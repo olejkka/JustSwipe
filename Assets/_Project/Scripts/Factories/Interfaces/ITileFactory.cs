@@ -1,9 +1,14 @@
-﻿using UnityEngine;
+﻿using UnityEngine.Tilemaps;
+using _Project.Scripts.Factories.Interfaces;
+using UnityEngine;
 
 namespace _Project.Scripts.Factories.Interfaces
 {
     public interface ITileFactory : IFactory
     {
-        GameObject CreateTile(Vector2Int boardPosition, TileType tileType);
+        /// <summary>
+        /// Устанавливает и возвращает TileBase в указанной клетке Tilemap.
+        /// </summary>
+        TileBase CreateTile(Vector2Int boardPosition, TileType tileType);
     }
 }

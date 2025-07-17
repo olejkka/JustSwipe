@@ -3,6 +3,7 @@ using _Project.Scripts.Factories;
 using _Project.Scripts.Factories.Interfaces;
 using _Project.Scripts.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using VContainer;
 using VContainer.Unity;
 
@@ -17,11 +18,12 @@ namespace _Project.Scripts.LifetimeScopes
         {
             builder.Register<TileFactory>(Lifetime.Singleton)
                 .As<ITileFactory>();
-
             builder.RegisterInstance(_fieldConfig)
                 .As<TileFieldConfig>();
-            
-            builder.RegisterComponentInHierarchy<BoardGenerator>().AsSelf();
+            builder.RegisterComponentInHierarchy<Tilemap>()
+                .As<Tilemap>();
+            builder.RegisterComponentInHierarchy<BoardGenerator>()
+                .AsSelf();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
+using _Project.Scripts.Factories.Interfaces;
 using _Project.Scripts.ScriptableObjects;
 using VContainer;
 
@@ -9,13 +10,14 @@ namespace _Project.Scripts
     public class BoardGenerator : MonoBehaviour
     {
         private TileFieldConfig _config;
+        private ITileFactory _tileFactory;
         private Tilemap _tilemap;
-        
-        
+
         [Inject]
-        public void Construct(TileFieldConfig config)
+        public void Construct(TileFieldConfig config, ITileFactory tileFactory)
         {
             _config = config;
+            _tileFactory = tileFactory;
         }
 
         private void Awake()
@@ -30,9 +32,9 @@ namespace _Project.Scripts
 
         private void GenerateRandomRoom()
         {
-            if (_config == null || _tilemap == null)
+            if (_config == null || _tilemap == null || _tileFactory == null)
             {
-                Debug.LogError("BoardGenerator: не назначен config или Tilemap!");
+                Debug.LogError("BoardGenerator: не назначен config, tilemap или tileFactory!");
                 return;
             }
 
@@ -49,24 +51,15 @@ namespace _Project.Scripts
             for (int x = 0; x < W; x++)
             for (int y = 0; y < H; y++)
             {
-                var cell = new Vector3Int(x, y, 0);
-                // базовый флаг «внутри комнаты»
                 bool inside = x >= x0 && x < x0 + roomW
-                           && y >= y0 && y < y0 + roomH;
+                                      && y >= y0 && y < y0 + roomH;
 
                 bool isGround = inside;
-
-                // с некоторой вероятностью перекрываем базовую форму шумом
                 if (Random.value < _config.Randomness)
-                {
-                    // решаем случайно, земля или препятствие
                     isGround = Random.value < _config.GroundProbability;
-                }
 
                 var type = isGround ? TileType.Ground : TileType.Obstacle;
-                var tile = _config.GetTile(type);
-                if (tile != null)
-                    _tilemap.SetTile(cell, tile);
+                _tileFactory.CreateTile(new Vector2Int(x, y), type);
             }
         }
     }

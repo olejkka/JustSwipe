@@ -5,41 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/BoardGenerator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/BoardGenerator.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/Interfaces.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/Interfaces/ICharacterFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/Interfaces/ICharacterFactory.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/Interfaces/IFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/Interfaces/IFactory.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/Interfaces/ITileFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/Interfaces/ITileFactory.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/TileFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/TileFactory.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameState.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/GameState.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/LifetimeScopes.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/LifetimeScopes/GameplayLifetimeScope.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/LifetimeScopes/GameplayLifetimeScope.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ScriptableObjects.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ScriptableObjects/TileFieldConfig.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ScriptableObjects/TileFieldConfig.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/TileType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/TileType.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/TilesPositionsRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/TilesPositionsRepository.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets_DevilsWorkShop/Low_Poly_Pixel_2D_Blocks_DevilsWorkShop_v04/Prefabs/assets_pixel_50x50/isometric_pixel_0014.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets_DevilsWorkShop/Low_Poly_Pixel_2D_Blocks_DevilsWorkShop_v04/Prefabs/assets_pixel_50x50/isometric_pixel_0014.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets_DevilsWorkShop/Low_Poly_Pixel_2D_Blocks_DevilsWorkShop_v04/Textures/assets_1024x1024/isometric_0014.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets_DevilsWorkShop/Low_Poly_Pixel_2D_Blocks_DevilsWorkShop_v04/Textures/assets_1024x1024/isometric_0014.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Assets_DevilsWorkShop/Low_Poly_Pixel_2D_Blocks_DevilsWorkShop_v04/Textures/assets_pixel_50x50/isometric_pixel_0014.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Assets_DevilsWorkShop/Low_Poly_Pixel_2D_Blocks_DevilsWorkShop_v04/Textures/assets_pixel_50x50/isometric_pixel_0014.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Free 32x32 Isometric Tileset Pack/Sample Tileset/Sample Grid.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Free 32x32 Isometric Tileset Pack/Sample Tileset/Sample Grid.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/BoardGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/BoardGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/Interfaces/ITileFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/Interfaces/ITileFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/TileFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/TileFactory.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,6 +116,7 @@
       <workItem from="1752573559633" duration="14000" />
       <workItem from="1752573670547" duration="7913000" />
       <workItem from="1752608306278" duration="4694000" />
+      <workItem from="1752771007020" duration="985000" />
     </task>
     <servers />
   </component>
