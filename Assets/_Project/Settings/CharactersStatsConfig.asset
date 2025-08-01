@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df45faaf92e436eb375de883779b001, type: 3}
+  m_Name: CharactersStatsConfig
+  m_EditorClassIdentifier: 
+  Characters:
+  - Id: Main
+    team: 1
+    BaseMaxHealth: 100
+    BaseAttackDamage: 10
+  - Id: Bot_1
+    team: 2
+    BaseMaxHealth: 20
+    BaseAttackDamage: 2

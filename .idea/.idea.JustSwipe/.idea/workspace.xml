@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/BoardGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/BoardGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/Interfaces/ITileFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/Interfaces/ITileFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/TileFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/TileFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/CharacterFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/CharacterFactory.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +16,20 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/ScriptableObjects/TileStorage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterBattleStats.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Team.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Generators/TilesPositionsGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/GameplayLifetimeScope.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Tiles/TilesPositionsStorage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.psdimporter@5684369550c9/Editor/PSDPlugin/PsdFile/ImageResources/ResolutionInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/jp.hadashikick.vcontainer@19ee6e1cc8be/Runtime/ContainerBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/jp.hadashikick.vcontainer@19ee6e1cc8be/Runtime/IObjectResolverExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/jp.hadashikick.vcontainer@19ee6e1cc8be/Runtime/RegistrationBuilder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/jp.hadashikick.vcontainer@19ee6e1cc8be/Runtime/Unity/EntryPointExceptionHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/jp.hadashikick.vcontainer@19ee6e1cc8be/Runtime/Unity/LifetimeScope.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -116,7 +126,23 @@
       <workItem from="1752573559633" duration="14000" />
       <workItem from="1752573670547" duration="7913000" />
       <workItem from="1752608306278" duration="4694000" />
-      <workItem from="1752771007020" duration="985000" />
+      <workItem from="1752771007020" duration="4236000" />
+      <workItem from="1752776455327" duration="1541000" />
+      <workItem from="1752778673261" duration="1380000" />
+      <workItem from="1752818273849" duration="3234000" />
+      <workItem from="1752821582100" duration="60000" />
+      <workItem from="1752821683626" duration="1229000" />
+      <workItem from="1752823182312" duration="3165000" />
+      <workItem from="1752925281984" duration="262000" />
+      <workItem from="1752925692502" duration="2572000" />
+      <workItem from="1753004336931" duration="2111000" />
+      <workItem from="1753376464345" duration="795000" />
+      <workItem from="1753379799548" duration="4375000" />
+      <workItem from="1753398112355" duration="2862000" />
+      <workItem from="1753505400300" duration="732000" />
+      <workItem from="1753522533392" duration="13244000" />
+      <workItem from="1753983119336" duration="6354000" />
+      <workItem from="1754051594435" duration="3118000" />
     </task>
     <servers />
   </component>
