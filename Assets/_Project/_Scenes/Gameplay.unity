@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 730333552}
   - component: {fileID: 730333553}
   m_Layer: 0
-  m_Name: Tiles
+  m_Name: Tile Factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -693,7 +693,7 @@ GameObject:
   - component: {fileID: 1924401468}
   - component: {fileID: 1924401467}
   m_Layer: 0
-  m_Name: CharacterFactory
+  m_Name: Character Factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -722,12 +722,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1924401466}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1988570165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1988570163
 GameObject:
@@ -740,7 +740,7 @@ GameObject:
   - component: {fileID: 1988570165}
   - component: {fileID: 1988570164}
   m_Layer: 0
-  m_Name: GameplayLifetimeScope
+  m_Name: Gameplay Lifetime Scope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -763,10 +763,9 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _tilesGenerationSettingsConfig: {fileID: 11400000, guid: 78b017ed30d583747a66f61f5bdb0175, type: 2}
-  _tileFactory: {fileID: 730333553}
-  _characterFactory: {fileID: 1924401467}
   _charactersPrefabsConfig: {fileID: 11400000, guid: 5725c3ed7311ddd4e8c19a8c2b09e083, type: 2}
   _characterStatsConfig: {fileID: 11400000, guid: 376b7224f828d854ca361b97ce017098, type: 2}
+  _tileFactory: {fileID: 730333553}
 --- !u!4 &1988570165
 Transform:
   m_ObjectHideFlags: 0
@@ -779,7 +778,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1924401468}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
@@ -787,8 +787,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 1988570165}
-  - {fileID: 1006825988}
-  - {fileID: 1924401468}
   - {fileID: 1828232211}
   - {fileID: 745065177}
+  - {fileID: 1006825988}
+  - {fileID: 1988570165}

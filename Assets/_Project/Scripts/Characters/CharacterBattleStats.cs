@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Characters
 {
-    public abstract class CharacterBattleStats : MonoBehaviour
+    public class CharacterBattleStats : MonoBehaviour
     {
         public string Id { get; private set; }
         public Team Team { get; private set; }
@@ -13,7 +13,7 @@ namespace _Project.Scripts.Characters
         public Vector2Int Position { get; private set; }
         
 
-        public virtual void Init(CharacterStatsConfig.CharacterStatsEntry stats, Vector2Int spawnPosition)
+        public void Init(CharacterStatsConfig.CharacterStatsEntry stats, Vector2Int spawnPosition)
         {
             Id = stats.Id;
             Team = stats.team;

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace _Project.Scripts.Characters
 {
@@ -9,16 +10,13 @@ namespace _Project.Scripts.Characters
         public void Add(string id, CharacterBattleStats characterBattleStats)
         {
             _charactersById[id] = characterBattleStats;
+            
+            Debug.Log($"CharactersStorage: Adding {id}");
         }
 
-        // public void Remove(string id)
-        // {
-        //     if (_charactersById.TryGetValue(id, out var character))
-        //     {
-        //         GameObject.Destroy(character.gameObject); // или pooled
-        //         _charactersById.Remove(id);
-        //     }
-        // }
+        public void Remove(string id)
+        {
+        }
 
         public CharacterBattleStats Get(string id)
         {

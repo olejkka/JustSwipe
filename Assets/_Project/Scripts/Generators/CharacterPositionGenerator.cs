@@ -27,15 +27,8 @@ namespace _Project.Scripts.Generators
         public void GenerateMainCharacter()
         {
             const string mainId = "Main";
-            var stats = _statsConfig.Characters.Find(e => e.Id == mainId);
-            
-            if (stats == null) 
-                return;
 
             var allPositions = _tilesStorage.GetAllPositions().ToList();
-            
-            if (allPositions.Count == 0) 
-                return;
 
             int minX = int.MaxValue, maxX = int.MinValue;
             int minY = int.MaxValue, maxY = int.MinValue;
@@ -60,7 +53,7 @@ namespace _Project.Scripts.Generators
                 if (type != TileType.Ground) 
                     continue;
 
-                float dsq = ((Vector2)p - center).sqrMagnitude;
+                float dsq = (p - center).sqrMagnitude;
                 
                 if (dsq < bestDist)
                 {

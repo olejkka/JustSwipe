@@ -4,6 +4,7 @@ using _Project.Scripts.Factories.Interfaces;
 using _Project.Scripts.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using VContainer;
 
 namespace _Project.Scripts.Factories
 {
@@ -12,6 +13,8 @@ namespace _Project.Scripts.Factories
         [SerializeField] private CharactersPrefabsConfig _prefabsConfig;
         [SerializeField] private CharacterStatsConfig _statsConfig;
         [SerializeField] private Tilemap _tilemap;
+        
+        [Inject] private CharactersStorage _charactersStorage;
 
         private Dictionary<string, GameObject> _prefabsById;
 
@@ -24,7 +27,7 @@ namespace _Project.Scripts.Factories
                 _prefabsById[entry.Id] = entry.Prefab;
         }
 
-        public void CreateCharacterPosition(string id, Vector2Int position)
+        public void Create(string id, Vector2Int position)
         {
             if (!_prefabsById.TryGetValue(id, out var prefab))
                 return;
@@ -33,11 +36,11 @@ namespace _Project.Scripts.Factories
             var worldPos = _tilemap.CellToWorld(cell);
             var characterGO = Instantiate(prefab, worldPos, Quaternion.identity);
 
-            var character = characterGO.GetComponent<CharacterBattleStats>();
+            var characterBattleStats = characterGO.GetComponent<CharacterBattleStats>();
             var stats = _statsConfig.Characters.Find(e => e.Id == id);
             
-            if (character != null && stats != null)
-                character.Init(stats, position);
+            characterBattleStats.Init(stats, position);
+            _charactersStorage.Add(characterBattleStats.Id, characterBattleStats);
         }
     }
 }

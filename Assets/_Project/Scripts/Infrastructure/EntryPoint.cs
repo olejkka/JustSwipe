@@ -16,7 +16,7 @@ namespace _Project.Scripts.Infrastructure
         public void Start()
         {
             _tilesPositionsGenerator.OnPositionCreated += _tileFactory.CreateTile;
-            _characterPositionGenerator.OnCharacterCreated += _characterFactory.CreateCharacterPosition;
+            _characterPositionGenerator.OnCharacterCreated += _characterFactory.Create;
 
             _tilesPositionsGenerator.Generate();
             _characterPositionGenerator.GenerateMainCharacter();
