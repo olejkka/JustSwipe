@@ -12,7 +12,7 @@ namespace _Project.Scripts.Factories
         [SerializeField] private TileBase _tilePrefab;
         
         
-        public void CreateTile(Vector2Int position)
+        public void Create(Vector2Int position)
         {
             var cell = new Vector3Int(position.x, position.y, 0);
             _tilemap.SetTile(cell, Instantiate(_tilePrefab));

@@ -7,28 +7,24 @@ using UnityEngine;
 
 namespace _Project.Scripts.Generators
 {
-    public class CharacterPositionGenerator : IGenarator
+    public class CharacterPositionGenerator : IGenerator
     {
-        private readonly CharacterStatsConfig _statsConfig;
-        private readonly TilesPositionsStorage _tilesStorage;
+        private readonly PositionsStorage _storage;
 
         public event Action<string, Vector2Int> OnCharacterCreated;
 
         
         public CharacterPositionGenerator(
-            CharacterStatsConfig statsConfig,
-            TilesPositionsStorage tilesStorage
-            )
+            PositionsStorage storage)
         {
-            _statsConfig = statsConfig;
-            _tilesStorage = tilesStorage;
+            _storage = storage;
         }
 
         public void GenerateMainCharacter()
         {
             const string mainId = "Main";
 
-            var allPositions = _tilesStorage.GetAllPositions().ToList();
+            var allPositions = _storage.GetAllPositions().ToList();
 
             int minX = int.MaxValue, maxX = int.MinValue;
             int minY = int.MaxValue, maxY = int.MinValue;
@@ -47,11 +43,11 @@ namespace _Project.Scripts.Generators
             
             foreach (var p in allPositions)
             {
-                if (!_tilesStorage.TryGetType(p, out var type)) 
-                    continue;
-                
-                if (type != TileType.Ground) 
-                    continue;
+                // if (!_storage.TryGetType(p, out var type)) 
+                //     continue;
+                //
+                // if (type != TileType.Ground) 
+                //     continue;
 
                 float dsq = (p - center).sqrMagnitude;
                 

@@ -1,6 +1,6 @@
 ﻿namespace _Project.Scripts.Generators.Interfaces
 {
-    public interface IGenarator
+    public interface IGenerator
     {
         public void GenerateMainCharacter();
     }

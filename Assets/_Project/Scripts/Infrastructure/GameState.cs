@@ -5,7 +5,7 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameState
     {
-        public TilesPositionsStorage TilesPositionsStorage = new ();
+        public PositionsStorage PositionsStorage = new ();
         public CharactersStorage CharactersStorage = new();
     }
 }

@@ -7,7 +7,7 @@ namespace _Project.Scripts.Infrastructure
 {
     public class EntryPoint : IStartable
     {
-        [Inject] private readonly TilesPositionsGenerator _tilesPositionsGenerator;
+        [Inject] private readonly PositionsGenerator _positionsGenerator;
         [Inject] private readonly TileFactory _tileFactory;
 
         [Inject] private readonly CharacterPositionGenerator _characterPositionGenerator;
@@ -15,10 +15,10 @@ namespace _Project.Scripts.Infrastructure
 
         public void Start()
         {
-            _tilesPositionsGenerator.OnPositionCreated += _tileFactory.CreateTile;
+            _positionsGenerator.OnPositionCreated += _tileFactory.Create;
+            _positionsGenerator.Generate();
+            
             _characterPositionGenerator.OnCharacterCreated += _characterFactory.Create;
-
-            _tilesPositionsGenerator.Generate();
             _characterPositionGenerator.GenerateMainCharacter();
         }
     }

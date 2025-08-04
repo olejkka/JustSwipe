@@ -15,7 +15,6 @@ namespace _Project.Scripts.Factories
         [SerializeField] private Tilemap _tilemap;
         
         [Inject] private CharactersStorage _charactersStorage;
-
         private Dictionary<string, GameObject> _prefabsById;
 
         

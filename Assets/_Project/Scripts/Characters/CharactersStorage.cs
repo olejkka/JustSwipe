@@ -11,7 +11,12 @@ namespace _Project.Scripts.Characters
         {
             _charactersById[id] = characterBattleStats;
             
-            Debug.Log($"CharactersStorage: Adding {id}");
+            // Debug.Log("CharactersStorage: Adding : " +
+            //           $"{characterBattleStats.Id}, " +
+            //           $"{characterBattleStats.Position}, " +
+            //           $"{characterBattleStats.Team}, " +
+            //           $"{characterBattleStats.MaxHealth}, " +
+            //           $"{characterBattleStats.AttackDamage}");
         }
 
         public void Remove(string id)

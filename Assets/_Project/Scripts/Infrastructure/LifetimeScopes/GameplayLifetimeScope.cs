@@ -11,27 +11,32 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 {
     public class GameplayLifetimeScope : LifetimeScope
     {
-        [SerializeField] private TilesGenerationSettingsConfig _tilesGenerationSettingsConfig;
+        [SerializeField] private TilesGenerationConfig _tilesGenerationConfig;
         [SerializeField] private CharactersPrefabsConfig _charactersPrefabsConfig;
         [SerializeField] private CharacterStatsConfig _characterStatsConfig;
-        [SerializeField] private TileFactory _tileFactory;
+        [SerializeField] private TileFactory tileFactory;
 
 
         protected override void Configure(IContainerBuilder builder)
         {
+            // EntryPoints
             builder.RegisterEntryPoint<EntryPoint>();
 
-            builder.RegisterInstance(_tilesGenerationSettingsConfig);
+            // Configs
+            builder.RegisterInstance(_tilesGenerationConfig);
             builder.RegisterInstance(_characterStatsConfig);
             builder.RegisterInstance(_charactersPrefabsConfig);
 
-            builder.Register<TilesPositionsGenerator>(Lifetime.Singleton);
+            // Generators
+            builder.Register<PositionsGenerator>(Lifetime.Singleton);
             builder.Register<CharacterPositionGenerator>(Lifetime.Singleton);
             
-            builder.RegisterInstance(_tileFactory);
+            // Factories
+            builder.RegisterInstance(tileFactory);
             builder.RegisterComponentInHierarchy<CharacterFactory>();
             
-            builder.Register<TilesPositionsStorage>(Lifetime.Singleton);
+            // Storages
+            builder.Register<PositionsStorage>(Lifetime.Singleton);
             builder.Register<CharactersStorage>(Lifetime.Singleton);
         }
     }
