@@ -26,14 +26,14 @@ namespace _Project.Scripts.Generators
 
         public void Generate()
         {
-            for (var y = _config.CommonBounds.yMin; y < _config.CommonBounds.yMax; y++)
-            for (var x = _config.CommonBounds.xMin; x < _config.CommonBounds.xMax; x++)
+            for (var y = _config.Bounds.yMin; y < _config.Bounds.yMax; y++)
+            for (var x = _config.Bounds.xMin; x < _config.Bounds.xMax; x++)
             {
                 var position = new Vector2Int(x, y);  
-
-                var threshold = _config.CoreBounds.Contains(new Vector3Int(x, y, 0))
-                    ? _config.CommonGenerationChance
-                    : _config.CoreGenerationChance;
+            
+                var threshold = _config.CoreBounds.Contains(new Vector2Int(x, y))
+                    ? _config.CoreGenerationChance
+                    : _config.CommonGenerationChance;
                 
                 if (Random.Range(0, 100) >= threshold)
                     continue;
