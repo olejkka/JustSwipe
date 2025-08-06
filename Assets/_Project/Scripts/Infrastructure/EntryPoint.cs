@@ -10,7 +10,7 @@ namespace _Project.Scripts.Infrastructure
         [Inject] private readonly PositionsGenerator _positionsGenerator;
         [Inject] private readonly TileFactory _tileFactory;
 
-        [Inject] private readonly CharacterPositionGenerator _characterPositionGenerator;
+        [Inject] private readonly CharacterGenerator _characterGenerator;
         [Inject] private readonly CharacterFactory _characterFactory;
 
         public void Start()
@@ -18,8 +18,9 @@ namespace _Project.Scripts.Infrastructure
             _positionsGenerator.OnPositionCreated += _tileFactory.Create;
             _positionsGenerator.Generate();
             
-            _characterPositionGenerator.OnCharacterCreated += _characterFactory.Create;
-            _characterPositionGenerator.GenerateMainCharacter();
+            _characterGenerator.OnCharacterCreated += _characterFactory.Create;
+            _characterGenerator.GenerateMainCharacter();
+            _characterGenerator.GenerateEnemyCharacter();
         }
     }
 }

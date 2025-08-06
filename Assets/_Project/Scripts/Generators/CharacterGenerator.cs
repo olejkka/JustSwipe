@@ -8,18 +8,18 @@ using Random = UnityEngine.Random;
 
 namespace _Project.Scripts.Generators
 {
-    public class CharacterPositionGenerator : IGenerator
+    public class CharacterGenerator : IGenerator
     {
-        private readonly TilesGenerationConfig _tilesGenerationConfig;
-        private readonly PositionsStorage _positionsStorage;
-
         public event Action<string, Vector2Int> OnCharacterCreated;
-
         
-        public CharacterPositionGenerator(
+        private readonly PositionsStorage _positionsStorage;
+        private readonly TilesGenerationConfig _tilesGenerationConfig;
+
+
+        public CharacterGenerator(
             TilesGenerationConfig tilesGenerationConfig,
             PositionsStorage positionsStorage
-            )
+        )
         {
             _tilesGenerationConfig = tilesGenerationConfig;
             _positionsStorage = positionsStorage;
@@ -28,8 +28,8 @@ namespace _Project.Scripts.Generators
         public void GenerateMainCharacter()
         {
             var corePositions = _positionsStorage
-                .GetAllPositions() 
-                .Where(pos => _tilesGenerationConfig.CoreBounds.Contains(
+                .GetAllPositions()
+                .Where(pos => _tilesGenerationConfig.CoreRect.Contains(
                     new Vector2Int(pos.x, pos.y)))
                 .ToList();
             
@@ -37,8 +37,23 @@ namespace _Project.Scripts.Generators
             
             OnCharacterCreated?.Invoke("Main", spawnPos);
         }
+        
+        public void GenerateAllyCharacter()
+        {
+            
+        }
 
-        public void GenerateAllyCharacter() { }
-        public void GenerateEnemyCharacter() { }
+        public void GenerateEnemyCharacter()
+        {
+            var outsidePositions = _positionsStorage
+                .GetAllPositions()
+                .Where(pos => !_tilesGenerationConfig.CoreRect.Contains(
+                    new Vector2Int(pos.x, pos.y)))
+                .ToList();
+            
+            var spawnPos = outsidePositions[Random.Range(0, outsidePositions.Count)];
+            
+            OnCharacterCreated?.Invoke("Bot_1", spawnPos);
+        }
     }
 }

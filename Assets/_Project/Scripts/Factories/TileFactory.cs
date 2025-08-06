@@ -1,21 +1,35 @@
-﻿using UnityEngine;
-using UnityEngine.Tilemaps;
-using _Project.Scripts.Factories.Interfaces;
+﻿using _Project.Scripts.Factories.Interfaces;
 using _Project.Scripts.ScriptableObjects;
-using VContainer;
+using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace _Project.Scripts.Factories
 {
     public class TileFactory : MonoBehaviour, IFactory
     {
         [SerializeField] private Tilemap _tilemap;
-        [SerializeField] private TileBase _tilePrefab;
-        
-        
+        [SerializeField] private TilesPrefabsConfig _prefabsConfig;
+
+
         public void Create(Vector2Int position)
         {
-            var cell = new Vector3Int(position.x, position.y, 0);
-            _tilemap.SetTile(cell, Instantiate(_tilePrefab));
+            var pos = new Vector3Int(position.x, position.y, 0);
+            var tile = PickTile();
+            
+            _tilemap.SetTile(pos, tile);
+        }
+
+        private TileBase PickTile()
+        {
+            foreach (var entry in _prefabsConfig.Entries)
+            {
+                if (entry.TileType == TileType.Ground)
+                    continue;
+                if (Random.Range(0, 100) < entry.Chance)
+                    return entry.TileAsset;
+            }
+
+            return _prefabsConfig.GetTile(TileType.Ground);
         }
     }
 }

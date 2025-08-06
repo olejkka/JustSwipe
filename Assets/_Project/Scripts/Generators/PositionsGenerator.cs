@@ -11,10 +11,8 @@ namespace _Project.Scripts.Generators
     {
         private readonly TilesGenerationConfig _config;
         private readonly PositionsStorage _storage;
-        
-        public event Action<Vector2Int> OnPositionCreated;
 
-        
+
         public PositionsGenerator(
             TilesGenerationConfig config,
             PositionsStorage storage
@@ -24,20 +22,22 @@ namespace _Project.Scripts.Generators
             _storage = storage;
         }
 
+        public event Action<Vector2Int> OnPositionCreated;
+
         public void Generate()
         {
-            for (var y = _config.Bounds.yMin; y < _config.Bounds.yMax; y++)
-            for (var x = _config.Bounds.xMin; x < _config.Bounds.xMax; x++)
+            for (var y = _config.Rect.yMin; y < _config.Rect.yMax; y++)
+            for (var x = _config.Rect.xMin; x < _config.Rect.xMax; x++)
             {
-                var position = new Vector2Int(x, y);  
-            
-                var threshold = _config.CoreBounds.Contains(new Vector2Int(x, y))
+                var position = new Vector2Int(x, y);
+
+                var threshold = _config.CoreRect.Contains(new Vector2Int(x, y))
                     ? _config.CoreGenerationChance
                     : _config.CommonGenerationChance;
-                
+
                 if (Random.Range(0, 100) >= threshold)
                     continue;
-                
+
                 _storage.AddPosition(position);
                 OnPositionCreated?.Invoke(position);
             }

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23d8e95f1f94cd883f2735c14ed3e92, type: 3}
   m_Name: GenerationConfig
   m_EditorClassIdentifier: 
-  <Bounds>k__BackingField:
+  <Rect>k__BackingField:
     x: 0
     y: 0
     width: 6
     height: 6
-  <CoreBounds>k__BackingField:
+  <CoreRect>k__BackingField:
     x: 1
     y: 1
     width: 4

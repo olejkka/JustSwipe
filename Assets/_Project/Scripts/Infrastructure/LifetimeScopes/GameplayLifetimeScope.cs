@@ -29,7 +29,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 
             // Generators
             builder.Register<PositionsGenerator>(Lifetime.Singleton);
-            builder.Register<CharacterPositionGenerator>(Lifetime.Singleton);
+            builder.Register<CharacterGenerator>(Lifetime.Singleton);
             
             // Factories
             builder.RegisterInstance(tileFactory);

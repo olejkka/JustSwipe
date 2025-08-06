@@ -5,10 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Configs/GenerationConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Configs/GenerationConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Generators/CharacterPositionGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Generators/CharacterPositionGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Configs/TilesPrefabsConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Configs/TilesPrefabsConfig.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Characters/_Character.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/Characters/_Character.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/CharacterFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/CharacterFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/TileFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Factories/TileFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Generators/CharacterPositionGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Generators/CharacterGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Generators/CharacterPositionGenerator.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Generators/CharacterGenerator.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Generators/PositionsGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Generators/PositionsGenerator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/EntryPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/EntryPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/GameplayLifetimeScope.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/GameplayLifetimeScope.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/ScriptableObjects/TilesGenerationConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ScriptableObjects/TilesGenerationConfig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/ScriptableObjects/TilesPrefabsConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ScriptableObjects/TilesPrefabsConfig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Tiles/PositionsStorage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Tiles/PositionsStorage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Tiles/TileType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Tiles/TileType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/_Scenes/Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/_Scenes/Gameplay.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,6 +167,7 @@
       <workItem from="1754203023594" duration="6773000" />
       <workItem from="1754301710995" duration="1110000" />
       <workItem from="1754317762784" duration="5981000" />
+      <workItem from="1754372964210" duration="15690000" />
     </task>
     <servers />
   </component>

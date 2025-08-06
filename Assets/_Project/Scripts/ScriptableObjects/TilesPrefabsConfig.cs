@@ -11,18 +11,18 @@ namespace _Project.Scripts.ScriptableObjects
     )]
     public class TilesPrefabsConfig : ScriptableObject
     {
-        [Serializable]
-        public class TileEntry
-        {
-            public TileType TileType;
-            public TileBase TileAsset;
-        }
-
         [SerializeField] private List<TileEntry> _entries = new();
 
         private Dictionary<TileType, TileBase> _map;
 
         public IReadOnlyList<TileEntry> Entries => _entries;
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            _map = null;
+        }
+#endif
 
         private void InitMap()
         {
@@ -30,12 +30,10 @@ namespace _Project.Scripts.ScriptableObjects
                 return;
 
             _map = new Dictionary<TileType, TileBase>();
-            
+
             foreach (var entry in _entries)
-            {
                 if (entry.TileAsset != null)
                     _map[entry.TileType] = entry.TileAsset;
-            }
         }
 
         public TileBase GetTile(TileType type)
@@ -44,11 +42,12 @@ namespace _Project.Scripts.ScriptableObjects
             return _map.TryGetValue(type, out var tile) ? tile : null;
         }
 
-#if UNITY_EDITOR
-        private void OnValidate()
+        [Serializable]
+        public class TileEntry
         {
-            _map = null;
+            public TileType TileType;
+            public TileBase TileAsset;
+            [Range(0, 100)] public int Chance;
         }
-#endif
     }
 }

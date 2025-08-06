@@ -13,15 +13,15 @@ namespace _Project.Scripts.Factories
         [SerializeField] private CharactersPrefabsConfig _prefabsConfig;
         [SerializeField] private CharacterStatsConfig _statsConfig;
         [SerializeField] private Tilemap _tilemap;
-        
+
         [Inject] private CharactersStorage _charactersStorage;
         private Dictionary<string, GameObject> _prefabsById;
 
-        
+
         private void Awake()
         {
             _prefabsById = new Dictionary<string, GameObject>();
-            
+
             foreach (var entry in _prefabsConfig.Characters)
                 _prefabsById[entry.Id] = entry.Prefab;
         }
@@ -32,13 +32,18 @@ namespace _Project.Scripts.Factories
                 return;
 
             var cell = new Vector3Int(position.x, position.y, 0);
+            
+            if (!_tilemap.HasTile(cell))
+                return;
+            
             var worldPos = _tilemap.CellToWorld(cell);
             var characterGO = Instantiate(prefab, worldPos, Quaternion.identity);
 
             var characterBattleStats = characterGO.GetComponent<CharacterBattleStats>();
             var stats = _statsConfig.Characters.Find(e => e.Id == id);
-            
+
             characterBattleStats.Init(stats, position);
+            
             _charactersStorage.Add(characterBattleStats.Id, characterBattleStats);
         }
     }
