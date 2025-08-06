@@ -1,37 +1,27 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace _Project.Scripts.Characters
 {
     public class CharactersStorage
     {
-        private Dictionary<string, CharacterBattleStats> _charactersById = new();
+        private readonly List<Character> _characters = new();
 
-        public void Add(string id, CharacterBattleStats characterBattleStats)
+        
+        public void Add(Character character)
         {
-            _charactersById[id] = characterBattleStats;
-            
-            // Debug.Log("CharactersStorage: Adding : " +
-            //           $"{characterBattleStats.Id}, " +
-            //           $"{characterBattleStats.Position}, " +
-            //           $"{characterBattleStats.Team}, " +
-            //           $"{characterBattleStats.MaxHealth}, " +
-            //           $"{characterBattleStats.AttackDamage}");
+            _characters.Add(character);
         }
-
-        public void Remove(string id)
+        
+        public IEnumerable<Character> GetAllCharacters()
         {
+            return _characters;
         }
-
-        public CharacterBattleStats Get(string id)
+        
+        public IEnumerable<Vector2Int> GetAllPositions()
         {
-            _charactersById.TryGetValue(id, out var character);
-            return character;
-        }
-
-        public IReadOnlyDictionary<string, CharacterBattleStats> GetAll()
-        {
-            return _charactersById;
+            return _characters.Select(character => character.Position);
         }
     }
 }

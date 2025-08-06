@@ -1,21 +1,19 @@
-﻿using _Project.Scripts.Factories.Interfaces;
-using _Project.Scripts.ScriptableObjects;
+﻿using _Project.Scripts.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace _Project.Scripts.Factories
 {
-    public class TileFactory : MonoBehaviour, IFactory
+    public class TileInstantiator : MonoBehaviour
     {
         [SerializeField] private Tilemap _tilemap;
         [SerializeField] private TilesPrefabsConfig _prefabsConfig;
 
 
-        public void Create(Vector2Int position)
+        public void Instantiate(Vector2Int position)
         {
             var pos = new Vector3Int(position.x, position.y, 0);
             var tile = PickTile();
-            
             _tilemap.SetTile(pos, tile);
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Project.Scripts.Characters;
 using UnityEngine;
 
 namespace _Project.Scripts.ScriptableObjects
@@ -11,7 +12,7 @@ namespace _Project.Scripts.ScriptableObjects
     public class CharacterStatsConfig : ScriptableObject
     {
         public List<CharacterStatsEntry> Characters = new();
-        
+
         [Serializable]
         public class CharacterStatsEntry
         {

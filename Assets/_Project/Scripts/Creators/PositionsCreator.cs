@@ -1,5 +1,4 @@
 ﻿using System;
-using _Project.Scripts.Factories.Interfaces;
 using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Tiles;
 using UnityEngine;
@@ -7,24 +6,24 @@ using Random = UnityEngine.Random;
 
 namespace _Project.Scripts.Generators
 {
-    public class PositionsGenerator : IFactory
+    public class PositionsCreator
     {
+        public event Action<Vector2Int> OnPositionCreated;
+        
         private readonly TilesGenerationConfig _config;
-        private readonly PositionsStorage _storage;
+        private readonly TilesPositionsStorage _storage;
 
 
-        public PositionsGenerator(
+        public PositionsCreator(
             TilesGenerationConfig config,
-            PositionsStorage storage
+            TilesPositionsStorage storage
         )
         {
             _config = config;
             _storage = storage;
         }
-
-        public event Action<Vector2Int> OnPositionCreated;
-
-        public void Generate()
+        
+        public void Create()
         {
             for (var y = _config.Rect.yMin; y < _config.Rect.yMax; y++)
             for (var x = _config.Rect.xMin; x < _config.Rect.xMax; x++)

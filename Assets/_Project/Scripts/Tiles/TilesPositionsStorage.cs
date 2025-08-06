@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Tiles
 {
-    public class PositionsStorage
+    public class TilesPositionsStorage
     {
         private readonly HashSet<Vector2Int> _tiles = new();
 
