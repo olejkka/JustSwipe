@@ -11,7 +11,7 @@ namespace _Project.Scripts.InputHandlers
         bool swiping;
         float minDistance = 50f;
 
-        void OnEnable()  => EnhancedTouchSupport.Enable();
+        void OnEnable() => EnhancedTouchSupport.Enable();
         void OnDisable() => EnhancedTouchSupport.Disable();
 
         void Update()
@@ -28,15 +28,21 @@ namespace _Project.Scripts.InputHandlers
                     var delta = t.screenPosition - start;
                     if (delta.magnitude >= minDistance)
                     {
-                        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
-                            OnPressed?.Invoke(delta.x > 0 ? Vector2Int.right : Vector2Int.left);
+                        float angle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;
+                        Vector2Int dir;
+                        if (angle >= 90f)
+                            dir = Vector2Int.up;
+                        else if (angle >= 0f)
+                            dir = Vector2Int.right;
+                        else if (angle >= -90f)
+                            dir = Vector2Int.down;
                         else
-                            OnPressed?.Invoke(delta.y > 0 ? Vector2Int.up    : Vector2Int.down);
+                            dir = Vector2Int.left;
+                        OnPressed?.Invoke(dir);
                     }
                     swiping = false;
                 }
             }
         }
     }
-
 }
