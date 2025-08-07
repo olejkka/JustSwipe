@@ -12,12 +12,20 @@ namespace _Project.Scripts.Characters
             _charactersStorage = charactersStorage;
         }
 
-        public void Move(Vector2Int vector)
+        public void MovePlayerCharacters(Vector2Int vector)
         {
-            foreach (var character in _charactersStorage.GetAllCharacters())
+            foreach (var character in _charactersStorage.GetCharactersByTeam(Team.Player))
             {
                 character.Move(vector);
-            }            
+            }
+        }
+        
+        public void MoveBotCharacters(Vector2Int vector)
+        {
+            foreach (var character in _charactersStorage.GetCharactersByTeam(Team.Bot))
+            {
+                character.Move(vector);
+            }
         }
     }
 }

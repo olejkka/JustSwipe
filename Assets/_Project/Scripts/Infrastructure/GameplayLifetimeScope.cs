@@ -10,26 +10,30 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace _Project.Scripts.Infrastructure.LifetimeScopes
+namespace _Project.Scripts.Infrastructure
 {
     public class GameplayLifetimeScope : LifetimeScope
     {
         [SerializeField] private TilesGenerationConfig _tilesGenerationConfig;
         [SerializeField] private CharactersPrefabsConfig _charactersPrefabsConfig;
         [SerializeField] private CharacterStatsConfig _characterStatsConfig;
-        
         [SerializeField] private TileInstantiator _tileInstantiator;
-        
-        // [SerializeField] private KeyboardInputHandler _keyboardInputHandler;
-        // [SerializeField] private SwipeInputHandler swipeInputHandler;
 
 
         protected override void Configure(IContainerBuilder builder)
         {
-            // EntryPoints
-            builder.RegisterEntryPoint<EntryPoint>();
+            builder.RegisterEntryPoint<GameInitializer>();
+            builder.Register<CharactersMover>(Lifetime.Singleton);
             
-            // Input
+            RegisterInput(builder);
+            RegisterConfigs(builder);
+            RegisterCreators(builder);
+            RegisterInstantiators(builder);
+            RegisterStorages(builder);
+        }
+        
+        private void RegisterInput(IContainerBuilder builder)
+        {
             builder.RegisterComponentInHierarchy<KeyboardInputHandler>();
             builder.RegisterComponentInHierarchy<SwipeInputHandler>();
 
@@ -39,28 +43,29 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
                     : resolver.Resolve<KeyboardInputHandler>(),
                 Lifetime.Singleton
             );
-            // var provider = Application.isMobilePlatform
-            //     ? (IInputHandler)swipeInputHandler
-            //     : _keyboardInputHandler;
-            //
-            // builder.RegisterInstance(provider).As<IInputHandler>();
-
-            // Configs
+        }
+        
+        private void RegisterConfigs(IContainerBuilder builder)
+        {
             builder.RegisterInstance(_tilesGenerationConfig);
             builder.RegisterInstance(_characterStatsConfig);
             builder.RegisterInstance(_charactersPrefabsConfig);
-
-            // Creators
+        }
+        
+        private void RegisterCreators(IContainerBuilder builder)
+        {
             builder.Register<PositionsCreator>(Lifetime.Singleton);
             builder.Register<CharacterCreator>(Lifetime.Singleton);
-
-            // Instantiators
+        }
+        
+        private void RegisterInstantiators(IContainerBuilder builder)
+        {
             builder.RegisterInstance(_tileInstantiator);    
             builder.RegisterComponentInHierarchy<CharacterViewInstantiator>();
-            
-            builder.Register<CharactersMover>(Lifetime.Singleton);
-            
-            // Storages
+        }
+        
+        private void RegisterStorages(IContainerBuilder builder)
+        {
             builder.Register<TilesPositionsStorage>(Lifetime.Singleton);
             builder.Register<CharactersStorage>(Lifetime.Singleton);
         }

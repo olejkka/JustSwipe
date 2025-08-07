@@ -37,13 +37,5 @@ namespace _Project.Scripts.Creators
             _charactersStorage.Add(character);
             OnCharacterCreated?.Invoke(character);
         }
-
-        public void GenerateAllyCharacter()
-        {
-        }
-
-        public void GenerateEnemyCharacter()
-        {
-        }
     }
 }

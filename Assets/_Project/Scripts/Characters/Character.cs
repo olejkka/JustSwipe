@@ -6,6 +6,7 @@ namespace _Project.Scripts.Characters
     public class Character
     {
         public event Action<Vector2Int> OnPositionChanged;
+        
         public Team Team { get; private set; }
         public int Health { get; private set; }
         public int Damage { get; private set; }

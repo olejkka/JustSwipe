@@ -9,19 +9,16 @@ namespace _Project.Scripts.Characters
         private readonly List<Character> _characters = new();
 
         
-        public void Add(Character character)
-        {
-            _characters.Add(character);
-        }
+        public void Add(Character character) => _characters.Add(character);
+        public bool Remove(Character character) => _characters.Remove(character);
+
         
-        public IEnumerable<Character> GetAllCharacters()
-        {
-            return _characters;
-        }
-        
-        public IEnumerable<Vector2Int> GetAllPositions()
-        {
-            return _characters.Select(character => character.Position);
-        }
+        public IEnumerable<Character> GetCharactersByTeam(Team team) =>
+            _characters.Where(character => character.Team == team);
+
+        public IEnumerable<Character> GetAllCharacters() => _characters;
+
+        public IEnumerable<Vector2Int> GetAllPositions() =>
+            _characters.Select(character => character.Position);
     }
 }

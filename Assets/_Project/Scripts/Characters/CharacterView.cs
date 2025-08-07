@@ -11,8 +11,9 @@ namespace _Project.Scripts.Characters
         public void Init(Character data, Tilemap tilemap)
         {
             _data = data;
-            _data.OnPositionChanged += UpdatePosition;
             _tilemap = tilemap;
+            _data.OnPositionChanged += UpdatePosition;
+            UpdatePosition(_data.Position);
         }
 
         private void UpdatePosition(Vector2Int pos)
@@ -20,6 +21,12 @@ namespace _Project.Scripts.Characters
             var cell = new Vector3Int(pos.x, pos.y, 0);
             var worldPos = _tilemap.CellToWorld(cell);
             transform.position = worldPos;
+        }
+        
+        private void OnDestroy()
+        {
+            if (_data != null)
+                _data.OnPositionChanged -= UpdatePosition;
         }
     }
 }

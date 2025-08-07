@@ -10,7 +10,7 @@ namespace _Project.Scripts.ScriptableObjects
     )]
     public class CharactersPrefabsConfig : ScriptableObject
     {
-        public List<CharacterPrefabEntry> Characters = new();
+        public List<CharacterPrefabEntry> CharacterPrefabEntries = new();
         
         [Serializable]
         public class CharacterPrefabEntry

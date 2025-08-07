@@ -11,7 +11,7 @@ namespace _Project.Scripts.ScriptableObjects
     )]
     public class CharacterStatsConfig : ScriptableObject
     {
-        public List<CharacterStatsEntry> Characters = new();
+        public List<CharacterStatsEntry> CharacterStatsEntries = new();
 
         [Serializable]
         public class CharacterStatsEntry
