@@ -23,7 +23,7 @@ namespace _Project.Scripts.Creators
             _tilesPositionsStorage = tilesPositionsStorage;
         }
         
-        public void Create(Team player)
+        public void Create(Team team)
         {
             var positions = _tilesPositionsStorage
                 .GetAllPositions()
@@ -32,7 +32,7 @@ namespace _Project.Scripts.Creators
 
             var spawnPos = positions[Random.Range(0, positions.Count)];
 
-            var character = new Character(player, 10, 1, spawnPos);
+            var character = new Character(team, 10, 1, spawnPos);
 
             _charactersStorage.Add(character);
             OnCharacterCreated?.Invoke(character);

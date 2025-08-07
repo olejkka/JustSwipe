@@ -23,15 +23,17 @@ namespace _Project.Scripts.Infrastructure
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<GameInitializer>();
-            builder.Register<CharactersMover>(Lifetime.Singleton);
             
+            builder.Register<CharacterSpawnController>(Lifetime.Singleton);
+            builder.Register<CharactersMover>(Lifetime.Singleton);
+
             RegisterInput(builder);
             RegisterConfigs(builder);
             RegisterCreators(builder);
             RegisterInstantiators(builder);
             RegisterStorages(builder);
         }
-        
+
         private void RegisterInput(IContainerBuilder builder)
         {
             builder.RegisterComponentInHierarchy<KeyboardInputHandler>();
@@ -44,26 +46,26 @@ namespace _Project.Scripts.Infrastructure
                 Lifetime.Singleton
             );
         }
-        
+
         private void RegisterConfigs(IContainerBuilder builder)
         {
             builder.RegisterInstance(_tilesGenerationConfig);
             builder.RegisterInstance(_characterStatsConfig);
             builder.RegisterInstance(_charactersPrefabsConfig);
         }
-        
+
         private void RegisterCreators(IContainerBuilder builder)
         {
             builder.Register<PositionsCreator>(Lifetime.Singleton);
             builder.Register<CharacterCreator>(Lifetime.Singleton);
         }
-        
+
         private void RegisterInstantiators(IContainerBuilder builder)
         {
-            builder.RegisterInstance(_tileInstantiator);    
+            builder.RegisterInstance(_tileInstantiator);
             builder.RegisterComponentInHierarchy<CharacterViewInstantiator>();
         }
-        
+
         private void RegisterStorages(IContainerBuilder builder)
         {
             builder.Register<TilesPositionsStorage>(Lifetime.Singleton);
