@@ -27,17 +27,18 @@ namespace _Project.Scripts.Infrastructure
             builder.Register<CharacterSpawnController>(Lifetime.Singleton);
             builder.Register<CharactersMover>(Lifetime.Singleton);
 
-            RegisterInput(builder);
+            RegisterInputHandlers(builder);
             RegisterConfigs(builder);
             RegisterCreators(builder);
             RegisterInstantiators(builder);
             RegisterStorages(builder);
         }
 
-        private void RegisterInput(IContainerBuilder builder)
+        private void RegisterInputHandlers(IContainerBuilder builder)
         {
             builder.RegisterComponentInHierarchy<KeyboardInputHandler>();
             builder.RegisterComponentInHierarchy<SwipeInputHandler>();
+            builder.RegisterComponentInHierarchy<BotInputHandler>();
 
             builder.Register<IInputHandler>(
                 resolver => Application.isMobilePlatform

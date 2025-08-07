@@ -15,12 +15,12 @@ namespace _Project.Scripts.Characters
         
         public CharacterSpawnController(
             CharacterCreator characterCreator
-        )
+            )
         {
             _creator = characterCreator;
         }
 
-        public void HandleInput(Vector2Int _)
+        public void HandleInput(Vector2Int vector, Team team)
         {
             if (Random.value < SpawnChance)
                 _creator.Create(Team.Bot);

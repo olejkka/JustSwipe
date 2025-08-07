@@ -11,13 +11,18 @@ namespace _Project.Scripts.Infrastructure
 {
     public class GameInitializer : IStartable, IDisposable
     {
-        private readonly CharacterCreator _characterCreator;
-        private readonly CharactersMover _charactersMover;
-        private readonly CharacterViewInstantiator _characterViewInstantiator;
         private readonly KeyboardInputHandler _keyboardInputHandler;
-        private readonly PositionsCreator _positionsCreator;
         private readonly SwipeInputHandler _swipeInputHandler;
+        private readonly BotInputHandler _botInputHandler;
+        
+        private readonly CharacterCreator _characterCreator;
+        private readonly PositionsCreator _positionsCreator;
+        
+        private readonly CharacterViewInstantiator _characterViewInstantiator;
         private readonly TileInstantiator _tileInstantiator;
+        
+        private readonly CharactersMover _charactersMover;
+        
         private readonly CharacterSpawnController _characterSpawnController;
 
 
@@ -29,7 +34,8 @@ namespace _Project.Scripts.Infrastructure
             TileInstantiator tileInstantiator,
             CharacterViewInstantiator characterViewInstantiator,
             CharactersMover charactersMover,
-            CharacterSpawnController characterSpawnController
+            CharacterSpawnController characterSpawnController,
+            BotInputHandler botInputHandler
         )
         {
             _keyboardInputHandler = keyboardInputHandler;
@@ -40,12 +46,14 @@ namespace _Project.Scripts.Infrastructure
             _characterViewInstantiator = characterViewInstantiator;
             _charactersMover = charactersMover;
             _characterSpawnController = characterSpawnController;
+            _botInputHandler = botInputHandler;
         }
 
         public void Start()
         {
-            _keyboardInputHandler.OnPressed += _charactersMover.MovePlayerCharacters;
-            _swipeInputHandler.OnPressed += _charactersMover.MovePlayerCharacters;
+            _keyboardInputHandler.OnPressed += _charactersMover.Move;
+            _swipeInputHandler.OnPressed += _charactersMover.Move;
+            _botInputHandler.OnPressed += _charactersMover.Move;
             
             _keyboardInputHandler.OnPressed += _characterSpawnController.HandleInput;
             _swipeInputHandler.OnPressed += _characterSpawnController.HandleInput;
@@ -60,8 +68,9 @@ namespace _Project.Scripts.Infrastructure
 
         public void Dispose()
         {
-            _keyboardInputHandler.OnPressed -= _charactersMover.MovePlayerCharacters;
-            _swipeInputHandler.OnPressed -= _charactersMover.MovePlayerCharacters;
+            _keyboardInputHandler.OnPressed -= _charactersMover.Move;
+            _swipeInputHandler.OnPressed -= _charactersMover.Move;
+            _botInputHandler.OnPressed -= _charactersMover.Move;
             
             _keyboardInputHandler.OnPressed -= _characterSpawnController.HandleInput;
             _swipeInputHandler.OnPressed -= _characterSpawnController.HandleInput;

@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.Characters;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
@@ -6,7 +7,7 @@ namespace _Project.Scripts.InputHandlers
 {
     public class SwipeInputHandler : MonoBehaviour, IInputHandler
     {
-        public event Action<Vector2Int> OnPressed;
+        public event Action<Vector2Int, Team> OnPressed;
         Vector2 start;
         bool swiping;
         float minDistance = 50f;
@@ -38,7 +39,7 @@ namespace _Project.Scripts.InputHandlers
                             dir = Vector2Int.down;
                         else
                             dir = Vector2Int.left;
-                        OnPressed?.Invoke(dir);
+                        OnPressed?.Invoke(dir, Team.Player);
                     }
                     swiping = false;
                 }
