@@ -8,7 +8,7 @@ namespace _Project.Scripts.Generators
 {
     public class PositionsCreator
     {
-        public event Action<Vector2Int> OnPositionCreated;
+        public event Action<Vector2Int> OnPositionsCreated;
         
         private readonly TilesGenerationConfig _config;
         private readonly TilesPositionsStorage _storage;
@@ -38,7 +38,7 @@ namespace _Project.Scripts.Generators
                     continue;
 
                 _storage.AddPosition(position);
-                OnPositionCreated?.Invoke(position);
+                OnPositionsCreated?.Invoke(position);
             }
         }
     }

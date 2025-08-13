@@ -20,9 +20,6 @@ namespace _Project.Scripts.Characters
             _tilemap = tilemap;
             _data.OnPositionChanged += UpdatePosition;
             UpdatePosition(_data.Position);
-
-            Debug.Log(
-                $"[CharacterViewInstantiator] Init - {_data.Position}, {_data.Team}, {_data.Health}, {_data.Damage}");
         }
 
         private void UpdatePosition(Vector2Int pos)
@@ -30,8 +27,6 @@ namespace _Project.Scripts.Characters
             var cell = new Vector3Int(pos.x, pos.y, 0);
             var worldPos = _tilemap.CellToWorld(cell);
             transform.position = worldPos;
-
-            Debug.Log($"[CharacterViewInstantiator] Update Position - {worldPos}");
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using _Project.Scripts.Characters;
 using _Project.Scripts.Creators;
-using _Project.Scripts.Factories;
 using _Project.Scripts.FSM;
 using _Project.Scripts.Generators;
 using _Project.Scripts.Infrastructure.Initializers;
@@ -32,6 +31,12 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
 
+            builder.Register<PhaseHandler>(Lifetime.Singleton).As<IStartable>().AsSelf();
+            builder.Register<InputStorage>(Lifetime.Singleton);
+            
+            builder.Register<InputReadingPhase>(Lifetime.Singleton).As<Phase>().AsSelf();
+            builder.Register<CharactersMovingPhase>(Lifetime.Singleton).As<Phase>().AsSelf();
+            
             RegisterConfigs(builder);
             RegisterCreators(builder);
             RegisterInstantiators(builder);

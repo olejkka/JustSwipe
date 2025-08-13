@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace _Project.Scripts.Factories
+namespace _Project.Scripts.Instantiators
 {
     public class TileInstantiator : MonoBehaviour
     {
