@@ -1,8 +1,9 @@
 ﻿using _Project.Scripts.Characters;
 using _Project.Scripts.Creators;
 using _Project.Scripts.Factories;
+using _Project.Scripts.FSM;
 using _Project.Scripts.Generators;
-using _Project.Scripts.InputHandlers;
+using _Project.Scripts.Infrastructure.Initializers;
 using _Project.Scripts.Instantiators;
 using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Tiles;
@@ -10,7 +11,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace _Project.Scripts.Infrastructure
+namespace _Project.Scripts.Infrastructure.LifetimeScopes
 {
     public class GameplayLifetimeScope : LifetimeScope
     {
@@ -19,33 +20,22 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private CharacterStatsConfig _characterStatsConfig;
         [SerializeField] private TileInstantiator _tileInstantiator;
 
-
+        
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<GameInitializer>();
+            builder.RegisterEntryPoint<InputInitializer>();
+            builder.RegisterEntryPoint<GameplayInitializer>();
             
             builder.Register<CharacterSpawnController>(Lifetime.Singleton);
             builder.Register<CharactersMover>(Lifetime.Singleton);
+            
+            builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
+            builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
 
-            RegisterInputHandlers(builder);
             RegisterConfigs(builder);
             RegisterCreators(builder);
             RegisterInstantiators(builder);
             RegisterStorages(builder);
-        }
-
-        private void RegisterInputHandlers(IContainerBuilder builder)
-        {
-            builder.RegisterComponentInHierarchy<KeyboardInputHandler>();
-            builder.RegisterComponentInHierarchy<SwipeInputHandler>();
-            builder.RegisterComponentInHierarchy<BotInputHandler>();
-
-            builder.Register<IInputHandler>(
-                resolver => Application.isMobilePlatform
-                    ? resolver.Resolve<SwipeInputHandler>()
-                    : resolver.Resolve<KeyboardInputHandler>(),
-                Lifetime.Singleton
-            );
         }
 
         private void RegisterConfigs(IContainerBuilder builder)
