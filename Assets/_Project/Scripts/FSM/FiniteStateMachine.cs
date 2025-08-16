@@ -28,8 +28,9 @@ public abstract class FiniteStateMachine
 
     public void UpdateState()
     {
-        if (_currentState == null) 
+        if (_currentState == null)
             return;
+        
         _currentState.Update();
         
         if (_currentState.TryGetNextState(out Type type))

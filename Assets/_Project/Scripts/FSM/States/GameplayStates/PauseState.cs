@@ -9,9 +9,15 @@ namespace _Project.Scripts.FSM.States.GameplayStates
 
         public override void Enter()
         {
-            
+            // Debug.Log("[PauseState] Entering PauseState");
+
         }
-        public override void Exit() { }
+
+        public override void Exit()
+        {
+            // Debug.Log("[PauseState] Exiting PauseState");
+
+        }
         public override void Update() { }
     }
 }

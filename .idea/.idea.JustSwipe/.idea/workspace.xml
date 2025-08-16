@@ -5,23 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/CharactersMovingPhase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/CharactersMovingPhase.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/InputReadingPhase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/InputReadingPhase.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/InputStorage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/InputStorage.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Phase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Phase.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/PhaseHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/PhaseHandler.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Creators/PositionsCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Creators/PositionsCreator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Initializers/GameplayInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Initializers/GameplayInitializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Initializers/InputInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Initializers/InputInitializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/GameplayLifetimeScope.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/GameplayLifetimeScope.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/RootLifetimeScope.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/RootLifetimeScope.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Instantiators/TileInstantiator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Instantiators/TileInstantiator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/CharactersMovingPhase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/CharactersMovingPhase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/CharactersMovingPhase.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/CharactersMovingPhase.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/InputReadingPhase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/InputReadingPhase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/InputReadingPhase.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/InputReadingPhase.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/InputStorage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/InputStorage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/InputStorage.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/InputStorage.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Phase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/Phase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Phase.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/Phase.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/PhaseHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/PhaseHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/PhaseHandler.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/PhaseHandler.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,6 +173,7 @@
       <workItem from="1755012341235" duration="2328000" />
       <workItem from="1755060458171" duration="152000" />
       <workItem from="1755060835258" duration="15463000" />
+      <workItem from="1755098879333" duration="2713000" />
     </task>
     <servers />
   </component>

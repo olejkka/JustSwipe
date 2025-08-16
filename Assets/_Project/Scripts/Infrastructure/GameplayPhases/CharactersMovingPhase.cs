@@ -28,8 +28,6 @@ namespace _Project.Scripts.Infrastructure
         
         public override void Enter()
         {
-            Debug.Log("Entering CharactersMovingPhase");
-            
             if (_humanPhase)
                 _charactersMover.Move(_inputStorage.InputVector, Team.Player);
             else

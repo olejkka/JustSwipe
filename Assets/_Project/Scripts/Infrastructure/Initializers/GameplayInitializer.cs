@@ -44,7 +44,7 @@ namespace _Project.Scripts.Infrastructure.Initializers
             _positionsesCreator.OnPositionsCreated += _tileInstantiator.Instantiate;
             _characterCreator.OnCharacterCreated += _characterViewInstantiator.Instantiate;
 
-            // _fsm = _stateMachineCreator.Create();
+            _fsm = _stateMachineCreator.Create();
             _positionsesCreator.Create();
             _characterCreator.Create(Team.Player);
             _characterCreator.Create(Team.Bot);

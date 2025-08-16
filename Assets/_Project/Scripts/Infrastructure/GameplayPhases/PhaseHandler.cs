@@ -18,13 +18,13 @@ namespace _Project.Scripts.Infrastructure
 
         public void Start()
         {
-            if (_phases == null || _phases.Count == 0)
-            {
-                Debug.LogWarning("PhaseHandler: no phases registered");
-                return;
-            }
-            
-            EnterNextPhase();
+            // if (_phases == null || _phases.Count == 0)
+            // {
+            //     Debug.LogWarning("PhaseHandler: no phases registered");
+            //     return;
+            // }
+            //
+            // EnterNextPhase();
         }
 
         private void EnterNextPhase()

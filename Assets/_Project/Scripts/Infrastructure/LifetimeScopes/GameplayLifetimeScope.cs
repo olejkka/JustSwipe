@@ -22,7 +22,6 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<InputInitializer>();
             builder.RegisterEntryPoint<GameplayInitializer>();
             
             builder.Register<CharacterSpawnController>(Lifetime.Singleton);
@@ -30,6 +29,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             
             builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
+            builder.Register<ITurnService, TurnService>(Lifetime.Singleton);
 
             builder.Register<PhaseHandler>(Lifetime.Singleton).As<IStartable>().AsSelf();
             builder.Register<InputStorage>(Lifetime.Singleton);

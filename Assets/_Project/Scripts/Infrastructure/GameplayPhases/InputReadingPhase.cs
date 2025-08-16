@@ -29,8 +29,6 @@ namespace _Project.Scripts.Infrastructure
         
         public override void Enter()
         {
-            Debug.Log("Entering InputReadingPhase");
-            
             if (_humanPhase)
             {
                 _keyboardInputHandler.OnPressed += ReadInput;
