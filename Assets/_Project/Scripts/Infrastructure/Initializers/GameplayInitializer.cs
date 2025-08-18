@@ -12,15 +12,18 @@ namespace _Project.Scripts.Infrastructure.Initializers
 {
     public class GameplayInitializer : IStartable, ITickable, IDisposable
     {
+        private readonly GameplayStateMachineCreator _stateMachineCreator;
+        private readonly PhaseHandler _phaseHandler;
+        private GameplayStateMachine _fsm;
+        
         private readonly CharacterCreator _characterCreator;
         private readonly PositionsCreator _positionsesCreator;
         private readonly CharacterViewInstantiator _characterViewInstantiator;
         private readonly TileInstantiator _tileInstantiator;
         
-        private readonly PhaseHandler _phaseHandler;
+        private readonly CharacterDeathHandler _deathHandler;
         
-        private readonly GameplayStateMachineCreator _stateMachineCreator;
-        private GameplayStateMachine _fsm;
+        
 
         
         public GameplayInitializer(
@@ -29,7 +32,8 @@ namespace _Project.Scripts.Infrastructure.Initializers
             TileInstantiator tileInstantiator,
             CharacterViewInstantiator characterViewInstantiator,
             GameplayStateMachineCreator stateMachineCreator,
-            PhaseHandler phaseHandler
+            PhaseHandler phaseHandler,
+            CharacterDeathHandler deathHandler
         )
         {
             _positionsesCreator = positionsesCreator;
@@ -38,12 +42,14 @@ namespace _Project.Scripts.Infrastructure.Initializers
             _characterViewInstantiator = characterViewInstantiator;
             _stateMachineCreator = stateMachineCreator;
             _phaseHandler = phaseHandler;
+            _deathHandler = deathHandler;
         }
 
         public void Start()
         {
             _positionsesCreator.OnPositionsCreated += _tileInstantiator.Instantiate;
             _characterCreator.OnCharacterCreated += _characterViewInstantiator.Instantiate;
+            _characterCreator.OnCharacterCreated += _deathHandler.Register;
 
             _fsm = _stateMachineCreator.Create();
             _positionsesCreator.Create();
@@ -60,6 +66,7 @@ namespace _Project.Scripts.Infrastructure.Initializers
         {
             _positionsesCreator.OnPositionsCreated -= _tileInstantiator.Instantiate;
             _characterCreator.OnCharacterCreated -= _characterViewInstantiator.Instantiate;
+            _characterCreator.OnCharacterCreated -= _deathHandler.Register;
             
             _fsm = null;
         }

@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace _Project.Scripts.Characters
+namespace _Project.Scripts.Characters.Storages
 {
     public class CharactersStorage
     {
@@ -11,7 +11,6 @@ namespace _Project.Scripts.Characters
         
         public void Add(Character character) => _characters.Add(character);
         public bool Remove(Character character) => _characters.Remove(character);
-
         
         public IEnumerable<Character> GetCharactersByTeam(Team team) =>
             _characters.Where(character => character.Team == team);

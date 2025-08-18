@@ -1,4 +1,5 @@
 using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
 using _Project.Scripts.FSM;
 using _Project.Scripts.Generators;
@@ -31,6 +32,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             
             builder.Register<CharacterSpawnController>(Lifetime.Singleton);
             builder.Register<CharactersMover>(Lifetime.Singleton);
+            builder.Register<CharacterDeathHandler>(Lifetime.Singleton);
             
             builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
@@ -79,6 +81,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         {
             builder.Register<TilesPositionsStorage>(Lifetime.Singleton);
             builder.Register<CharactersStorage>(Lifetime.Singleton);
+            builder.Register<CharactersViewsStorage>(Lifetime.Singleton);
         }
     }
 }

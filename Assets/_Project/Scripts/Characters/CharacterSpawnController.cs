@@ -13,9 +13,7 @@ namespace _Project.Scripts.Characters
         private readonly CharacterCreator _creator;
 
         
-        public CharacterSpawnController(
-            CharacterCreator characterCreator
-            )
+        public CharacterSpawnController(CharacterCreator characterCreator)
         {
             _creator = characterCreator;
         }

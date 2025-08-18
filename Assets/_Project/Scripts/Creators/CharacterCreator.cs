@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Tiles;
 using Random = UnityEngine.Random;
 
@@ -32,7 +33,7 @@ namespace _Project.Scripts.Creators
 
             var spawnPos = positions[Random.Range(0, positions.Count)];
 
-            var character = new Character(team, 10, 1, spawnPos);
+            var character = new Character(spawnPos, team, 1, 1);
 
             _charactersStorage.Add(character);
             OnCharacterCreated?.Invoke(character);

@@ -1,6 +1,8 @@
 ﻿using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Storages;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using VContainer;
 
 namespace _Project.Scripts.Instantiators
 {
@@ -10,7 +12,8 @@ namespace _Project.Scripts.Instantiators
         [SerializeField] private CharacterView _botCharacter;
         [SerializeField] private Tilemap _tilemap;
 
-
+        [Inject] private CharactersViewsStorage _charactersViewsStorage;        
+        
         public void Instantiate(Character character)
         {
             var cell = new Vector3Int(character.Position.x, character.Position.y, 0);
@@ -23,6 +26,8 @@ namespace _Project.Scripts.Instantiators
 
             var instance = Instantiate(prefab, worldPos, Quaternion.identity);
             instance.Init(character, _tilemap);
+            
+            _charactersViewsStorage.Register(character, instance);
         }
     }
 }

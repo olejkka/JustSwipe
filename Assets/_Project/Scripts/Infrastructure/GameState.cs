@@ -1,4 +1,5 @@
 ﻿using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Tiles;
 
 namespace _Project.Scripts.Infrastructure
