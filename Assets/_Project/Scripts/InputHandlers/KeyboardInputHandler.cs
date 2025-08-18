@@ -8,7 +8,7 @@ namespace _Project.Scripts.InputHandlers
     {
         public event Action<Vector2Int, Team> OnPressed;
 
-        void Update()
+        private void Update()
         {
             if (Input.GetKeyDown(KeyCode.W)) 
                 OnPressed?.Invoke(Vector2Int.up, Team.Player);

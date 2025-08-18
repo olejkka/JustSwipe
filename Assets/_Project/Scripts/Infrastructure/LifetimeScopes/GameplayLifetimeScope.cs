@@ -1,8 +1,10 @@
-﻿using _Project.Scripts.Characters;
+using _Project.Scripts.Characters;
 using _Project.Scripts.Creators;
 using _Project.Scripts.FSM;
 using _Project.Scripts.Generators;
+using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.Infrastructure.Initializers;
+using _Project.Scripts.InputHandlers;
 using _Project.Scripts.Instantiators;
 using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Tiles;
@@ -23,24 +25,35 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<GameplayInitializer>();
+            builder.RegisterEntryPoint<PauseInitializer>();
+            
+            builder.Register<PauseService>(Lifetime.Singleton);
             
             builder.Register<CharacterSpawnController>(Lifetime.Singleton);
             builder.Register<CharactersMover>(Lifetime.Singleton);
             
             builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
-            builder.Register<ITurnService, TurnService>(Lifetime.Singleton);
+            builder.Register<TurnService>(Lifetime.Singleton);
 
             builder.Register<PhaseHandler>(Lifetime.Singleton).As<IStartable>().AsSelf();
             builder.Register<InputStorage>(Lifetime.Singleton);
-            
             builder.Register<InputReadingPhase>(Lifetime.Singleton).As<Phase>().AsSelf();
             builder.Register<CharactersMovingPhase>(Lifetime.Singleton).As<Phase>().AsSelf();
             
+            RegisterInputHandlers(builder);
             RegisterConfigs(builder);
             RegisterCreators(builder);
             RegisterInstantiators(builder);
             RegisterStorages(builder);
+        }
+        
+        private void RegisterInputHandlers(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInHierarchy<KeyboardInputHandler>();
+            builder.RegisterComponentInHierarchy<PauseKeyboardInputHandler>();
+            builder.RegisterComponentInHierarchy<SwipeInputHandler>();
+            builder.RegisterComponentInHierarchy<BotInputHandler>();
         }
 
         private void RegisterConfigs(IContainerBuilder builder)

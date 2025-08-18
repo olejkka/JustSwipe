@@ -1,4 +1,6 @@
 ﻿using _Project.Scripts.Creators;
+using _Project.Scripts.FSM;
+using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.Infrastructure.Initializers;
 using _Project.Scripts.InputHandlers;
 using UnityEngine;
@@ -11,21 +13,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            RegisterInputHandlers(builder);
-        }
-        
-        private void RegisterInputHandlers(IContainerBuilder builder)
-        {
-            builder.RegisterComponentInHierarchy<KeyboardInputHandler>();
-            builder.RegisterComponentInHierarchy<SwipeInputHandler>();
-            builder.RegisterComponentInHierarchy<BotInputHandler>();
-
-            builder.Register<IInputHandler>(
-                resolver => Application.isMobilePlatform
-                    ? resolver.Resolve<SwipeInputHandler>()
-                    : resolver.Resolve<KeyboardInputHandler>(),
-                Lifetime.Singleton
-            );
+            
         }
     }
 }

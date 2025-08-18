@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Characters;
+using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.InputHandlers;
 
 namespace _Project.Scripts.FSM.States.GameplayStates
@@ -8,7 +9,9 @@ namespace _Project.Scripts.FSM.States.GameplayStates
     {
         private readonly BotInputHandler _botInputHandler;
         private readonly CharactersMover _charactersMover;
-        private readonly ITurnService _turns;
+        private readonly TurnService _turnService;
+        private readonly PauseService _pauseService;
+        
         private bool _handled;
 
 
@@ -16,23 +19,28 @@ namespace _Project.Scripts.FSM.States.GameplayStates
             IReadOnlyList<ITransition> transitions,
             BotInputHandler botInputHandler,
             CharactersMover charactersMover,
-            ITurnService turns
+            TurnService turnService,
+            PauseService pauseService
         ) : base(transitions)
         {
             _botInputHandler = botInputHandler;
             _charactersMover = charactersMover;
-            _turns = turns;
+            _turnService = turnService;
+            _pauseService = pauseService;
         }
 
         public override void Enter()
         {
             // Debug.Log("[BotTurnState] Entering Bot Turn State");
             
+            _pauseService.ResumeToPlayer = false;
+
+            
             _botInputHandler.OnPressed += _charactersMover.Move;
             _charactersMover.OnMove += OnBotCharactersMoved;
             
             _handled = false;
-            _turns.BotMoveFinished = false;
+            _turnService.BotMoveFinished = false;
         }
 
         public override void Exit()
@@ -40,7 +48,7 @@ namespace _Project.Scripts.FSM.States.GameplayStates
             _botInputHandler.OnPressed -= _charactersMover.Move;
             _charactersMover.OnMove -= OnBotCharactersMoved;
             
-            _turns.BotMoveFinished = false;
+            _turnService.BotMoveFinished = false;
             
             // Debug.Log("[BotTurnState] Exiting Bot Turn State");
         }
@@ -52,7 +60,7 @@ namespace _Project.Scripts.FSM.States.GameplayStates
                 return;
             
             _handled = true;
-            _turns.BotMoveFinished = true;
+            _turnService.BotMoveFinished = true;
         }
     }
 }

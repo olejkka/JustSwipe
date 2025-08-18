@@ -3,6 +3,7 @@ using _Project.Scripts.Characters;
 using _Project.Scripts.Creators;
 using _Project.Scripts.FSM;
 using _Project.Scripts.Generators;
+using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.InputHandlers;
 using _Project.Scripts.Instantiators;
 using VContainer.Unity;
