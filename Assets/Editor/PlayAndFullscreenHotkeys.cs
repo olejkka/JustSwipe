@@ -1,5 +1,4 @@
 #if UNITY_EDITOR
-using System;
 using UnityEditor;
 using UnityEngine;
 #if UNITY_2019_1_OR_NEWER
@@ -14,7 +13,13 @@ public static class PlayAndFullscreenHotkeys
         EditorApplication.isPlaying = !EditorApplication.isPlaying;
     }
 
-    // Меню для переключения maximize у активного окна
+    [MenuItem("Tools/Pause _#p")]
+    private static void TogglePause()
+    {
+        if (EditorApplication.isPlaying)
+            EditorApplication.isPaused = !EditorApplication.isPaused;
+    }
+
     [MenuItem("Tools/Toggle Active Window Maximize _f")]
     private static void ToggleActiveWindowMaximize_Menu()
     {
@@ -28,9 +33,13 @@ public static class PlayAndFullscreenHotkeys
         TogglePlayMode();
     }
 
-    // Глобальный шорткат F
+    [Shortcut("JustSwipe/Pause", KeyCode.P, ShortcutModifiers.Shift)]
+    private static void Shortcut_Pause()
+    {
+        TogglePause();
+    }
+
     [Shortcut("JustSwipe/Toggle Active Window Maximize", KeyCode.F)]
-    // И специфично для SceneView, чтобы переопределить Frame Selected
     [Shortcut("JustSwipe/Toggle Active Window Maximize (SceneView)", typeof(SceneView), KeyCode.F)]
     private static void Shortcut_ToggleActiveWindowMaximize()
     {
@@ -40,8 +49,7 @@ public static class PlayAndFullscreenHotkeys
 
     private static void ToggleActiveWindowMaximize()
     {
-        // Текущее выбранное окно (или окно под курсором, если фокус отсутствует)
-        EditorWindow window = EditorWindow.focusedWindow ?? EditorWindow.mouseOverWindow;
+        EditorWindow window = EditorWindow.mouseOverWindow ?? EditorWindow.focusedWindow;
         if (window == null)
             return;
 
@@ -53,8 +61,8 @@ public static class PlayAndFullscreenHotkeys
         if (window == null)
             return;
 
-        window.Focus();                // активируем вкладку
-        window.maximized = !window.maximized; // эффект двойного клика по вкладке
+        window.Focus();
+        window.maximized = !window.maximized;
     }
 }
 #endif
