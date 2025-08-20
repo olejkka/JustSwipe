@@ -9,6 +9,7 @@ using _Project.Scripts.InputHandlers;
 using _Project.Scripts.Instantiators;
 using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Tiles;
+using _Project.Scripts.UI;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -26,9 +27,6 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<GameplayInitializer>();
-            builder.RegisterEntryPoint<PauseInitializer>();
-            
-            builder.Register<PauseService>(Lifetime.Singleton);
             
             builder.Register<CharacterSpawnController>(Lifetime.Singleton);
             builder.Register<CharactersMover>(Lifetime.Singleton);
@@ -53,7 +51,6 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         private void RegisterInputHandlers(IContainerBuilder builder)
         {
             builder.RegisterComponentInHierarchy<KeyboardInputHandler>();
-            builder.RegisterComponentInHierarchy<PauseKeyboardInputHandler>();
             builder.RegisterComponentInHierarchy<SwipeInputHandler>();
             builder.RegisterComponentInHierarchy<BotInputHandler>();
         }
