@@ -28,7 +28,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         {
             builder.RegisterEntryPoint<GameplayInitializer>();
 
-            builder.Register<EnemyCharacterSpawnController>(Lifetime.Singleton);
+            builder.Register<PlayerInputHandler>(Lifetime.Singleton);
             builder.Register<CharactersMover>(Lifetime.Singleton);
             builder.Register<CharacterDeathHandler>(Lifetime.Singleton);
 

@@ -8,7 +8,7 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
     public class PlayerTurnState : State
     {
         private readonly CharactersMover _charactersMover;
-        private readonly EnemyCharacterSpawnController _enemyCharacterSpawnController;
+        private readonly PlayerInputHandler _playerInputHandler;
         private readonly PauseService _pauseService;
         private readonly SwipeInputHandler _swipeInputHandler;
         private readonly TurnService _turnService;
@@ -20,14 +20,14 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
             IReadOnlyList<ITransition> transitions,
             SwipeInputHandler swipeInputHandler,
             CharactersMover charactersMover,
-            EnemyCharacterSpawnController enemyCharacterSpawnController,
+            PlayerInputHandler playerInputHandler,
             TurnService turnService,
             PauseService pauseService
         ) : base(transitions)
         {
             _swipeInputHandler = swipeInputHandler;
             _charactersMover = charactersMover;
-            _enemyCharacterSpawnController = enemyCharacterSpawnController;
+            _playerInputHandler = playerInputHandler;
             _turnService = turnService;
             _pauseService = pauseService;
         }
@@ -39,7 +39,7 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
             _pauseService.ResumeToPlayer = true;
 
             _swipeInputHandler.OnPressed += _charactersMover.Move;
-            _swipeInputHandler.OnPressed += _enemyCharacterSpawnController.HandlePlayerInput;
+            _swipeInputHandler.OnPressed += _playerInputHandler.Handle;
             _charactersMover.OnMove += OnPlayerCharactersMoved;
 
             _handled = false;
@@ -49,7 +49,7 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         public override void Exit()
         {
             _swipeInputHandler.OnPressed -= _charactersMover.Move;
-            _swipeInputHandler.OnPressed -= _enemyCharacterSpawnController.HandlePlayerInput;
+            _swipeInputHandler.OnPressed -= _playerInputHandler.Handle;
             _charactersMover.OnMove -= OnPlayerCharactersMoved;
 
             _turnService.PlayerMoveFinished = false;

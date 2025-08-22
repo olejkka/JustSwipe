@@ -1,21 +1,22 @@
-﻿using _Project.Scripts.Creators;
+﻿using _Project.Scripts.Characters;
+using _Project.Scripts.Creators;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace _Project.Scripts.Characters
+namespace _Project.Scripts.InputHandlers
 {
-    public class EnemyCharacterSpawnController
+    public class PlayerInputHandler
     {
         private const float SpawnChance = 0.25f;
         private readonly CharacterCreator _creator;
 
 
-        public EnemyCharacterSpawnController(CharacterCreator characterCreator)
+        public PlayerInputHandler(CharacterCreator characterCreator)
         {
             _creator = characterCreator;
         }
 
-        public void HandlePlayerInput(Vector2Int vector, Team team)
+        public void Handle(Vector2Int vector, Team team)
         {
             if (Random.value < SpawnChance)
                 _creator.Create("Bot_1");

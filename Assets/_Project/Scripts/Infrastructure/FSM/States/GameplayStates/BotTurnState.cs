@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Storages;
+using _Project.Scripts.Creators;
 using _Project.Scripts.FSM;
 using _Project.Scripts.InputHandlers;
 
@@ -11,6 +14,8 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         private readonly CharactersMover _charactersMover;
         private readonly PauseService _pauseService;
         private readonly TurnService _turnService;
+        private readonly CharactersStorage _charactersStorage;
+        private readonly CharacterCreator _characterCreator;
 
         private bool _handled;
 
@@ -20,13 +25,17 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
             BotInputHandler botInputHandler,
             CharactersMover charactersMover,
             TurnService turnService,
-            PauseService pauseService
+            PauseService pauseService,
+            CharactersStorage charactersStorage,
+            CharacterCreator characterCreator
         ) : base(transitions)
         {
             _botInputHandler = botInputHandler;
             _charactersMover = charactersMover;
             _turnService = turnService;
             _pauseService = pauseService;
+            _charactersStorage = charactersStorage;
+            _characterCreator = characterCreator;
         }
 
         public override void Enter()
@@ -35,6 +44,10 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 
             _pauseService.ResumeToPlayer = false;
 
+            if (!_charactersStorage.GetCharactersByTeam(Team.Bot).Any())
+            {
+                _characterCreator.Create("Bot_1");
+            }
 
             _botInputHandler.OnPressed += _charactersMover.Move;
             _charactersMover.OnMove += OnBotCharactersMoved;
