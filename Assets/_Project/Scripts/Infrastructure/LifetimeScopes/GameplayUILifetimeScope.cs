@@ -9,8 +9,6 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            
-            
             builder.RegisterEntryPoint<PauseButtonPresenter>();
 
             builder.RegisterComponentInHierarchy<PauseButtonView>();

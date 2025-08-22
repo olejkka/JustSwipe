@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Characters;
-using _Project.Scripts.Infrastructure.FSM;
+using _Project.Scripts.FSM;
 using _Project.Scripts.InputHandlers;
 
-namespace _Project.Scripts.FSM.States.GameplayStates
+namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 {
     public class BotTurnState : State
     {
         private readonly BotInputHandler _botInputHandler;
         private readonly CharactersMover _charactersMover;
-        private readonly TurnService _turnService;
         private readonly PauseService _pauseService;
-        
+        private readonly TurnService _turnService;
+
         private bool _handled;
 
 
@@ -32,13 +32,13 @@ namespace _Project.Scripts.FSM.States.GameplayStates
         public override void Enter()
         {
             // Debug.Log("[BotTurnState] Entering Bot Turn State");
-            
+
             _pauseService.ResumeToPlayer = false;
 
-            
+
             _botInputHandler.OnPressed += _charactersMover.Move;
             _charactersMover.OnMove += OnBotCharactersMoved;
-            
+
             _handled = false;
             _turnService.BotMoveFinished = false;
         }
@@ -47,18 +47,21 @@ namespace _Project.Scripts.FSM.States.GameplayStates
         {
             _botInputHandler.OnPressed -= _charactersMover.Move;
             _charactersMover.OnMove -= OnBotCharactersMoved;
-            
+
             _turnService.BotMoveFinished = false;
-            
+
             // Debug.Log("[BotTurnState] Exiting Bot Turn State");
         }
-        public override void Update() { }
-        
+
+        public override void Update()
+        {
+        }
+
         private void OnBotCharactersMoved()
         {
-            if (_handled) 
+            if (_handled)
                 return;
-            
+
             _handled = true;
             _turnService.BotMoveFinished = true;
         }

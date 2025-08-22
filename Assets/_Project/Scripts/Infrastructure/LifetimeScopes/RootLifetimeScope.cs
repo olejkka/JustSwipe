@@ -1,9 +1,4 @@
-﻿using _Project.Scripts.Creators;
-using _Project.Scripts.FSM;
-using _Project.Scripts.Infrastructure.FSM;
-using _Project.Scripts.Infrastructure.Initializers;
-using _Project.Scripts.InputHandlers;
-using UnityEngine;
+﻿using _Project.Scripts.Infrastructure.FSM;
 using VContainer;
 using VContainer.Unity;
 

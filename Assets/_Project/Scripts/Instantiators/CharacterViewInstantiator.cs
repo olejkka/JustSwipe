@@ -1,5 +1,7 @@
-﻿using _Project.Scripts.Characters;
+﻿using System.Linq;
+using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
+using _Project.Scripts.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using VContainer;
@@ -8,11 +10,11 @@ namespace _Project.Scripts.Instantiators
 {
     public class CharacterViewInstantiator : MonoBehaviour
     {
-        [SerializeField] private CharacterView _playerCharacter;
-        [SerializeField] private CharacterView _botCharacter;
         [SerializeField] private Tilemap _tilemap;
+        
+        [Inject] private CharactersPrefabsConfig _charactersPrefabsConfig;
+        [Inject] private CharactersViewsStorage _charactersViewsStorage;
 
-        [Inject] private CharactersViewsStorage _charactersViewsStorage;        
         
         public void Instantiate(Character character)
         {
@@ -20,14 +22,26 @@ namespace _Project.Scripts.Instantiators
 
             var worldPos = _tilemap.CellToWorld(cell);
 
-            var prefab = character.Team == Team.Player
-                ? _playerCharacter
-                : _botCharacter;
+            var prefabEntry = _charactersPrefabsConfig.CharacterPrefabEntries
+                .FirstOrDefault(entry => entry.Id == character.Id);
 
-            var instance = Instantiate(prefab, worldPos, Quaternion.identity);
-            instance.Init(character, _tilemap);
-            
-            _charactersViewsStorage.Register(character, instance);
+            if (prefabEntry?.Prefab == null)
+            {
+                Debug.LogError($"Не найден префаб для персонажа с ID: {character.Id}");
+                return;
+            }
+
+            var instance = Instantiate(prefabEntry.Prefab, worldPos, Quaternion.identity);
+
+            if (instance.TryGetComponent<CharacterView>(out var characterView))
+            {
+                characterView.Init(character, _tilemap);
+                _charactersViewsStorage.Register(character, characterView);
+            }
+            else
+            {
+                Debug.LogError($"Префаб {prefabEntry.Prefab.name} не содержит компонент CharacterView");
+            }
         }
     }
 }

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df45faaf92e436eb375de883779b001, type: 3}
   m_Name: CharactersStatsConfig
   m_EditorClassIdentifier: 
-  Characters:
+  CharacterStatsEntries:
   - Id: Main
     team: 1
-    BaseMaxHealth: 100
-    BaseAttackDamage: 10
+    BaseMaxHealth: 1
+    BaseAttackDamage: 1
   - Id: Bot_1
     team: 2
-    BaseMaxHealth: 20
-    BaseAttackDamage: 2
+    BaseMaxHealth: 1
+    BaseAttackDamage: 1

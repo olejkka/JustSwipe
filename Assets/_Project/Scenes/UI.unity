@@ -235,7 +235,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1080, y: 1920}
-  m_ScreenMatchMode: 1
+  m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -315,6 +315,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingsButton
       objectReference: {fileID: 0}
+    - target: {fileID: 3168049526746981340, guid: 145ba78e7c7a43e46ab589e867332b9f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3168049526746981340, guid: 145ba78e7c7a43e46ab589e867332b9f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054211001380742702, guid: 145ba78e7c7a43e46ab589e867332b9f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054211001380742702, guid: 145ba78e7c7a43e46ab589e867332b9f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054211001380742702, guid: 145ba78e7c7a43e46ab589e867332b9f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054211001380742702, guid: 145ba78e7c7a43e46ab589e867332b9f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4860768449050171215, guid: 145ba78e7c7a43e46ab589e867332b9f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -365,23 +389,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4860768449050171215, guid: 145ba78e7c7a43e46ab589e867332b9f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4860768449050171215, guid: 145ba78e7c7a43e46ab589e867332b9f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4860768449050171215, guid: 145ba78e7c7a43e46ab589e867332b9f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4860768449050171215, guid: 145ba78e7c7a43e46ab589e867332b9f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -125
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 4860768449050171215, guid: 145ba78e7c7a43e46ab589e867332b9f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -125
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 4860768449050171215, guid: 145ba78e7c7a43e46ab589e867332b9f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

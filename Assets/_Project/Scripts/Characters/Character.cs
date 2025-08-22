@@ -5,22 +5,23 @@ namespace _Project.Scripts.Characters
 {
     public class Character
     {
-        public Vector2Int Position { get; private set; }
-        public Team Team { get; private set; }
-        public int Health { get; private set; }
-        public int Damage { get; private set; }
-        
-        public event Action<Vector2Int> OnPositionChanged;
-        public event Action<int> OnHealthChanged;
-        
-        
-        public Character(Vector2Int position, Team team, int health, int damage)
+        public Character(string id, Vector2Int position, Team team, int health, int damage)
         {
+            Id = id;
             Team = team;
             Health = health;
             Damage = damage;
             Position = position;
         }
+
+        public string Id { get; private set; }
+        public Vector2Int Position { get; private set; }
+        public Team Team { get; private set; }
+        public int Health { get; private set; }
+        public int Damage { get; private set; }
+
+        public event Action<Vector2Int> OnPositionChanged;
+        public event Action<int> OnHealthChanged;
 
         public void Move(Vector2Int vector)
         {
