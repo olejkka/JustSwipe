@@ -21,3 +21,7 @@ MonoBehaviour:
     team: 2
     BaseMaxHealth: 5
     BaseAttackDamage: 1
+  - Id: Bot_2
+    team: 2
+    BaseMaxHealth: 6
+    BaseAttackDamage: 10

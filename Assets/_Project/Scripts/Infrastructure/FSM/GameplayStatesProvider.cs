@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
 using _Project.Scripts.FSM;
 using _Project.Scripts.Infrastructure.FSM.States.GameplayStates;
 using _Project.Scripts.InputHandlers;
+using _Project.Scripts.ScriptableObjects;
 
 namespace _Project.Scripts.Infrastructure.FSM
 {
@@ -19,6 +21,7 @@ namespace _Project.Scripts.Infrastructure.FSM
         private readonly TurnService _turnService;
         private readonly CharactersStorage _charactersStorage;
         private readonly CharacterCreator _characterCreator;
+        private readonly CharacterStatsConfig _characterStatsConfig;
 
 
         public GameplayStatesProvider(
@@ -29,7 +32,8 @@ namespace _Project.Scripts.Infrastructure.FSM
             TurnService turnService,
             PauseService pauseService,
             CharactersStorage charactersStorage,
-            CharacterCreator characterCreator
+            CharacterCreator characterCreator,
+            CharacterStatsConfig characterStatsConfig
         )
         {
             _swipeInputHandler = swipeInputHandler;
@@ -40,6 +44,7 @@ namespace _Project.Scripts.Infrastructure.FSM
             _pauseService = pauseService;
             _charactersStorage = charactersStorage;
             _characterCreator = characterCreator;
+            _characterStatsConfig = characterStatsConfig;
         }
 
         public IReadOnlyList<IState> GetStates()
@@ -48,8 +53,8 @@ namespace _Project.Scripts.Infrastructure.FSM
                 new ITransition[]
                 {
                     new TransitionTo<PauseState>(() => _pauseService.IsPaused),
-                    new TransitionTo<BotTurnState>(() => _turnService.PlayerMoveFinished)
-                    // new TransitionTo<EndGameState>(() => _turnService.PlayerMoveFinished)
+                    new TransitionTo<BotTurnState>(() => _turnService.PlayerMoveFinished),
+                    new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any())
                 },
                 _swipeInputHandler,
                 _charactersMover,
@@ -62,15 +67,16 @@ namespace _Project.Scripts.Infrastructure.FSM
                 new ITransition[]
                 {
                     new TransitionTo<PauseState>(() => _pauseService.IsPaused),
-                    new TransitionTo<PlayerTurnState>(() => _turnService.BotMoveFinished)
-                    // new TransitionTo<EndGameState>(() => _turnService.PlayerMoveFinished)
+                    new TransitionTo<PlayerTurnState>(() => _turnService.BotMoveFinished),
+                    new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any())
                 },
                 _botInputHandler,
                 _charactersMover,
                 _turnService,
                 _pauseService,
                 _charactersStorage,
-                _characterCreator
+                _characterCreator,
+                _characterStatsConfig
             );
 
             var pauseState = new PauseState(

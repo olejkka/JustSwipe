@@ -61,9 +61,6 @@ namespace _Project.Scripts.Infrastructure.Initializers
             _characterCreator.Create("Bot_1");
         }
 
-        public void Tick()
-        {
-            _fsm?.UpdateState();
-        }
+        public void Tick() => _fsm?.UpdateState();
     }
 }

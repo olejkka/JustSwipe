@@ -5,10 +5,11 @@ using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
 using _Project.Scripts.FSM;
 using _Project.Scripts.InputHandlers;
+using _Project.Scripts.ScriptableObjects;
 
 namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 {
-    public class BotTurnState : State
+    public class BotTurnState : State 
     {
         private readonly BotInputHandler _botInputHandler;
         private readonly CharactersMover _charactersMover;
@@ -16,6 +17,7 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         private readonly TurnService _turnService;
         private readonly CharactersStorage _charactersStorage;
         private readonly CharacterCreator _characterCreator;
+        private readonly CharacterStatsConfig _characterStatsConfig;
 
         private bool _handled;
 
@@ -27,7 +29,8 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
             TurnService turnService,
             PauseService pauseService,
             CharactersStorage charactersStorage,
-            CharacterCreator characterCreator
+            CharacterCreator characterCreator,
+            CharacterStatsConfig characterStatsConfig
         ) : base(transitions)
         {
             _botInputHandler = botInputHandler;
@@ -36,6 +39,7 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
             _pauseService = pauseService;
             _charactersStorage = charactersStorage;
             _characterCreator = characterCreator;
+            _characterStatsConfig = characterStatsConfig;
         }
 
         public override void Enter()
@@ -44,10 +48,10 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 
             _pauseService.ResumeToPlayer = false;
 
+            string randomBot = _characterStatsConfig.GetRandomCharacterIdByTeam(Team.Bot);
+            
             if (!_charactersStorage.GetCharactersByTeam(Team.Bot).Any())
-            {
-                _characterCreator.Create("Bot_1");
-            }
+                _characterCreator.Create(randomBot);
 
             _botInputHandler.OnPressed += _charactersMover.Move;
             _charactersMover.OnMove += OnBotCharactersMoved;
@@ -58,12 +62,12 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 
         public override void Exit()
         {
+            // Debug.Log("[BotTurnState] Exiting Bot Turn State");
+            
             _botInputHandler.OnPressed -= _charactersMover.Move;
             _charactersMover.OnMove -= OnBotCharactersMoved;
 
             _turnService.BotMoveFinished = false;
-
-            // Debug.Log("[BotTurnState] Exiting Bot Turn State");
         }
 
         public override void Update()
