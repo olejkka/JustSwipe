@@ -4,14 +4,14 @@ using _Project.Scripts.Characters.Storages;
 
 namespace _Project.Scripts.Characters
 {
-    public class CharacterDeathHandler : IDisposable
+    public class CharactersDeathHandler : IDisposable
     {
         private readonly CharactersStorage _charactersStorage;
         private readonly CharactersViewsStorage _charactersViewsStorage;
         private readonly Dictionary<Character, Action<int>> _subs = new();
 
         
-        public CharacterDeathHandler(CharactersStorage charactersStorage, CharactersViewsStorage charactersViewsStorage)
+        public CharactersDeathHandler(CharactersStorage charactersStorage, CharactersViewsStorage charactersViewsStorage)
         {
             _charactersStorage = charactersStorage;
             _charactersViewsStorage = charactersViewsStorage;

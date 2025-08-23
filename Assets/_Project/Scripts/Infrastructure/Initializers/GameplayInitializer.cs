@@ -13,7 +13,7 @@ namespace _Project.Scripts.Infrastructure.Initializers
         private readonly CharacterCreator _characterCreator;
         private readonly CharacterViewInstantiator _characterViewInstantiator;
 
-        private readonly CharacterDeathHandler _deathHandler;
+        private readonly CharactersDeathHandler _deathHandler;
         private readonly PhaseHandler _phaseHandler;
         private readonly PositionsCreator _positionsesCreator;
         private readonly GameplayStateMachineCreator _stateMachineCreator;
@@ -28,7 +28,7 @@ namespace _Project.Scripts.Infrastructure.Initializers
             CharacterViewInstantiator characterViewInstantiator,
             GameplayStateMachineCreator stateMachineCreator,
             PhaseHandler phaseHandler,
-            CharacterDeathHandler deathHandler
+            CharactersDeathHandler deathHandler
         )
         {
             _positionsesCreator = positionsesCreator;

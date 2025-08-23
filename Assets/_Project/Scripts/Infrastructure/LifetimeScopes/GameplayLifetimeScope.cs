@@ -30,7 +30,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 
             builder.Register<PlayerInputHandler>(Lifetime.Singleton);
             builder.Register<CharactersMover>(Lifetime.Singleton);
-            builder.Register<CharacterDeathHandler>(Lifetime.Singleton);
+            builder.Register<CharactersDeathHandler>(Lifetime.Singleton);
 
             builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
