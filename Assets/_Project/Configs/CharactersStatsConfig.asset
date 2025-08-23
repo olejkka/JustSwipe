@@ -15,13 +15,13 @@ MonoBehaviour:
   CharacterStatsEntries:
   - Id: Main
     team: 1
-    BaseMaxHealth: 10
-    BaseAttackDamage: 5
+    BaseMaxHealth: 1
+    BaseAttackDamage: 1
   - Id: Bot_1
     team: 2
-    BaseMaxHealth: 5
+    BaseMaxHealth: 1
     BaseAttackDamage: 1
   - Id: Bot_2
     team: 2
-    BaseMaxHealth: 6
-    BaseAttackDamage: 10
+    BaseMaxHealth: 1
+    BaseAttackDamage: 1

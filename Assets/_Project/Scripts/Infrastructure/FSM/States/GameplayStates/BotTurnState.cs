@@ -44,8 +44,6 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 
         public override void Enter()
         {
-            // Debug.Log("[BotTurnState] Entering Bot Turn State");
-
             _pauseService.ResumeToPlayer = false;
 
             string randomBot = _characterStatsConfig.GetRandomCharacterIdByTeam(Team.Bot);
@@ -62,8 +60,6 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 
         public override void Exit()
         {
-            // Debug.Log("[BotTurnState] Exiting Bot Turn State");
-            
             _botInputHandler.OnPressed -= _charactersMover.Move;
             _charactersMover.OnMove -= OnBotCharactersMoved;
 
