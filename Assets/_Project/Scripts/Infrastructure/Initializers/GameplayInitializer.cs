@@ -12,7 +12,8 @@ namespace _Project.Scripts.Infrastructure.Initializers
     {
         private readonly CharacterCreator _characterCreator;
         private readonly CharacterViewInstantiator _characterViewInstantiator;
-        
+
+        private readonly CharacterDeathHandler _deathHandler;
         private readonly PhaseHandler _phaseHandler;
         private readonly PositionsCreator _positionsesCreator;
         private readonly GameplayStateMachineCreator _stateMachineCreator;
@@ -26,7 +27,8 @@ namespace _Project.Scripts.Infrastructure.Initializers
             TileInstantiator tileInstantiator,
             CharacterViewInstantiator characterViewInstantiator,
             GameplayStateMachineCreator stateMachineCreator,
-            PhaseHandler phaseHandler
+            PhaseHandler phaseHandler,
+            CharacterDeathHandler deathHandler
         )
         {
             _positionsesCreator = positionsesCreator;
@@ -35,12 +37,14 @@ namespace _Project.Scripts.Infrastructure.Initializers
             _characterViewInstantiator = characterViewInstantiator;
             _stateMachineCreator = stateMachineCreator;
             _phaseHandler = phaseHandler;
+            _deathHandler = deathHandler;
         }
 
         public void Dispose()
         {
             _positionsesCreator.OnPositionsCreated -= _tileInstantiator.Instantiate;
             _characterCreator.OnCharacterCreated -= _characterViewInstantiator.Instantiate;
+            _characterCreator.OnCharacterCreated -= _deathHandler.Register;
 
             _fsm = null;
         }
@@ -49,6 +53,7 @@ namespace _Project.Scripts.Infrastructure.Initializers
         {
             _positionsesCreator.OnPositionsCreated += _tileInstantiator.Instantiate;
             _characterCreator.OnCharacterCreated += _characterViewInstantiator.Instantiate;
+            _characterCreator.OnCharacterCreated += _deathHandler.Register;
 
             _fsm = _stateMachineCreator.Create();
             _positionsesCreator.Create();

@@ -15,12 +15,15 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 
         public override void Enter()
         {
-           Time.timeScale = 0f;
+            // Debug.Log("[EndGameState] Entering EndGameState");
+            
+            Time.timeScale = 0f;
             OnEndGame?.Invoke();
         }
 
         public override void Exit()
         {
+            // Debug.Log("[EndGameState] Exiting EndGameState");
         }
 
         public override void Update()
