@@ -1,5 +1,7 @@
 ﻿using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.UI;
+using _Project.Scripts.UI.Money;
+using _Project.Scripts.UI.SettingsButton;
 using VContainer;
 using VContainer.Unity;
 
@@ -9,9 +11,20 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<PauseButtonPresenter>();
+            RegisterPresenters(builder);
+            RegisterViews(builder);
+        }
 
-            builder.RegisterComponentInHierarchy<PauseButtonView>();
+        private void RegisterPresenters(IContainerBuilder builder)
+        {
+            builder.RegisterEntryPoint<SettingsButtonPresenter>();
+            builder.RegisterEntryPoint<PlayerMoneyPresenter>();
+        }
+        
+        private void RegisterViews(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInHierarchy<SettingsButtonView>();
+            builder.RegisterComponentInHierarchy<PlayerMoneyView>();
         }
     }
 }

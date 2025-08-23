@@ -24,10 +24,6 @@ namespace _Project.Scripts.Characters
             transform.position = worldPos;
         }
         
-        private void OnDestroy()
-        {
-            if (_data != null)
-                _data.OnPositionChanged -= UpdatePosition;
-        }
+        private void OnDestroy() => _data.OnPositionChanged -= UpdatePosition;
     }
 }

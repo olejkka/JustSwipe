@@ -1,9 +1,11 @@
 ﻿using System;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Creators;
+using _Project.Scripts.Economy;
 using _Project.Scripts.Generators;
 using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.Instantiators;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace _Project.Scripts.Infrastructure.Initializers
@@ -18,6 +20,7 @@ namespace _Project.Scripts.Infrastructure.Initializers
         private readonly PositionsCreator _positionsesCreator;
         private readonly GameplayStateMachineCreator _stateMachineCreator;
         private readonly TileInstantiator _tileInstantiator;
+        private readonly PlayerMoney _playerMoney;
         private GameplayStateMachine _fsm;
 
 
@@ -28,7 +31,8 @@ namespace _Project.Scripts.Infrastructure.Initializers
             CharacterViewInstantiator characterViewInstantiator,
             GameplayStateMachineCreator stateMachineCreator,
             PhaseHandler phaseHandler,
-            CharactersDeathHandler deathHandler
+            CharactersDeathHandler deathHandler,
+            PlayerMoney playerMoney
         )
         {
             _positionsesCreator = positionsesCreator;
@@ -38,8 +42,29 @@ namespace _Project.Scripts.Infrastructure.Initializers
             _stateMachineCreator = stateMachineCreator;
             _phaseHandler = phaseHandler;
             _deathHandler = deathHandler;
+            _playerMoney = playerMoney;
+        }
+        
+        public void Start()
+        {
+            _positionsesCreator.OnPositionsCreated += _tileInstantiator.Instantiate;
+            _characterCreator.OnCharacterCreated += _characterViewInstantiator.Instantiate;
+            _characterCreator.OnCharacterCreated += _deathHandler.Register;
+
+            _fsm = _stateMachineCreator.Create();
+            _playerMoney.SetMoney(10);
+            _positionsesCreator.Create();
+            CreateCharacters();
         }
 
+        public void Tick() => _fsm?.UpdateState();
+        
+        private void CreateCharacters()
+        {
+            _characterCreator.Create("Main");
+            _characterCreator.Create("Bot_1");
+        }
+        
         public void Dispose()
         {
             _positionsesCreator.OnPositionsCreated -= _tileInstantiator.Instantiate;
@@ -48,19 +73,5 @@ namespace _Project.Scripts.Infrastructure.Initializers
 
             _fsm = null;
         }
-
-        public void Start()
-        {
-            _positionsesCreator.OnPositionsCreated += _tileInstantiator.Instantiate;
-            _characterCreator.OnCharacterCreated += _characterViewInstantiator.Instantiate;
-            _characterCreator.OnCharacterCreated += _deathHandler.Register;
-
-            _fsm = _stateMachineCreator.Create();
-            _positionsesCreator.Create();
-            _characterCreator.Create("Main");
-            _characterCreator.Create("Bot_1");
-        }
-
-        public void Tick() => _fsm?.UpdateState();
     }
 }

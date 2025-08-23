@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Infrastructure.FSM;
+﻿using _Project.Scripts.Economy;
+using _Project.Scripts.Infrastructure.FSM;
 using VContainer;
 using VContainer.Unity;
 
@@ -9,6 +10,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<PauseService>(Lifetime.Singleton);
+            builder.Register<PlayerMoney>(Lifetime.Singleton);
         }
     }
 }

@@ -34,9 +34,7 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 
         public override void Enter()
         {
-            // Debug.Log("[PlayerTurnState] Entering Player Turn State");
-
-            _pauseService.ResumeToPlayer = true;
+           _pauseService.ResumeToPlayer = true;
 
             _swipeInputHandler.OnPressed += _charactersMover.Move;
             _swipeInputHandler.OnPressed += _playerInputHandler.Handle;
@@ -53,8 +51,6 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
             _charactersMover.OnMove -= OnPlayerCharactersMoved;
 
             _turnService.PlayerMoveFinished = false;
-
-            // Debug.Log("[PlayerTurnState] Exiting Player Turn State");
         }
 
         public override void Update()

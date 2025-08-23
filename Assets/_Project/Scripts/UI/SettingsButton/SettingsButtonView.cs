@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.Scripts.UI
+namespace _Project.Scripts.UI.SettingsButton
 {
-    public class PauseButtonView : MonoBehaviour
+    public class SettingsButtonView : MonoBehaviour
     {
         [SerializeField] private Button _button;
 
@@ -23,9 +23,6 @@ namespace _Project.Scripts.UI
                 _button.onClick.RemoveListener(OnButtonClicked);
         }
 
-        private void OnButtonClicked()
-        {
-            Clicked?.Invoke();
-        }
+        private void OnButtonClicked() => Clicked?.Invoke();
     }
 }

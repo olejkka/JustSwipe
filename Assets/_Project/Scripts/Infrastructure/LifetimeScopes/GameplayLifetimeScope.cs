@@ -1,6 +1,7 @@
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
+using _Project.Scripts.Economy;
 using _Project.Scripts.FSM;
 using _Project.Scripts.Generators;
 using _Project.Scripts.Infrastructure.FSM;
@@ -27,8 +28,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<GameplayInitializer>();
-
-            builder.Register<PlayerInputHandler>(Lifetime.Singleton);
+            
             builder.Register<CharactersMover>(Lifetime.Singleton);
             builder.Register<CharactersDeathHandler>(Lifetime.Singleton);
 
@@ -52,6 +52,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         {
             builder.RegisterComponentInHierarchy<SwipeInputHandler>();
             builder.RegisterComponentInHierarchy<BotInputHandler>();
+            builder.Register<PlayerInputHandler>(Lifetime.Singleton);
         }
 
         private void RegisterConfigs(IContainerBuilder builder)
