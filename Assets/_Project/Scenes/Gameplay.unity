@@ -943,6 +943,7 @@ MonoBehaviour:
   _tilesGenerationConfig: {fileID: 11400000, guid: 78b017ed30d583747a66f61f5bdb0175, type: 2}
   _charactersPrefabsConfig: {fileID: 11400000, guid: 5725c3ed7311ddd4e8c19a8c2b09e083, type: 2}
   _characterStatsConfig: {fileID: 11400000, guid: 376b7224f828d854ca361b97ce017098, type: 2}
+  _botsDeathRewardsContig: {fileID: 11400000, guid: 85c3cffca1b68814baf3e0665d85848a, type: 2}
   _tileInstantiator: {fileID: 730333553}
 --- !u!4 &1988570165
 Transform:

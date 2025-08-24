@@ -1,22 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using _Project.Scripts.Characters.Storages;
+using _Project.Scripts.Economy;
+using _Project.Scripts.ScriptableObjects;
 
 namespace _Project.Scripts.Characters
 {
     public class CharactersDeathHandler : IDisposable
     {
-        public event Action<Character> OnCharacterDied;
-        
         private readonly CharactersStorage _charactersStorage;
         private readonly CharactersViewsStorage _charactersViewsStorage;
+        private readonly BotDeathRewardService _rewardService;
         private readonly List<Character> _registeredCharacters = new();
         
 
-        public CharactersDeathHandler(CharactersStorage charactersStorage, CharactersViewsStorage charactersViewsStorage)
+        public CharactersDeathHandler(
+            CharactersStorage charactersStorage, 
+            CharactersViewsStorage charactersViewsStorage,
+            BotDeathRewardService rewardService
+            )
         {
             _charactersStorage = charactersStorage;
             _charactersViewsStorage = charactersViewsStorage;
+            _rewardService = rewardService;
         }
 
         public void Register(Character character)
@@ -52,8 +59,11 @@ namespace _Project.Scripts.Characters
                 _charactersViewsStorage.Unregister(character);
                 UnityEngine.Object.Destroy(view.gameObject);
             }
-
-            OnCharacterDied?.Invoke(character);
+            
+            if (character.Team == Team.Bot)
+            {
+                _rewardService.ProcessBotDeath(character.Id);
+            }
         }
 
         public void Dispose()

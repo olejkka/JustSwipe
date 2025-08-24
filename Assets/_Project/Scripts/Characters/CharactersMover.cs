@@ -33,17 +33,17 @@ namespace _Project.Scripts.Characters
             for (int i = 0; i < attackers.Length; i++)
             {
                 var attacker = attackers[i];
-                var target = attacker.Position + vector;
+                var targetPosition = attacker.Position + vector;
 
-                if (_claimedPositions.TryGetValue(target, out var defender))
+                if (_claimedPositions.TryGetValue(targetPosition, out var defender))
                 {
                     if (defender.Team != attacker.Team)
                         defender.TakeDamage(attacker.Damage);
-                    
-                    continue;
+                    else
+                        attacker.Move(vector);
                 }
-
-                attacker.Move(vector);
+                else
+                    attacker.Move(vector);
             }
 
             OnMove?.Invoke();

@@ -22,6 +22,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         [SerializeField] private TilesGenerationConfig _tilesGenerationConfig;
         [SerializeField] private CharactersPrefabsConfig _charactersPrefabsConfig;
         [SerializeField] private CharacterStatsConfig _characterStatsConfig;
+        [SerializeField] private BotsDeathRewardsContig _botsDeathRewardsContig;
         [SerializeField] private TileInstantiator _tileInstantiator;
 
 
@@ -31,6 +32,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             
             builder.Register<CharactersMover>(Lifetime.Singleton);
             builder.Register<CharactersDeathHandler>(Lifetime.Singleton);
+            builder.Register<BotDeathRewardService>(Lifetime.Singleton);
 
             builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
@@ -60,6 +62,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.RegisterInstance(_tilesGenerationConfig);
             builder.RegisterInstance(_characterStatsConfig);
             builder.RegisterInstance(_charactersPrefabsConfig);
+            builder.RegisterInstance(_botsDeathRewardsContig);
         }
 
         private void RegisterCreators(IContainerBuilder builder)

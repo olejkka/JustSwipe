@@ -9,19 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0df45faaf92e436eb375de883779b001, type: 3}
-  m_Name: CharactersStatsConfig
+  m_Script: {fileID: 11500000, guid: 2f50a47759c046338b7771ba17ec4430, type: 3}
+  m_Name: BotsDeathRewardsConfig
   m_EditorClassIdentifier: 
-  CharacterStatsEntries:
-  - Id: Main
-    team: 1
-    BaseMaxHealth: 10
-    BaseAttackDamage: 1
+  BotDeathRewardEntries:
   - Id: Bot_1
-    team: 2
-    BaseMaxHealth: 1
-    BaseAttackDamage: 1
+    Reward: 5
   - Id: Bot_2
-    team: 2
-    BaseMaxHealth: 1
-    BaseAttackDamage: 1
+    Reward: 10
