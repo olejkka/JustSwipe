@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Economy;
-using _Project.Scripts.ScriptableObjects;
 
 namespace _Project.Scripts.Characters
 {
@@ -12,18 +10,22 @@ namespace _Project.Scripts.Characters
         private readonly CharactersStorage _charactersStorage;
         private readonly CharactersViewsStorage _charactersViewsStorage;
         private readonly BotDeathRewardService _rewardService;
+        private readonly CharactersMover _charactersMover;
+        
         private readonly List<Character> _registeredCharacters = new();
         
 
         public CharactersDeathHandler(
             CharactersStorage charactersStorage, 
             CharactersViewsStorage charactersViewsStorage,
-            BotDeathRewardService rewardService
+            BotDeathRewardService rewardService,
+            CharactersMover charactersMover
             )
         {
             _charactersStorage = charactersStorage;
             _charactersViewsStorage = charactersViewsStorage;
             _rewardService = rewardService;
+            _charactersMover = charactersMover;
         }
 
         public void Register(Character character)
@@ -53,16 +55,17 @@ namespace _Project.Scripts.Characters
         {
             Unregister(character);
             _charactersStorage.Remove(character);
-
-            if (_charactersViewsStorage.TryGet(character, out var view) && view != null)
-            {
-                _charactersViewsStorage.Unregister(character);
-                UnityEngine.Object.Destroy(view.gameObject);
-            }
+            
+            _charactersViewsStorage.TryGet(character, out var view);
+            _charactersViewsStorage.Unregister(character);
+            UnityEngine.Object.Destroy(view.gameObject);
             
             if (character.Team == Team.Bot)
             {
-                _rewardService.ProcessBotDeath(character.Id);
+                var lastAttacker = _charactersMover.GetLastAttacker(character);
+                
+                if (lastAttacker != null && lastAttacker.Team == Team.Player)
+                    _rewardService.ProcessBotDeath(character.Id);
             }
         }
 

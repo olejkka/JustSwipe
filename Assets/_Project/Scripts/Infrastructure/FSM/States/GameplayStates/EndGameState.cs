@@ -15,6 +15,8 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 
         public override void Enter()
         {
+            Debug.Log("Game Over");
+            
             Time.timeScale = 0f;
             OnEndGame?.Invoke();
         }

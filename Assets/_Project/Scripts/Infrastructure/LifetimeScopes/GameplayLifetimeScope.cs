@@ -33,6 +33,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<CharactersMover>(Lifetime.Singleton);
             builder.Register<CharactersDeathHandler>(Lifetime.Singleton);
             builder.Register<BotDeathRewardService>(Lifetime.Singleton);
+            builder.Register<CharactersPositionValidator>(Lifetime.Singleton);
 
             builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
