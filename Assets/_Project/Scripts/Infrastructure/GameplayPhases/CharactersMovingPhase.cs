@@ -1,12 +1,11 @@
 ﻿using _Project.Scripts.Characters;
 using UnityEngine;
-using VContainer;
 
-namespace _Project.Scripts.Infrastructure
+namespace _Project.Scripts.Infrastructure.GameplayPhases
 {
     public class CharactersMovingPhase : Phase
     {
-        private readonly CharactersMover _charactersMover;
+        private readonly CharactersMovementHandler _charactersMovementHandler;
         private readonly InputStorage _inputStorage;
         private Vector2Int[] _dirs =
         {
@@ -18,20 +17,20 @@ namespace _Project.Scripts.Infrastructure
         
 
         public CharactersMovingPhase(
-            CharactersMover charactersMover,
+            CharactersMovementHandler charactersMovementHandler,
             InputStorage inputStorage
             )
         {
-            _charactersMover = charactersMover;
+            _charactersMovementHandler = charactersMovementHandler;
             _inputStorage = inputStorage;
         }
         
         public override void Enter()
         {
             if (_humanPhase)
-                _charactersMover.Move(_inputStorage.InputVector, Team.Player);
+                _charactersMovementHandler.ProcessMovementForTeam(_inputStorage.InputVector, Team.Player);
             else
-                _charactersMover.Move(_dirs[Random.Range(0, _dirs.Length)], Team.Bot);
+                _charactersMovementHandler.ProcessMovementForTeam(_dirs[Random.Range(0, _dirs.Length)], Team.Bot);
             
             _humanPhase = !_humanPhase;
             Exit();

@@ -30,7 +30,9 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         {
             builder.RegisterEntryPoint<GameplayInitializer>();
             
-            builder.Register<CharactersMover>(Lifetime.Singleton);
+            builder.Register<CharactersMovementOrchestrator>(Lifetime.Singleton);
+            builder.Register<CharactersCombatHandler>(Lifetime.Singleton);
+            builder.Register<CharactersMovementHandler>(Lifetime.Singleton);
             builder.Register<CharactersDeathHandler>(Lifetime.Singleton);
             builder.Register<BotDeathRewardService>(Lifetime.Singleton);
             builder.Register<CharactersPositionValidator>(Lifetime.Singleton);

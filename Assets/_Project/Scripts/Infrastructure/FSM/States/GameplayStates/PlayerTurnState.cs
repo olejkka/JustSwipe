@@ -7,7 +7,7 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 {
     public class PlayerTurnState : State
     {
-        private readonly CharactersMover _charactersMover;
+        private readonly CharactersMovementOrchestrator _charactersMovementOrchestrator;
         private readonly PlayerInputHandler _playerInputHandler;
         private readonly PauseService _pauseService;
         private readonly SwipeInputHandler _swipeInputHandler;
@@ -19,14 +19,14 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         public PlayerTurnState(
             IReadOnlyList<ITransition> transitions,
             SwipeInputHandler swipeInputHandler,
-            CharactersMover charactersMover,
+            CharactersMovementOrchestrator charactersMovementOrchestrator,
             PlayerInputHandler playerInputHandler,
             TurnService turnService,
             PauseService pauseService
         ) : base(transitions)
         {
             _swipeInputHandler = swipeInputHandler;
-            _charactersMover = charactersMover;
+            _charactersMovementOrchestrator = charactersMovementOrchestrator;
             _playerInputHandler = playerInputHandler;
             _turnService = turnService;
             _pauseService = pauseService;
@@ -36,9 +36,9 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         {
            _pauseService.ResumeToPlayer = true;
 
-            _swipeInputHandler.OnPressed += _charactersMover.Move;
+            _swipeInputHandler.OnPressed += _charactersMovementOrchestrator.ProcessTurn;
             _swipeInputHandler.OnPressed += _playerInputHandler.Handle;
-            _charactersMover.OnMove += OnPlayerCharactersMoved;
+            _charactersMovementOrchestrator.OnTurnCompleted += OnPlayerCharactersMoved;
 
             _handled = false;
             _turnService.PlayerMoveFinished = false;
@@ -46,9 +46,9 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 
         public override void Exit()
         {
-            _swipeInputHandler.OnPressed -= _charactersMover.Move;
+            _swipeInputHandler.OnPressed -= _charactersMovementOrchestrator.ProcessTurn;
             _swipeInputHandler.OnPressed -= _playerInputHandler.Handle;
-            _charactersMover.OnMove -= OnPlayerCharactersMoved;
+            _charactersMovementOrchestrator.OnTurnCompleted -= OnPlayerCharactersMoved;
 
             _turnService.PlayerMoveFinished = false;
         }

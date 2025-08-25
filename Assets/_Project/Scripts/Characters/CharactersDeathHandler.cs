@@ -10,7 +10,7 @@ namespace _Project.Scripts.Characters
         private readonly CharactersStorage _charactersStorage;
         private readonly CharactersViewsStorage _charactersViewsStorage;
         private readonly BotDeathRewardService _rewardService;
-        private readonly CharactersMover _charactersMover;
+        private readonly CharactersCombatHandler _combatHandler;
         
         private readonly List<Character> _registeredCharacters = new();
         
@@ -19,13 +19,13 @@ namespace _Project.Scripts.Characters
             CharactersStorage charactersStorage, 
             CharactersViewsStorage charactersViewsStorage,
             BotDeathRewardService rewardService,
-            CharactersMover charactersMover
+            CharactersCombatHandler combatHandler
             )
         {
             _charactersStorage = charactersStorage;
             _charactersViewsStorage = charactersViewsStorage;
             _rewardService = rewardService;
-            _charactersMover = charactersMover;
+            _combatHandler = combatHandler;
         }
 
         public void Register(Character character)
@@ -62,10 +62,12 @@ namespace _Project.Scripts.Characters
             
             if (character.Team == Team.Bot)
             {
-                var lastAttacker = _charactersMover.GetLastAttacker(character);
+                var lastAttacker = _combatHandler.GetLastAttacker(character);
                 
                 if (lastAttacker != null && lastAttacker.Team == Team.Player)
+                {
                     _rewardService.ProcessBotDeath(character.Id);
+                }
             }
         }
 

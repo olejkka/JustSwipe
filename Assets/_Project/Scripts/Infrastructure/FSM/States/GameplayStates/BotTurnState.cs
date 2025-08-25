@@ -12,7 +12,7 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
     public class BotTurnState : State 
     {
         private readonly BotInputHandler _botInputHandler;
-        private readonly CharactersMover _charactersMover;
+        private readonly CharactersMovementOrchestrator _charactersMovementOrchestrator;
         private readonly PauseService _pauseService;
         private readonly TurnService _turnService;
         private readonly CharactersStorage _charactersStorage;
@@ -25,7 +25,7 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         public BotTurnState(
             IReadOnlyList<ITransition> transitions,
             BotInputHandler botInputHandler,
-            CharactersMover charactersMover,
+            CharactersMovementOrchestrator charactersMovementOrchestrator,
             TurnService turnService,
             PauseService pauseService,
             CharactersStorage charactersStorage,
@@ -34,7 +34,7 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         ) : base(transitions)
         {
             _botInputHandler = botInputHandler;
-            _charactersMover = charactersMover;
+            _charactersMovementOrchestrator = charactersMovementOrchestrator;
             _turnService = turnService;
             _pauseService = pauseService;
             _charactersStorage = charactersStorage;
@@ -51,8 +51,8 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
             if (!_charactersStorage.GetCharactersByTeam(Team.Bot).Any())
                 _characterCreator.Create(randomBot);
 
-            _botInputHandler.OnPressed += _charactersMover.Move;
-            _charactersMover.OnMove += OnBotCharactersMoved;
+            _botInputHandler.OnPressed += _charactersMovementOrchestrator.ProcessTurn;
+            _charactersMovementOrchestrator.OnTurnCompleted += OnBotCharactersMoved;
 
             _handled = false;
             _turnService.BotMoveFinished = false;
@@ -60,8 +60,8 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 
         public override void Exit()
         {
-            _botInputHandler.OnPressed -= _charactersMover.Move;
-            _charactersMover.OnMove -= OnBotCharactersMoved;
+            _botInputHandler.OnPressed -= _charactersMovementOrchestrator.ProcessTurn;
+            _charactersMovementOrchestrator.OnTurnCompleted -= OnBotCharactersMoved;
 
             _turnService.BotMoveFinished = false;
         }

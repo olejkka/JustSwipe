@@ -14,7 +14,7 @@ namespace _Project.Scripts.Infrastructure.FSM
     public class GameplayStatesProvider : IGameplayStatesProvider
     {
         private readonly BotInputHandler _botInputHandler;
-        private readonly CharactersMover _charactersMover;
+        private readonly CharactersMovementOrchestrator _charactersMovementOrchestrator;
         private readonly PlayerInputHandler _playerInputHandler;
         private readonly PauseService _pauseService;
         private readonly SwipeInputHandler _swipeInputHandler;
@@ -27,7 +27,7 @@ namespace _Project.Scripts.Infrastructure.FSM
         public GameplayStatesProvider(
             SwipeInputHandler swipeInputHandler,
             BotInputHandler botInputHandler,
-            CharactersMover charactersMover,
+            CharactersMovementOrchestrator charactersMovementOrchestrator,
             PlayerInputHandler playerInputHandler,
             TurnService turnService,
             PauseService pauseService,
@@ -38,7 +38,7 @@ namespace _Project.Scripts.Infrastructure.FSM
         {
             _swipeInputHandler = swipeInputHandler;
             _botInputHandler = botInputHandler;
-            _charactersMover = charactersMover;
+            _charactersMovementOrchestrator = charactersMovementOrchestrator;
             _playerInputHandler = playerInputHandler;
             _turnService = turnService;
             _pauseService = pauseService;
@@ -57,7 +57,7 @@ namespace _Project.Scripts.Infrastructure.FSM
                     new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any())
                 },
                 _swipeInputHandler,
-                _charactersMover,
+                _charactersMovementOrchestrator,
                 _playerInputHandler,
                 _turnService,
                 _pauseService
@@ -71,7 +71,7 @@ namespace _Project.Scripts.Infrastructure.FSM
                     new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any())
                 },
                 _botInputHandler,
-                _charactersMover,
+                _charactersMovementOrchestrator,
                 _turnService,
                 _pauseService,
                 _charactersStorage,
