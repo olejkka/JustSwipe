@@ -1,6 +1,4 @@
-﻿using _Project.Scripts.Infrastructure.FSM;
-using _Project.Scripts.UI;
-using _Project.Scripts.UI.Money;
+﻿using _Project.Scripts.UI.MoneyUI;
 using _Project.Scripts.UI.SettingsButton;
 using VContainer;
 using VContainer.Unity;

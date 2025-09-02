@@ -25,7 +25,7 @@ namespace _Project.Scripts.Characters
             
             foreach (var character in characters)
                 if (!_tilesPositionsStorage.Contains(character.Position))
-                    character.TakeDamage(character.Health);
+                    character.TakeDamage(character._stats.Health);
         }
     }
 }

@@ -1,21 +1,16 @@
 ﻿using System;
 
-namespace _Project.Scripts.Infrastructure
+namespace _Project.Scripts.Infrastructure.GameplayPhases
 {
     public abstract class Phase : IPhase
     {
-        protected bool _humanPhase = true; 
         public event Action OnExit;
+        
+        protected bool _humanPhase = true;
 
+        
         public abstract void Enter();
 
-        protected void Exit()
-        {
-            OnExit?.Invoke();
-        }
-    }
-
-    public interface IPhase
-    {
+        protected void Exit() => OnExit?.Invoke();
     }
 }

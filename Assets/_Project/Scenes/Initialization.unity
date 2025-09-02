@@ -505,6 +505,14 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+  _tilesGenerationConfig: {fileID: 11400000, guid: 78b017ed30d583747a66f61f5bdb0175, type: 2}
+  _charactersPrefabsConfig: {fileID: 11400000, guid: 5725c3ed7311ddd4e8c19a8c2b09e083, type: 2}
+  _characterStatsConfig: {fileID: 11400000, guid: 376b7224f828d854ca361b97ce017098, type: 2}
+  _botsDeathRewardsConfig: {fileID: 11400000, guid: 85c3cffca1b68814baf3e0665d85848a, type: 2}
+  _characterConfigs:
+  - {fileID: 11400000, guid: ef58b6fbd53fcb64dbbd1c3f9211ceb7, type: 2}
+  - {fileID: 11400000, guid: f3ae208e215bd0b44a8597c05fca13be, type: 2}
+  - {fileID: 11400000, guid: 709b61454cb80e848aefaefdbc681670, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

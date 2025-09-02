@@ -1,30 +1,31 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace _Project.Scripts.Infrastructure
+namespace _Project.Scripts.Infrastructure.GameplayPhases
 {
     public class PhaseHandler : IStartable
     {
         private readonly IReadOnlyList<Phase> _phases;
         private int _currentPhase = -1;
 
-        
+
         public PhaseHandler(IReadOnlyList<Phase> phases)
         {
-            _phases = phases;
+            _phases = phases.OrderBy(p => (p as IOrderedPhase)?.Order ?? int.MaxValue).ToList();
         }
 
 
         public void Start()
         {
-            // if (_phases == null || _phases.Count == 0)
-            // {
-            //     Debug.LogWarning("PhaseHandler: no phases registered");
-            //     return;
-            // }
-            //
-            // EnterNextPhase();
+            if (_phases == null || _phases.Count == 0)
+            {
+                Debug.LogWarning("PhaseHandler: no phases registered");
+                return;
+            }
+
+            EnterNextPhase();
         }
 
         private void EnterNextPhase()
