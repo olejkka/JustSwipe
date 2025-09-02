@@ -1,5 +1,5 @@
 ﻿using System;
-using _Project.Scripts.Infrastructure.FSM;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI.SettingsButton
@@ -7,12 +7,12 @@ namespace _Project.Scripts.UI.SettingsButton
     public class SettingsButtonPresenter : IStartable, IDisposable
     {
         private readonly SettingsButtonView _view;
-        private readonly PauseService _pauseService;
 
-        public SettingsButtonPresenter(SettingsButtonView view, PauseService pauseService)
+        public bool IsPaused { get; private set; }
+
+        public SettingsButtonPresenter(SettingsButtonView view)
         {
             _view = view;
-            _pauseService = pauseService;
         }
 
         public void Start() => _view.Clicked += OnClicked;
@@ -21,10 +21,8 @@ namespace _Project.Scripts.UI.SettingsButton
 
         private void OnClicked()
         {
-            if (_pauseService.IsPaused)
-                _pauseService.RequestResume();
-            else
-                _pauseService.RequestPause();
+            IsPaused = !IsPaused;
+            Time.timeScale = IsPaused ? 0 : 1;
         }
     }
 }
