@@ -7,12 +7,17 @@ namespace _Project.Scripts.Characters
     {
         private Character _data;
         private Tilemap _tilemap;
+        private SpriteRenderer _spriteRenderer;
 
         
         public void Init(Character data, Tilemap tilemap)
         {
             _data = data;
             _tilemap = tilemap;
+            
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            _spriteRenderer.sprite = _data.CharacterConfig.Sprite;
+            
             _data.OnPositionChanged += UpdatePosition;
             UpdatePosition(_data.Position);
         }

@@ -1,13 +1,14 @@
+using System.Collections.Generic;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
 using _Project.Scripts.Economy;
 using _Project.Scripts.FSM;
 using _Project.Scripts.Generators;
+using _Project.Scripts.Infrastructure.EntryPoints;
 using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.Infrastructure.GameplayPhases;
 using _Project.Scripts.Infrastructure.GameplayPhases.Phases;
-using _Project.Scripts.Infrastructure.Initializers;
 using _Project.Scripts.InputHandlers;
 using _Project.Scripts.Instantiators;
 using _Project.Scripts.ScriptableObjects;
@@ -21,10 +22,8 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
     public class GameplayLifetimeScope : LifetimeScope
     {
         [SerializeField] private TilesGenerationConfig _tilesGenerationConfig;
-        [SerializeField] private CharactersPrefabsConfig _charactersPrefabsConfig;
-        [SerializeField] private CharacterStatsConfig _characterStatsConfig;
-        [SerializeField] private BotsDeathRewardsContig _botsDeathRewardsContig;
         [SerializeField] private TileInstantiator _tileInstantiator;
+        [SerializeField] private List<CharacterConfig> _characterConfigs;
 
 
         protected override void Configure(IContainerBuilder builder)
@@ -37,7 +36,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<CharactersCombatHandler>(Lifetime.Singleton);
             builder.Register<CharactersMovementHandler>(Lifetime.Singleton);
             builder.Register<CharactersDeathHandler>(Lifetime.Singleton);
-            builder.Register<BotDeathRewardService>(Lifetime.Singleton);
+            builder.Register<DeathRewardService>(Lifetime.Singleton);
             builder.Register<CharactersPositionValidator>(Lifetime.Singleton);
 
             builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
@@ -54,9 +53,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         private void RegisterConfigs(IContainerBuilder builder)
         {
             builder.RegisterInstance(_tilesGenerationConfig);
-            builder.RegisterInstance(_characterStatsConfig);
-            builder.RegisterInstance(_charactersPrefabsConfig);
-            builder.RegisterInstance(_botsDeathRewardsContig);
+            builder.RegisterInstance<IReadOnlyList<CharacterConfig>>(_characterConfigs);
         }
 
         private void RegisterCreators(IContainerBuilder builder)

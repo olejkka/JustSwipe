@@ -1,4 +1,7 @@
-﻿using _Project.Scripts.Characters;
+﻿using System.Collections.Generic;
+using System.Linq;
+using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
 using _Project.Scripts.ScriptableObjects;
 using UnityEngine;
@@ -8,27 +11,32 @@ namespace _Project.Scripts.Infrastructure.GameplayPhases.Phases
     public class CharactersSpawnPhase : Phase
     {
         private const float SpawnChance = 0.25f;
-        
+		
         private readonly CharacterCreator _creator;
-        private readonly CharacterStatsConfig _characterStatsConfig;
-        
+        private readonly CharactersStorage _charactersStorage;
+        private readonly IReadOnlyList<CharacterConfig> _characterConfigs;
+		
 
         public CharactersSpawnPhase(
             CharacterCreator creator,
-            CharacterStatsConfig characterStatsConfig
+            CharactersStorage charactersStorage,
+            IReadOnlyList<CharacterConfig> characterConfigs
         )
         {
             _creator = creator;
-            _characterStatsConfig = characterStatsConfig;
+            _charactersStorage = charactersStorage;
+            _characterConfigs = characterConfigs;
         }
-        
+		
         public override void Enter()
         {
-            string randomBot = _characterStatsConfig.GetRandomCharacterIdByTeam(Team.Bot);
-            
-            if (Random.value < SpawnChance)
-                _creator.Create(randomBot);
-            
+            if (!_charactersStorage.GetCharactersByTeam(Team.Bot).Any() || Random.value < SpawnChance)
+            {
+                var botConfigs = _characterConfigs.Where(c => c.Team == Team.Bot).ToList();
+                
+                _creator.Create(botConfigs[Random.Range(0, botConfigs.Count)]);
+            }
+			
             Exit();
         }
     }

@@ -15,7 +15,7 @@ namespace _Project.Scripts.Economy
             OnMoneyChanged?.Invoke(Money);
         }
 
-        public void ChangeMoney(int amount)
+        public void AddMoney(int amount)
         {
             Money += amount;
             OnMoneyChanged?.Invoke(Money);

@@ -8,8 +8,8 @@ namespace _Project.Scripts.Characters
     public class CharactersDeathHandler : IDisposable
     {
         private readonly CharactersStorage _charactersStorage;
+        private readonly DeathRewardService _deathRewardService;
         private readonly CharactersViewsStorage _charactersViewsStorage;
-        private readonly BotDeathRewardService _rewardService;
         private readonly CharactersCombatHandler _combatHandler;
         
         private readonly List<Character> _registeredCharacters = new();
@@ -18,13 +18,13 @@ namespace _Project.Scripts.Characters
         public CharactersDeathHandler(
             CharactersStorage charactersStorage, 
             CharactersViewsStorage charactersViewsStorage,
-            BotDeathRewardService rewardService,
+            DeathRewardService deathRewardService,
             CharactersCombatHandler combatHandler
             )
         {
             _charactersStorage = charactersStorage;
             _charactersViewsStorage = charactersViewsStorage;
-            _rewardService = rewardService;
+            _deathRewardService = deathRewardService;
             _combatHandler = combatHandler;
         }
 
@@ -60,13 +60,13 @@ namespace _Project.Scripts.Characters
             _charactersViewsStorage.Unregister(character);
             UnityEngine.Object.Destroy(view.gameObject);
             
-            if (character.Team == Team.Bot)
+            if (character.CharacterConfig.Team == Team.Bot)
             {
                 var lastAttacker = _combatHandler.GetLastAttacker(character);
                 
-                if (lastAttacker != null && lastAttacker.Team == Team.Player)
+                if (lastAttacker != null && lastAttacker.CharacterConfig.Team == Team.Player)
                 {
-                    _rewardService.ProcessBotDeath(character.Id);
+                    _deathRewardService.GiveReward(character);
                 }
             }
         }

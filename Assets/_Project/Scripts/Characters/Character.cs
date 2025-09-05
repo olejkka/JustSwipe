@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.ScriptableObjects;
 using UnityEngine;
 
 namespace _Project.Scripts.Characters
@@ -8,20 +9,17 @@ namespace _Project.Scripts.Characters
         public event Action<Vector2Int> OnPositionChanged;
         public event Action<Character, int> OnHealthChanged;
         
-        public string Id { get; private set; }
         public Vector2Int Position { get; private set; }
-        public Team Team { get; private set; }
-        public int Health { get; private set; }
-        public int Damage { get; private set; }
+        public CharacterConfig CharacterConfig { get; private set; }
+        public Stats Stats;
         
         
-        public Character(string id, Vector2Int position, Team team, int health, int damage)
+        public Character(Vector2Int spawnPos, CharacterConfig characterConfig)
         {
-            Id = id;
-            Team = team;
-            Health = health;
-            Damage = damage;
-            Position = position;
+            Position = spawnPos;
+            CharacterConfig = characterConfig;
+            
+            Stats = CharacterConfig.BaseStats;
         }
 
         public void Move(Vector2Int vector)
@@ -32,8 +30,8 @@ namespace _Project.Scripts.Characters
 
         public void TakeDamage(int amount)
         {
-            Health -= amount;
-            OnHealthChanged?.Invoke(this, Health);
+            Stats.Health -= amount;
+            OnHealthChanged?.Invoke(this, Stats.Health);
         }
     }
 }
