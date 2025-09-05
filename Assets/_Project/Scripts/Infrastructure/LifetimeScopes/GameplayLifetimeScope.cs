@@ -6,6 +6,7 @@ using _Project.Scripts.FSM;
 using _Project.Scripts.Generators;
 using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.Infrastructure.GameplayPhases;
+using _Project.Scripts.Infrastructure.GameplayPhases.Phases;
 using _Project.Scripts.Infrastructure.Initializers;
 using _Project.Scripts.InputHandlers;
 using _Project.Scripts.Instantiators;
@@ -28,7 +29,9 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<GameplayInitializer>();
+            builder.RegisterEntryPoint<GameplayEntryPoint>();
+            
+            builder.RegisterComponentInHierarchy<SwipeInputHandler>();
             
             builder.Register<CharactersMovementOrchestrator>(Lifetime.Singleton);
             builder.Register<CharactersCombatHandler>(Lifetime.Singleton);
@@ -39,26 +42,14 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 
             builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
-            builder.Register<TurnService>(Lifetime.Singleton);
-
-            builder.Register<PhaseHandler>(Lifetime.Singleton).As<IStartable>().AsSelf();
-            builder.Register<InputStorage>(Lifetime.Singleton);
-            builder.Register<InputReadingPhase>(Lifetime.Singleton).As<Phase>().AsSelf();
-            builder.Register<CharactersMovingPhase>(Lifetime.Singleton).As<Phase>().AsSelf();
-
-            RegisterInputHandlers(builder);
+            
             RegisterConfigs(builder);
             RegisterCreators(builder);
             RegisterInstantiators(builder);
             RegisterStorages(builder);
+            RegisterPhases(builder);
         }
-
-        private void RegisterInputHandlers(IContainerBuilder builder)
-        {
-            builder.RegisterComponentInHierarchy<SwipeInputHandler>();
-            builder.RegisterComponentInHierarchy<BotInputHandler>();
-            builder.Register<PlayerInputHandler>(Lifetime.Singleton);
-        }
+        
 
         private void RegisterConfigs(IContainerBuilder builder)
         {
@@ -85,6 +76,16 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<TilesPositionsStorage>(Lifetime.Singleton);
             builder.Register<CharactersStorage>(Lifetime.Singleton);
             builder.Register<CharactersViewsStorage>(Lifetime.Singleton);
+        }
+        
+        private void RegisterPhases(IContainerBuilder builder)
+        {
+            builder.Register<PhaseHandler>(Lifetime.Singleton).AsSelf();
+            builder.Register<InputStorage>(Lifetime.Singleton);
+            
+            builder.Register<InputReadingPhase>(Lifetime.Singleton).As<Phase>();
+            builder.Register<CharactersMovingPhase>(Lifetime.Singleton).As<Phase>();
+            builder.Register<CharactersSpawnPhase>(Lifetime.Singleton).As<Phase>();
         }
     }
 }

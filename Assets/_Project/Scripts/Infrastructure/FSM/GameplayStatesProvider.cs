@@ -6,6 +6,7 @@ using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
 using _Project.Scripts.FSM;
 using _Project.Scripts.Infrastructure.FSM.States.GameplayStates;
+using _Project.Scripts.Infrastructure.GameplayPhases;
 using _Project.Scripts.InputHandlers;
 using _Project.Scripts.ScriptableObjects;
 
@@ -13,77 +14,35 @@ namespace _Project.Scripts.Infrastructure.FSM
 {
     public class GameplayStatesProvider : IGameplayStatesProvider
     {
-        private readonly BotInputHandler _botInputHandler;
-        private readonly CharactersMovementOrchestrator _charactersMovementOrchestrator;
-        private readonly PlayerInputHandler _playerInputHandler;
         private readonly PauseService _pauseService;
-        private readonly SwipeInputHandler _swipeInputHandler;
-        private readonly TurnService _turnService;
-        private readonly CharactersStorage _charactersStorage;
-        private readonly CharacterCreator _characterCreator;
-        private readonly CharacterStatsConfig _characterStatsConfig;
+        private readonly PhaseHandler _phaseHandler;
 
 
         public GameplayStatesProvider(
-            SwipeInputHandler swipeInputHandler,
-            BotInputHandler botInputHandler,
-            CharactersMovementOrchestrator charactersMovementOrchestrator,
-            PlayerInputHandler playerInputHandler,
-            TurnService turnService,
             PauseService pauseService,
-            CharactersStorage charactersStorage,
-            CharacterCreator characterCreator,
-            CharacterStatsConfig characterStatsConfig
+            PhaseHandler phaseHandler
         )
         {
-            _swipeInputHandler = swipeInputHandler;
-            _botInputHandler = botInputHandler;
-            _charactersMovementOrchestrator = charactersMovementOrchestrator;
-            _playerInputHandler = playerInputHandler;
-            _turnService = turnService;
             _pauseService = pauseService;
-            _charactersStorage = charactersStorage;
-            _characterCreator = characterCreator;
-            _characterStatsConfig = characterStatsConfig;
+            _phaseHandler = phaseHandler;
         }
 
         public IReadOnlyList<IState> GetStates()
         {
-            var playerTurnState = new PlayerTurnState(
+            var gameplayState = new GameplayState(
                 new ITransition[]
                 {
-                    new TransitionTo<PauseState>(() => _pauseService.IsPaused),
-                    new TransitionTo<BotTurnState>(() => _turnService.PlayerMoveFinished),
-                    new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any())
+                    new TransitionTo<PauseState>(() => _pauseService.IsPaused)
                 },
-                _swipeInputHandler,
-                _charactersMovementOrchestrator,
-                _playerInputHandler,
-                _turnService,
+                _phaseHandler,
                 _pauseService
             );
-
-            var botTurnState = new BotTurnState(
-                new ITransition[]
-                {
-                    new TransitionTo<PauseState>(() => _pauseService.IsPaused),
-                    new TransitionTo<PlayerTurnState>(() => _turnService.BotMoveFinished),
-                    new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any())
-                },
-                _botInputHandler,
-                _charactersMovementOrchestrator,
-                _turnService,
-                _pauseService,
-                _charactersStorage,
-                _characterCreator,
-                _characterStatsConfig
-            );
+            
 
             var pauseState = new PauseState(
                 new ITransition[]
                 {
-                    new TransitionTo<PlayerTurnState>(() => !_pauseService.IsPaused && _pauseService.ResumeToPlayer),
-                    new TransitionTo<BotTurnState>(() => !_pauseService.IsPaused && !_pauseService.ResumeToPlayer)
+                    new TransitionTo<GameplayState>(() => !_pauseService.IsPaused)
                 }
             );
 
@@ -95,8 +54,7 @@ namespace _Project.Scripts.Infrastructure.FSM
 
             return new IState[]
             {
-                playerTurnState,
-                botTurnState,
+                gameplayState,
                 pauseState,
                 endGameState
             };
@@ -104,7 +62,7 @@ namespace _Project.Scripts.Infrastructure.FSM
 
         public Type GetStartState()
         {
-            return typeof(PlayerTurnState);
+            return typeof(GameplayState);
         }
     }
 }

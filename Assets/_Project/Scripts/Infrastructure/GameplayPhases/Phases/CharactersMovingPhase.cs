@@ -1,11 +1,11 @@
 ﻿using _Project.Scripts.Characters;
 using UnityEngine;
 
-namespace _Project.Scripts.Infrastructure.GameplayPhases
+namespace _Project.Scripts.Infrastructure.GameplayPhases.Phases
 {
     public class CharactersMovingPhase : Phase
     {
-        private readonly CharactersMovementHandler _charactersMovementHandler;
+        private readonly CharactersMovementOrchestrator _charactersMovementOrchestrator;
         private readonly InputStorage _inputStorage;
         private Vector2Int[] _dirs =
         {
@@ -17,22 +17,19 @@ namespace _Project.Scripts.Infrastructure.GameplayPhases
         
 
         public CharactersMovingPhase(
-            CharactersMovementHandler charactersMovementHandler,
+            CharactersMovementOrchestrator charactersMovementOrchestrator,
             InputStorage inputStorage
             )
         {
-            _charactersMovementHandler = charactersMovementHandler;
+            _charactersMovementOrchestrator = charactersMovementOrchestrator;
             _inputStorage = inputStorage;
         }
         
         public override void Enter()
         {
-            if (_humanPhase)
-                _charactersMovementHandler.ProcessMovementForTeam(_inputStorage.InputVector, Team.Player);
-            else
-                _charactersMovementHandler.ProcessMovementForTeam(_dirs[Random.Range(0, _dirs.Length)], Team.Bot);
+            _charactersMovementOrchestrator.ProcessTurn(_inputStorage.InputVector, Team.Player);
+            _charactersMovementOrchestrator.ProcessTurn(_dirs[Random.Range(0, _dirs.Length)], Team.Bot);
             
-            _humanPhase = !_humanPhase;
             Exit();
         }
     }

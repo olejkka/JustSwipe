@@ -2,11 +2,10 @@
 using _Project.Scripts.Creators;
 using _Project.Scripts.ScriptableObjects;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-namespace _Project.Scripts.InputHandlers
+namespace _Project.Scripts.Infrastructure.GameplayPhases.Phases
 {
-    public class PlayerInputHandler
+    public class CharactersSpawnPhase : Phase
     {
         private const float SpawnChance = 0.25f;
         
@@ -14,21 +13,23 @@ namespace _Project.Scripts.InputHandlers
         private readonly CharacterStatsConfig _characterStatsConfig;
         
 
-        public PlayerInputHandler(
-            CharacterCreator characterCreator,
+        public CharactersSpawnPhase(
+            CharacterCreator creator,
             CharacterStatsConfig characterStatsConfig
-            )
+        )
         {
-            _creator = characterCreator;
+            _creator = creator;
             _characterStatsConfig = characterStatsConfig;
         }
         
-        public void Handle(Vector2Int vector, Team team)
+        public override void Enter()
         {
             string randomBot = _characterStatsConfig.GetRandomCharacterIdByTeam(Team.Bot);
             
             if (Random.value < SpawnChance)
                 _creator.Create(randomBot);
+            
+            Exit();
         }
     }
 }

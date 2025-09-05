@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace _Project.Scripts.Infrastructure
+namespace _Project.Scripts.Infrastructure.GameplayPhases.Phases
 {
     public abstract class Phase : IPhase
     {
-        protected bool _humanPhase = true; 
         public event Action OnExit;
 
         public abstract void Enter();
@@ -15,7 +14,4 @@ namespace _Project.Scripts.Infrastructure
         }
     }
 
-    public interface IPhase
-    {
-    }
 }

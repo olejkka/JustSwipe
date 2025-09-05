@@ -10,13 +10,12 @@ using VContainer.Unity;
 
 namespace _Project.Scripts.Infrastructure.Initializers
 {
-    public class GameplayInitializer : IStartable, ITickable, IDisposable
+    public class GameplayEntryPoint : IStartable, ITickable, IDisposable
     {
         private readonly CharacterCreator _characterCreator;
         private readonly CharacterViewInstantiator _characterViewInstantiator;
 
         private readonly CharactersDeathHandler _deathHandler;
-        private readonly PhaseHandler _phaseHandler;
         private readonly PositionsCreator _positionsesCreator;
         private readonly GameplayStateMachineCreator _stateMachineCreator;
         private readonly TileInstantiator _tileInstantiator;
@@ -24,13 +23,12 @@ namespace _Project.Scripts.Infrastructure.Initializers
         private GameplayStateMachine _fsm;
 
 
-        public GameplayInitializer(
+        public GameplayEntryPoint(
             PositionsCreator positionsesCreator,
             CharacterCreator characterCreator,
             TileInstantiator tileInstantiator,
             CharacterViewInstantiator characterViewInstantiator,
             GameplayStateMachineCreator stateMachineCreator,
-            PhaseHandler phaseHandler,
             CharactersDeathHandler deathHandler,
             PlayerMoney playerMoney
         )
@@ -40,7 +38,6 @@ namespace _Project.Scripts.Infrastructure.Initializers
             _tileInstantiator = tileInstantiator;
             _characterViewInstantiator = characterViewInstantiator;
             _stateMachineCreator = stateMachineCreator;
-            _phaseHandler = phaseHandler;
             _deathHandler = deathHandler;
             _playerMoney = playerMoney;
         }
@@ -52,6 +49,7 @@ namespace _Project.Scripts.Infrastructure.Initializers
             _characterCreator.OnCharacterCreated += _deathHandler.Register;
 
             _fsm = _stateMachineCreator.Create();
+            
             _playerMoney.SetMoney(10);
             _positionsesCreator.Create();
             CreateCharacters();
