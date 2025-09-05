@@ -10,7 +10,6 @@ namespace _Project.Scripts.Infrastructure.GameplayPhases.Phases
         private readonly CharactersStorage _charactersStorage;
         public int Order => 3;
 
-        
         public DefeatPhase(CharactersStorage charactersStorage)
         {
             _charactersStorage = charactersStorage;

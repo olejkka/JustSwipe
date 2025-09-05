@@ -46,6 +46,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         {
             builder.RegisterComponentInHierarchy<SwipeInputHandler>();
             builder.RegisterComponentInHierarchy<BotInputHandler>();
+            builder.Register<PlayerInputHandler>(Lifetime.Singleton);
         }
 
         private void RegisterCreators(IContainerBuilder builder)
