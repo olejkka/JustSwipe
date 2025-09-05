@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace _Project.Scripts.UI.MoneyUI
+namespace _Project.Scripts.UI.Money
 {
     public class PlayerMoneyView : MonoBehaviour
     {

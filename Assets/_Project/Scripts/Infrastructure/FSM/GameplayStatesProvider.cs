@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
@@ -13,14 +14,14 @@ namespace _Project.Scripts.Infrastructure.FSM
     public class GameplayStatesProvider : IGameplayStatesProvider
     {
         private readonly BotInputHandler _botInputHandler;
-        private readonly CharacterCreator _characterCreator;
         private readonly CharactersMovementOrchestrator _charactersMovementOrchestrator;
-        private readonly CharactersStorage _charactersStorage;
-        private readonly CharacterStatsConfig _characterStatsConfig;
-        private readonly PauseService _pauseService;
         private readonly PlayerInputHandler _playerInputHandler;
+        private readonly PauseService _pauseService;
         private readonly SwipeInputHandler _swipeInputHandler;
         private readonly TurnService _turnService;
+        private readonly CharactersStorage _charactersStorage;
+        private readonly CharacterCreator _characterCreator;
+        private readonly CharacterStatsConfig _characterStatsConfig;
 
 
         public GameplayStatesProvider(
@@ -48,12 +49,62 @@ namespace _Project.Scripts.Infrastructure.FSM
 
         public IReadOnlyList<IState> GetStates()
         {
+            var playerTurnState = new PlayerTurnState(
+                new ITransition[]
+                {
+                    new TransitionTo<PauseState>(() => _pauseService.IsPaused),
+                    new TransitionTo<BotTurnState>(() => _turnService.PlayerMoveFinished),
+                    new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any())
+                },
+                _swipeInputHandler,
+                _charactersMovementOrchestrator,
+                _playerInputHandler,
+                _turnService,
+                _pauseService
+            );
+
+            var botTurnState = new BotTurnState(
+                new ITransition[]
+                {
+                    new TransitionTo<PauseState>(() => _pauseService.IsPaused),
+                    new TransitionTo<PlayerTurnState>(() => _turnService.BotMoveFinished),
+                    new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any())
+                },
+                _botInputHandler,
+                _charactersMovementOrchestrator,
+                _turnService,
+                _pauseService,
+                _charactersStorage,
+                _characterCreator,
+                _characterStatsConfig
+            );
+
+            var pauseState = new PauseState(
+                new ITransition[]
+                {
+                    new TransitionTo<PlayerTurnState>(() => !_pauseService.IsPaused && _pauseService.ResumeToPlayer),
+                    new TransitionTo<BotTurnState>(() => !_pauseService.IsPaused && !_pauseService.ResumeToPlayer)
+                }
+            );
+
+            var endGameState = new EndGameState(
+                new ITransition[]
+                {
+                }
+            );
+
             return new IState[]
             {
-
+                playerTurnState,
+                botTurnState,
+                pauseState,
+                endGameState
             };
         }
 
-        public Type GetStartState() => typeof(PlayerTurnState);
+        public Type GetStartState()
+        {
+            return typeof(PlayerTurnState);
+        }
     }
 }

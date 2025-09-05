@@ -25,7 +25,7 @@ namespace _Project.Scripts.Characters
             {
                 var targetPosition = character.Position + direction;
                 
-                if (CanMoveToPosition(targetPosition, occupiedPositions, character.CharacterConfig.Team))
+                if (CanMoveToPosition(targetPosition, occupiedPositions, character.Team))
                 {
                     character.Move(direction);
                 }
@@ -34,10 +34,13 @@ namespace _Project.Scripts.Characters
 
         private bool CanMoveToPosition(Vector2Int position, Dictionary<Vector2Int, Character> occupiedPositions, Team characterTeam)
         {
+            // Если позиция свободна - можно двигаться
             if (!occupiedPositions.ContainsKey(position))
                 return true;
             
-            return occupiedPositions[position].CharacterConfig.Team == characterTeam;
+            // Если на позиции союзник - можно двигаться (накладываться)
+            var characterAtPosition = occupiedPositions[position];
+            return characterAtPosition.Team == characterTeam;
         }
 
         private Dictionary<Vector2Int, Character> GetOccupiedPositions()

@@ -25,7 +25,7 @@ namespace _Project.Scripts.Characters
                 var targetPosition = attacker.Position + direction;
                 
                 if (defenders.TryGetValue(targetPosition, out var defender))
-                    if (defender.CharacterConfig.Team != attacker.CharacterConfig.Team)
+                    if (defender.Team != attacker.Team)
                         ProcessAttack(attacker, defender);
             }
         }
@@ -34,9 +34,9 @@ namespace _Project.Scripts.Characters
         {
             _lastAttackers.Clear();
             _lastAttackers[defender] = attacker;
-            defender.TakeDamage(attacker._stats.Attack);
+            defender.TakeDamage(attacker.Damage);
         }
-        
+
         private Dictionary<Vector2Int, Character> GetDefendersAtTargetPositions(IEnumerable<Character> attackers, Vector2Int direction)
         {
             var targetPositions = attackers.Select(a => a.Position + direction).ToHashSet();
@@ -46,7 +46,7 @@ namespace _Project.Scripts.Characters
                 .Where(c => targetPositions.Contains(c.Position))
                 .ToDictionary(c => c.Position);
         }
-        
+
         public Character GetLastAttacker(Character character)
         {
             _lastAttackers.TryGetValue(character, out var attacker);

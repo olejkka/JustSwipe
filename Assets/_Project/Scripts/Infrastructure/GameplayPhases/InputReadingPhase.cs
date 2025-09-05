@@ -2,18 +2,16 @@
 using _Project.Scripts.InputHandlers;
 using UnityEngine;
 
-namespace _Project.Scripts.Infrastructure.GameplayPhases.Phases
+namespace _Project.Scripts.Infrastructure.GameplayPhases
 {
-    public class InputReadingPhase : Phase, IOrderedPhase
+    public class InputReadingPhase : Phase
     {
         private readonly BotInputHandler _botInputHandler;
         private readonly SwipeInputHandler _swipeInputHandler;
 
         private readonly InputStorage _inputStorage;
 
-        public int Order => 0;
 
-        
         public InputReadingPhase(
             SwipeInputHandler swipeInputHandler,
             BotInputHandler botInputHandler,
@@ -24,7 +22,7 @@ namespace _Project.Scripts.Infrastructure.GameplayPhases.Phases
             _botInputHandler = botInputHandler;
             _inputStorage = inputStorage;
         }
-        
+
         public override void Enter()
         {
             if (_humanPhase)
@@ -39,7 +37,6 @@ namespace _Project.Scripts.Infrastructure.GameplayPhases.Phases
             _swipeInputHandler.OnPressed -= ReadInput;
             _botInputHandler.OnPressed -= ReadInput;
             _humanPhase = !_humanPhase;
-            
             Exit();
         }
     }

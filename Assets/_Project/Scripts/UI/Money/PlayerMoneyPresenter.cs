@@ -2,24 +2,24 @@
 using _Project.Scripts.Economy;
 using VContainer.Unity;
 
-namespace _Project.Scripts.UI.MoneyUI
+namespace _Project.Scripts.UI.Money
 {
     public class PlayerMoneyPresenter : IStartable, IDisposable
     {
         private readonly PlayerMoney _playerMoney;
-        private readonly PlayerMoneyView _view;
+        private readonly PlayerMoneyView _playerMoneyView;
 
-        public PlayerMoneyPresenter(PlayerMoney playerMoney, PlayerMoneyView view)
+        public PlayerMoneyPresenter(PlayerMoney playerMoney, PlayerMoneyView playerMoneyView)
         {
             _playerMoney = playerMoney;
-            _view = view;
+            _playerMoneyView = playerMoneyView;
         }
 
         public void Start()
         {
             _playerMoney.OnMoneyChanged += OnMoneyChanged;
             
-            _view.UpdateMoneyDisplay(_playerMoney.Money);
+            _playerMoneyView.UpdateMoneyDisplay(_playerMoney.Money);
         }
 
         public void Dispose()
@@ -29,7 +29,7 @@ namespace _Project.Scripts.UI.MoneyUI
 
         private void OnMoneyChanged(int newMoney)
         {
-            _view.UpdateMoneyDisplay(newMoney);
+            _playerMoneyView.UpdateMoneyDisplay(newMoney);
         }
     }
 }

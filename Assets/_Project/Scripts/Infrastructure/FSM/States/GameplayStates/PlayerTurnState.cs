@@ -36,9 +36,9 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         {
            _pauseService.ResumeToPlayer = true;
 
-            // _swipeInputHandler.OnPressed += _charactersMovementOrchestrator.ProcessTurn;
-            // _swipeInputHandler.OnPressed += _playerInputHandler.Handle;
-            // _charactersMovementOrchestrator.OnTurnCompleted += OnPlayerCharactersMoved;
+            _swipeInputHandler.OnPressed += _charactersMovementOrchestrator.ProcessTurn;
+            _swipeInputHandler.OnPressed += _playerInputHandler.Handle;
+            _charactersMovementOrchestrator.OnTurnCompleted += OnPlayerCharactersMoved;
 
             _handled = false;
             _turnService.PlayerMoveFinished = false;
@@ -46,11 +46,11 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 
         public override void Exit()
         {
-            // _swipeInputHandler.OnPressed -= _charactersMovementOrchestrator.ProcessTurn;
-            // _swipeInputHandler.OnPressed -= _playerInputHandler.Handle;
-            // _charactersMovementOrchestrator.OnTurnCompleted -= OnPlayerCharactersMoved;
-            //
-            // _turnService.PlayerMoveFinished = false;
+            _swipeInputHandler.OnPressed -= _charactersMovementOrchestrator.ProcessTurn;
+            _swipeInputHandler.OnPressed -= _playerInputHandler.Handle;
+            _charactersMovementOrchestrator.OnTurnCompleted -= OnPlayerCharactersMoved;
+
+            _turnService.PlayerMoveFinished = false;
         }
 
         public override void Update()

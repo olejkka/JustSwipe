@@ -8,7 +8,7 @@ namespace _Project.Scripts.ScriptableObjects
         menuName = "Gameplay/BotsDeathRewardsConfig",
         fileName = "BotsDeathRewardsConfig"
     )]
-    public class BotsDeathRewardsConfig : ScriptableObject
+    public class BotsDeathRewardsContig : ScriptableObject
     {
         public List<BotDeathRewardEntry> BotDeathRewardEntries = new();
         

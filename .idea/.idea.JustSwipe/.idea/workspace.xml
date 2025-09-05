@@ -5,64 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterConfig.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterConfig.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/IOrderedPhase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/IOrderedPhase.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/IPhase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/IPhase.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Instantiators/CharacterHPViewInstantiator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Instantiators/CharacterHPViewInstantiator.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/CharacterUI.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/CharacterUI/CharacterHPPresenter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/CharacterUI/CharacterHPPresenter.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/CharacterUI/CharacterHPView.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/CharacterUI/CharacterHPView.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Characters.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Characters/Bot_1.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Characters/Bot_1.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Characters/Bot_2.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Characters/Bot_2.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Characters/Main.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Characters/Main.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Characters/_Character.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Characters/_Character.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Canvas.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Gameplay.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Initialization.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Initialization.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Character.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Character.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersCombatHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersCombatHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersCombatHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersCombatHandler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersMovementOrchestrator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersMovementOrchestrator.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersDeathHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersDeathHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersMovementHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersMovementHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersMovementOrchestrator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersMovementOrchestrator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersPositionValidator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersPositionValidator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Storages/CharactersStorage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Storages/CharactersStorage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Creators/CharacterCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Creators/CharacterCreator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Economy/BotDeathRewardService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Economy/BotDeathRewardService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersMover.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersMovementHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersMover.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersMovementHandler.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/GameplayStatesProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/GameplayStatesProvider.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/States/GameplayStates/BotTurnState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/States/GameplayStates/BotTurnState.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/States/GameplayStates/EndGameState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/States/GameplayStates/EndGameState.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/States/GameplayStates/PauseState.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/States/GameplayStates/PauseState.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/States/GameplayStates/BotTurnState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/States/GameplayStates/BotTurnState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/States/GameplayStates/PlayerTurnState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/States/GameplayStates/PlayerTurnState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/CharactersMovingPhase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/CharactersMovingPhase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/InputReadingPhase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/InputReadingPhase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/InputStorage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/InputStorage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/Phase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/Phase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/PhaseHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayPhases/PhaseHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Initializers/GameplayInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Initializers/GameplayEntryPoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Initializers/GameplayInitializer.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Initializers/GameplayEntryPoint.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/GameplayLifetimeScope.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/GameplayLifetimeScope.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/RootLifetimeScope.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/RootLifetimeScope.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/SceneLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/SceneLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/InputHandlers/PlayerInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/InputHandlers/PlayerInputHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Instantiators/CharacterViewInstantiator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Instantiators/CharacterViewInstantiator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/ScriptableObjects/BotsDeathRewards.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ScriptableObjects/BotsDeathRewards.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Money/PlayerMoneyPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/Money/PlayerMoneyPresenter.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +27,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2c271b216ff84328b73d1d7f2333e7ab1eac00/b8/6a8e3603/Vector3.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Character.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Team.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Creators/PositionsCreator.cs" root0="FORCE_HIGHLIGHTING" />
@@ -122,7 +75,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.1.10f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Tools programs\Unity Hub\Unity Editor\6000.1.10f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\UnityProjects\JustSwipe -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\UnityProjects\JustSwipe" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -130,7 +83,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.1.10f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Tools programs\Unity Hub\Unity Editor\6000.1.10f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\UnityProjects\JustSwipe -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\UnityProjects\JustSwipe" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -222,13 +175,6 @@
       <workItem from="1755948273989" duration="7749000" />
       <workItem from="1756024980345" duration="1141000" />
       <workItem from="1756036156918" duration="9984000" />
-      <workItem from="1756115455015" duration="3704000" />
-      <workItem from="1756131847515" duration="1195000" />
-      <workItem from="1756141986720" duration="2031000" />
-      <workItem from="1756193498519" duration="4272000" />
-      <workItem from="1756202003458" duration="7867000" />
-      <workItem from="1756803769461" duration="10485000" />
-      <workItem from="1756829484568" duration="4506000" />
     </task>
     <servers />
   </component>
