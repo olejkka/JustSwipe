@@ -2,17 +2,17 @@
 using System.Linq;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
-using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Tiles;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace _Project.Scripts.Creators
 {
     public class CharacterCreator
     {
-        private readonly TilesPositionsStorage _tilesPositionsStorage;
+        public event Action<Character> OnCharacterCreated;
+        
         private readonly CharactersStorage _charactersStorage;
+        private readonly TilesPositionsStorage _tilesPositionsStorage;
 
 
         public CharacterCreator(
@@ -23,10 +23,8 @@ namespace _Project.Scripts.Creators
             _charactersStorage = charactersStorage;
             _tilesPositionsStorage = tilesPositionsStorage;
         }
-
-        public event Action<Character> OnCharacterCreated;
-
-        public void Create(CharacterConfig characterConfig)
+        
+        public void Create(Team team)
         {
             var positions = _tilesPositionsStorage
                 .GetAllPositions()
@@ -35,7 +33,7 @@ namespace _Project.Scripts.Creators
 
             var spawnPos = positions[Random.Range(0, positions.Count)];
 
-            var character = new Character(spawnPos, characterConfig);
+            var character = new Character(spawnPos, team, 1, 1);
 
             _charactersStorage.Add(character);
             OnCharacterCreated?.Invoke(character);

@@ -13,7 +13,7 @@ namespace _Project.Scripts.Characters.Storages
         public bool Remove(Character character) => _characters.Remove(character);
         
         public IEnumerable<Character> GetCharactersByTeam(Team team) =>
-            _characters.Where(character => character.CharacterConfig.Team == team);
+            _characters.Where(character => character.Team == team);
 
         public IEnumerable<Character> GetAllCharacters() => _characters;
 

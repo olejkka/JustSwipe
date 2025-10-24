@@ -1,42 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace _Project.Scripts.Infrastructure.FSM
+public abstract class FiniteStateMachine
 {
-    public abstract class FiniteStateMachine
+    private IState _currentState;
+    private Dictionary<Type, IState> _states;
+
+    public FiniteStateMachine(Dictionary<Type, IState> states)
     {
-        private IState _currentState;
-        private readonly Dictionary<Type, IState> _states;
+        _states = states;
+    }
 
-        public FiniteStateMachine(Dictionary<Type, IState> states)
+    public void EnterState<TState>()
+    {
+        EnterState(typeof(TState));
+    }
+
+    public void EnterState(Type type)
+    {
+        if (_states.TryGetValue(type, out var state))
         {
-            _states = states;
+            _currentState?.Exit();
+            _currentState = state;
+            _currentState.Enter();
         }
+    }
 
-        public void EnterState<TState>()
-        {
-            EnterState(typeof(TState));
-        }
-
-        public void EnterState(Type type)
-        {
-            if (_states.TryGetValue(type, out var state))
-            {
-                _currentState?.Exit();
-                _currentState = state;
-                _currentState.Enter();
-            }
-        }
-
-        public void UpdateState()
-        {
-            if (_currentState == null)
-                return;
-
-            _currentState.Update();
-
-            if (_currentState.TryGetNextState(out var type))
-                EnterState(type);
-        }
+    public void UpdateState()
+    {
+        if (_currentState == null)
+            return;
+        
+        _currentState.Update();
+        
+        if (_currentState.TryGetNextState(out Type type))
+            EnterState(type);
     }
 }

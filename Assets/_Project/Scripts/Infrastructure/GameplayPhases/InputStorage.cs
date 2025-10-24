@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _Project.Scripts.Infrastructure.GameplayPhases
+namespace _Project.Scripts.Infrastructure
 {
     public class InputStorage
     {
