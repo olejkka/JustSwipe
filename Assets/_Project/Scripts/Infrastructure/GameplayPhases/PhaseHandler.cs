@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using _Project.Scripts.Infrastructure.GameplayPhases.Phases;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace _Project.Scripts.Infrastructure
+namespace _Project.Scripts.Infrastructure.GameplayPhases
 {
-    public class PhaseHandler : IStartable
+    public class PhaseHandler
     {
         private readonly IReadOnlyList<Phase> _phases;
         private int _currentPhase = -1;
@@ -18,13 +19,13 @@ namespace _Project.Scripts.Infrastructure
 
         public void Start()
         {
-            // if (_phases == null || _phases.Count == 0)
-            // {
-            //     Debug.LogWarning("PhaseHandler: no phases registered");
-            //     return;
-            // }
-            //
-            // EnterNextPhase();
+            if (_phases == null || _phases.Count == 0)
+            {
+                Debug.LogWarning("PhaseHandler: no phases registered");
+                return;
+            }
+            
+            EnterNextPhase();
         }
 
         private void EnterNextPhase()

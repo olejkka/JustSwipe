@@ -1,22 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
-namespace _Project.Scripts.FSM.States.GameplayStates
+namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 {
     public class EndGameState : State
     {
-        public EndGameState(IReadOnlyList<ITransition> transitions) : base(transitions) { }
+        public event Action OnEndGame;
+            
+            
+        public EndGameState(IReadOnlyList<ITransition> transitions) : base(transitions)
+        {
+        }
 
         public override void Enter()
         {
-            // Debug.Log("[EndGameState] Entering EndGameState");
-
+            Debug.Log("Game Over");
+            
+            Time.timeScale = 0f;
+            OnEndGame?.Invoke();
         }
 
         public override void Exit()
         {
-            // Debug.Log("[EndGameState] Exiting EndGameState");
-
         }
-        public override void Update() { }
+
+        public override void Update()
+        {
+        }
     }
 }
