@@ -5,22 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/GameplayUILifetimeScope.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/GameplayUILifetimeScope.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/PauseButtonPresenter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/PauseButtonPresenter.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/PauseButtonView.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/PauseButtonView.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Editor/PlayAndFullscreenHotkeys.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/PlayAndFullscreenHotkeys.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/UI.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/UI.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Initializers/PauseInitializer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Initializers/PauseInitializer.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/GameplayLifetimeScope.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/GameplayLifetimeScope.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/RootLifetimeScope.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/RootLifetimeScope.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/InputHandlers/PauseKeyboardInputHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/InputHandlers/PauseKeyboardInputHandler.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,6 +170,7 @@
       <workItem from="1755675166315" duration="951000" />
       <workItem from="1755697793022" duration="3229000" />
       <workItem from="1755726289356" duration="887000" />
+      <workItem from="1755780185935" duration="521000" />
     </task>
     <servers />
   </component>

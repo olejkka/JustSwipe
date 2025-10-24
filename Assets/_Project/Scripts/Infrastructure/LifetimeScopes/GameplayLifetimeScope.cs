@@ -41,6 +41,10 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<InputReadingPhase>(Lifetime.Singleton).As<Phase>().AsSelf();
             builder.Register<CharactersMovingPhase>(Lifetime.Singleton).As<Phase>().AsSelf();
             
+            builder.RegisterEntryPoint<PauseButtonPresenter>();
+
+            builder.RegisterComponentInHierarchy<PauseButtonView>();
+            
             RegisterInputHandlers(builder);
             RegisterConfigs(builder);
             RegisterCreators(builder);

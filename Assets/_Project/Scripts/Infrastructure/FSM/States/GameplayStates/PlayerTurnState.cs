@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Characters;
-using _Project.Scripts.Infrastructure.FSM;
+using _Project.Scripts.FSM;
 using _Project.Scripts.InputHandlers;
 
-namespace _Project.Scripts.FSM.States.GameplayStates
+namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 {
     public class PlayerTurnState : State
     {
@@ -12,7 +12,6 @@ namespace _Project.Scripts.FSM.States.GameplayStates
         private readonly CharactersMover _charactersMover;
         private readonly CharacterSpawnController _characterSpawnController;
         private readonly TurnService _turnService;
-        private readonly PauseService _pauseService;
         
         private bool _handled;
         
@@ -23,8 +22,7 @@ namespace _Project.Scripts.FSM.States.GameplayStates
             SwipeInputHandler swipeInputHandler,
             CharactersMover charactersMover,
             CharacterSpawnController characterSpawnController,
-            TurnService turnService,
-            PauseService pauseService
+            TurnService turnService
             ) : base(transitions)
         {
             _keyboardInputHandler = keyboardInputHandler;
@@ -32,14 +30,11 @@ namespace _Project.Scripts.FSM.States.GameplayStates
             _charactersMover = charactersMover;
             _characterSpawnController = characterSpawnController;
             _turnService = turnService;
-            _pauseService = pauseService;
         }
 
         public override void Enter()
         {
             // Debug.Log("[PlayerTurnState] Entering Player Turn State");
-
-            _pauseService.ResumeToPlayer = true;
             
             _keyboardInputHandler.OnPressed += _charactersMover.Move;
             _swipeInputHandler.OnPressed += _charactersMover.Move;

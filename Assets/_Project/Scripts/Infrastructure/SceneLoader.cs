@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+namespace _Project.Scripts.Infrastructure
 {
-    private async void Start()
+    public class SceneLoader : MonoBehaviour
     {
-        await SceneManager.LoadSceneAsync("Gameplay", LoadSceneMode.Additive);
-        await SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
+        private async void Start()
+        {
+            await SceneManager.LoadSceneAsync("Gameplay", LoadSceneMode.Additive);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Project.Scripts.FSM;
+using _Project.Scripts.Infrastructure.FSM;
 
 namespace _Project.Scripts.Creators
 {

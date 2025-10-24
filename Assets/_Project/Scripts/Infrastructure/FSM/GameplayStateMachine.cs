@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace _Project.Scripts.FSM
+namespace _Project.Scripts.Infrastructure.FSM
 {
     public class GameplayStateMachine : FiniteStateMachine
     {

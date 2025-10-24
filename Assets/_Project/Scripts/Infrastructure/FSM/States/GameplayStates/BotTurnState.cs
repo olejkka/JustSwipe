@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Characters;
-using _Project.Scripts.Infrastructure.FSM;
+using _Project.Scripts.FSM;
 using _Project.Scripts.InputHandlers;
 
-namespace _Project.Scripts.FSM.States.GameplayStates
+namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 {
     public class BotTurnState : State
     {
         private readonly BotInputHandler _botInputHandler;
         private readonly CharactersMover _charactersMover;
         private readonly TurnService _turnService;
-        private readonly PauseService _pauseService;
         
         private bool _handled;
 
@@ -19,22 +18,17 @@ namespace _Project.Scripts.FSM.States.GameplayStates
             IReadOnlyList<ITransition> transitions,
             BotInputHandler botInputHandler,
             CharactersMover charactersMover,
-            TurnService turnService,
-            PauseService pauseService
+            TurnService turnService
         ) : base(transitions)
         {
             _botInputHandler = botInputHandler;
             _charactersMover = charactersMover;
             _turnService = turnService;
-            _pauseService = pauseService;
         }
 
         public override void Enter()
         {
             // Debug.Log("[BotTurnState] Entering Bot Turn State");
-            
-            _pauseService.ResumeToPlayer = false;
-
             
             _botInputHandler.OnPressed += _charactersMover.Move;
             _charactersMover.OnMove += OnBotCharactersMoved;

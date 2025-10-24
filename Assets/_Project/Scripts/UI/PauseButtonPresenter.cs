@@ -1,5 +1,6 @@
 ﻿using System;
-using _Project.Scripts.Infrastructure.FSM;
+using UnityEngine;
+using _Project.Scripts.InputHandlers;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI
@@ -7,12 +8,22 @@ namespace _Project.Scripts.UI
     public class PauseButtonPresenter : IStartable, IDisposable
     {
         private readonly PauseButtonView _view;
-        private readonly PauseService _pauseService;
+        private readonly KeyboardInputHandler _keyboardInputHandler;
+        private readonly SwipeInputHandler _swipeInputHandler;
+        private readonly BotInputHandler _botInputHandler;
+        
+        private bool _isPaused;
 
-        public PauseButtonPresenter(PauseButtonView view, PauseService pauseService)
+        public PauseButtonPresenter(
+            PauseButtonView view,
+            KeyboardInputHandler keyboardInputHandler,
+            SwipeInputHandler swipeInputHandler,
+            BotInputHandler botInputHandler)
         {
             _view = view;
-            _pauseService = pauseService;
+            _keyboardInputHandler = keyboardInputHandler;
+            _swipeInputHandler = swipeInputHandler;
+            _botInputHandler = botInputHandler;
         }
 
         public void Start()
@@ -29,10 +40,34 @@ namespace _Project.Scripts.UI
 
         private void OnClicked()
         {
-            if (_pauseService.IsPaused)
-                _pauseService.RequestResume();
+            if (_isPaused)
+            {
+                Resume();
+            }
             else
-                _pauseService.RequestPause();
+            {
+                Pause();
+            }
+        }
+
+        private void Pause()
+        {
+            _isPaused = true;
+            Time.timeScale = 0f;
+            
+            _keyboardInputHandler.enabled = false;
+            _swipeInputHandler.enabled = false;
+            _botInputHandler.enabled = false;
+        }
+
+        private void Resume()
+        {
+            _isPaused = false;
+            Time.timeScale = 1f;
+            
+            _keyboardInputHandler.enabled = true;
+            _swipeInputHandler.enabled = true;
+            _botInputHandler.enabled = true;
         }
     }
 }
