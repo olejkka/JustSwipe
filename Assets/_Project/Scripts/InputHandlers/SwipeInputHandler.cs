@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.EnhancedTouch;
 
 namespace _Project.Scripts.InputHandlers
 {
-    public class SwipeInputHandler : MonoBehaviour, IInputHandler
+    public class SwipeInputHandler : MonoBehaviour
     {
         private Vector2 start;
         private bool swiping;

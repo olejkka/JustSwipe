@@ -31,7 +31,6 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<CharactersMover>(Lifetime.Singleton);
             builder.Register<CharacterDeathHandler>(Lifetime.Singleton);
             
-            builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
             builder.Register<TurnService>(Lifetime.Singleton);
             
@@ -39,18 +38,12 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 
             builder.RegisterComponentInHierarchy<PauseButtonView>();
             
-            RegisterInputHandlers(builder);
+            builder.RegisterComponentInHierarchy<SwipeInputHandler>();
+            
             RegisterConfigs(builder);
             RegisterCreators(builder);
             RegisterInstantiators(builder);
             RegisterStorages(builder);
-        }
-        
-        private void RegisterInputHandlers(IContainerBuilder builder)
-        {
-            builder.RegisterComponentInHierarchy<KeyboardInputHandler>();
-            builder.RegisterComponentInHierarchy<SwipeInputHandler>();
-            builder.RegisterComponentInHierarchy<BotInputHandler>();
         }
 
         private void RegisterConfigs(IContainerBuilder builder)
@@ -61,8 +54,10 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 
         private void RegisterCreators(IContainerBuilder builder)
         {
+            builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
             builder.Register<PositionsCreator>(Lifetime.Singleton);
             builder.Register<CharacterCreator>(Lifetime.Singleton);
+            builder.Register<BotMoveCreator>(Lifetime.Singleton);
         }
 
         private void RegisterInstantiators(IContainerBuilder builder)

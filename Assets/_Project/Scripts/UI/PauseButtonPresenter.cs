@@ -8,22 +8,17 @@ namespace _Project.Scripts.UI
     public class PauseButtonPresenter : IStartable, IDisposable
     {
         private readonly PauseButtonView _view;
-        private readonly KeyboardInputHandler _keyboardInputHandler;
         private readonly SwipeInputHandler _swipeInputHandler;
-        private readonly BotInputHandler _botInputHandler;
         
         private bool _isPaused;
 
         public PauseButtonPresenter(
             PauseButtonView view,
-            KeyboardInputHandler keyboardInputHandler,
-            SwipeInputHandler swipeInputHandler,
-            BotInputHandler botInputHandler)
+            SwipeInputHandler swipeInputHandler
+            )
         {
             _view = view;
-            _keyboardInputHandler = keyboardInputHandler;
             _swipeInputHandler = swipeInputHandler;
-            _botInputHandler = botInputHandler;
         }
 
         public void Start()
@@ -55,9 +50,7 @@ namespace _Project.Scripts.UI
             _isPaused = true;
             Time.timeScale = 0f;
             
-            _keyboardInputHandler.enabled = false;
             _swipeInputHandler.enabled = false;
-            _botInputHandler.enabled = false;
         }
 
         private void Resume()
@@ -65,9 +58,7 @@ namespace _Project.Scripts.UI
             _isPaused = false;
             Time.timeScale = 1f;
             
-            _keyboardInputHandler.enabled = true;
             _swipeInputHandler.enabled = true;
-            _botInputHandler.enabled = true;
         }
     }
 }

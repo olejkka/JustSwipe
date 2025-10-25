@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Characters;
+using _Project.Scripts.Creators;
 using _Project.Scripts.FSM;
 using _Project.Scripts.InputHandlers;
 
@@ -7,7 +8,7 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 {
     public class BotTurnState : State
     {
-        private readonly BotInputHandler _botInputHandler;
+        private readonly BotMoveCreator _botMoveCreator;
         private readonly CharactersMover _charactersMover;
         private readonly TurnService _turnService;
         
@@ -16,12 +17,12 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 
         public BotTurnState(
             IReadOnlyList<ITransition> transitions,
-            BotInputHandler botInputHandler,
+            BotMoveCreator botMoveCreator,
             CharactersMover charactersMover,
             TurnService turnService
         ) : base(transitions)
         {
-            _botInputHandler = botInputHandler;
+            _botMoveCreator = botMoveCreator;
             _charactersMover = charactersMover;
             _turnService = turnService;
         }
@@ -30,16 +31,17 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         {
             // Debug.Log("[BotTurnState] Entering Bot Turn State");
             
-            _botInputHandler.OnPressed += _charactersMover.Move;
             _charactersMover.OnMove += OnBotCharactersMoved;
             
             _handled = false;
             _turnService.BotMoveFinished = false;
+            
+            var direction = _botMoveCreator.GenerateRandomDirection();
+            _charactersMover.Move(direction, Team.Bot);
         }
 
         public override void Exit()
         {
-            _botInputHandler.OnPressed -= _charactersMover.Move;
             _charactersMover.OnMove -= OnBotCharactersMoved;
             
             _turnService.BotMoveFinished = false;

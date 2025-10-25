@@ -7,7 +7,6 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 {
     public class PlayerTurnState : State
     {
-        private readonly KeyboardInputHandler _keyboardInputHandler;
         private readonly SwipeInputHandler _swipeInputHandler;
         private readonly CharactersMover _charactersMover;
         private readonly CharacterSpawnController _characterSpawnController;
@@ -18,14 +17,12 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         
         public PlayerTurnState(
             IReadOnlyList<ITransition> transitions, 
-            KeyboardInputHandler keyboardInputHandler,
             SwipeInputHandler swipeInputHandler,
             CharactersMover charactersMover,
             CharacterSpawnController characterSpawnController,
             TurnService turnService
             ) : base(transitions)
         {
-            _keyboardInputHandler = keyboardInputHandler;
             _swipeInputHandler = swipeInputHandler;
             _charactersMover = charactersMover;
             _characterSpawnController = characterSpawnController;
@@ -36,9 +33,7 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         {
             // Debug.Log("[PlayerTurnState] Entering Player Turn State");
             
-            _keyboardInputHandler.OnPressed += _charactersMover.Move;
             _swipeInputHandler.OnPressed += _charactersMover.Move;
-            _keyboardInputHandler.OnPressed += _characterSpawnController.HandleInput;
             _swipeInputHandler.OnPressed += _characterSpawnController.HandleInput;
             _charactersMover.OnMove += OnPlayerCharactersMoved;
             
@@ -48,9 +43,7 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 
         public override void Exit()
         {
-            _keyboardInputHandler.OnPressed -= _charactersMover.Move;
             _swipeInputHandler.OnPressed -= _charactersMover.Move;
-            _keyboardInputHandler.OnPressed -= _characterSpawnController.HandleInput;
             _swipeInputHandler.OnPressed -= _characterSpawnController.HandleInput;
             _charactersMover.OnMove -= OnPlayerCharactersMoved;
             
