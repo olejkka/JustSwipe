@@ -1,19 +1,16 @@
 ﻿using System;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Creators;
-using _Project.Scripts.FSM;
 using _Project.Scripts.Generators;
 using _Project.Scripts.Infrastructure.FSM;
-using _Project.Scripts.InputHandlers;
 using _Project.Scripts.Instantiators;
 using VContainer.Unity;
 
-namespace _Project.Scripts.Infrastructure.Initializers
+namespace _Project.Scripts.Infrastructure
 {
-    public class GameplayInitializer : IStartable, ITickable, IDisposable
+    public class GameplayEntryPoint : IStartable, ITickable, IDisposable
     {
         private readonly GameplayStateMachineCreator _stateMachineCreator;
-        private readonly PhaseHandler _phaseHandler;
         private GameplayStateMachine _fsm;
         
         private readonly CharacterCreator _characterCreator;
@@ -24,15 +21,12 @@ namespace _Project.Scripts.Infrastructure.Initializers
         private readonly CharacterDeathHandler _deathHandler;
         
         
-
-        
-        public GameplayInitializer(
+        public GameplayEntryPoint(
             PositionsCreator positionsesCreator,
             CharacterCreator characterCreator,
             TileInstantiator tileInstantiator,
             CharacterViewInstantiator characterViewInstantiator,
             GameplayStateMachineCreator stateMachineCreator,
-            PhaseHandler phaseHandler,
             CharacterDeathHandler deathHandler
         )
         {
@@ -41,7 +35,6 @@ namespace _Project.Scripts.Infrastructure.Initializers
             _tileInstantiator = tileInstantiator;
             _characterViewInstantiator = characterViewInstantiator;
             _stateMachineCreator = stateMachineCreator;
-            _phaseHandler = phaseHandler;
             _deathHandler = deathHandler;
         }
 

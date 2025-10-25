@@ -4,7 +4,6 @@ using _Project.Scripts.Creators;
 using _Project.Scripts.FSM;
 using _Project.Scripts.Generators;
 using _Project.Scripts.Infrastructure.FSM;
-using _Project.Scripts.Infrastructure.Initializers;
 using _Project.Scripts.InputHandlers;
 using _Project.Scripts.Instantiators;
 using _Project.Scripts.ScriptableObjects;
@@ -26,7 +25,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<GameplayInitializer>();
+            builder.RegisterEntryPoint<GameplayEntryPoint>();
             
             builder.Register<CharacterSpawnController>(Lifetime.Singleton);
             builder.Register<CharactersMover>(Lifetime.Singleton);
@@ -35,11 +34,6 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
             builder.Register<TurnService>(Lifetime.Singleton);
-
-            builder.Register<PhaseHandler>(Lifetime.Singleton).As<IStartable>().AsSelf();
-            builder.Register<InputStorage>(Lifetime.Singleton);
-            builder.Register<InputReadingPhase>(Lifetime.Singleton).As<Phase>().AsSelf();
-            builder.Register<CharactersMovingPhase>(Lifetime.Singleton).As<Phase>().AsSelf();
             
             builder.RegisterEntryPoint<PauseButtonPresenter>();
 

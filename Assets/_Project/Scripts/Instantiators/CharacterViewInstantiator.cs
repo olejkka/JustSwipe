@@ -12,7 +12,7 @@ namespace _Project.Scripts.Instantiators
         [SerializeField] private CharacterView _botCharacter;
         [SerializeField] private Tilemap _tilemap;
 
-        [Inject] private CharactersViewsStorage _charactersViewsStorage;        
+        [Inject] private CharactersViewsStorage _charactersViewsStorage;
         
         public void Instantiate(Character character)
         {

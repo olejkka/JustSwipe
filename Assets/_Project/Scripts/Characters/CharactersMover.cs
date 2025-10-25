@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Characters.Storages;
+using _Project.Scripts.Tiles;
 using UnityEngine;
 
 namespace _Project.Scripts.Characters
@@ -9,14 +10,16 @@ namespace _Project.Scripts.Characters
     public class CharactersMover
     {
         private readonly CharactersStorage _charactersStorage;
+        private readonly TilesPositionsStorage _tilesPositionsStorage;
         private readonly Dictionary<Vector2Int, Character> _claimedPositions = new();
         
         public event Action OnMove;
 
         
-        public CharactersMover(CharactersStorage charactersStorage)
+        public CharactersMover(CharactersStorage charactersStorage, TilesPositionsStorage tilesPositionsStorage)
         {
             _charactersStorage = charactersStorage;
+            _tilesPositionsStorage = tilesPositionsStorage;
         }
 
         public void Move(Vector2Int vector, Team team)
@@ -46,7 +49,22 @@ namespace _Project.Scripts.Characters
                 attacker.Move(vector);
             }
 
+            KillCharactersOutOfBounds();
+            
             OnMove?.Invoke();
+        }
+        
+        private void KillCharactersOutOfBounds()
+        {
+            var allCharacters = _charactersStorage.GetAllCharacters().ToArray();
+            
+            for (int i = 0; i < allCharacters.Length; i++)
+            {
+                var character = allCharacters[i];
+                
+                if (!_tilesPositionsStorage.Contains(character.Position)) 
+                    character.TakeDamage(character.Health);
+            }
         }
     }
 }

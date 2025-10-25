@@ -8,6 +8,7 @@ namespace _Project.Scripts.Infrastructure
         private async void Start()
         {
             await SceneManager.LoadSceneAsync("Gameplay", LoadSceneMode.Additive);
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("Gameplay"));
         }
     }
 }

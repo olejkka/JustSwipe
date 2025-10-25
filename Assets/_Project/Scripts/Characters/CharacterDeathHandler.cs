@@ -54,6 +54,7 @@ namespace _Project.Scripts.Characters
         {
             foreach (var kv in _subs)
                 kv.Key.OnHealthChanged -= kv.Value;
+            
             _subs.Clear();
         }
     }

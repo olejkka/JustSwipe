@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace _Project.Scripts.FSM.States.GameplayStates
 {
@@ -8,7 +9,7 @@ namespace _Project.Scripts.FSM.States.GameplayStates
 
         public override void Enter()
         {
-            // Debug.Log("[EndGameState] Entering EndGameState");
+            Debug.Log("[EndGameState] Entering EndGameState");
 
         }
 
