@@ -23,9 +23,7 @@ namespace _Project.Scripts.Creators
                 dictionary[state.GetType()] = state;
 
             var fsm = new GameplayStateMachine(dictionary);
-            
             fsm.EnterState(_provider.GetStartState());
-            
             return fsm;
         }
     }

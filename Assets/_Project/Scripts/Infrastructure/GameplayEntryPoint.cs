@@ -9,16 +9,12 @@ using VContainer.Unity;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class GameplayEntryPoint : IStartable, ITickable, IDisposable
+    public class GameplayEntryPoint : IStartable, IDisposable
     {
-        private readonly GameplayStateMachineCreator _stateMachineCreator;
-        private GameplayStateMachine _fsm;
-        
         private readonly CharacterCreator _characterCreator;
         private readonly PositionsCreator _positionsesCreator;
         private readonly CharacterViewInstantiator _characterViewInstantiator;
         private readonly TileInstantiator _tileInstantiator;
-        
         private readonly CharacterDeathHandler _deathHandler;
         
         
@@ -27,7 +23,6 @@ namespace _Project.Scripts.Infrastructure
             CharacterCreator characterCreator,
             TileInstantiator tileInstantiator,
             CharacterViewInstantiator characterViewInstantiator,
-            GameplayStateMachineCreator stateMachineCreator,
             CharacterDeathHandler deathHandler
         )
         {
@@ -35,7 +30,6 @@ namespace _Project.Scripts.Infrastructure
             _characterCreator = characterCreator;
             _tileInstantiator = tileInstantiator;
             _characterViewInstantiator = characterViewInstantiator;
-            _stateMachineCreator = stateMachineCreator;
             _deathHandler = deathHandler;
         }
 
@@ -45,15 +39,9 @@ namespace _Project.Scripts.Infrastructure
             _characterCreator.OnCharacterCreated += _characterViewInstantiator.Instantiate;
             _characterCreator.OnCharacterCreated += _deathHandler.Register;
 
-            _fsm = _stateMachineCreator.Create();
             _positionsesCreator.Create();
             _characterCreator.Create(CharacterType.Main);
             _characterCreator.Create(CharacterType.Bot_1);
-        }
-        
-        public void Tick()
-        {
-            _fsm?.UpdateState();
         }
 
         public void Dispose()
@@ -61,8 +49,6 @@ namespace _Project.Scripts.Infrastructure
             _positionsesCreator.OnPositionsCreated -= _tileInstantiator.Instantiate;
             _characterCreator.OnCharacterCreated -= _characterViewInstantiator.Instantiate;
             _characterCreator.OnCharacterCreated -= _deathHandler.Register;
-            
-            _fsm = null;
         }
     }
 }

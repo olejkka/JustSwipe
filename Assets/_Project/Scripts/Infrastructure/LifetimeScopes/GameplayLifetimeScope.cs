@@ -55,6 +55,13 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         private void RegisterCreators(IContainerBuilder builder)
         {
             builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
+            
+            builder.Register<GameplayStateMachine>(container =>
+            {
+                var creator = container.Resolve<GameplayStateMachineCreator>();
+                return creator.Create();
+            }, Lifetime.Singleton).As<ITickable>();
+            
             builder.Register<PositionsCreator>(Lifetime.Singleton);
             builder.Register<CharacterCreator>(Lifetime.Singleton);
             builder.Register<BotMoveCreator>(Lifetime.Singleton);
