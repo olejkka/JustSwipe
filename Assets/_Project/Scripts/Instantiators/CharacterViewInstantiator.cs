@@ -1,5 +1,7 @@
-﻿using _Project.Scripts.Characters;
+﻿// Assets/_Project/Scripts/Instantiators/CharacterViewInstantiator.cs
+using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
+using _Project.Scripts.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using VContainer;
@@ -8,24 +10,26 @@ namespace _Project.Scripts.Instantiators
 {
     public class CharacterViewInstantiator : MonoBehaviour
     {
-        [SerializeField] private CharacterView _playerCharacter;
-        [SerializeField] private CharacterView _botCharacter;
         [SerializeField] private Tilemap _tilemap;
+        [SerializeField] private CharacterView _characterViewPrefab;
 
         [Inject] private CharactersViewsStorage _charactersViewsStorage;
+        [Inject] private CharactersConfig _charactersConfig;
         
         public void Instantiate(Character character)
         {
             var cell = new Vector3Int(character.Position.x, character.Position.y, 0);
-
             var worldPos = _tilemap.CellToWorld(cell);
 
-            var prefab = character.Team == Team.Player
-                ? _playerCharacter
-                : _botCharacter;
+            var entry = _charactersConfig.GetEntryByTeam(character.Team);
+            if (entry == null || entry.Sprite == null)
+            {
+                Debug.LogError($"No sprite found for team {character.Team}");
+                return;
+            }
 
-            var instance = Instantiate(prefab, worldPos, Quaternion.identity);
-            instance.Init(character, _tilemap);
+            var instance = Instantiate(_characterViewPrefab, worldPos, Quaternion.identity);
+            instance.Init(character, _tilemap, entry.Sprite);
             
             _charactersViewsStorage.Register(character, instance);
         }

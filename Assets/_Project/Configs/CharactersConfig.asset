@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 428752d0674d4a5eb7c0c3fa75d327b2, type: 3}
+  m_Name: CharactersConfig
+  m_EditorClassIdentifier: 
+  CharacterEntries:
+  - Team: 1
+    Sprite: {fileID: 36719575, guid: adfa18486ab63ee489a13e74f26c7474, type: 3}
+    BaseStats:
+      Health: 1
+      Damage: 1
+  - Team: 2
+    Sprite: {fileID: -1066070986, guid: 8fb2a9392442fd64c95590a662356cbe, type: 3}
+    BaseStats:
+      Health: 1
+      Damage: 1

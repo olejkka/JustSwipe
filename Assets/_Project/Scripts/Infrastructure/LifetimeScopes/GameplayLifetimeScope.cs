@@ -18,8 +18,8 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
     public class GameplayLifetimeScope : LifetimeScope
     {
         [SerializeField] private TilesGenerationConfig _tilesGenerationConfig;
-        [SerializeField] private CharactersPrefabsConfig _charactersPrefabsConfig;
-        [SerializeField] private CharacterStatsConfig _characterStatsConfig;
+        [SerializeField] private CharactersConfig _charactersConfig;
+        
         [SerializeField] private TileInstantiator _tileInstantiator;
 
         
@@ -56,8 +56,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         private void RegisterConfigs(IContainerBuilder builder)
         {
             builder.RegisterInstance(_tilesGenerationConfig);
-            builder.RegisterInstance(_characterStatsConfig);
-            builder.RegisterInstance(_charactersPrefabsConfig);
+            builder.RegisterInstance(_charactersConfig);
         }
 
         private void RegisterCreators(IContainerBuilder builder)

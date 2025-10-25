@@ -7,6 +7,7 @@ namespace _Project.Scripts.Characters
     {
         public Vector2Int Position { get; private set; }
         public Team Team { get; private set; }
+        
         public int Health { get; private set; }
         public int Damage { get; private set; }
         
@@ -14,12 +15,14 @@ namespace _Project.Scripts.Characters
         public event Action<int> OnHealthChanged;
         
         
-        public Character(Vector2Int position, Team team, int health, int damage)
+        public Character(Vector2Int position, Team team, CharacterStats stats)
         {
-            Team = team;
-            Health = health;
-            Damage = damage;
             Position = position;
+            Team = team;
+            
+            // Копируем статы из конфига в экземпляр персонажа
+            Health = stats.Health;
+            Damage = stats.Damage;
         }
 
         public void Move(Vector2Int vector)

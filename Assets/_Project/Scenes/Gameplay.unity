@@ -1265,9 +1265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 518e15b8fdd045f8add709809970ff2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCharacter: {fileID: 4596385366425020373, guid: 38afc8ef3c9afd6428a4c13ec7517ebb, type: 3}
-  _botCharacter: {fileID: 4596385366425020373, guid: 6310e5677013b1f4fb2da4d2cab7fdfb, type: 3}
   _tilemap: {fileID: 1130102325}
+  _characterViewPrefab: {fileID: 9172353915170555933, guid: c7e14d7d5730e7b45b1dfe794f03e5c4, type: 3}
 --- !u!4 &1924401468
 Transform:
   m_ObjectHideFlags: 0
@@ -1317,8 +1316,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _tilesGenerationConfig: {fileID: 11400000, guid: 78b017ed30d583747a66f61f5bdb0175, type: 2}
-  _charactersPrefabsConfig: {fileID: 11400000, guid: 5725c3ed7311ddd4e8c19a8c2b09e083, type: 2}
-  _characterStatsConfig: {fileID: 11400000, guid: 376b7224f828d854ca361b97ce017098, type: 2}
+  _charactersConfig: {fileID: 11400000, guid: 1956db181fccd544e9dd5bee55c7dee9, type: 2}
   _tileInstantiator: {fileID: 730333553}
 --- !u!4 &1988570165
 Transform:
