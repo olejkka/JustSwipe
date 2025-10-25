@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Characters.Storages;
+using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Tiles;
 using UnityEngine;
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using _Project.Scripts.Characters.Structs;
 using UnityEngine;
 
 namespace _Project.Scripts.Characters.Storages

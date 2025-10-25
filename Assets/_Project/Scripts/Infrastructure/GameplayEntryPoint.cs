@@ -1,5 +1,6 @@
 ﻿using System;
 using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Creators;
 using _Project.Scripts.Generators;
 using _Project.Scripts.Infrastructure.FSM;
@@ -46,8 +47,8 @@ namespace _Project.Scripts.Infrastructure
 
             _fsm = _stateMachineCreator.Create();
             _positionsesCreator.Create();
-            _characterCreator.Create(Team.Player);
-            _characterCreator.Create(Team.Bot);
+            _characterCreator.Create(CharacterType.Main);
+            _characterCreator.Create(CharacterType.Bot_1);
         }
         
         public void Tick()

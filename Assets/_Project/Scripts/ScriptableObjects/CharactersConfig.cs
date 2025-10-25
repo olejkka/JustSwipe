@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Structs;
 using UnityEngine;
 
 namespace _Project.Scripts.ScriptableObjects
@@ -17,14 +18,15 @@ namespace _Project.Scripts.ScriptableObjects
         [Serializable]
         public class CharacterEntry
         {
+            public CharacterType CharacterType;
             public Team Team;
             public Sprite Sprite;
-            public CharacterStats BaseStats;
+            public CharacterBaseStats CharacterBaseStats;
         }
 
-        public CharacterEntry GetEntryByTeam(Team team)
+        public CharacterEntry GetEntry(CharacterType type)
         {
-            return CharacterEntries.FirstOrDefault(e => e.Team == team);
+            return CharacterEntries.FirstOrDefault(e => e.CharacterType == type);
         }
     }
 }

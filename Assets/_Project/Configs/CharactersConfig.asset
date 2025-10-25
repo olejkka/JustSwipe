@@ -13,13 +13,21 @@ MonoBehaviour:
   m_Name: CharactersConfig
   m_EditorClassIdentifier: 
   CharacterEntries:
-  - Team: 1
-    Sprite: {fileID: 36719575, guid: adfa18486ab63ee489a13e74f26c7474, type: 3}
-    BaseStats:
+  - CharacterType: 1
+    Team: 1
+    Sprite: {fileID: 629487236, guid: b7e38f038aaa6f54e94dd17398b7cf3b, type: 3}
+    CharacterBaseStats:
+      Health: 2
+      Damage: 1
+  - CharacterType: 10
+    Team: 2
+    Sprite: {fileID: -1066070986, guid: 8fb2a9392442fd64c95590a662356cbe, type: 3}
+    CharacterBaseStats:
       Health: 1
       Damage: 1
-  - Team: 2
-    Sprite: {fileID: -1066070986, guid: 8fb2a9392442fd64c95590a662356cbe, type: 3}
-    BaseStats:
+  - CharacterType: 11
+    Team: 2
+    Sprite: {fileID: 2101225415, guid: 2892eb2b65cef754191a2f751abc8e04, type: 3}
+    CharacterBaseStats:
       Health: 1
       Damage: 1

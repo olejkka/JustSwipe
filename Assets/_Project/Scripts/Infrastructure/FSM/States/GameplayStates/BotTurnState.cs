@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Creators;
 using _Project.Scripts.FSM;
 using _Project.Scripts.InputHandlers;

@@ -1,4 +1,4 @@
-﻿namespace _Project.Scripts.Characters
+﻿namespace _Project.Scripts.Characters.Structs
 {
     public enum Team
     {

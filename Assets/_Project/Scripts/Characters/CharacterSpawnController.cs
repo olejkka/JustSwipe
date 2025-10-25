@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Creators;
 using _Project.Scripts.InputHandlers;
 using UnityEngine;
@@ -21,7 +22,7 @@ namespace _Project.Scripts.Characters
         public void HandleInput(Vector2Int vector, Team team)
         {
             if (Random.value < SpawnChance)
-                _creator.Create(Team.Bot);
+                _creator.Create(CharacterType.Bot_1);
         }
     }
 }

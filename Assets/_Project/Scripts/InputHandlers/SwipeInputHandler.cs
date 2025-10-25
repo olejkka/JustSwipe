@@ -1,5 +1,6 @@
 ﻿using System;
 using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Structs;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
