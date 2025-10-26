@@ -1,6 +1,6 @@
 ﻿using System;
-using UnityEngine;
-using _Project.Scripts.InputHandlers;
+using _Project.Scripts.Infrastructure;
+using _Project.Scripts.UI;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI
@@ -8,57 +8,26 @@ namespace _Project.Scripts.UI
     public class PauseButtonPresenter : IStartable, IDisposable
     {
         private readonly PauseButtonView _view;
-        private readonly SwipeInputHandler _swipeInputHandler;
-        
-        private bool _isPaused;
+        private readonly PauseService _pauseService;
 
         public PauseButtonPresenter(
             PauseButtonView view,
-            SwipeInputHandler swipeInputHandler
-            )
+            PauseService pauseService)
         {
             _view = view;
-            _swipeInputHandler = swipeInputHandler;
+            _pauseService = pauseService;
         }
 
         public void Start()
         {
             if (_view != null)
-                _view.Clicked += OnClicked;
+                _view.Clicked += _pauseService.TogglePause;
         }
 
         public void Dispose()
         {
             if (_view != null)
-                _view.Clicked -= OnClicked;
-        }
-
-        private void OnClicked()
-        {
-            if (_isPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
-
-        private void Pause()
-        {
-            _isPaused = true;
-            Time.timeScale = 0f;
-            
-            _swipeInputHandler.enabled = false;
-        }
-
-        private void Resume()
-        {
-            _isPaused = false;
-            Time.timeScale = 1f;
-            
-            _swipeInputHandler.enabled = true;
+                _view.Clicked -= _pauseService.TogglePause;
         }
     }
 }

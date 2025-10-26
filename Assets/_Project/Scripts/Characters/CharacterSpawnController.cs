@@ -22,7 +22,7 @@ namespace _Project.Scripts.Characters
         public void HandleInput(Vector2Int vector, Team team)
         {
             if (Random.value < SpawnChance)
-                _creator.Create(CharacterType.Bot_1);
+                _creator.CreateOnRandomPos(CharacterType.Bot_1);
         }
     }
 }

@@ -1,16 +1,26 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Project.Scripts.FSM.States.GameplayStates
+namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 {
     public class EndGameState : State
     {
-        public EndGameState(IReadOnlyList<ITransition> transitions) : base(transitions) { }
+        private readonly PauseService _pauseService;
+
+
+        public EndGameState(
+            IReadOnlyList<ITransition> transitions,
+            PauseService pauseService
+        ) : base(transitions)
+        {
+            _pauseService = pauseService;
+        }
 
         public override void Enter()
         {
             Debug.Log("[EndGameState] Entering EndGameState");
 
+            _pauseService.TogglePause();
         }
 
         public override void Exit()

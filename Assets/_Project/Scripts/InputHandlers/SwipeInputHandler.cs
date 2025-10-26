@@ -3,6 +3,7 @@ using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Structs;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
+using VContainer;
 
 namespace _Project.Scripts.InputHandlers
 {
@@ -12,11 +13,22 @@ namespace _Project.Scripts.InputHandlers
         private bool swiping;
         private float minDistance = 50f;
         
+        private PauseService _pauseService;
+        
         public event Action<Vector2Int, Team> OnPressed;
         
+        
+        [Inject]
+        public void Construct(PauseService pauseService)
+        {
+            _pauseService = pauseService;
+        }
 
         private void Update()
         {
+            if (_pauseService.IsPaused)
+                return;
+            
             foreach (var t in UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches)
             {
                 if (t.phase == UnityEngine.InputSystem.TouchPhase.Began)

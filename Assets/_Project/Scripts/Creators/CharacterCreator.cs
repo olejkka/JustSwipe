@@ -30,7 +30,7 @@ namespace _Project.Scripts.Creators
             _charactersConfig = charactersConfig;
         }
         
-        public void Create(CharacterType characterType)
+        public void CreateOnRandomPos(CharacterType characterType)
         {
             var positions = _tilesPositionsStorage
                 .GetAllPositions()

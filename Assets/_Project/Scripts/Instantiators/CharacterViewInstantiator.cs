@@ -30,7 +30,6 @@ namespace _Project.Scripts.Instantiators
 
             var instance = Instantiate(_characterViewPrefab, worldPos, Quaternion.identity);
             instance.Init(character, _tilemap, entry.Sprite);
-            
             _charactersViewsStorage.Register(character, instance);
         }
     }

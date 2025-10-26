@@ -40,8 +40,8 @@ namespace _Project.Scripts.Infrastructure
             _characterCreator.OnCharacterCreated += _deathHandler.Register;
 
             _positionsesCreator.Create();
-            _characterCreator.Create(CharacterType.Main);
-            _characterCreator.Create(CharacterType.Bot_1);
+            _characterCreator.CreateOnRandomPos(CharacterType.Main);
+            _characterCreator.CreateOnRandomPos(CharacterType.Bot_1);
         }
 
         public void Dispose()

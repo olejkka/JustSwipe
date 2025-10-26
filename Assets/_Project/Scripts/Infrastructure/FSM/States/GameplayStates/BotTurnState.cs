@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Creators;
 using _Project.Scripts.FSM;
@@ -12,6 +14,8 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         private readonly BotMoveCreator _botMoveCreator;
         private readonly CharactersMover _charactersMover;
         private readonly TurnService _turnService;
+        private readonly CharacterCreator _characterCreator;
+        private readonly CharactersStorage _charactersStorage;
         
         private bool _handled;
 
@@ -20,17 +24,24 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
             IReadOnlyList<ITransition> transitions,
             BotMoveCreator botMoveCreator,
             CharactersMover charactersMover,
-            TurnService turnService
+            TurnService turnService,
+            CharacterCreator characterCreator,
+            CharactersStorage charactersStorage
         ) : base(transitions)
         {
             _botMoveCreator = botMoveCreator;
             _charactersMover = charactersMover;
             _turnService = turnService;
+            _characterCreator = characterCreator;
+            _charactersStorage = charactersStorage;
         }
 
         public override void Enter()
         {
             // Debug.Log("[BotTurnState] Entering Bot Turn State");
+            
+            if(!_charactersStorage.GetCharactersByTeam(Team.Bot).Any())
+                _characterCreator.CreateOnRandomPos(CharacterType.Bot_1);
             
             _charactersMover.OnMove += OnBotCharactersMoved;
             
