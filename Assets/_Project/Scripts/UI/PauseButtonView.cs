@@ -13,14 +13,12 @@ namespace _Project.Scripts.UI
         
         private void OnEnable()
         {
-            if (_button != null)
-                _button.onClick.AddListener(OnButtonClicked);
+            _button.onClick.AddListener(OnButtonClicked);
         }
 
         private void OnDisable()
         {
-            if (_button != null)
-                _button.onClick.RemoveListener(OnButtonClicked);
+            _button.onClick.RemoveListener(OnButtonClicked);
         }
 
         private void OnButtonClicked()

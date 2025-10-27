@@ -1,5 +1,4 @@
-﻿// Assets/_Project/Scripts/Characters/CharacterView.cs
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace _Project.Scripts.Characters
@@ -17,8 +16,7 @@ namespace _Project.Scripts.Characters
             _data = data;
             _tilemap = tilemap;
             
-            if (_spriteRenderer != null && sprite != null)
-                _spriteRenderer.sprite = sprite;
+            _spriteRenderer.sprite = sprite;
             
             _data.OnPositionChanged += UpdatePosition;
             UpdatePosition(_data.Position);
@@ -33,8 +31,7 @@ namespace _Project.Scripts.Characters
         
         private void OnDestroy()
         {
-            if (_data != null)
-                _data.OnPositionChanged -= UpdatePosition;
+            _data.OnPositionChanged -= UpdatePosition;
         }
     }
 }

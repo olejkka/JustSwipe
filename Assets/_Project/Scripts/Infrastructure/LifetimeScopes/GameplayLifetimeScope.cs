@@ -9,6 +9,7 @@ using _Project.Scripts.Instantiators;
 using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Tiles;
 using _Project.Scripts.UI;
+using _Project.Scripts.Wallet;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -27,6 +28,10 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         {
             builder.RegisterEntryPoint<GameplayEntryPoint>();
             
+            builder.RegisterComponentInHierarchy<SwipeInputHandler>();
+            
+            builder.Register<Money>(Lifetime.Singleton);
+            
             builder.Register<CharacterSpawnController>(Lifetime.Singleton);
             builder.Register<CharactersMover>(Lifetime.Singleton);
             builder.Register<CharacterDeathHandler>(Lifetime.Singleton);
@@ -34,16 +39,28 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
             builder.Register<TurnService>(Lifetime.Singleton);
             
-            builder.RegisterEntryPoint<PauseButtonPresenter>();
-
-            builder.RegisterComponentInHierarchy<PauseButtonView>();
-            
-            builder.RegisterComponentInHierarchy<SwipeInputHandler>();
+            builder.Register<PauseService>(Lifetime.Singleton);
             
             RegisterConfigs(builder);
+            RegisterPresenters(builder);
+            RegisterViews(builder);
             RegisterCreators(builder);
             RegisterInstantiators(builder);
             RegisterStorages(builder);
+        }
+
+        private void RegisterViews(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInHierarchy<PauseButtonView>();
+            builder.RegisterComponentInHierarchy<MoneyView>();
+            builder.RegisterComponentInHierarchy<CharacterPurchaseCaseView>();
+        }
+
+        private void RegisterPresenters(IContainerBuilder builder)
+        {
+            builder.RegisterEntryPoint<PauseButtonPresenter>();
+            builder.RegisterEntryPoint<MoneyPresenter>();
+            builder.RegisterEntryPoint<CharacterPurchaseCasePresenter>();
         }
 
         private void RegisterConfigs(IContainerBuilder builder)

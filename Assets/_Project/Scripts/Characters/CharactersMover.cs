@@ -40,12 +40,8 @@ namespace _Project.Scripts.Characters
                 var target = attacker.Position + vector;
 
                 if (_claimedPositions.TryGetValue(target, out var defender))
-                {
                     if (defender.Team != attacker.Team)
                         defender.TakeDamage(attacker.Damage);
-                    
-                    continue;
-                }
 
                 attacker.Move(vector);
             }

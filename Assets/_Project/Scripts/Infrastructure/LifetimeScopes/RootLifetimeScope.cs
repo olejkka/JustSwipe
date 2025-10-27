@@ -7,7 +7,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<PauseService>(Lifetime.Singleton);
+            
         }
     }
 }

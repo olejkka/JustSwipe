@@ -4,6 +4,7 @@ using System.Linq;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Structs;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace _Project.Scripts.ScriptableObjects
 {
@@ -22,11 +23,18 @@ namespace _Project.Scripts.ScriptableObjects
             public Team Team;
             public Sprite Sprite;
             public CharacterBaseStats CharacterBaseStats;
+            public int Price;
         }
 
         public CharacterEntry GetEntry(CharacterType type)
         {
             return CharacterEntries.FirstOrDefault(e => e.CharacterType == type);
+        }
+        
+        public CharacterEntry GetRandomEntryByTeam(Team team)
+        {
+            var entries = CharacterEntries.Where(e => e.Team == team).ToList();
+            return entries.Count > 0 ? entries[Random.Range(0, entries.Count)] : null;
         }
     }
 }

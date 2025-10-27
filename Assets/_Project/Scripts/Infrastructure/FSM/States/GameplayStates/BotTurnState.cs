@@ -17,8 +17,6 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         private readonly CharacterCreator _characterCreator;
         private readonly CharactersStorage _charactersStorage;
         
-        private bool _handled;
-
 
         public BotTurnState(
             IReadOnlyList<ITransition> transitions,
@@ -40,12 +38,8 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         {
             // Debug.Log("[BotTurnState] Entering Bot Turn State");
             
-            if(!_charactersStorage.GetCharactersByTeam(Team.Bot).Any())
-                _characterCreator.CreateOnRandomPos(CharacterType.Bot_1);
-            
             _charactersMover.OnMove += OnBotCharactersMoved;
             
-            _handled = false;
             _turnService.BotMoveFinished = false;
             
             var direction = _botMoveCreator.GenerateRandomDirection();
@@ -58,16 +52,15 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
             
             _turnService.BotMoveFinished = false;
             
+            if(!_charactersStorage.GetCharactersByTeam(Team.Bot).Any())
+                _characterCreator.CreateOnRandomPos(CharacterType.Bot_2);
+            
             // Debug.Log("[BotTurnState] Exiting Bot Turn State");
         }
         public override void Update() { }
         
         private void OnBotCharactersMoved()
         {
-            if (_handled) 
-                return;
-            
-            _handled = true;
             _turnService.BotMoveFinished = true;
         }
     }

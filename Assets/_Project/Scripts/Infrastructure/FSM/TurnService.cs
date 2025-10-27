@@ -1,4 +1,4 @@
-﻿namespace _Project.Scripts.FSM
+﻿namespace _Project.Scripts.Infrastructure.FSM
 {
     public class TurnService
     {

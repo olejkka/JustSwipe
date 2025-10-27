@@ -5,6 +5,7 @@ using _Project.Scripts.Creators;
 using _Project.Scripts.Generators;
 using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.Instantiators;
+using _Project.Scripts.Wallet;
 using VContainer.Unity;
 
 namespace _Project.Scripts.Infrastructure
@@ -16,6 +17,7 @@ namespace _Project.Scripts.Infrastructure
         private readonly CharacterViewInstantiator _characterViewInstantiator;
         private readonly TileInstantiator _tileInstantiator;
         private readonly CharacterDeathHandler _deathHandler;
+        private readonly Money _money;
         
         
         public GameplayEntryPoint(
@@ -23,7 +25,8 @@ namespace _Project.Scripts.Infrastructure
             CharacterCreator characterCreator,
             TileInstantiator tileInstantiator,
             CharacterViewInstantiator characterViewInstantiator,
-            CharacterDeathHandler deathHandler
+            CharacterDeathHandler deathHandler,
+            Money money
         )
         {
             _positionsesCreator = positionsesCreator;
@@ -31,6 +34,7 @@ namespace _Project.Scripts.Infrastructure
             _tileInstantiator = tileInstantiator;
             _characterViewInstantiator = characterViewInstantiator;
             _deathHandler = deathHandler;
+            _money = money;
         }
 
         public void Start()
@@ -40,6 +44,7 @@ namespace _Project.Scripts.Infrastructure
             _characterCreator.OnCharacterCreated += _deathHandler.Register;
 
             _positionsesCreator.Create();
+            _money.SetAmount(10);
             _characterCreator.CreateOnRandomPos(CharacterType.Main);
             _characterCreator.CreateOnRandomPos(CharacterType.Bot_1);
         }

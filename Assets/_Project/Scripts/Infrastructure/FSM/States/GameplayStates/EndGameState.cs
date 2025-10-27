@@ -26,7 +26,7 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
         public override void Exit()
         {
             // Debug.Log("[EndGameState] Exiting EndGameState");
-
+            
         }
         public override void Update() { }
     }
