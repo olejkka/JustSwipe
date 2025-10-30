@@ -1,5 +1,4 @@
 ﻿using System;
-using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Creators;
 using _Project.Scripts.ScriptableObjects;
@@ -7,7 +6,7 @@ using _Project.Scripts.Wallet;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace _Project.Scripts.UI
+namespace _Project.Scripts.UI.CharacterPurchaseCase
 {
     public class CharacterPurchaseCasePresenter : IStartable, IDisposable
     {

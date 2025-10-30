@@ -9,6 +9,10 @@ using _Project.Scripts.Instantiators;
 using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Tiles;
 using _Project.Scripts.UI;
+using _Project.Scripts.UI.CharacterCaseUI;
+using _Project.Scripts.UI.CharacterPurchaseCase;
+using _Project.Scripts.UI.MoneyUI;
+using _Project.Scripts.UI.SettingsButton;
 using _Project.Scripts.Wallet;
 using UnityEngine;
 using VContainer;
@@ -22,10 +26,15 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         [SerializeField] private CharactersConfig _charactersConfig;
         
         [SerializeField] private TileInstantiator _tileInstantiator;
+        
+        [SerializeField] private CharacterCaseUIView[] _characterCaseViews;
 
         
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<CharacterCasesManager>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<CharacterCasesManager>();
+            
             builder.RegisterEntryPoint<GameplayEntryPoint>();
             
             builder.RegisterComponentInHierarchy<SwipeInputHandler>();
@@ -51,14 +60,15 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 
         private void RegisterViews(IContainerBuilder builder)
         {
-            builder.RegisterComponentInHierarchy<PauseButtonView>();
+            builder.RegisterComponentInHierarchy<SettingsButtonView>();
             builder.RegisterComponentInHierarchy<MoneyView>();
+            builder.RegisterInstance(_characterCaseViews);
             builder.RegisterComponentInHierarchy<CharacterPurchaseCaseView>();
         }
 
         private void RegisterPresenters(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<PauseButtonPresenter>();
+            builder.RegisterEntryPoint<SettingsButtonPresenter>();
             builder.RegisterEntryPoint<MoneyPresenter>();
             builder.RegisterEntryPoint<CharacterPurchaseCasePresenter>();
         }

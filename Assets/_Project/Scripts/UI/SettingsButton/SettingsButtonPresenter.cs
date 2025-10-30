@@ -1,18 +1,16 @@
 ﻿using System;
-using _Project.Scripts.Infrastructure;
-using _Project.Scripts.UI;
 using VContainer.Unity;
 
-namespace _Project.Scripts.UI
+namespace _Project.Scripts.UI.SettingsButton
 {
-    public class PauseButtonPresenter : IStartable, IDisposable
+    public class SettingsButtonPresenter : IStartable, IDisposable
     {
-        private readonly PauseButtonView _view;
+        private readonly SettingsButtonView _view;
         private readonly PauseService _pauseService;
 
         
-        public PauseButtonPresenter(
-            PauseButtonView view,
+        public SettingsButtonPresenter(
+            SettingsButtonView view,
             PauseService pauseService)
         {
             _view = view;

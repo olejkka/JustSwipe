@@ -5,6 +5,7 @@ using _Project.Scripts.Creators;
 using _Project.Scripts.Generators;
 using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.Instantiators;
+using _Project.Scripts.UI.CharacterCaseUI;
 using _Project.Scripts.Wallet;
 using VContainer.Unity;
 
@@ -18,6 +19,7 @@ namespace _Project.Scripts.Infrastructure
         private readonly TileInstantiator _tileInstantiator;
         private readonly CharacterDeathHandler _deathHandler;
         private readonly Money _money;
+        private readonly CharacterCasesManager _characterCasesManager;
         
         
         public GameplayEntryPoint(
@@ -26,7 +28,8 @@ namespace _Project.Scripts.Infrastructure
             TileInstantiator tileInstantiator,
             CharacterViewInstantiator characterViewInstantiator,
             CharacterDeathHandler deathHandler,
-            Money money
+            Money money,
+            CharacterCasesManager characterCasesManager
         )
         {
             _positionsesCreator = positionsesCreator;
@@ -35,6 +38,7 @@ namespace _Project.Scripts.Infrastructure
             _characterViewInstantiator = characterViewInstantiator;
             _deathHandler = deathHandler;
             _money = money;
+            _characterCasesManager = characterCasesManager;
         }
 
         public void Start()
@@ -42,6 +46,7 @@ namespace _Project.Scripts.Infrastructure
             _positionsesCreator.OnPositionsCreated += _tileInstantiator.Instantiate;
             _characterCreator.OnCharacterCreated += _characterViewInstantiator.Instantiate;
             _characterCreator.OnCharacterCreated += _deathHandler.Register;
+            _characterCreator.OnCharacterCreated += _characterCasesManager.OnCharacterCreated;
 
             _positionsesCreator.Create();
             _money.SetAmount(10);
@@ -54,6 +59,7 @@ namespace _Project.Scripts.Infrastructure
             _positionsesCreator.OnPositionsCreated -= _tileInstantiator.Instantiate;
             _characterCreator.OnCharacterCreated -= _characterViewInstantiator.Instantiate;
             _characterCreator.OnCharacterCreated -= _deathHandler.Register;
+            _characterCreator.OnCharacterCreated -= _characterCasesManager.OnCharacterCreated;
         }
     }
 }

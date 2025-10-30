@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.Scripts.UI
+namespace _Project.Scripts.UI.SettingsButton
 {
-    public class PauseButtonView : MonoBehaviour
+    public class SettingsButtonView : MonoBehaviour
     {
         [SerializeField] private Button _button;
 

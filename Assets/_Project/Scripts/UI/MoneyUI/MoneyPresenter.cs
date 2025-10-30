@@ -1,15 +1,14 @@
 ﻿using System;
-using _Project.Scripts.Wallet;
 using VContainer.Unity;
 
-namespace _Project.Scripts.UI
+namespace _Project.Scripts.UI.MoneyUI
 {
     public class MoneyPresenter : IStartable, IDisposable
     {
         private readonly MoneyView _view;
-        private readonly Money _money;
+        private readonly Wallet.Money _money;
 
-        public MoneyPresenter(MoneyView view, Money money)
+        public MoneyPresenter(MoneyView view, Wallet.Money money)
         {
             _view = view;
             _money = money;
