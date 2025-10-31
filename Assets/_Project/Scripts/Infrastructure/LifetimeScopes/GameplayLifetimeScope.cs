@@ -36,29 +36,25 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         {
             builder.Register<EventBus>(Lifetime.Singleton);
 
-            builder.Register<CharacterCasesManager>(Lifetime.Singleton);
-            builder.RegisterEntryPoint<CharacterCasesManager>();
-            
+            RegisterConfigs(builder);
+            RegisterInstantiators(builder);
+            RegisterCreators(builder);
+            RegisterViews(builder);
+            RegisterPresenters(builder);
+            RegisterStorages(builder);
+    
             builder.RegisterComponentInHierarchy<SwipeInputHandler>();
-            
+    
             builder.Register<Money>(Lifetime.Singleton);
-            
             builder.Register<CharacterSpawnController>(Lifetime.Singleton);
             builder.Register<CharactersMover>(Lifetime.Singleton);
-            builder.RegisterEntryPoint<CharacterDeathHandler>();
-            
+
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
             builder.Register<TurnService>(Lifetime.Singleton);
-            
             builder.Register<PauseService>(Lifetime.Singleton);
-            
-            RegisterConfigs(builder);
-            RegisterPresenters(builder);
-            RegisterViews(builder);
-            RegisterCreators(builder);
-            RegisterInstantiators(builder);
-            RegisterStorages(builder);
-            
+
+            builder.RegisterEntryPoint<CharacterDeathHandler>();
+            builder.RegisterEntryPoint<CharacterCasesManager>();
             builder.RegisterEntryPoint<GameplayEntryPoint>();
         }
 
@@ -107,8 +103,8 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         private void RegisterStorages(IContainerBuilder builder)
         {
             builder.Register<TilesPositionsStorage>(Lifetime.Singleton);
-            builder.Register<CharactersStorage>(Lifetime.Singleton);
-            builder.Register<CharactersViewsStorage>(Lifetime.Singleton);
+            builder.Register<CharactersStorage>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<CharactersViewsStorage>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         }
     }
 }

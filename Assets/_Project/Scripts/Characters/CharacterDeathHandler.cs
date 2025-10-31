@@ -9,20 +9,14 @@ namespace _Project.Scripts.Characters
     public class CharacterDeathHandler : IStartable, IDisposable
     {
         private readonly EventBus _eventBus;
-        private readonly CharactersStorage _charactersStorage;
-        private readonly CharactersViewsStorage _charactersViewsStorage;
         private readonly Dictionary<Character, Action<int>> _subs = new();
 
         
         public CharacterDeathHandler(
-            EventBus eventBus,
-            CharactersStorage charactersStorage, 
-            CharactersViewsStorage charactersViewsStorage
+            EventBus eventBus
             )
         {
             _eventBus = eventBus;
-            _charactersStorage = charactersStorage;
-            _charactersViewsStorage = charactersViewsStorage;
         }
         
         public void Start() => 
@@ -52,14 +46,6 @@ namespace _Project.Scripts.Characters
                     return;
                 
                 Unregister(character);
-                
-                _charactersStorage.Remove(character);
-
-                if (_charactersViewsStorage.TryGet(character, out var view) && view != null)
-                {
-                    _charactersViewsStorage.Unregister(character);
-                    UnityEngine.Object.Destroy(view.gameObject);
-                }
 
                 _eventBus.Publish(new CharacterDiedEvent(character));
             }
