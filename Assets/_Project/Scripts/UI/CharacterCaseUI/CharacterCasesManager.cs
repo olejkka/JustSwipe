@@ -2,6 +2,7 @@ using System;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
+using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.ScriptableObjects;
 using VContainer.Unity;
 
@@ -9,6 +10,7 @@ namespace _Project.Scripts.UI.CharacterCaseUI
 {
     public class CharacterCasesManager : IStartable, IDisposable
     {
+        private readonly EventBus _eventBus;
         private readonly CharacterCaseUIView[] _caseViews;
         private readonly CharacterCaseUIPresenter[] _casePresenters;
         private readonly CharactersStorage _charactersStorage;
@@ -16,11 +18,14 @@ namespace _Project.Scripts.UI.CharacterCaseUI
 
         private bool _initialized;
 
+        
         public CharacterCasesManager(
+            EventBus eventBus,
             CharacterCaseUIView[] caseViews,
             CharactersStorage charactersStorage,
             CharactersConfig charactersConfig)
         {
+            _eventBus = eventBus;
             _caseViews = caseViews;
             _charactersStorage = charactersStorage;
             _charactersConfig = charactersConfig;
@@ -30,11 +35,17 @@ namespace _Project.Scripts.UI.CharacterCaseUI
 
         public void Start()
         {
+            _eventBus.Subscribe<CharacterCreatedEvent>(OnCharacterCreated);
+            _eventBus.Subscribe<CharacterDiedEvent>(OnCharacterDied);
+            
             EnsureInitialized();
         }
 
         public void Dispose()
         {
+            _eventBus.Unsubscribe<CharacterCreatedEvent>(OnCharacterCreated);
+            _eventBus.Unsubscribe<CharacterDiedEvent>(OnCharacterDied);
+            
             for (int i = 0; i < _casePresenters.Length; i++)
             {
                 _casePresenters[i]?.Dispose();
@@ -42,17 +53,27 @@ namespace _Project.Scripts.UI.CharacterCaseUI
             }
         }
 
-        public void OnCharacterCreated(Character character)
+        private void OnCharacterCreated(CharacterCreatedEvent e)
         {
-            EnsureInitialized();
-
-            if (character.Team != Team.Player) return;
+            if (e.Character.Team != Team.Player) return;
 
             for (int i = 0; i < _casePresenters.Length; i++)
             {
                 if (!_casePresenters[i].IsAssigned())
                 {
-                    _casePresenters[i].AssignCharacter(character);
+                    _casePresenters[i].AssignCharacter(e.Character);
+                    return;
+                }
+            }
+        }
+        
+        private void OnCharacterDied(CharacterDiedEvent e)
+        {
+            for (int i = 0; i < _casePresenters.Length; i++)
+            {
+                if (_casePresenters[i].IsAssignedTo(e.Character))
+                {
+                    _casePresenters[i].UnassignCharacter();
                     return;
                 }
             }
@@ -60,7 +81,8 @@ namespace _Project.Scripts.UI.CharacterCaseUI
 
         private void EnsureInitialized()
         {
-            if (_initialized) return;
+            if (_initialized) 
+                return;
 
             for (int i = 0; i < _caseViews.Length; i++)
             {
@@ -72,3 +94,4 @@ namespace _Project.Scripts.UI.CharacterCaseUI
         }
     }
 }
+

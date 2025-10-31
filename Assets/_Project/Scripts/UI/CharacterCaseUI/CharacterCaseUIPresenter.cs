@@ -27,7 +27,6 @@ namespace _Project.Scripts.UI.CharacterCaseUI
         
         public void Start()
         {
-            // Изначально кейс неактивен
             _view.SetActive(false);
         }
         
@@ -81,12 +80,6 @@ namespace _Project.Scripts.UI.CharacterCaseUI
         
         private void OnHealthChanged(int newHealth)
         {
-            if (newHealth <= 0)
-            {
-                UnassignCharacter();
-                return;
-            }
-
             UpdateStats();
         }
         
@@ -101,6 +94,11 @@ namespace _Project.Scripts.UI.CharacterCaseUI
         public bool IsAssigned()
         {
             return _assignedCharacter != null;
+        }
+
+        public bool IsAssignedTo(Character character)
+        {
+            return _assignedCharacter != null && ReferenceEquals(_assignedCharacter, character);
         }
     }
 }

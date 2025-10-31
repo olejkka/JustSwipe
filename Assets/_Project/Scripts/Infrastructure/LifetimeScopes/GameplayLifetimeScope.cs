@@ -3,6 +3,7 @@ using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
 using _Project.Scripts.FSM;
 using _Project.Scripts.Generators;
+using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.InputHandlers;
 using _Project.Scripts.Instantiators;
@@ -26,16 +27,17 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         [SerializeField] private CharactersConfig _charactersConfig;
         
         [SerializeField] private TileInstantiator _tileInstantiator;
+        [SerializeField] private CharacterViewInstantiator _characterViewInstantiator;
         
         [SerializeField] private CharacterCaseUIView[] _characterCaseViews;
 
         
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<EventBus>(Lifetime.Singleton);
+
             builder.Register<CharacterCasesManager>(Lifetime.Singleton);
             builder.RegisterEntryPoint<CharacterCasesManager>();
-            
-            builder.RegisterEntryPoint<GameplayEntryPoint>();
             
             builder.RegisterComponentInHierarchy<SwipeInputHandler>();
             
@@ -43,7 +45,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             
             builder.Register<CharacterSpawnController>(Lifetime.Singleton);
             builder.Register<CharactersMover>(Lifetime.Singleton);
-            builder.Register<CharacterDeathHandler>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<CharacterDeathHandler>();
             
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
             builder.Register<TurnService>(Lifetime.Singleton);
@@ -56,6 +58,8 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             RegisterCreators(builder);
             RegisterInstantiators(builder);
             RegisterStorages(builder);
+            
+            builder.RegisterEntryPoint<GameplayEntryPoint>();
         }
 
         private void RegisterViews(IContainerBuilder builder)
@@ -96,8 +100,8 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 
         private void RegisterInstantiators(IContainerBuilder builder)
         {
-            builder.RegisterInstance(_tileInstantiator);
-            builder.RegisterComponentInHierarchy<CharacterViewInstantiator>();
+            builder.RegisterComponent(_tileInstantiator);
+            builder.RegisterComponent(_characterViewInstantiator);
         }
 
         private void RegisterStorages(IContainerBuilder builder)

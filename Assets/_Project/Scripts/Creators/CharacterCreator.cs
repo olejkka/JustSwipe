@@ -3,6 +3,7 @@ using System.Linq;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
+using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Tiles;
 using UnityEngine;
@@ -12,19 +13,20 @@ namespace _Project.Scripts.Creators
 {
     public class CharacterCreator
     {
-        public event Action<Character> OnCharacterCreated;
-        
+        private readonly EventBus _eventBus;
         private readonly CharactersStorage _charactersStorage;
         private readonly TilesPositionsStorage _tilesPositionsStorage;
         private readonly CharactersConfig _charactersConfig;
 
 
         public CharacterCreator(
+            EventBus eventBus,
             CharactersStorage charactersStorage,
             TilesPositionsStorage tilesPositionsStorage,
             CharactersConfig charactersConfig
         )
         {
+            _eventBus = eventBus;
             _charactersStorage = charactersStorage;
             _tilesPositionsStorage = tilesPositionsStorage;
             _charactersConfig = charactersConfig;
@@ -56,7 +58,7 @@ namespace _Project.Scripts.Creators
             var character = new Character(spawnPos, characterType, entry.Team, entry.CharacterBaseStats.Copy());
 
             _charactersStorage.Add(character);
-            OnCharacterCreated?.Invoke(character);
+            _eventBus.Publish(new CharacterCreatedEvent(character));
         }
     }
 }

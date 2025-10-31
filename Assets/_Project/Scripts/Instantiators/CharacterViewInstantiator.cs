@@ -1,20 +1,37 @@
-﻿using _Project.Scripts.Characters;
+﻿using System;
+using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
+using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using VContainer;
+using VContainer.Unity;
 
 namespace _Project.Scripts.Instantiators
 {
-    public class CharacterViewInstantiator : MonoBehaviour
+    public class CharacterViewInstantiator : MonoBehaviour, IDisposable
     {
         [SerializeField] private Tilemap _tilemap;
         [SerializeField] private CharacterView _characterViewPrefab;
 
         [Inject] private CharactersViewsStorage _charactersViewsStorage;
         [Inject] private CharactersConfig _charactersConfig;
+        [Inject] private EventBus _eventBus;
+
         
+        [Inject]
+        public void Initialize()
+        {
+            _eventBus.Subscribe<CharacterCreatedEvent>(OnCharacterCreated);
+        }
+
+        public void Dispose() => 
+            _eventBus.Unsubscribe<CharacterCreatedEvent>(OnCharacterCreated);
+
+        private void OnCharacterCreated(CharacterCreatedEvent e) => 
+            Instantiate(e.Character);
+
         public void Instantiate(Character character)
         {
             var cell = new Vector3Int(character.Position.x, character.Position.y, 0);

@@ -2111,7 +2111,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1988570165}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1988570163
 GameObject:
@@ -2149,6 +2149,7 @@ MonoBehaviour:
   _tilesGenerationConfig: {fileID: 11400000, guid: 78b017ed30d583747a66f61f5bdb0175, type: 2}
   _charactersConfig: {fileID: 11400000, guid: 1956db181fccd544e9dd5bee55c7dee9, type: 2}
   _tileInstantiator: {fileID: 730333553}
+  _characterViewInstantiator: {fileID: 1924401467}
   _characterCaseViews:
   - {fileID: 113371395}
   - {fileID: 2142388929}
@@ -2166,8 +2167,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1924401468}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2142388929 stripped
@@ -2186,6 +2186,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1988570165}
+  - {fileID: 1924401468}
   - {fileID: 1834651682}
   - {fileID: 47509532}
   - {fileID: 1342486848}

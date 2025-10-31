@@ -1,14 +1,35 @@
-﻿using _Project.Scripts.ScriptableObjects;
+﻿using System;
+using _Project.Scripts.Infrastructure.Events;
+using _Project.Scripts.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using VContainer;
+using Random = UnityEngine.Random;
 
 namespace _Project.Scripts.Instantiators
 {
-    public class TileInstantiator : MonoBehaviour
+    public class TileInstantiator : MonoBehaviour, IDisposable
     {
         [SerializeField] private Tilemap _tilemap;
         [SerializeField] private TilesPrefabsConfig _prefabsConfig;
 
+        [Inject] private EventBus _eventBus;
+
+        [Inject]
+        public void Initialize()
+        {
+            _eventBus.Subscribe<PositionCreatedEvent>(OnPositionCreated);
+        }
+
+        public void Dispose()
+        {
+            _eventBus?.Unsubscribe<PositionCreatedEvent>(OnPositionCreated);
+        }
+
+        private void OnPositionCreated(PositionCreatedEvent e)
+        {
+            Instantiate(e.Position);
+        }
 
         public void Instantiate(Vector2Int position)
         {
@@ -28,6 +49,11 @@ namespace _Project.Scripts.Instantiators
             }
 
             return _prefabsConfig.GetTile(TileType.Ground);
+        }
+
+        private void OnDestroy()
+        {
+            Dispose();
         }
     }
 }

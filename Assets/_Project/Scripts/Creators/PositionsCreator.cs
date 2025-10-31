@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Tiles;
 using UnityEngine;
@@ -8,17 +9,18 @@ namespace _Project.Scripts.Generators
 {
     public class PositionsCreator
     {
-        public event Action<Vector2Int> OnPositionsCreated;
-        
+        private readonly EventBus _eventBus;
         private readonly TilesGenerationConfig _config;
         private readonly TilesPositionsStorage _storage;
 
 
         public PositionsCreator(
+            EventBus eventBus,
             TilesGenerationConfig config,
             TilesPositionsStorage storage
         )
         {
+            _eventBus = eventBus;
             _config = config;
             _storage = storage;
         }
@@ -38,7 +40,7 @@ namespace _Project.Scripts.Generators
                     continue;
 
                 _storage.AddPosition(position);
-                OnPositionsCreated?.Invoke(position);
+                _eventBus.Publish(new PositionCreatedEvent(position));
             }
         }
     }
