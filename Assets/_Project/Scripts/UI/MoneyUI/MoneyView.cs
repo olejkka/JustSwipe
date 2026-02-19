@@ -16,7 +16,7 @@ namespace _Project.Scripts.UI.MoneyUI
         public void UpdateAmountFormatted(int amount)
         {
             if (_text != null)
-                _text.text = $"${amount:N0}";
+                _text.text = $"{amount:N0}";
         }
     }
 }

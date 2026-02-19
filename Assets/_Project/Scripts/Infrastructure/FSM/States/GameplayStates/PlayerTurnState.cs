@@ -2,8 +2,7 @@
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Creators;
-using _Project.Scripts.FSM;
-using _Project.Scripts.InputHandlers;
+using _Project.Scripts.Infrastructure.Events;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
@@ -12,66 +11,40 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
     {
         private const float SpawnChance = 0.25f;
         
-        private readonly SwipeInputHandler _swipeInputHandler;
+        private readonly EventBus _eventBus;
         private readonly CharactersMover _charactersMover;
-        private readonly CharacterSpawnController _characterSpawnController;
-        private readonly TurnService _turnService;
         private readonly CharacterCreator _creator;
-        
-        private bool _handled;
-        
-        
-        
+
         public PlayerTurnState(
             IReadOnlyList<ITransition> transitions, 
-            SwipeInputHandler swipeInputHandler,
+            EventBus eventBus,
             CharactersMover charactersMover,
-            CharacterSpawnController characterSpawnController,
-            TurnService turnService,
             CharacterCreator characterCreator
-            ) : base(transitions)
+        ) : base(transitions)
         {
-            _swipeInputHandler = swipeInputHandler;
+            _eventBus = eventBus;
             _charactersMover = charactersMover;
-            _characterSpawnController = characterSpawnController;
-            _turnService = turnService;
             _creator = characterCreator;
         }
 
-        public override void Enter()
+        protected override void OnEnter()
         {
-            // Debug.Log("[PlayerTurnState] Entering Player Turn State");
-            
-            _swipeInputHandler.OnPressed += _charactersMover.Move;
-            _swipeInputHandler.OnPressed += _characterSpawnController.HandleInput;
-            _charactersMover.OnMove += OnPlayerCharactersMoved;
-            
-            _handled = false;
-            _turnService.PlayerMoveFinished = false;
+            _eventBus.Subscribe<SwipeEvent>(OnSwipe);
         }
 
         public override void Exit()
         {
-            _swipeInputHandler.OnPressed -= _charactersMover.Move;
-            _swipeInputHandler.OnPressed -= _characterSpawnController.HandleInput;
-            _charactersMover.OnMove -= OnPlayerCharactersMoved;
-            
-            _turnService.PlayerMoveFinished = false;
+            _eventBus.Unsubscribe<SwipeEvent>(OnSwipe);
             
             if (Random.value < SpawnChance)
                 _creator.CreateOnRandomPos(CharacterType.Bot_1);
-            
-            // Debug.Log("[PlayerTurnState] Exiting Player Turn State");
         }
+
         public override void Update() { }
-        
-        private void OnPlayerCharactersMoved()
+
+        private void OnSwipe(SwipeEvent e)
         {
-            if (_handled)
-                return;
-            
-            _handled = true;
-            _turnService.PlayerMoveFinished = true;
+            _charactersMover.Move(e.Direction, Team.Player);
         }
     }
 }

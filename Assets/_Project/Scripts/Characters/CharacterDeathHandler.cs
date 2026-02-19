@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Project.Scripts.Characters.Storages;
+using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.Events;
 using VContainer.Unity;
 
@@ -12,9 +13,7 @@ namespace _Project.Scripts.Characters
         private readonly Dictionary<Character, Action<int>> _subs = new();
 
         
-        public CharacterDeathHandler(
-            EventBus eventBus
-            )
+        public CharacterDeathHandler(EventBus eventBus)
         {
             _eventBus = eventBus;
         }

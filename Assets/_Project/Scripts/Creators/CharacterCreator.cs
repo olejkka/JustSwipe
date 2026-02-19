@@ -3,6 +3,7 @@ using System.Linq;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
+using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Tiles;

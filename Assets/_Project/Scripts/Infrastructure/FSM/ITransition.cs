@@ -1,8 +1,13 @@
 ﻿using System;
 
-public interface ITransition
+namespace _Project.Scripts.Infrastructure.FSM
 {
-    public Type NextState { get;}
+    public interface ITransition
+    {
+        public Type NextState { get;}
 
-    public bool CanTransit();
+        public bool CanTransit();
+        
+        public void Reset();
+    }
 }

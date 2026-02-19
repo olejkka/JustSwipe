@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
+using _Project.Scripts.Infrastructure;
+using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.Tiles;
 using UnityEngine;
 
@@ -12,15 +14,17 @@ namespace _Project.Scripts.Characters
     {
         private readonly CharactersStorage _charactersStorage;
         private readonly TilesPositionsStorage _tilesPositionsStorage;
+        private readonly EventBus _eventBus;
         private readonly Dictionary<Vector2Int, Character> _claimedPositions = new();
-        
-        public event Action OnMove;
 
-        
-        public CharactersMover(CharactersStorage charactersStorage, TilesPositionsStorage tilesPositionsStorage)
+        public CharactersMover(
+            CharactersStorage charactersStorage, 
+            TilesPositionsStorage tilesPositionsStorage,
+            EventBus eventBus)
         {
             _charactersStorage = charactersStorage;
             _tilesPositionsStorage = tilesPositionsStorage;
+            _eventBus = eventBus;
         }
 
         public void Move(Vector2Int vector, Team team)
@@ -53,8 +57,13 @@ namespace _Project.Scripts.Characters
             }
 
             KillCharactersOutOfBounds();
-            
-            OnMove?.Invoke();
+
+            if (team == Team.Player)
+                _eventBus.Publish(new PlayerMoveCompletedEvent());
+            else
+                _eventBus.Publish(new BotMoveCompletedEvent());
+
+            _eventBus.Publish(new CharactersMovedEvent());
         }
         
         private void KillCharactersOutOfBounds()

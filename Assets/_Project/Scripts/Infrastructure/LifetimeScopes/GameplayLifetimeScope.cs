@@ -46,11 +46,9 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.RegisterComponentInHierarchy<SwipeInputHandler>();
     
             builder.Register<Money>(Lifetime.Singleton);
-            builder.Register<CharacterSpawnController>(Lifetime.Singleton);
             builder.Register<CharactersMover>(Lifetime.Singleton);
 
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
-            builder.Register<TurnService>(Lifetime.Singleton);
             builder.Register<PauseService>(Lifetime.Singleton);
 
             builder.RegisterEntryPoint<CharacterDeathHandler>();

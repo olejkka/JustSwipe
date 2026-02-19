@@ -7,7 +7,6 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
     {
         private readonly PauseService _pauseService;
 
-
         public EndGameState(
             IReadOnlyList<ITransition> transitions,
             PauseService pauseService
@@ -16,18 +15,14 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
             _pauseService = pauseService;
         }
 
-        public override void Enter()
+        protected override void OnEnter()
         {
             Debug.Log("[EndGameState] Entering EndGameState");
-
             _pauseService.TogglePause();
         }
 
-        public override void Exit()
-        {
-            // Debug.Log("[EndGameState] Exiting EndGameState");
-            
-        }
+        public override void Exit() { }
+
         public override void Update() { }
     }
 }

@@ -4,8 +4,6 @@ using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Creators;
-using _Project.Scripts.FSM;
-using _Project.Scripts.InputHandlers;
 
 namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
 {
@@ -13,55 +11,35 @@ namespace _Project.Scripts.Infrastructure.FSM.States.GameplayStates
     {
         private readonly BotMoveCreator _botMoveCreator;
         private readonly CharactersMover _charactersMover;
-        private readonly TurnService _turnService;
         private readonly CharacterCreator _characterCreator;
         private readonly CharactersStorage _charactersStorage;
-        
 
         public BotTurnState(
             IReadOnlyList<ITransition> transitions,
             BotMoveCreator botMoveCreator,
             CharactersMover charactersMover,
-            TurnService turnService,
             CharacterCreator characterCreator,
             CharactersStorage charactersStorage
         ) : base(transitions)
         {
             _botMoveCreator = botMoveCreator;
             _charactersMover = charactersMover;
-            _turnService = turnService;
             _characterCreator = characterCreator;
             _charactersStorage = charactersStorage;
         }
 
-        public override void Enter()
+        protected override void OnEnter()
         {
-            // Debug.Log("[BotTurnState] Entering Bot Turn State");
-            
-            _charactersMover.OnMove += OnBotCharactersMoved;
-            
-            _turnService.BotMoveFinished = false;
-            
             var direction = _botMoveCreator.GenerateRandomDirection();
             _charactersMover.Move(direction, Team.Bot);
         }
 
         public override void Exit()
         {
-            _charactersMover.OnMove -= OnBotCharactersMoved;
-            
-            _turnService.BotMoveFinished = false;
-            
-            if(!_charactersStorage.GetCharactersByTeam(Team.Bot).Any())
+            if (!_charactersStorage.GetCharactersByTeam(Team.Bot).Any())
                 _characterCreator.CreateOnRandomPos(CharacterType.Bot_2);
-            
-            // Debug.Log("[BotTurnState] Exiting Bot Turn State");
         }
+
         public override void Update() { }
-        
-        private void OnBotCharactersMoved()
-        {
-            _turnService.BotMoveFinished = true;
-        }
     }
 }

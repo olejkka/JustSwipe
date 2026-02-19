@@ -1,19 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
-namespace _Project.Scripts
+namespace _Project.Scripts.Infrastructure.FSM.States
 {
     public abstract class State : IState
     {
-        private IReadOnlyList<ITransition> _transitions;
+        private readonly IReadOnlyList<ITransition> _transitions;
 
-        public State(IReadOnlyList<ITransition> transitions)
+        protected State(IReadOnlyList<ITransition> transitions)
         {
             _transitions = transitions;
         }
 
-        public abstract void Enter();
+        public void Enter()
+        {
+            foreach (var transition in _transitions)
+                transition.Reset();
+
+            OnEnter();
+        }
+
+        protected abstract void OnEnter();
 
         public abstract void Exit();
 

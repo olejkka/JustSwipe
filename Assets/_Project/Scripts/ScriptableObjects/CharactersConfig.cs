@@ -24,6 +24,7 @@ namespace _Project.Scripts.ScriptableObjects
             public Sprite Sprite;
             public CharacterBaseStats CharacterBaseStats;
             public int Price;
+            public int Reward;
         }
 
         public CharacterEntry GetEntry(CharacterType type)

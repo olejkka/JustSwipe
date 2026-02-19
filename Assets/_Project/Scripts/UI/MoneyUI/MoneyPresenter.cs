@@ -1,34 +1,34 @@
 ﻿using System;
+using _Project.Scripts.Infrastructure;
+using _Project.Scripts.Infrastructure.Events;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI.MoneyUI
 {
     public class MoneyPresenter : IStartable, IDisposable
     {
+        private readonly EventBus _eventBus;
         private readonly MoneyView _view;
-        private readonly Wallet.Money _money;
 
-        public MoneyPresenter(MoneyView view, Wallet.Money money)
+        public MoneyPresenter(EventBus eventBus, MoneyView view)
         {
+            _eventBus = eventBus;
             _view = view;
-            _money = money;
         }
 
         public void Start()
         {
-            _money.OnAmountChanged += OnMoneyChanged;
-            
-            OnMoneyChanged(_money.Amount);
+            _eventBus.Subscribe<MoneyChangedEvent>(OnMoneyChanged);
         }
 
         public void Dispose()
         {
-            _money.OnAmountChanged -= OnMoneyChanged;
+            _eventBus.Unsubscribe<MoneyChangedEvent>(OnMoneyChanged);
         }
 
-        private void OnMoneyChanged(int newAmount)
+        private void OnMoneyChanged(MoneyChangedEvent e)
         {
-            _view.UpdateAmountFormatted(newAmount);
+            _view.UpdateAmountFormatted(e.Value);
         }
     }
 }

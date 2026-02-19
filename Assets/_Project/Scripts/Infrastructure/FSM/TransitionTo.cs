@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.Infrastructure.FSM;
 
 public class TransitionTo<T> : ITransition where T : IState
 {
@@ -15,4 +16,6 @@ public class TransitionTo<T> : ITransition where T : IState
     {
         return _condition();
     }
+    
+    public void Reset() { }
 }

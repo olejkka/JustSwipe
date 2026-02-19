@@ -1,6 +1,8 @@
 ﻿using System;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Structs;
+using _Project.Scripts.Infrastructure;
+using _Project.Scripts.Infrastructure.Events;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using VContainer;
@@ -9,20 +11,13 @@ namespace _Project.Scripts.InputHandlers
 {
     public class SwipeInputHandler : MonoBehaviour
     {
+        [Inject] private EventBus _eventBus;
+        [Inject] private PauseService _pauseService;
+        
         private Vector2 start;
         private bool swiping;
         private float minDistance = 50f;
         
-        private PauseService _pauseService;
-        
-        public event Action<Vector2Int, Team> OnPressed;
-        
-        
-        [Inject]
-        public void Construct(PauseService pauseService)
-        {
-            _pauseService = pauseService;
-        }
 
         private void Update()
         {
@@ -54,7 +49,7 @@ namespace _Project.Scripts.InputHandlers
                         else
                             dir = Vector2Int.left;
                         
-                        OnPressed?.Invoke(dir, Team.Player);
+                        _eventBus.Publish(new SwipeEvent(dir));
                     }
                     
                     swiping = false;

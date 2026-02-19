@@ -6,39 +6,32 @@ using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Creators;
 using _Project.Scripts.FSM;
+using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.Infrastructure.FSM.States.GameplayStates;
-using _Project.Scripts.InputHandlers;
 
 namespace _Project.Scripts.Infrastructure.FSM
 {
     public class GameplayStatesProvider : IGameplayStatesProvider
     {
-        private readonly SwipeInputHandler _swipeInputHandler;
+        private readonly EventBus _eventBus;
         private readonly BotMoveCreator _botMoveCreator;
         private readonly CharactersMover _charactersMover;
-        private readonly CharacterSpawnController _characterSpawnController;
-        private readonly TurnService _turnService;
         private readonly CharacterCreator _creator;
         private readonly CharactersStorage _charactersStorage;
         private readonly PauseService _pauseService;
-        
-        
+
         public GameplayStatesProvider(
-            SwipeInputHandler swipeInputHandler,
+            EventBus eventBus,
             BotMoveCreator botMoveCreator,
             CharactersMover charactersMover,
-            CharacterSpawnController characterSpawnController,
-            TurnService turnService,
             CharacterCreator creator,
             CharactersStorage charactersStorage,
             PauseService pauseService
             )
         {
-            _swipeInputHandler = swipeInputHandler;
+            _eventBus = eventBus;
             _botMoveCreator = botMoveCreator;
             _charactersMover = charactersMover;
-            _characterSpawnController = characterSpawnController;
-            _turnService = turnService;
             _creator = creator;
             _charactersStorage = charactersStorage;
             _pauseService = pauseService;
@@ -49,25 +42,22 @@ namespace _Project.Scripts.Infrastructure.FSM
             var playerTurnState = new PlayerTurnState(
                 new ITransition[]
                 {
-                    new TransitionTo<BotTurnState>(() => _turnService.PlayerMoveFinished),
+                    new EventTransition<PlayerMoveCompletedEvent, BotTurnState>(_eventBus),
                     new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any()),
                 },
-                _swipeInputHandler,
+                _eventBus,
                 _charactersMover,
-                _characterSpawnController,
-                _turnService,
                 _creator
             );
             
             var botTurnState = new BotTurnState(
                 new ITransition[]
                 {
-                    new TransitionTo<PlayerTurnState>(() => _turnService.BotMoveFinished),
+                    new EventTransition<BotMoveCompletedEvent, PlayerTurnState>(_eventBus),
                     new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any())
                 },
                 _botMoveCreator,
                 _charactersMover,
-                _turnService,
                 _creator,
                 _charactersStorage
             );

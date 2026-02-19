@@ -1,24 +1,33 @@
 ﻿using System;
+using _Project.Scripts.Infrastructure;
+using _Project.Scripts.Infrastructure.Events;
 
 namespace _Project.Scripts.Wallet
 {
     public class Money
     {
-        public int Amount { get; private set; }
+        private readonly EventBus _eventBus;
         
-        public event Action<int> OnAmountChanged;
+        public int Amount { get; private set; }
 
+
+        public Money(EventBus eventBus)
+        {
+            _eventBus = eventBus;
+        }
         
         public void SetAmount(int amount)
         {
             Amount = amount;
-            OnAmountChanged?.Invoke(Amount);
+
+            _eventBus.Publish(new MoneyChangedEvent(Amount));
         }
         
         public void ChangeAmount(int amount)
         {
             Amount += amount;
-            OnAmountChanged?.Invoke(Amount);
+            
+            _eventBus.Publish(new MoneyChangedEvent(Amount));
         }
     }
 }
