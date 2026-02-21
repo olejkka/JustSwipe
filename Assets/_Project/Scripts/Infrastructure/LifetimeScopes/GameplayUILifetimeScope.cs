@@ -26,6 +26,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.RegisterEntryPoint<CharacterPurchaseCasePresenter>();
             
             builder.RegisterEntryPoint<CharacterCasesManager>();
+            builder.Register<CharacterPurchaseService>(Lifetime.Singleton);
         }
     }
 }

@@ -12,21 +12,19 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
     {
         private readonly CharacterPurchaseCaseView _view;
         private readonly CharactersConfig _charactersConfig;
-        private readonly CharacterCreator _characterCreator;
-        private readonly Money _money;
+        private readonly CharacterPurchaseService _characterPurchaseService;
 
         private CharactersConfig.CharacterEntry _currentEntry;
 
         public CharacterPurchaseCasePresenter(
             CharacterPurchaseCaseView view,
             CharactersConfig charactersConfig,
-            CharacterCreator characterCreator,
-            Money money)
+            CharacterPurchaseService characterPurchaseService
+            )
         {
             _view = view;
             _charactersConfig = charactersConfig;
-            _characterCreator = characterCreator;
-            _money = money;
+            _characterPurchaseService = characterPurchaseService;
         }
 
         public void Start()
@@ -61,17 +59,8 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
 
         private void OnPurchaseClicked()
         {
-            if (_currentEntry == null || _money == null)
+            if (!_characterPurchaseService.TryPurchase(_currentEntry.CharacterType, _currentEntry.Price))
                 return;
-
-            if (_money.Amount < _currentEntry.Price)
-            {
-                Debug.Log("Not enough money!");
-                return;
-            }
-
-            _money.ChangeAmount(-_currentEntry.Price);
-            _characterCreator.CreateOnRandomPos(_currentEntry.CharacterType);
 
             RefreshCase();
         }
