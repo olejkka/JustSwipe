@@ -23,24 +23,14 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 {
     public class GameplayLifetimeScope : LifetimeScope
     {
-        [SerializeField] private TilesGenerationConfig _tilesGenerationConfig;
-        [SerializeField] private CharactersConfig _charactersConfig;
-        
         [SerializeField] private TileInstantiator _tileInstantiator;
         [SerializeField] private CharacterViewInstantiator _characterViewInstantiator;
-        
-        [SerializeField] private CharacterCaseUIView[] _characterCaseViews;
 
         
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<EventBus>(Lifetime.Singleton);
-
-            RegisterConfigs(builder);
             RegisterInstantiators(builder);
             RegisterCreators(builder);
-            RegisterViews(builder);
-            RegisterPresenters(builder);
             RegisterStorages(builder);
     
             builder.RegisterComponentInHierarchy<SwipeInputHandler>();
@@ -49,32 +39,9 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<CharactersMover>(Lifetime.Singleton);
 
             builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
-            builder.Register<PauseService>(Lifetime.Singleton);
 
             builder.RegisterEntryPoint<CharacterDeathHandler>();
-            builder.RegisterEntryPoint<CharacterCasesManager>();
             builder.RegisterEntryPoint<GameplayEntryPoint>();
-        }
-
-        private void RegisterViews(IContainerBuilder builder)
-        {
-            builder.RegisterComponentInHierarchy<SettingsButtonView>();
-            builder.RegisterComponentInHierarchy<MoneyView>();
-            builder.RegisterInstance(_characterCaseViews);
-            builder.RegisterComponentInHierarchy<CharacterPurchaseCaseView>();
-        }
-
-        private void RegisterPresenters(IContainerBuilder builder)
-        {
-            builder.RegisterEntryPoint<SettingsButtonPresenter>();
-            builder.RegisterEntryPoint<MoneyPresenter>();
-            builder.RegisterEntryPoint<CharacterPurchaseCasePresenter>();
-        }
-
-        private void RegisterConfigs(IContainerBuilder builder)
-        {
-            builder.RegisterInstance(_tilesGenerationConfig);
-            builder.RegisterInstance(_charactersConfig);
         }
 
         private void RegisterCreators(IContainerBuilder builder)
@@ -85,7 +52,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             {
                 var creator = container.Resolve<GameplayStateMachineCreator>();
                 return creator.Create();
-            }, Lifetime.Singleton).As<ITickable>();
+            }, Lifetime.Singleton).AsSelf().As<ITickable>();
             
             builder.Register<PositionsCreator>(Lifetime.Singleton);
             builder.Register<CharacterCreator>(Lifetime.Singleton);

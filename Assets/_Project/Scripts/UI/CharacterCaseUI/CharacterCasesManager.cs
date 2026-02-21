@@ -19,7 +19,6 @@ namespace _Project.Scripts.UI.CharacterCaseUI
 
         private bool _initialized;
 
-        
         public CharacterCasesManager(
             EventBus eventBus,
             CharacterCaseUIView[] caseViews,
@@ -38,15 +37,16 @@ namespace _Project.Scripts.UI.CharacterCaseUI
         {
             _eventBus.Subscribe<CharacterCreatedEvent>(OnCharacterCreated);
             _eventBus.Subscribe<CharacterDiedEvent>(OnCharacterDied);
-            
+
             EnsureInitialized();
+            SyncExistingCharacters();
         }
 
         public void Dispose()
         {
             _eventBus.Unsubscribe<CharacterCreatedEvent>(OnCharacterCreated);
             _eventBus.Unsubscribe<CharacterDiedEvent>(OnCharacterDied);
-            
+
             for (int i = 0; i < _casePresenters.Length; i++)
             {
                 _casePresenters[i]?.Dispose();
@@ -67,7 +67,7 @@ namespace _Project.Scripts.UI.CharacterCaseUI
                 }
             }
         }
-        
+
         private void OnCharacterDied(CharacterDiedEvent e)
         {
             for (int i = 0; i < _casePresenters.Length; i++)
@@ -80,9 +80,24 @@ namespace _Project.Scripts.UI.CharacterCaseUI
             }
         }
 
+        private void SyncExistingCharacters()
+        {
+            foreach (var character in _charactersStorage.GetCharactersByTeam(Team.Player))
+            {
+                for (int i = 0; i < _casePresenters.Length; i++)
+                {
+                    if (!_casePresenters[i].IsAssigned())
+                    {
+                        _casePresenters[i].AssignCharacter(character);
+                        break;
+                    }
+                }
+            }
+        }
+
         private void EnsureInitialized()
         {
-            if (_initialized) 
+            if (_initialized)
                 return;
 
             for (int i = 0; i < _caseViews.Length; i++)
@@ -95,7 +110,3 @@ namespace _Project.Scripts.UI.CharacterCaseUI
         }
     }
 }
-
-
-
-
