@@ -5,8 +5,8 @@ using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Creators;
-using _Project.Scripts.FSM;
 using _Project.Scripts.Infrastructure.Events;
+using _Project.Scripts.Infrastructure.FSM.States;
 using _Project.Scripts.Infrastructure.FSM.States.GameplayStates;
 
 namespace _Project.Scripts.Infrastructure.FSM

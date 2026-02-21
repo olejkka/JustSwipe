@@ -1,7 +1,6 @@
 ﻿using System;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Creators;
-using _Project.Scripts.Generators;
 using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.Infrastructure.FSM.States.GameplayStates;

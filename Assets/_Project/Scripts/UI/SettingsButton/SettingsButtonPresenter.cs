@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.Infrastructure;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI.SettingsButton

@@ -1,12 +1,15 @@
 ﻿using System;
 
-public interface IState
+namespace _Project.Scripts.Infrastructure.FSM.States
 {
-    public void Enter();
+    public interface IState
+    {
+        public void Enter();
 
-    public void Exit();
+        public void Exit();
 
-    public void Update();
+        public void Update();
 
-    public bool TryGetNextState(out Type type);
+        public bool TryGetNextState(out Type type);
+    }
 }

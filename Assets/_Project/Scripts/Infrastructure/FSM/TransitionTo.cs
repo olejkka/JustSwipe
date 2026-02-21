@@ -1,21 +1,27 @@
 ﻿using System;
 using _Project.Scripts.Infrastructure.FSM;
+using _Project.Scripts.Infrastructure.FSM.States;
 
-public class TransitionTo<T> : ITransition where T : IState
+namespace _Project.Scripts.Infrastructure.FSM
 {
-    private Func<bool> _condition;
-
-    public Type NextState => typeof(T);
-
-    public TransitionTo(Func<bool> condition)
+    public class TransitionTo<T> : ITransition where T : IState
     {
-        _condition = condition;
-    }
+        private Func<bool> _condition;
 
-    public bool CanTransit()
-    {
-        return _condition();
+        public Type NextState => typeof(T);
+
+        public TransitionTo(Func<bool> condition)
+        {
+            _condition = condition;
+        }
+
+        public bool CanTransit()
+        {
+            return _condition();
+        }
+
+        public void Reset()
+        {
+        }
     }
-    
-    public void Reset() { }
 }

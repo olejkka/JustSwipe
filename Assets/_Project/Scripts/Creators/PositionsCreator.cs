@@ -1,12 +1,11 @@
-﻿using System;
-using _Project.Scripts.Infrastructure;
+﻿using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Tiles;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace _Project.Scripts.Generators
+namespace _Project.Scripts.Creators
 {
     public class PositionsCreator
     {

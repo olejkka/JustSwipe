@@ -1,41 +1,44 @@
 ﻿using System;
 using UnityEngine;
 
-public class PauseService
+namespace _Project.Scripts.Infrastructure
 {
-    private bool _isPaused;
-    
-    public bool IsPaused => _isPaused;
-    
-    public event Action OnPaused;
-    public event Action OnResumed;
-    
-
-    public void TogglePause()
+    public class PauseService
     {
-        if (_isPaused)
-            Resume();
-        else
-            Pause();
-    }
+        private bool _isPaused;
 
-    private void Pause()
-    {
-        if (_isPaused) 
-            return;
-        
-        _isPaused = true;
-        Time.timeScale = 0f;
-        OnPaused?.Invoke();
-    }
+        public bool IsPaused => _isPaused;
 
-    private void Resume()
-    {
-        if (!_isPaused) 
-            return;
-        
-        _isPaused = false;
-        Time.timeScale = 1f;
-        OnResumed?.Invoke();
+        public event Action OnPaused;
+        public event Action OnResumed;
+
+
+        public void TogglePause()
+        {
+            if (_isPaused)
+                Resume();
+            else
+                Pause();
+        }
+
+        private void Pause()
+        {
+            if (_isPaused)
+                return;
+
+            _isPaused = true;
+            Time.timeScale = 0f;
+            OnPaused?.Invoke();
+        }
+
+        private void Resume()
+        {
+            if (!_isPaused)
+                return;
+
+            _isPaused = false;
+            Time.timeScale = 1f;
+            OnResumed?.Invoke();
+        }
     }
 }

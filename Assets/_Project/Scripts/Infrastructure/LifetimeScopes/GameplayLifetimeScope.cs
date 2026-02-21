@@ -1,8 +1,6 @@
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
-using _Project.Scripts.FSM;
-using _Project.Scripts.Generators;
 using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.InputHandlers;

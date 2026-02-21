@@ -1,5 +1,6 @@
 ﻿using System;
 using _Project.Scripts.Infrastructure.Events;
+using _Project.Scripts.Infrastructure.FSM.States;
 
 namespace _Project.Scripts.Infrastructure.FSM
 {
