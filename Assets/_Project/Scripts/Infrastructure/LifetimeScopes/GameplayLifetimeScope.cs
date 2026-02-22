@@ -55,6 +55,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<Money>(Lifetime.Singleton);
             builder.Register<CharactersMover>(Lifetime.Singleton);
             builder.Register<GameplayStatesProvider>(Lifetime.Singleton);
+            builder.Register<PauseService>(Lifetime.Singleton);
             
             builder.RegisterEntryPoint<CharacterDeathHandler>();
             builder.RegisterEntryPoint<KillRewardHandler>();

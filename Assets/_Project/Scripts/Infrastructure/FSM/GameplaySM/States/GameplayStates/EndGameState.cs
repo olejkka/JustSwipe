@@ -1,24 +1,25 @@
 ﻿using System.Collections.Generic;
+using _Project.Scripts.Infrastructure.Events;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
 {
     public class EndGameState : State
     {
-        private readonly PauseService _pauseService;
+        private readonly EventBus _eventBus;
 
+        
         public EndGameState(
             IReadOnlyList<ITransition> transitions,
-            PauseService pauseService
+            EventBus eventBus
         ) : base(transitions)
         {
-            _pauseService = pauseService;
+            _eventBus = eventBus;
         }
 
         protected override void OnEnter()
         {
-            Debug.Log("[EndGameState] Entering EndGameState");
-            _pauseService.TogglePause();
+            _eventBus.Publish(new ReturnToMenuEvent());
         }
 
         public override void Exit() { }

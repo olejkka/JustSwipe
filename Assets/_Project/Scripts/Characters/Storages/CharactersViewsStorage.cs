@@ -20,9 +20,19 @@ namespace _Project.Scripts.Characters.Storages
         public void Start() =>
             _eventBus.Subscribe<CharacterDiedEvent>(OnCharacterDied);
         
-        public void Dispose() =>
+        public void Dispose()
+        {
             _eventBus.Unsubscribe<CharacterDiedEvent>(OnCharacterDied);
-        
+
+            foreach (var kv in _map)
+            {
+                if (kv.Value != null)
+                    UnityEngine.Object.Destroy(kv.Value.gameObject);
+            }
+
+            _map.Clear();
+        }
+
         public void Register(Character character, CharacterView view) => _map[character] = view;
 
         public bool TryGet(Character character, out CharacterView view) =>

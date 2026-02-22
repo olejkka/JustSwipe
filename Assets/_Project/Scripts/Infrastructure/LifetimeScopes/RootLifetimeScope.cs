@@ -15,7 +15,6 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             _gameplayConfigs.RegisterAll(builder);
 
             builder.Register<EventBus>(Lifetime.Singleton);
-            builder.Register<PauseService>(Lifetime.Singleton);
             builder.Register<SceneLoader>(Lifetime.Singleton);
 
             builder.Register<ProjectStatesProvider>(Lifetime.Singleton);

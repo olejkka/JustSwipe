@@ -23,9 +23,12 @@ namespace _Project.Scripts.Characters.Storages
         public void Start() =>
             _eventBus.Subscribe<CharacterDiedEvent>(OnCharacterDied);
         
-        public void Dispose() =>
+        public void Dispose()
+        {
             _eventBus.Unsubscribe<CharacterDiedEvent>(OnCharacterDied);
-        
+            _characters.Clear();
+        }
+
         public void Add(Character character) => _characters.Add(character);
         public bool Remove(Character character) => _characters.Remove(character);
         

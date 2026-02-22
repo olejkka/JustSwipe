@@ -66,7 +66,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                 new ITransition[]
                 {
                 },
-                _pauseService
+                _eventBus
             );
             
             return new IState[] 
