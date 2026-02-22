@@ -4,7 +4,7 @@ using VContainer.Unity;
 
 namespace _Project.Scripts.Infrastructure.LifetimeScopes
 {
-    public class MenuUILifetimeScope : LifetimeScope
+    public class MenuLifetimeScope : LifetimeScope
     {
         protected override void Configure(IContainerBuilder builder)
         {

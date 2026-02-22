@@ -10,25 +10,21 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 {
     public class GameplayUILifetimeScope : LifetimeScope
     {
-        [SerializeField] private CharacterCaseUIView[] _characterCaseViews;
-        
-        
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterInstance(_characterCaseViews);
-            
-            builder.RegisterEntryPoint<CharacterCasesManager>();
+            builder.RegisterEntryPoint<CharacterCasesContainerPresenter>();
             builder.Register<CharacterPurchaseService>(Lifetime.Singleton);
             
             //Views
+            builder.RegisterComponentInHierarchy<CharacterCasesContainerView>();
             builder.RegisterComponentInHierarchy<SettingsButtonView>();
             builder.RegisterComponentInHierarchy<MoneyView>();
             builder.RegisterComponentInHierarchy<CharacterPurchaseCaseView>();
             
             //Presenters
+            builder.RegisterEntryPoint<CharacterPurchaseCasePresenter>();
             builder.RegisterEntryPoint<SettingsButtonPresenter>();
             builder.RegisterEntryPoint<MoneyPresenter>();
-            builder.RegisterEntryPoint<CharacterPurchaseCasePresenter>();
         }
     }
 }

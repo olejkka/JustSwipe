@@ -8,9 +8,10 @@ using VContainer.Unity;
 
 namespace _Project.Scripts.UI.CharacterCase
 {
-    public class CharacterCasesManager : IStartable, IDisposable
+    public class CharacterCasesContainerPresenter : IStartable, IDisposable
     {
         private readonly EventBus _eventBus;
+        private readonly CharacterCasesContainerView _characterCasesContainerView;
         private readonly CharacterCaseUIView[] _caseViews;
         private readonly CharacterCaseUIPresenter[] _casePresenters;
         private readonly CharactersStorage _charactersStorage;
@@ -18,14 +19,15 @@ namespace _Project.Scripts.UI.CharacterCase
 
         private bool _initialized;
 
-        public CharacterCasesManager(
+        public CharacterCasesContainerPresenter(
             EventBus eventBus,
-            CharacterCaseUIView[] caseViews,
+            CharacterCasesContainerView containerView,
+            InitialGameplayConfig config,
             CharactersStorage charactersStorage,
             CharactersConfig charactersConfig)
         {
             _eventBus = eventBus;
-            _caseViews = caseViews;
+            _caseViews = containerView.CreateCases(config.MaxPlayerCharactersCount);
             _charactersStorage = charactersStorage;
             _charactersConfig = charactersConfig;
 
