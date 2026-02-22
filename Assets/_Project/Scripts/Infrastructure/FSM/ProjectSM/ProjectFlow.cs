@@ -1,0 +1,44 @@
+﻿using System;
+using _Project.Scripts.Infrastructure.Events;
+using _Project.Scripts.Infrastructure.FSM.ProjectSM.States;
+using VContainer.Unity;
+
+namespace _Project.Scripts.Infrastructure.FSM.ProjectSM
+{
+    public class ProjectFlow : IStartable, IDisposable
+    {
+        private readonly ProjectStateMachine _stateMachine;
+        private readonly EventBus _eventBus;
+
+        public ProjectFlow(ProjectStateMachine stateMachine, EventBus eventBus)
+        {
+            _stateMachine = stateMachine;
+            _eventBus = eventBus;
+        }
+
+        public async void Start()
+        {
+            _eventBus.Subscribe<PlayClickedEvent>(OnPlayClicked);
+            _eventBus.Subscribe<ReturnToMenuEvent>(OnReturnToMenu);
+
+            await _stateMachine.EnterState<InitializationState>();
+            await _stateMachine.EnterState<MenuState>();
+        }
+
+        public void Dispose()
+        {
+            _eventBus.Unsubscribe<PlayClickedEvent>(OnPlayClicked);
+            _eventBus.Unsubscribe<ReturnToMenuEvent>(OnReturnToMenu);
+        }
+
+        private async void OnPlayClicked(PlayClickedEvent e)
+        {
+            await _stateMachine.EnterState<GameplayState>();
+        }
+
+        private async void OnReturnToMenu(ReturnToMenuEvent e)
+        {
+            await _stateMachine.EnterState<MenuState>();
+        }
+    }
+}
