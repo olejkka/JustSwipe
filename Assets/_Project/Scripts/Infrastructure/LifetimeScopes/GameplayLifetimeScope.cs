@@ -21,53 +21,44 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 {
     public class GameplayLifetimeScope : LifetimeScope
     {
+        [SerializeField] private SwipeInputHandler _swipeInputHandler;
         [SerializeField] private TileInstantiator _tileInstantiator;
         [SerializeField] private CharacterViewInstantiator _characterViewInstantiator;
 
-        
+
         protected override void Configure(IContainerBuilder builder)
         {
-            RegisterInstantiators(builder);
-            RegisterCreators(builder);
-            RegisterStorages(builder);
-    
-            builder.RegisterComponentInHierarchy<SwipeInputHandler>();
-    
-            builder.Register<Money>(Lifetime.Singleton);
-            builder.Register<CharactersMover>(Lifetime.Singleton);
-
-            builder.Register<IGameplayStatesProvider, GameplayStatesProvider>(Lifetime.Singleton);
-
-            builder.RegisterEntryPoint<CharacterDeathHandler>();
-            builder.RegisterEntryPoint<GameplayEntryPoint>();
-        }
-
-        private void RegisterCreators(IContainerBuilder builder)
-        {
-            builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
+            //Input
+            builder.RegisterComponent(_swipeInputHandler);
             
+            //Instantiators
+            builder.RegisterComponent(_tileInstantiator);
+            builder.RegisterComponent(_characterViewInstantiator);
+
+            //Creators
+            builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
             builder.Register<GameplayStateMachine>(container =>
             {
                 var creator = container.Resolve<GameplayStateMachineCreator>();
                 return creator.Create();
             }, Lifetime.Singleton).AsSelf().As<ITickable>();
-            
             builder.Register<PositionsCreator>(Lifetime.Singleton);
             builder.Register<CharacterCreator>(Lifetime.Singleton);
             builder.Register<BotMoveCreator>(Lifetime.Singleton);
-        }
 
-        private void RegisterInstantiators(IContainerBuilder builder)
-        {
-            builder.RegisterComponent(_tileInstantiator);
-            builder.RegisterComponent(_characterViewInstantiator);
-        }
-
-        private void RegisterStorages(IContainerBuilder builder)
-        {
+            //Storages
             builder.Register<TilesPositionsStorage>(Lifetime.Singleton);
             builder.Register<CharactersStorage>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<CharactersViewsStorage>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            
+            
+            builder.Register<Money>(Lifetime.Singleton);
+            builder.Register<CharactersMover>(Lifetime.Singleton);
+            builder.Register<GameplayStatesProvider>(Lifetime.Singleton);
+            
+            builder.RegisterEntryPoint<CharacterDeathHandler>();
+            builder.RegisterEntryPoint<KillRewardHandler>();
+            builder.RegisterEntryPoint<GameplayEntryPoint>();
         }
     }
 }

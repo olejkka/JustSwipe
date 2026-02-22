@@ -5,6 +5,11 @@ namespace _Project.Scripts.Infrastructure.Events
     public class CharacterDiedEvent
     {
         public Character Character { get; }
-        public CharacterDiedEvent(Character character) => Character = character;
+        public Character Killer { get; }
+        public CharacterDiedEvent(Character character, Character killer = null)
+        {
+            Character = character;
+            Killer = killer;
+        }
     }
 }

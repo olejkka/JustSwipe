@@ -726,6 +726,7 @@ MonoBehaviour:
     TypeName: _Project.Scripts.Infrastructure.LifetimeScopes.RootLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
+  _swipeInputHandler: {fileID: 47509531}
   _tileInstantiator: {fileID: 730333553}
   _characterViewInstantiator: {fileID: 1924401467}
 --- !u!4 &1988570165

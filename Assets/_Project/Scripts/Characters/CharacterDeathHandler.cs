@@ -46,7 +46,7 @@ namespace _Project.Scripts.Characters
                 
                 Unregister(character);
 
-                _eventBus.Publish(new CharacterDiedEvent(character));
+                _eventBus.Publish(new CharacterDiedEvent(character, character.LastDamageSource));
             }
 
             _subs[character] = OnHealth;

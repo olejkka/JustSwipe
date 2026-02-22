@@ -7,9 +7,9 @@ namespace _Project.Scripts.Creators
 {
     public class GameplayStateMachineCreator
     {
-        private readonly IGameplayStatesProvider _provider;
+        private readonly GameplayStatesProvider _provider;
 
-        public GameplayStateMachineCreator(IGameplayStatesProvider provider)
+        public GameplayStateMachineCreator(GameplayStatesProvider provider)
         {
             _provider = provider;
         }

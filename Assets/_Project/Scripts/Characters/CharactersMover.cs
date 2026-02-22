@@ -17,6 +17,7 @@ namespace _Project.Scripts.Characters
         private readonly EventBus _eventBus;
         private readonly Dictionary<Vector2Int, Character> _claimedPositions = new();
 
+        
         public CharactersMover(
             CharactersStorage charactersStorage, 
             TilesPositionsStorage tilesPositionsStorage,
@@ -47,7 +48,7 @@ namespace _Project.Scripts.Characters
                 {
                     if (defender.Team != attacker.Team)
                     {
-                        defender.TakeDamage(attacker.Damage);
+                        defender.TakeDamage(attacker.Damage, attacker);
                     }
                     
                     continue;

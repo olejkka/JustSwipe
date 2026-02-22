@@ -20,6 +20,15 @@ MonoBehaviour:
       Health: 8
       Damage: 3
     Price: 1
+    Reward: 0
+  - CharacterType: 2
+    Team: 1
+    Sprite: {fileID: -1681957862, guid: 7aa1d6fee10f52e40a6ba710e05b5e25, type: 3}
+    CharacterBaseStats:
+      Health: 10
+      Damage: 1
+    Price: 5
+    Reward: 0
   - CharacterType: 10
     Team: 2
     Sprite: {fileID: -1066070986, guid: 8fb2a9392442fd64c95590a662356cbe, type: 3}
@@ -27,6 +36,7 @@ MonoBehaviour:
       Health: 1
       Damage: 1
     Price: 0
+    Reward: 1
   - CharacterType: 11
     Team: 2
     Sprite: {fileID: 2101225415, guid: 2892eb2b65cef754191a2f751abc8e04, type: 3}
@@ -34,10 +44,4 @@ MonoBehaviour:
       Health: 1
       Damage: 1
     Price: 0
-  - CharacterType: 2
-    Team: 1
-    Sprite: {fileID: -1681957862, guid: 7aa1d6fee10f52e40a6ba710e05b5e25, type: 3}
-    CharacterBaseStats:
-      Health: 10
-      Damage: 1
-    Price: 1
+    Reward: 2
