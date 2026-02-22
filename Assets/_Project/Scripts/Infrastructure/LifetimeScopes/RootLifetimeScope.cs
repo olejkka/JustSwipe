@@ -7,16 +7,14 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 {
     public class RootLifetimeScope : LifetimeScope
     {
-        [SerializeField] private TilesGenerationConfig _tilesGenerationConfig;
-        [SerializeField] private CharactersConfig _charactersConfig;
+        [SerializeField] private GameplayConfigs _gameplayConfigs;
 
         protected override void Configure(IContainerBuilder builder)
         {
+            _gameplayConfigs.RegisterAll(builder);
+            
             builder.Register<EventBus>(Lifetime.Singleton);
             builder.Register<PauseService>(Lifetime.Singleton);
-
-            builder.RegisterInstance(_tilesGenerationConfig);
-            builder.RegisterInstance(_charactersConfig);
         }
     }
 }

@@ -290,9 +290,7 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  _sceneLoader: {fileID: 1392735088}
-  _tilesGenerationConfig: {fileID: 11400000, guid: 78b017ed30d583747a66f61f5bdb0175, type: 2}
-  _charactersConfig: {fileID: 11400000, guid: 1956db181fccd544e9dd5bee55c7dee9, type: 2}
+  _gameplayConfigs: {fileID: 11400000, guid: 88d9522f5aee4c941a8643986a6fba98, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
