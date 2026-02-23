@@ -14,7 +14,7 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
         private readonly CharactersConfig _charactersConfig;
         private readonly CharacterPurchaseService _characterPurchaseService;
 
-        private CharactersConfig.CharacterEntry _currentEntry;
+        private CharacterEntry _currentEntry;
 
         public CharacterPurchaseCasePresenter(
             CharacterPurchaseCaseView view,
@@ -50,7 +50,7 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
             }
 
             _view.SetData(
-                _currentEntry.Sprite,
+                _currentEntry.Icon,
                 _currentEntry.Price,
                 _currentEntry.CharacterBaseStats.Health,
                 _currentEntry.CharacterBaseStats.Damage

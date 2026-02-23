@@ -40,14 +40,19 @@ namespace _Project.Scripts.Instantiators
 
             var entry = _charactersConfig.GetEntry(character.CharacterType);
             
-            if (entry == null || entry.Sprite == null)
+            if (
+                entry == null || 
+                entry.Animations == null || 
+                entry.Animations.Idle == null || 
+                entry.Animations.Idle.Length == 0
+                )
             {
-                Debug.LogError($"No sprite found for team {character.Team}");
+                Debug.LogError($"No animations found for {character.CharacterType}");
                 return;
             }
 
             var instance = Instantiate(_characterViewPrefab, worldPos, Quaternion.identity);
-            instance.Init(character, _tilemap, entry.Sprite);
+            instance.Init(character, _tilemap, entry.Animations);
             _charactersViewsStorage.Register(character, instance);
         }
     }

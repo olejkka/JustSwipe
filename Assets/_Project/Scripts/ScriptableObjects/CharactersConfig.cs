@@ -16,16 +16,6 @@ namespace _Project.Scripts.ScriptableObjects
     {
         public List<CharacterEntry> CharacterEntries = new();
 
-        [Serializable]
-        public class CharacterEntry
-        {
-            public CharacterType CharacterType;
-            public Team Team;
-            public Sprite Sprite;
-            public CharacterBaseStats CharacterBaseStats;
-            public int Price;
-            public int Reward;
-        }
 
         public CharacterEntry GetEntry(CharacterType type)
         {
@@ -37,5 +27,27 @@ namespace _Project.Scripts.ScriptableObjects
             var entries = CharacterEntries.Where(e => e.Team == team).ToList();
             return entries.Count > 0 ? entries[Random.Range(0, entries.Count)] : null;
         }
+    }
+    
+    [Serializable]
+    public class CharacterEntry
+    {
+        public CharacterType CharacterType;
+        public Team Team;
+        public Sprite Icon;
+        public CharacterAnimationData Animations;
+        public CharacterBaseStats CharacterBaseStats;
+        public int Price;
+        public int Reward;
+    }
+    
+    [Serializable]
+    public class CharacterAnimationData
+    {
+        public Sprite[] Idle;
+        public Sprite[] Move;
+        public Sprite[] Attack;
+        public Sprite[] Death;
+        public float FrameRate = 8f;
     }
 }

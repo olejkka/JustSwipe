@@ -59,7 +59,7 @@ namespace _Project.Scripts.UI.CharacterCase
             var entry = _charactersConfig.GetEntry(character.CharacterType);
             if (entry != null)
             {
-                _view.SetIcon(entry.Sprite);
+                _view.SetIcon(entry.Icon);
             }
             
             UpdateStats();

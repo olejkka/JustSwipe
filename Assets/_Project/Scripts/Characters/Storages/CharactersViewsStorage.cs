@@ -45,7 +45,7 @@ namespace _Project.Scripts.Characters.Storages
             if (TryGet(e.Character, out var view) && view != null)
             {
                 Unregister(e.Character);
-                UnityEngine.Object.Destroy(view.gameObject);
+                view.PlayDeath(() => UnityEngine.Object.Destroy(view.gameObject));
             }
         }
     }
