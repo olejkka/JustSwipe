@@ -44,10 +44,11 @@ namespace _Project.Scripts.ScriptableObjects
     [Serializable]
     public class CharacterAnimationData
     {
+        public float FrameRate = 8f;
         public Sprite[] Idle;
         public Sprite[] Move;
-        public Sprite[] Attack;
+        public Sprite[] DealDamage;
+        public Sprite[] TakeDamage;
         public Sprite[] Death;
-        public float FrameRate = 8f;
     }
 }

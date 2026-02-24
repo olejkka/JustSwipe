@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Utilities;
 using UnityEngine;
@@ -13,7 +14,11 @@ namespace _Project.Scripts.Characters
         private Character _data;
         private Tilemap _tilemap;
         private CharacterAnimationData _animations;
-        private bool _isDead;
+
+        private bool _isOneShotPlaying;
+        private CharacterAnimationType _currentAnimationType = CharacterAnimationType.None;
+        private int _currentPriority;
+        
 
         public void Init(Character data, Tilemap tilemap, CharacterAnimationData animations)
         {
@@ -30,42 +35,76 @@ namespace _Project.Scripts.Characters
 
         private void PlayIdle()
         {
-            if (_isDead) 
-                return;
-            
+            _isOneShotPlaying = false;
+            _currentAnimationType = CharacterAnimationType.Idle;
+            _currentPriority = (int)CharacterAnimationType.Idle;
+
             _animator.Play(_animations.Idle, _animations.FrameRate, loop: true);
         }
 
-        private void PlayOneShot(Sprite[] frames)
+        private void TryPlayOneShot(
+            CharacterAnimationType animationType,
+            Sprite[] frames,
+            Action onComplete = null,
+            bool returnToIdleOnFinish = true)
         {
-            if (_isDead || frames == null || frames.Length == 0) return;
+            var newPriority = (int)animationType;
+            
+            if (!_isOneShotPlaying)
+            {
+                PlayOneShotInternal(animationType, frames, onComplete, returnToIdleOnFinish);
+                return;
+            }
+            
+            if (newPriority > _currentPriority)
+            {
+                PlayOneShotInternal(animationType, frames, onComplete, returnToIdleOnFinish);
+            }
+        }
+
+        private void PlayOneShotInternal(
+            CharacterAnimationType animationType,
+            Sprite[] frames,
+            Action onComplete,
+            bool returnToIdleOnFinish)
+        {
+            _isOneShotPlaying = true;
+            _currentAnimationType = animationType;
+            _currentPriority = (int)animationType;
+
             _animator.Play(frames, _animations.FrameRate, loop: false);
-            _animator.OnAnimationFinished += PlayIdle;
+            
+            _animator.OnAnimationFinished += () =>
+            {
+                _isOneShotPlaying = false;
+                _currentAnimationType = CharacterAnimationType.None;
+                _currentPriority = (int)CharacterAnimationType.None;
+
+                onComplete?.Invoke();
+
+                if (returnToIdleOnFinish)
+                    PlayIdle();
+            };
         }
 
         public void PlayDeath(Action onComplete)
         {
-            _isDead = true;
-
-            if (_animations.Death is { Length: > 0 })
-            {
-                _animator.Play(_animations.Death, _animations.FrameRate, loop: false);
-                _animator.OnAnimationFinished += () => onComplete?.Invoke();
-            }
-            else
-            {
-                onComplete?.Invoke();
-            }
+            TryPlayOneShot(
+                CharacterAnimationType.Death,
+                _animations.Death,
+                onComplete,
+                returnToIdleOnFinish: false);
         }
 
         private void OnMoved(Vector2Int pos)
         {
             UpdatePosition(pos);
-            PlayOneShot(_animations.Move);
+            TryPlayOneShot(CharacterAnimationType.Move, _animations.Move);
         }
 
         private void OnHealthChanged(int health)
         {
+            TryPlayOneShot(CharacterAnimationType.TakingDamage, _animations.TakeDamage);
         }
 
         private void UpdatePosition(Vector2Int pos)
@@ -76,7 +115,6 @@ namespace _Project.Scripts.Characters
 
         private void OnDestroy()
         {
-            if (_data == null) return;
             _data.OnPositionChanged -= OnMoved;
             _data.OnHealthChanged -= OnHealthChanged;
         }
