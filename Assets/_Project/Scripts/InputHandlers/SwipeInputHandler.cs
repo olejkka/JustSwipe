@@ -1,12 +1,8 @@
-﻿using System;
-using _Project.Scripts.Characters;
-using _Project.Scripts.Characters.Structs;
-using _Project.Scripts.Infrastructure;
+﻿using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.Events;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using VContainer;
-using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace _Project.Scripts.InputHandlers
 {

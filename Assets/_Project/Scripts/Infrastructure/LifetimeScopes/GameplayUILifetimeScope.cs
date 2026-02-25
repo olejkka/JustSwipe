@@ -2,7 +2,7 @@
 using _Project.Scripts.UI.CharacterPurchaseCase;
 using _Project.Scripts.UI.MoneyUI;
 using _Project.Scripts.UI.SettingsButton;
-using UnityEngine;
+using _Project.Scripts.UI.SettingsPopup;
 using VContainer;
 using VContainer.Unity;
 
@@ -17,14 +17,18 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             
             //Views
             builder.RegisterComponentInHierarchy<CharacterCasesContainerView>();
-            builder.RegisterComponentInHierarchy<SettingsButtonView>();
             builder.RegisterComponentInHierarchy<MoneyView>();
             builder.RegisterComponentInHierarchy<CharacterPurchaseCaseView>();
             
+            builder.RegisterComponentInHierarchy<SettingsButtonView>();
+            builder.RegisterComponentInHierarchy<SettingsPopupView>();
+            
             //Presenters
             builder.RegisterEntryPoint<CharacterPurchaseCasePresenter>();
-            builder.RegisterEntryPoint<SettingsButtonPresenter>();
             builder.RegisterEntryPoint<MoneyPresenter>();
+            
+            builder.RegisterEntryPoint<SettingsButtonPresenter>();
+            builder.RegisterEntryPoint<SettingsPopupPresenter>();
         }
     }
 }

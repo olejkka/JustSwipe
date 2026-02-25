@@ -21,9 +21,6 @@ namespace _Project.Scripts.UI.PlayButton
             _playButton.onClick.RemoveListener(OnButtonClicked);
         }
 
-        private void OnButtonClicked()
-        {
-            Clicked?.Invoke();
-        }
+        private void OnButtonClicked() => Clicked?.Invoke();
     }
 }

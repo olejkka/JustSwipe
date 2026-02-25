@@ -27,22 +27,15 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
 
         public void SetData(Sprite icon, int price, int health, int damage)
         {
-            if (_iconImage != null)
-                _iconImage.sprite = icon;
+            _iconImage.sprite = icon;
+                
+            _priceText.text = $"${price}";
+                
+            _healthText.text = $"{health}";
             
-            if (_priceText != null)
-                _priceText.text = $"${price}";
-            
-            if (_healthText != null)
-                _healthText.text = $"{health}";
-            
-            if (_damageText != null)
-                _damageText.text = $"{damage}";
+            _damageText.text = $"{damage}";
         }
 
-        private void HandlePurchaseClick()
-        {
-            OnPurchaseClicked?.Invoke();
-        }
+        private void HandlePurchaseClick() => OnPurchaseClicked?.Invoke();
     }
 }

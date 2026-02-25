@@ -8,22 +8,11 @@ namespace _Project.Scripts.UI.SettingsButton
     {
         [SerializeField] private Button _button;
 
-        public event Action Clicked;
+        public event Action SettingsClicked;
 
         
-        private void OnEnable()
-        {
-            _button.onClick.AddListener(OnButtonClicked);
-        }
-
-        private void OnDisable()
-        {
-            _button.onClick.RemoveListener(OnButtonClicked);
-        }
-
-        private void OnButtonClicked()
-        {
-            Clicked?.Invoke();
-        }
+        private void OnEnable() => _button.onClick.AddListener(OnSettingsClicked);
+        private void OnDisable() => _button.onClick.RemoveListener(OnSettingsClicked);
+        private void OnSettingsClicked() => SettingsClicked?.Invoke();
     }
 }

@@ -11,7 +11,6 @@ using _Project.Scripts.Tiles;
 using _Project.Scripts.UI;
 using _Project.Scripts.UI.CharacterPurchaseCase;
 using _Project.Scripts.UI.MoneyUI;
-using _Project.Scripts.UI.SettingsButton;
 using _Project.Scripts.Wallet;
 using UnityEngine;
 using VContainer;
@@ -22,6 +21,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
     public class GameplayLifetimeScope : LifetimeScope
     {
         [SerializeField] private SwipeInputHandler _swipeInputHandler;
+        [SerializeField] private KeyboardInputHandler _keyboardInputHandler;
         [SerializeField] private TileInstantiator _tileInstantiator;
         [SerializeField] private CharacterViewInstantiator _characterViewInstantiator;
 
@@ -30,6 +30,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         {
             //Input
             builder.RegisterComponent(_swipeInputHandler);
+            builder.RegisterComponent(_keyboardInputHandler);
             
             //Instantiators
             builder.RegisterComponent(_tileInstantiator);
