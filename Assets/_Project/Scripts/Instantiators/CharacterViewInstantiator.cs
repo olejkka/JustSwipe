@@ -52,7 +52,7 @@ namespace _Project.Scripts.Instantiators
             }
 
             var instance = Instantiate(_characterViewPrefab, worldPos, Quaternion.identity);
-            instance.Init(character, _tilemap, entry.Animations);
+            instance.Init(character, _tilemap, entry.Animations, _eventBus);
             _charactersViewsStorage.Register(character, instance);
         }
     }

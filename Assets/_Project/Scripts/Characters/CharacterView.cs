@@ -1,5 +1,7 @@
 ﻿using System;
 using _Project.Scripts.Characters.Structs;
+using _Project.Scripts.Infrastructure;
+using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Utilities;
 using UnityEngine;
@@ -11,6 +13,7 @@ namespace _Project.Scripts.Characters
     {
         [SerializeField] private SpriteAnimator _animator;
 
+        private EventBus _eventBus;
         private Character _data;
         private Tilemap _tilemap;
         private CharacterAnimationData _animations;
@@ -20,17 +23,32 @@ namespace _Project.Scripts.Characters
         private int _currentPriority;
         
 
-        public void Init(Character data, Tilemap tilemap, CharacterAnimationData animations)
+        public void Init(
+            Character data, 
+            Tilemap tilemap, 
+            CharacterAnimationData animations, 
+            EventBus eventBus
+            )
         {
             _data = data;
             _tilemap = tilemap;
             _animations = animations;
+            _eventBus = eventBus;
 
             _data.OnPositionChanged += OnMoved;
             _data.OnHealthChanged += OnHealthChanged;
+            _eventBus.Subscribe<SwipeEvent>(OnSwipe);
 
             PlayIdle();
             UpdatePosition(_data.Position);
+        }
+        
+        private void OnSwipe(SwipeEvent e)
+        {
+            if (e.Direction.x > 0)
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            else if (e.Direction.x < 0)
+                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
 
         private void PlayIdle()
@@ -117,6 +135,7 @@ namespace _Project.Scripts.Characters
         {
             _data.OnPositionChanged -= OnMoved;
             _data.OnHealthChanged -= OnHealthChanged;
+            _eventBus?.Unsubscribe<SwipeEvent>(OnSwipe);
         }
     }
 }
