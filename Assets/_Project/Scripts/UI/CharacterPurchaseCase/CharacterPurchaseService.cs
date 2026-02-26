@@ -2,35 +2,35 @@
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Creators;
+using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.ScriptableObjects;
-using _Project.Scripts.Wallet;
 
 namespace _Project.Scripts.UI.CharacterPurchaseCase
 {
     public class CharacterPurchaseService
     {
         private readonly CharacterCreator _characterCreator;
-        private readonly Money _money;
+        private readonly GameplayMoney _gameplayMoney;
         private readonly InitialGameplayConfig _initialGameplayConfig;
         private readonly CharactersStorage _charactersStorage;
 
         
         public CharacterPurchaseService(
             CharacterCreator characterCreator, 
-            Money money,
+            GameplayMoney gameplayMoney,
             InitialGameplayConfig initialGameplayConfig,
             CharactersStorage charactersStorage
             )
         {
             _characterCreator = characterCreator;
-            _money = money;
+            _gameplayMoney = gameplayMoney;
             _initialGameplayConfig = initialGameplayConfig;
             _charactersStorage = charactersStorage;
         }
 
-        public bool CanPurchase(int price)
+        private bool CanPurchase(int price)
         {
-            return _money.Amount >= price && 
+            return _gameplayMoney.Amount >= price && 
                    _charactersStorage.GetCharactersByTeam(Team.Player).Count() < 
                    _initialGameplayConfig.MaxPlayerCharactersCount;
         }
@@ -40,7 +40,7 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
             if (!CanPurchase(price))
                 return false;
 
-            _money.ChangeAmount(-price);
+            _gameplayMoney.ChangeAmount(-price);
             _characterCreator.CreateOnRandomPos(characterType);
             return true;
         }

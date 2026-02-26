@@ -1,7 +1,7 @@
 ﻿using System;
+using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.Events;
-using _Project.Scripts.Wallet;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI.MoneyUI
@@ -10,19 +10,19 @@ namespace _Project.Scripts.UI.MoneyUI
     {
         private readonly EventBus _eventBus;
         private readonly MoneyView _view;
-        private readonly Money _money;
+        private readonly GameplayMoney _gameplayMoney;
 
-        public MoneyPresenter(EventBus eventBus, MoneyView view, Money money)
+        public MoneyPresenter(EventBus eventBus, MoneyView view, GameplayMoney gameplayMoney)
         {
             _eventBus = eventBus;
             _view = view;
-            _money = money;
+            _gameplayMoney = gameplayMoney;
         }
 
         public void Start()
         {
             _eventBus.Subscribe<MoneyChangedEvent>(OnMoneyChanged);
-            _view.UpdateAmountFormatted(_money.Amount);
+            _view.UpdateAmountFormatted(_gameplayMoney.Amount);
         }
 
         public void Dispose()

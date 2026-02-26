@@ -1,6 +1,7 @@
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
+using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM;
@@ -11,7 +12,6 @@ using _Project.Scripts.Tiles;
 using _Project.Scripts.UI;
 using _Project.Scripts.UI.CharacterPurchaseCase;
 using _Project.Scripts.UI.MoneyUI;
-using _Project.Scripts.Wallet;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -53,7 +53,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<CharactersViewsStorage>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             
             
-            builder.Register<Money>(Lifetime.Singleton);
+            builder.Register<GameplayMoney>(Lifetime.Singleton);
             builder.Register<CharactersMover>(Lifetime.Singleton);
             builder.Register<GameplayStatesProvider>(Lifetime.Singleton);
             builder.Register<PauseService>(Lifetime.Singleton);

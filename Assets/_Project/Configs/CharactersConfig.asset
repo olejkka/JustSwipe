@@ -18,7 +18,6 @@ MonoBehaviour:
     Icon: {fileID: -1625386022, guid: 6dab75d7ff81216429cfc6d6ea8a4712, type: 3}
     Animations:
       FrameRate: 8
-      QueuedAnimationSpeedMultiplier: 10
       Idle:
       - {fileID: -1625386022, guid: 6dab75d7ff81216429cfc6d6ea8a4712, type: 3}
       - {fileID: -1440160044, guid: 6dab75d7ff81216429cfc6d6ea8a4712, type: 3}
@@ -46,53 +45,51 @@ MonoBehaviour:
       - {fileID: 1545337665, guid: bb0b33ab1db252341938b6037c64f78f, type: 3}
       - {fileID: 1554786234, guid: bb0b33ab1db252341938b6037c64f78f, type: 3}
     CharacterBaseStats:
-      Health: 100
+      Health: 2
       Damage: 1
     Price: 1
     Reward: 0
   - CharacterType: 2
     Team: 1
-    Icon: {fileID: 887015444, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
+    Icon: {fileID: -1701976148, guid: 1b67a795747b04c4c80d2c1d242ea24e, type: 3}
     Animations:
       FrameRate: 8
-      QueuedAnimationSpeedMultiplier: 10
       Idle:
-      - {fileID: 887015444, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
-      - {fileID: 1698060689, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
-      - {fileID: 1560299205, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
-      - {fileID: 1410732376, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
+      - {fileID: -1701976148, guid: 1b67a795747b04c4c80d2c1d242ea24e, type: 3}
+      - {fileID: 1055155533, guid: 1b67a795747b04c4c80d2c1d242ea24e, type: 3}
+      - {fileID: -1086082734, guid: 1b67a795747b04c4c80d2c1d242ea24e, type: 3}
+      - {fileID: 1667014064, guid: 1b67a795747b04c4c80d2c1d242ea24e, type: 3}
       Move:
-      - {fileID: 1878390317, guid: dff7594ed3e009e4ab3f1e299a407024, type: 3}
-      - {fileID: 1469474333, guid: dff7594ed3e009e4ab3f1e299a407024, type: 3}
-      - {fileID: 465366711, guid: dff7594ed3e009e4ab3f1e299a407024, type: 3}
-      - {fileID: 1303150586, guid: dff7594ed3e009e4ab3f1e299a407024, type: 3}
+      - {fileID: 1559624537, guid: 470de8ac7c5f13d4ba0b9511010622d6, type: 3}
+      - {fileID: -1952621993, guid: 470de8ac7c5f13d4ba0b9511010622d6, type: 3}
+      - {fileID: -191834948, guid: 470de8ac7c5f13d4ba0b9511010622d6, type: 3}
+      - {fileID: -539438323, guid: 470de8ac7c5f13d4ba0b9511010622d6, type: 3}
       DealDamage: []
       TakeDamage:
-      - {fileID: 887015444, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
-      - {fileID: 1698060689, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
-      - {fileID: 1560299205, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
-      - {fileID: 1410732376, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
+      - {fileID: 1513115974, guid: f3534750c5f607f4987f02cf28672e98, type: 3}
+      - {fileID: -750064301, guid: f3534750c5f607f4987f02cf28672e98, type: 3}
+      - {fileID: 603545177, guid: f3534750c5f607f4987f02cf28672e98, type: 3}
+      - {fileID: 681534396, guid: f3534750c5f607f4987f02cf28672e98, type: 3}
       Death:
-      - {fileID: 1066618812, guid: b210890c013de6248922467c724abccb, type: 3}
-      - {fileID: -1630914185, guid: b210890c013de6248922467c724abccb, type: 3}
-      - {fileID: -1982450812, guid: b210890c013de6248922467c724abccb, type: 3}
-      - {fileID: -1769082195, guid: b210890c013de6248922467c724abccb, type: 3}
-      - {fileID: -620074858, guid: b210890c013de6248922467c724abccb, type: 3}
-      - {fileID: -1604282544, guid: b210890c013de6248922467c724abccb, type: 3}
-      - {fileID: 1226034887, guid: b210890c013de6248922467c724abccb, type: 3}
-      - {fileID: -1258221810, guid: b210890c013de6248922467c724abccb, type: 3}
-      - {fileID: 1967620726, guid: b210890c013de6248922467c724abccb, type: 3}
+      - {fileID: -1433927306, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
+      - {fileID: 1084904814, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
+      - {fileID: -2116440568, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
+      - {fileID: -578291671, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
+      - {fileID: 2128674527, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
+      - {fileID: 24258276, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
+      - {fileID: -630979369, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
+      - {fileID: 1919340665, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
+      - {fileID: -196287458, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
     CharacterBaseStats:
-      Health: 10
-      Damage: 1
-    Price: 5
+      Health: 4
+      Damage: 2
+    Price: 2
     Reward: 0
   - CharacterType: 10
     Team: 2
     Icon: {fileID: 204135639, guid: 613ea9d7a1332514b8803ce9a5886e71, type: 3}
     Animations:
       FrameRate: 8
-      QueuedAnimationSpeedMultiplier: 10
       Idle:
       - {fileID: 204135639, guid: 613ea9d7a1332514b8803ce9a5886e71, type: 3}
       - {fileID: 884354035, guid: 613ea9d7a1332514b8803ce9a5886e71, type: 3}
@@ -131,7 +128,6 @@ MonoBehaviour:
     Icon: {fileID: 1294119602, guid: 55045297179c96b4db873fc76854c72f, type: 3}
     Animations:
       FrameRate: 8
-      QueuedAnimationSpeedMultiplier: 3
       Idle:
       - {fileID: 1294119602, guid: 55045297179c96b4db873fc76854c72f, type: 3}
       - {fileID: 1428007513, guid: 55045297179c96b4db873fc76854c72f, type: 3}

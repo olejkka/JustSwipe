@@ -1,17 +1,16 @@
-﻿using System;
-using _Project.Scripts.Infrastructure;
+﻿using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.Events;
 
-namespace _Project.Scripts.Wallet
+namespace _Project.Scripts.GameplayEconomy
 {
-    public class Money
+    public class GameplayMoney
     {
         private readonly EventBus _eventBus;
         
         public int Amount { get; private set; }
 
 
-        public Money(EventBus eventBus)
+        public GameplayMoney(EventBus eventBus)
         {
             _eventBus = eventBus;
         }

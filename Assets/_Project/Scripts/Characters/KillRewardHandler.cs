@@ -1,9 +1,9 @@
 ﻿using System;
 using _Project.Scripts.Characters.Structs;
+using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.ScriptableObjects;
-using _Project.Scripts.Wallet;
 using VContainer.Unity;
 
 namespace _Project.Scripts.Characters
@@ -11,13 +11,13 @@ namespace _Project.Scripts.Characters
     public class KillRewardHandler : IStartable, IDisposable
     {
         private readonly EventBus _eventBus;
-        private readonly Money _money;
+        private readonly GameplayMoney _gameplayMoney;
         private readonly CharactersConfig _charactersConfig;
 
-        public KillRewardHandler(EventBus eventBus, Money money, CharactersConfig charactersConfig)
+        public KillRewardHandler(EventBus eventBus, GameplayMoney gameplayMoney, CharactersConfig charactersConfig)
         {
             _eventBus = eventBus;
-            _money = money;
+            _gameplayMoney = gameplayMoney;
             _charactersConfig = charactersConfig;
         }
 
@@ -39,7 +39,7 @@ namespace _Project.Scripts.Characters
                 return;
 
             var entry = _charactersConfig.GetEntry(e.Character.CharacterType);
-            _money.ChangeAmount(entry.Reward);
+            _gameplayMoney.ChangeAmount(entry.Reward);
         }
     }
 }

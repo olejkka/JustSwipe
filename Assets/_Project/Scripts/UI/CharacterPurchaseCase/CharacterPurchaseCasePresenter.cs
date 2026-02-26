@@ -1,8 +1,9 @@
 ﻿using System;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Creators;
+using _Project.Scripts.Infrastructure;
+using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.ScriptableObjects;
-using _Project.Scripts.Wallet;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -13,30 +14,35 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
         private readonly CharacterPurchaseCaseView _view;
         private readonly CharactersConfig _charactersConfig;
         private readonly CharacterPurchaseService _characterPurchaseService;
+        private readonly EventBus _eventBus;
 
         private CharacterEntry _currentEntry;
 
         public CharacterPurchaseCasePresenter(
             CharacterPurchaseCaseView view,
             CharactersConfig charactersConfig,
-            CharacterPurchaseService characterPurchaseService
+            CharacterPurchaseService characterPurchaseService,
+            EventBus eventBus
             )
         {
             _view = view;
             _charactersConfig = charactersConfig;
             _characterPurchaseService = characterPurchaseService;
+            _eventBus = eventBus;
         }
 
         public void Start()
         {
             _view.OnPurchaseClicked += OnPurchaseClicked;
-
+            _eventBus.Subscribe<CharacterPurchaseCaseRerollEvent>(OnRerollClicked);
+            
             RefreshCase();
         }
 
         public void Dispose()
         {
             _view.OnPurchaseClicked -= OnPurchaseClicked;
+            _eventBus.Unsubscribe<CharacterPurchaseCaseRerollEvent>(OnRerollClicked);
         }
 
         private void RefreshCase()
@@ -62,6 +68,11 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
             if (!_characterPurchaseService.TryPurchase(_currentEntry.CharacterType, _currentEntry.Price))
                 return;
 
+            RefreshCase();
+        }
+
+        private void OnRerollClicked(CharacterPurchaseCaseRerollEvent e)
+        {
             RefreshCase();
         }
     }
