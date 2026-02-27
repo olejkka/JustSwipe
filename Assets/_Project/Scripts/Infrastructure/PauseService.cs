@@ -1,10 +1,13 @@
 ﻿using System;
+using _Project.Scripts.Infrastructure.Events;
 using UnityEngine;
+using VContainer.Unity;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class PauseService
+    public class PauseService : IStartable, IDisposable
     {
+        private readonly EventBus _eventBus;
         private bool _isPaused;
 
         public bool IsPaused => _isPaused;
@@ -13,7 +16,22 @@ namespace _Project.Scripts.Infrastructure
         public event Action OnResumed;
 
 
-        public void TogglePause()
+        public PauseService(EventBus eventBus)
+        {
+            _eventBus = eventBus;
+        }
+
+        public void Start()
+        {
+            _eventBus.Subscribe<SettingsButtonToggleEvent>(TogglePause);
+        }
+
+        public void Dispose()
+        {
+            _eventBus.Unsubscribe<SettingsButtonToggleEvent>(TogglePause);
+        }
+
+        private void TogglePause(SettingsButtonToggleEvent e)
         {
             if (_isPaused)
                 Resume();
