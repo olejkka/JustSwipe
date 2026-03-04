@@ -2,7 +2,7 @@
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
-using _Project.Scripts.ScriptableObjects;
+using _Project.Scripts.Configs;
 using UnityEngine;
 using VContainer.Unity;
 

@@ -1,8 +1,8 @@
 ﻿using System;
+using _Project.Scripts.Configs;
 using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.Events;
-using _Project.Scripts.ScriptableObjects;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollButton

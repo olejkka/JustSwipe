@@ -9,6 +9,7 @@ namespace _Project.Scripts.Infrastructure
         public async Task LoadMenu()
         {
             await SceneManager.LoadSceneAsync("Menu", LoadSceneMode.Additive);
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("Menu"));
         }
 
         public async Task UnloadMenu()

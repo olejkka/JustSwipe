@@ -7,10 +7,13 @@ namespace _Project.Scripts.Infrastructure.FSM.ProjectSM
     public class ProjectStatesProvider
     {
         private readonly SceneLoader _sceneLoader;
-
-        public ProjectStatesProvider(SceneLoader sceneLoader)
+        private readonly EventBus _eventBus;
+        
+        
+        public ProjectStatesProvider(SceneLoader sceneLoader,  EventBus eventBus)
         {
             _sceneLoader = sceneLoader;
+            _eventBus = eventBus;
         }
 
         public Dictionary<Type, IProjectState> CreateStates()
@@ -23,11 +26,11 @@ namespace _Project.Scripts.Infrastructure.FSM.ProjectSM
                 },
                 {
                     typeof(MenuState), 
-                    new MenuState(_sceneLoader)
+                    new MenuState(_sceneLoader,  _eventBus)
                 },
                 {
                     typeof(GameplayState), 
-                    new GameplayState(_sceneLoader)
+                    new GameplayState(_sceneLoader,  _eventBus)
                 },
             };
         }

@@ -1,8 +1,8 @@
 ﻿using System;
 using _Project.Scripts.Characters.Structs;
+using _Project.Scripts.Configs;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.Events;
-using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Utilities;
 using UnityEngine;
 using UnityEngine.Tilemaps;

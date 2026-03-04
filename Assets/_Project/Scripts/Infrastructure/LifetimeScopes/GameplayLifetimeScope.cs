@@ -2,16 +2,10 @@ using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
 using _Project.Scripts.GameplayEconomy;
-using _Project.Scripts.Infrastructure.Events;
-using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM;
 using _Project.Scripts.InputHandlers;
 using _Project.Scripts.Instantiators;
-using _Project.Scripts.ScriptableObjects;
 using _Project.Scripts.Tiles;
-using _Project.Scripts.UI;
-using _Project.Scripts.UI.CharacterPurchaseCase;
-using _Project.Scripts.UI.MoneyUI;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -38,11 +32,13 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 
             //Creators
             builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
+            
             builder.Register<GameplayStateMachine>(container =>
             {
                 var creator = container.Resolve<GameplayStateMachineCreator>();
                 return creator.Create();
             }, Lifetime.Singleton).AsSelf().As<ITickable>();
+            
             builder.Register<PositionsCreator>(Lifetime.Singleton);
             builder.Register<CharacterCreator>(Lifetime.Singleton);
             builder.Register<BotMoveCreator>(Lifetime.Singleton);

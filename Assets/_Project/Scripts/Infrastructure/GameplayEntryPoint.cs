@@ -1,24 +1,22 @@
 ﻿using System;
-using _Project.Scripts.Characters.Structs;
+using _Project.Scripts.Configs;
 using _Project.Scripts.Creators;
 using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure.Events;
-using _Project.Scripts.Infrastructure.FSM;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates;
-using _Project.Scripts.ScriptableObjects;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class GameplayEntryPoint : IStartable
+    public class GameplayEntryPoint : IStartable, IDisposable
     {
         private readonly GameplayStateMachine _stateMachine;
         private readonly InitialGameplayConfig _initialGameplayConfig;
         private readonly CharacterCreator _characterCreator;
         private readonly PositionsCreator _positionsCreator;
         private readonly GameplayMoney _gameplayMoney;
+        private readonly EventBus _eventBus;
         
 
         public GameplayEntryPoint(
@@ -26,7 +24,8 @@ namespace _Project.Scripts.Infrastructure
             InitialGameplayConfig initialGameplayConfig,
             PositionsCreator positionsCreator,
             CharacterCreator characterCreator,
-            GameplayMoney gameplayMoney
+            GameplayMoney gameplayMoney,
+            EventBus eventBus
         )
         {
             _stateMachine = stateMachine;
@@ -34,9 +33,20 @@ namespace _Project.Scripts.Infrastructure
             _positionsCreator = positionsCreator;
             _characterCreator = characterCreator;
             _gameplayMoney = gameplayMoney;
+            _eventBus = eventBus;
         }
 
         public void Start()
+        {
+            _eventBus.Subscribe<StartGameplayEvent>(OnStartGameplay);
+        }
+
+        public void Dispose()
+        {
+            _eventBus.Unsubscribe<StartGameplayEvent>(OnStartGameplay);
+        }
+        
+        public void OnStartGameplay(StartGameplayEvent e)
         {
             _positionsCreator.Create();
             _gameplayMoney.SetAmount(_initialGameplayConfig.MoneyCount);

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
+using _Project.Scripts.Configs;
 using _Project.Scripts.Creators;
 using _Project.Scripts.GameplayEconomy;
-using _Project.Scripts.ScriptableObjects;
 
 namespace _Project.Scripts.UI.CharacterPurchaseCase
 {

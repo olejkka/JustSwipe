@@ -1,9 +1,9 @@
 ﻿using System;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
+using _Project.Scripts.Configs;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.Events;
-using _Project.Scripts.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using VContainer;

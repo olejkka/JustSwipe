@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c50e3f05cb48484a9344feba7400d543, type: 3}
+  m_Name: AudioConfig
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Configs.AudioConfig
+  _entries:
+  - Id: 1
+    Clip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+    Volume: 0.5
+    Pitch: 1
+  - Id: 2
+    Clip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+    Volume: 1
+    Pitch: 1
+  - Id: 3
+    Clip: {fileID: 8300000, guid: edbacb988b88a724e89e9ab8faba4c14, type: 3}
+    Volume: 0.3
+    Pitch: 1
+  - Id: 3
+    Clip: {fileID: 8300000, guid: 1db65805ee2884243b1c05140a51a15f, type: 3}
+    Volume: 0.5
+    Pitch: 1
+  - Id: 3
+    Clip: {fileID: 8300000, guid: 3619bc492d7d6aa428e07425acdd9880, type: 3}
+    Volume: 0.5
+    Pitch: 1
+  - Id: 4
+    Clip: {fileID: 8300000, guid: 1db65805ee2884243b1c05140a51a15f, type: 3}
+    Volume: 0.3
+    Pitch: 1
