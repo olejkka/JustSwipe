@@ -81,9 +81,9 @@ MonoBehaviour:
       - {fileID: 1919340665, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
       - {fileID: -196287458, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
     CharacterBaseStats:
-      Health: 4
+      Health: 2
       Damage: 2
-    Price: 2
+    Price: 4
     Reward: 0
   - CharacterType: 10
     Team: 2
@@ -156,6 +156,6 @@ MonoBehaviour:
       - {fileID: 392177722, guid: f8f26cefec249b540b055a5e985d1f73, type: 3}
     CharacterBaseStats:
       Health: 2
-      Damage: 2
+      Damage: 1
     Price: 0
     Reward: 2

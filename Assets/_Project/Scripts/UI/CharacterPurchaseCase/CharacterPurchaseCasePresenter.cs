@@ -47,8 +47,10 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
 
         private void RefreshCase()
         {
-            _currentEntry = _charactersConfig.GetRandomEntryByTeam(Team.Player);
-
+            var excludedType = _currentEntry?.CharacterType;
+            var nextEntry = _charactersConfig.GetRandomEntryByTeamExcept(Team.Player, excludedType);
+            _currentEntry = nextEntry ?? _charactersConfig.GetRandomEntryByTeam(Team.Player);
+            
             if (_currentEntry == null)
             {
                 Debug.LogError("No player characters found in config!");

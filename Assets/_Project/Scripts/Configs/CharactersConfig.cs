@@ -26,6 +26,14 @@ namespace _Project.Scripts.Configs
             var entries = CharacterEntries.Where(e => e.Team == team).ToList();
             return entries.Count > 0 ? entries[Random.Range(0, entries.Count)] : null;
         }
+        
+        public CharacterEntry GetRandomEntryByTeamExcept(Team team, CharacterType? excludedType)
+        {
+            var entries = CharacterEntries
+                .Where(e => e.Team == team && (!excludedType.HasValue || e.CharacterType != excludedType.Value))
+                .ToList();
+            return entries.Count > 0 ? entries[Random.Range(0, entries.Count)] : null;
+        }
     }
     
     [Serializable]
