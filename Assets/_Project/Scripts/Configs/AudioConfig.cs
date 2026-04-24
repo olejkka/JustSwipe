@@ -5,8 +5,8 @@ using UnityEngine;
 namespace _Project.Scripts.Configs
 {
     [CreateAssetMenu(
-        menuName = "Gameplay/AudioConfig",
-        fileName = "AudioConfig"
+        menuName = "Gameplay Configs/Audio",
+        fileName = "Audio"
     )]
     public sealed class AudioConfig : ScriptableObject
     {

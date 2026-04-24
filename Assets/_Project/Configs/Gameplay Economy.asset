@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2ff5309728e476a92cb8bac4170071f, type: 3}
-  m_Name: GameplayEconomyConfig
+  m_Name: Gameplay Economy
   m_EditorClassIdentifier: 
   RerollPrice: 1

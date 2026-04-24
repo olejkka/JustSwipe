@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8603040009cc4cfe8c99e3f8ccd2ed16, type: 3}
-  m_Name: InitialGameplayConfig
+  m_Name: Initial Gameplay
   m_EditorClassIdentifier: 
   MaxPlayerCharactersCount: 4
   MoneyCount: 5

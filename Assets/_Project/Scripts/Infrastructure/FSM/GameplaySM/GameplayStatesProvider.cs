@@ -16,25 +16,23 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
         private readonly EventBus _eventBus;
         private readonly BotMoveCreator _botMoveCreator;
         private readonly CharactersMover _charactersMover;
-        private readonly CharacterCreator _creator;
+        private readonly CharacterCreator _characterCreator;
         private readonly CharactersStorage _charactersStorage;
-        private readonly PauseService _pauseService;
+
 
         public GameplayStatesProvider(
             EventBus eventBus,
             BotMoveCreator botMoveCreator,
             CharactersMover charactersMover,
-            CharacterCreator creator,
-            CharactersStorage charactersStorage,
-            PauseService pauseService
-            )
+            CharacterCreator characterCreator,
+            CharactersStorage charactersStorage
+        )
         {
             _eventBus = eventBus;
             _botMoveCreator = botMoveCreator;
             _charactersMover = charactersMover;
-            _creator = creator;
+            _characterCreator = characterCreator;
             _charactersStorage = charactersStorage;
-            _pauseService = pauseService;
         }
         
         public IReadOnlyList<IState> GetStates()
@@ -42,23 +40,22 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
             var playerTurnState = new PlayerTurnState(
                 new ITransition[]
                 {
-                    new EventTransition<PlayerMoveCompletedEvent, BotTurnState>(_eventBus),
                     new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any()),
+                    new EventTransition<PlayerMoveCompletedEvent, BotTurnState>(_eventBus),
                 },
                 _eventBus,
-                _charactersMover,
-                _creator
+                _charactersMover
             );
             
             var botTurnState = new BotTurnState(
                 new ITransition[]
                 {
+                    new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any()),
                     new EventTransition<BotMoveCompletedEvent, PlayerTurnState>(_eventBus),
-                    new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any())
                 },
                 _botMoveCreator,
                 _charactersMover,
-                _creator,
+                _characterCreator,
                 _charactersStorage
             );
             

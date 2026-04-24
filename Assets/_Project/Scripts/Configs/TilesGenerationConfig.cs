@@ -3,8 +3,8 @@
 namespace _Project.Scripts.Configs
 {
     [CreateAssetMenu(
-        menuName = "Gameplay/TilesGenerationConfig",
-        fileName = "TilesGenerationConfig"
+        menuName = "Gameplay Configs/Tiles Generation",
+        fileName = "Tiles Generation"
     )]
     public class TilesGenerationConfig : ScriptableObject
     {

@@ -8,8 +8,8 @@ using Random = UnityEngine.Random;
 namespace _Project.Scripts.Configs
 {
     [CreateAssetMenu(
-        menuName = "Gameplay/CharactersConfig",
-        fileName = "CharactersConfig"
+        menuName = "Gameplay Configs/Characters",
+        fileName = "Characters"
     )]
     public class CharactersConfig : ScriptableObject
     {

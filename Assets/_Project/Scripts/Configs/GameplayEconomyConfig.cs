@@ -3,8 +3,8 @@
 namespace _Project.Scripts.Configs
 {
     [CreateAssetMenu(
-        menuName = "Gameplay/GameplayEconomyConfig",
-        fileName = "GameplayEconomyConfig"
+        menuName = "Gameplay Configs/Gameplay Economy",
+        fileName = "Gameplay Economy"
     )]
     public class GameplayEconomyConfig : ScriptableObject
     {

@@ -4,8 +4,8 @@ using UnityEngine;
 namespace _Project.Scripts.Configs
 {
     [CreateAssetMenu(
-        menuName = "Gameplay/InitialGameplayConfig",
-        fileName = "InitialGameplayConfig"
+        menuName = "Gameplay Configs/Initial Gameplay",
+        fileName = "Initial Gameplay"
     )]
     public class InitialGameplayConfig : ScriptableObject
     {

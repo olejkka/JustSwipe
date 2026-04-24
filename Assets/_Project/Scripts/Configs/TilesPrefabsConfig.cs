@@ -7,8 +7,8 @@ using UnityEngine.Tilemaps;
 namespace _Project.Scripts.Configs
 {
     [CreateAssetMenu(
-        menuName = "Gameplay/TilesPrefabsConfig",
-        fileName = "TilesPrefabsConfig"
+        menuName = "Gameplay Configs/Tiles Prefabs",
+        fileName = "Tiles Prefabs"
     )]
     public class TilesPrefabsConfig : ScriptableObject
     {
