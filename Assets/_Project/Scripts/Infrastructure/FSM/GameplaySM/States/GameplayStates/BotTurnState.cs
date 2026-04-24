@@ -4,6 +4,7 @@ using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Creators;
+using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
 {
@@ -30,7 +31,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
 
         protected override void OnEnter()
         {
-            var direction = _botMoveCreator.GenerateRandomDirection();
+            var direction = _botMoveCreator.GenerateDirectionToANearbyPlayerCharacter();
             _charactersMover.Move(direction, Team.Bot);
         }
 
