@@ -15,6 +15,7 @@ namespace _Project.Scripts.Infrastructure.Audio
         private Coroutine _musicTransitionCoroutine;
 
         private bool _muted;
+        private float _musicLogicalVolume = 1f;
         
         public bool Muted { get => _muted; set => _muted = value; }
         
@@ -43,14 +44,17 @@ namespace _Project.Scripts.Infrastructure.Audio
             
             _musicSource.mute = muted;
             _sfx2DSource.mute = muted;
-            AudioListener.pause = muted;
+            
+            ApplyMusicVolume();
+        }
+        
+        private void ApplyMusicVolume()
+        {
+            _musicSource.volume = Muted ? 0f : _musicLogicalVolume;
         }
 
         public void PlayMusic(SoundId id, bool loop = true, float fadeInSeconds = 0.5f, float fadeOutSeconds = 0.5f)
         {
-            if (Muted)
-                return;
-
             var entries = _config.GetAll(id);
 
             if (entries.Count == 0)
@@ -69,9 +73,6 @@ namespace _Project.Scripts.Infrastructure.Audio
 
         public void StopMusic(float fadeOutSeconds = 0.5f)
         {
-            if (Muted)
-                return;
-            
             if (_musicTransitionCoroutine != null)
                 StopCoroutine(_musicTransitionCoroutine);
 
@@ -80,7 +81,7 @@ namespace _Project.Scripts.Infrastructure.Audio
 
         public void PlaySfx(SoundId id)
         {
-            if (Muted)
+            if (Muted) 
                 return;
             
             var entry = _config.Get(id);
@@ -91,7 +92,7 @@ namespace _Project.Scripts.Infrastructure.Audio
 
         public void PlaySfxAt(SoundId id, Vector3 worldPos, float volume = 1f)
         {
-            if (Muted)
+            if (Muted) 
                 return;
             
             var entry = _config.Get(id);
@@ -151,18 +152,21 @@ namespace _Project.Scripts.Infrastructure.Audio
             if (duration <= 0f)
             {
                 _musicSource.volume = targetVolume;
+                ApplyMusicVolume();
                 yield break;
             }
 
             while (elapsed < duration)
             {
-                elapsed += Time.deltaTime;
+                elapsed += Time.unscaledDeltaTime;
                 float t = Mathf.Clamp01(elapsed / duration);
                 _musicSource.volume = Mathf.Lerp(startVolume, targetVolume, t);
+                ApplyMusicVolume();
                 yield return null;
             }
 
             _musicSource.volume = targetVolume;
+            ApplyMusicVolume();
         }
 
         private AudioSource CreateSource(string name, bool loop)
