@@ -34,6 +34,11 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollB
         {
             _iconRotateBehaviour.Play();
         }
+
+        public void RotateShakeImage()
+        {
+            _iconRotateBehaviour.PlayShakeRotation();
+        }
             
         private void HandleRerollClick() => OnRerollClicked?.Invoke();
     }

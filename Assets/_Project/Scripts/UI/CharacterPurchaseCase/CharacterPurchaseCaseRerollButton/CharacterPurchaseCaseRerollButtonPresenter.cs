@@ -43,7 +43,11 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollB
         private void OnRerollClicked()
         {
             if (!_rerollPurchaseService.TryPurchase(_gameplayEconomyConfig.RerollPrice))
+            {
+                _view.RotateShakeImage();
                 return;
+            }
+                
 
             _view.RotateImage();
             _eventBus.Publish(new CharacterPurchaseCaseRerollEvent());
