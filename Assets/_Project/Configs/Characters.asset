@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: Characters
   m_EditorClassIdentifier: 
   CharacterEntries:
-  - CharacterType: 1
-    Team: 1
-    Icon: {fileID: -1625386022, guid: 6dab75d7ff81216429cfc6d6ea8a4712, type: 3}
-    Animations:
+  - _definitionId: player_01
+    _type: 1
+    _team: 1
+    _baseStats:
+      Health: 2
+      Damage: 1
+    _icon: {fileID: -1625386022, guid: 6dab75d7ff81216429cfc6d6ea8a4712, type: 3}
+    _animations:
       FrameRate: 8
       Idle:
       - {fileID: -1625386022, guid: 6dab75d7ff81216429cfc6d6ea8a4712, type: 3}
@@ -28,7 +32,11 @@ MonoBehaviour:
       - {fileID: -1742101282, guid: 44f88be01d2beef40b8b4a2aa060f516, type: 3}
       - {fileID: 477327454, guid: 44f88be01d2beef40b8b4a2aa060f516, type: 3}
       - {fileID: 1879434483, guid: 44f88be01d2beef40b8b4a2aa060f516, type: 3}
-      DealDamage: []
+      DealDamage:
+      - {fileID: 1910322188, guid: 44f88be01d2beef40b8b4a2aa060f516, type: 3}
+      - {fileID: -1742101282, guid: 44f88be01d2beef40b8b4a2aa060f516, type: 3}
+      - {fileID: 477327454, guid: 44f88be01d2beef40b8b4a2aa060f516, type: 3}
+      - {fileID: 1879434483, guid: 44f88be01d2beef40b8b4a2aa060f516, type: 3}
       TakeDamage:
       - {fileID: 1447313763, guid: 3e623190480d385459b045d29397ed0e, type: 3}
       - {fileID: -1854933293, guid: 3e623190480d385459b045d29397ed0e, type: 3}
@@ -44,15 +52,16 @@ MonoBehaviour:
       - {fileID: -847956095, guid: bb0b33ab1db252341938b6037c64f78f, type: 3}
       - {fileID: 1545337665, guid: bb0b33ab1db252341938b6037c64f78f, type: 3}
       - {fileID: 1554786234, guid: bb0b33ab1db252341938b6037c64f78f, type: 3}
-    CharacterBaseStats:
+    _price: 1
+    _reward: 0
+  - _definitionId: player_02
+    _type: 1
+    _team: 1
+    _baseStats:
       Health: 2
-      Damage: 1
-    Price: 1
-    Reward: 0
-  - CharacterType: 2
-    Team: 1
-    Icon: {fileID: -1701976148, guid: 1b67a795747b04c4c80d2c1d242ea24e, type: 3}
-    Animations:
+      Damage: 2
+    _icon: {fileID: -1701976148, guid: 1b67a795747b04c4c80d2c1d242ea24e, type: 3}
+    _animations:
       FrameRate: 8
       Idle:
       - {fileID: -1701976148, guid: 1b67a795747b04c4c80d2c1d242ea24e, type: 3}
@@ -64,7 +73,11 @@ MonoBehaviour:
       - {fileID: -1952621993, guid: 470de8ac7c5f13d4ba0b9511010622d6, type: 3}
       - {fileID: -191834948, guid: 470de8ac7c5f13d4ba0b9511010622d6, type: 3}
       - {fileID: -539438323, guid: 470de8ac7c5f13d4ba0b9511010622d6, type: 3}
-      DealDamage: []
+      DealDamage:
+      - {fileID: 1559624537, guid: 470de8ac7c5f13d4ba0b9511010622d6, type: 3}
+      - {fileID: -1952621993, guid: 470de8ac7c5f13d4ba0b9511010622d6, type: 3}
+      - {fileID: -191834948, guid: 470de8ac7c5f13d4ba0b9511010622d6, type: 3}
+      - {fileID: -539438323, guid: 470de8ac7c5f13d4ba0b9511010622d6, type: 3}
       TakeDamage:
       - {fileID: 1513115974, guid: f3534750c5f607f4987f02cf28672e98, type: 3}
       - {fileID: -750064301, guid: f3534750c5f607f4987f02cf28672e98, type: 3}
@@ -80,82 +93,294 @@ MonoBehaviour:
       - {fileID: -630979369, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
       - {fileID: 1919340665, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
       - {fileID: -196287458, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
-    CharacterBaseStats:
-      Health: 2
+    _price: 2
+    _reward: 0
+  - _definitionId: player_03
+    _type: 1
+    _team: 1
+    _baseStats:
+      Health: 3
       Damage: 2
-    Price: 4
-    Reward: 0
-  - CharacterType: 10
-    Team: 2
-    Icon: {fileID: 204135639, guid: 613ea9d7a1332514b8803ce9a5886e71, type: 3}
-    Animations:
+    _icon: {fileID: -1214402316, guid: 4a350331c4bf2fd4bb8994072e7c1c85, type: 3}
+    _animations:
       FrameRate: 8
       Idle:
-      - {fileID: 204135639, guid: 613ea9d7a1332514b8803ce9a5886e71, type: 3}
-      - {fileID: 884354035, guid: 613ea9d7a1332514b8803ce9a5886e71, type: 3}
-      - {fileID: 657921334, guid: 613ea9d7a1332514b8803ce9a5886e71, type: 3}
-      - {fileID: 937962182, guid: 613ea9d7a1332514b8803ce9a5886e71, type: 3}
+      - {fileID: -1214402316, guid: 4a350331c4bf2fd4bb8994072e7c1c85, type: 3}
+      - {fileID: 1212093811, guid: 4a350331c4bf2fd4bb8994072e7c1c85, type: 3}
+      - {fileID: -1411277314, guid: 4a350331c4bf2fd4bb8994072e7c1c85, type: 3}
+      - {fileID: -813561111, guid: 4a350331c4bf2fd4bb8994072e7c1c85, type: 3}
       Move:
-      - {fileID: 566315886, guid: 772a34af9697feb42a3440e55c41384e, type: 3}
-      - {fileID: -1242428311, guid: 772a34af9697feb42a3440e55c41384e, type: 3}
-      - {fileID: -191902871, guid: 772a34af9697feb42a3440e55c41384e, type: 3}
-      - {fileID: 65287830, guid: 772a34af9697feb42a3440e55c41384e, type: 3}
-      DealDamage: []
+      - {fileID: 859101002, guid: 0fb5ae891d705b04da308562eaa1b60e, type: 3}
+      - {fileID: 1109300354, guid: 0fb5ae891d705b04da308562eaa1b60e, type: 3}
+      - {fileID: 1765083979, guid: 0fb5ae891d705b04da308562eaa1b60e, type: 3}
+      - {fileID: -567714065, guid: 0fb5ae891d705b04da308562eaa1b60e, type: 3}
+      DealDamage:
+      - {fileID: 859101002, guid: 0fb5ae891d705b04da308562eaa1b60e, type: 3}
+      - {fileID: 1109300354, guid: 0fb5ae891d705b04da308562eaa1b60e, type: 3}
+      - {fileID: 1765083979, guid: 0fb5ae891d705b04da308562eaa1b60e, type: 3}
+      - {fileID: -567714065, guid: 0fb5ae891d705b04da308562eaa1b60e, type: 3}
       TakeDamage:
-      - {fileID: -1707451564, guid: c6748973b976c2642b4190a77e07dec5, type: 3}
-      - {fileID: 1268512007, guid: c6748973b976c2642b4190a77e07dec5, type: 3}
-      - {fileID: 2068455238, guid: c6748973b976c2642b4190a77e07dec5, type: 3}
-      - {fileID: 1458385211, guid: c6748973b976c2642b4190a77e07dec5, type: 3}
+      - {fileID: -1806174594, guid: 7eb376e4066f59f48839c013e6172f5f, type: 3}
+      - {fileID: -1628843560, guid: 7eb376e4066f59f48839c013e6172f5f, type: 3}
+      - {fileID: 332956143, guid: 7eb376e4066f59f48839c013e6172f5f, type: 3}
+      - {fileID: 1477628522, guid: 7eb376e4066f59f48839c013e6172f5f, type: 3}
       Death:
-      - {fileID: -597413668, guid: bbe76480da5cee649aa0c70a21636336, type: 3}
-      - {fileID: -1118753811, guid: bbe76480da5cee649aa0c70a21636336, type: 3}
-      - {fileID: 887448569, guid: bbe76480da5cee649aa0c70a21636336, type: 3}
-      - {fileID: -241436879, guid: bbe76480da5cee649aa0c70a21636336, type: 3}
-      - {fileID: 1721627999, guid: bbe76480da5cee649aa0c70a21636336, type: 3}
-      - {fileID: 2085544055, guid: bbe76480da5cee649aa0c70a21636336, type: 3}
-      - {fileID: -418475238, guid: bbe76480da5cee649aa0c70a21636336, type: 3}
-      - {fileID: -1379035828, guid: bbe76480da5cee649aa0c70a21636336, type: 3}
-      - {fileID: -456216302, guid: bbe76480da5cee649aa0c70a21636336, type: 3}
-      - {fileID: 739732963, guid: bbe76480da5cee649aa0c70a21636336, type: 3}
-      - {fileID: -316761781, guid: bbe76480da5cee649aa0c70a21636336, type: 3}
-    CharacterBaseStats:
+      - {fileID: -1421573181, guid: 92445a452d22fe146a6a6c4fcac8aaa7, type: 3}
+      - {fileID: 988979173, guid: 92445a452d22fe146a6a6c4fcac8aaa7, type: 3}
+      - {fileID: 319606245, guid: 92445a452d22fe146a6a6c4fcac8aaa7, type: 3}
+      - {fileID: -1328101075, guid: 92445a452d22fe146a6a6c4fcac8aaa7, type: 3}
+      - {fileID: -321633370, guid: 92445a452d22fe146a6a6c4fcac8aaa7, type: 3}
+      - {fileID: 352932407, guid: 92445a452d22fe146a6a6c4fcac8aaa7, type: 3}
+      - {fileID: 1553337913, guid: 92445a452d22fe146a6a6c4fcac8aaa7, type: 3}
+      - {fileID: -1366611355, guid: 92445a452d22fe146a6a6c4fcac8aaa7, type: 3}
+      - {fileID: -1154499586, guid: 92445a452d22fe146a6a6c4fcac8aaa7, type: 3}
+    _price: 5
+    _reward: 0
+  - _definitionId: player_04
+    _type: 1
+    _team: 1
+    _baseStats:
+      Health: 5
+      Damage: 3
+    _icon: {fileID: 605253563, guid: d72c2c24f8790254ea01da3be234727b, type: 3}
+    _animations:
+      FrameRate: 8
+      Idle:
+      - {fileID: 605253563, guid: d72c2c24f8790254ea01da3be234727b, type: 3}
+      - {fileID: 474662435, guid: d72c2c24f8790254ea01da3be234727b, type: 3}
+      - {fileID: 994488033, guid: d72c2c24f8790254ea01da3be234727b, type: 3}
+      - {fileID: 260878751, guid: d72c2c24f8790254ea01da3be234727b, type: 3}
+      Move:
+      - {fileID: -448057212, guid: b4e3a874232bcc84dbc1e5474f1b404d, type: 3}
+      - {fileID: -278172320, guid: b4e3a874232bcc84dbc1e5474f1b404d, type: 3}
+      - {fileID: -1268168661, guid: b4e3a874232bcc84dbc1e5474f1b404d, type: 3}
+      - {fileID: 46625310, guid: b4e3a874232bcc84dbc1e5474f1b404d, type: 3}
+      DealDamage:
+      - {fileID: -448057212, guid: b4e3a874232bcc84dbc1e5474f1b404d, type: 3}
+      - {fileID: -278172320, guid: b4e3a874232bcc84dbc1e5474f1b404d, type: 3}
+      - {fileID: -1268168661, guid: b4e3a874232bcc84dbc1e5474f1b404d, type: 3}
+      - {fileID: 46625310, guid: b4e3a874232bcc84dbc1e5474f1b404d, type: 3}
+      TakeDamage:
+      - {fileID: -950167756, guid: 7edb77a3faaef9345bf65e8b0b7a141b, type: 3}
+      - {fileID: 2118483773, guid: 7edb77a3faaef9345bf65e8b0b7a141b, type: 3}
+      - {fileID: -1441682581, guid: 7edb77a3faaef9345bf65e8b0b7a141b, type: 3}
+      - {fileID: -1626633824, guid: 7edb77a3faaef9345bf65e8b0b7a141b, type: 3}
+      Death:
+      - {fileID: 334282337, guid: db7444338d29c3c4bad89aaca988da11, type: 3}
+      - {fileID: -1978380052, guid: db7444338d29c3c4bad89aaca988da11, type: 3}
+      - {fileID: 362964935, guid: db7444338d29c3c4bad89aaca988da11, type: 3}
+      - {fileID: -180231224, guid: db7444338d29c3c4bad89aaca988da11, type: 3}
+      - {fileID: -1350978658, guid: db7444338d29c3c4bad89aaca988da11, type: 3}
+      - {fileID: 1283587364, guid: db7444338d29c3c4bad89aaca988da11, type: 3}
+      - {fileID: -1883880346, guid: db7444338d29c3c4bad89aaca988da11, type: 3}
+      - {fileID: -641123023, guid: db7444338d29c3c4bad89aaca988da11, type: 3}
+      - {fileID: -877037418, guid: db7444338d29c3c4bad89aaca988da11, type: 3}
+    _price: 10
+    _reward: 0
+  - _definitionId: bot_01
+    _type: 1
+    _team: 2
+    _baseStats:
       Health: 1
       Damage: 1
-    Price: 0
-    Reward: 1
-  - CharacterType: 11
-    Team: 2
-    Icon: {fileID: 1294119602, guid: 55045297179c96b4db873fc76854c72f, type: 3}
-    Animations:
+    _icon: {fileID: 887015444, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
+    _animations:
       FrameRate: 8
       Idle:
-      - {fileID: 1294119602, guid: 55045297179c96b4db873fc76854c72f, type: 3}
-      - {fileID: 1428007513, guid: 55045297179c96b4db873fc76854c72f, type: 3}
-      - {fileID: -2110774634, guid: 55045297179c96b4db873fc76854c72f, type: 3}
-      - {fileID: -1903416709, guid: 55045297179c96b4db873fc76854c72f, type: 3}
+      - {fileID: 887015444, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
+      - {fileID: 1698060689, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
+      - {fileID: 1560299205, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
+      - {fileID: 1410732376, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
       Move:
-      - {fileID: -2109410096, guid: f65b3b2b2abe24546961f3552bfccf6e, type: 3}
-      - {fileID: 1223269391, guid: f65b3b2b2abe24546961f3552bfccf6e, type: 3}
-      - {fileID: -1099641013, guid: f65b3b2b2abe24546961f3552bfccf6e, type: 3}
-      - {fileID: 1673497960, guid: f65b3b2b2abe24546961f3552bfccf6e, type: 3}
-      DealDamage: []
+      - {fileID: 1878390317, guid: dff7594ed3e009e4ab3f1e299a407024, type: 3}
+      - {fileID: 1469474333, guid: dff7594ed3e009e4ab3f1e299a407024, type: 3}
+      - {fileID: 465366711, guid: dff7594ed3e009e4ab3f1e299a407024, type: 3}
+      - {fileID: 1303150586, guid: dff7594ed3e009e4ab3f1e299a407024, type: 3}
+      DealDamage:
+      - {fileID: 1878390317, guid: dff7594ed3e009e4ab3f1e299a407024, type: 3}
+      - {fileID: 1469474333, guid: dff7594ed3e009e4ab3f1e299a407024, type: 3}
+      - {fileID: 465366711, guid: dff7594ed3e009e4ab3f1e299a407024, type: 3}
+      - {fileID: 1303150586, guid: dff7594ed3e009e4ab3f1e299a407024, type: 3}
       TakeDamage:
-      - {fileID: -1442328479, guid: 0df37d995253f644c9dbf7f4cfb49bb1, type: 3}
-      - {fileID: -177713456, guid: 0df37d995253f644c9dbf7f4cfb49bb1, type: 3}
-      - {fileID: -765004839, guid: 0df37d995253f644c9dbf7f4cfb49bb1, type: 3}
-      - {fileID: 1567798489, guid: 0df37d995253f644c9dbf7f4cfb49bb1, type: 3}
+      - {fileID: -156579366, guid: ca8931d92ddd726409dc37cf0b334849, type: 3}
+      - {fileID: -1937428448, guid: ca8931d92ddd726409dc37cf0b334849, type: 3}
+      - {fileID: -196068646, guid: ca8931d92ddd726409dc37cf0b334849, type: 3}
+      - {fileID: -1378187043, guid: ca8931d92ddd726409dc37cf0b334849, type: 3}
       Death:
-      - {fileID: 1597903283, guid: f8f26cefec249b540b055a5e985d1f73, type: 3}
-      - {fileID: -860200141, guid: f8f26cefec249b540b055a5e985d1f73, type: 3}
-      - {fileID: 426132979, guid: f8f26cefec249b540b055a5e985d1f73, type: 3}
-      - {fileID: -1960784853, guid: f8f26cefec249b540b055a5e985d1f73, type: 3}
-      - {fileID: 1241110917, guid: f8f26cefec249b540b055a5e985d1f73, type: 3}
-      - {fileID: -748365459, guid: f8f26cefec249b540b055a5e985d1f73, type: 3}
-      - {fileID: -1727044215, guid: f8f26cefec249b540b055a5e985d1f73, type: 3}
-      - {fileID: -1602975808, guid: f8f26cefec249b540b055a5e985d1f73, type: 3}
-      - {fileID: 392177722, guid: f8f26cefec249b540b055a5e985d1f73, type: 3}
-    CharacterBaseStats:
+      - {fileID: 1066618812, guid: b210890c013de6248922467c724abccb, type: 3}
+      - {fileID: -1630914185, guid: b210890c013de6248922467c724abccb, type: 3}
+      - {fileID: -1982450812, guid: b210890c013de6248922467c724abccb, type: 3}
+      - {fileID: -1769082195, guid: b210890c013de6248922467c724abccb, type: 3}
+      - {fileID: -620074858, guid: b210890c013de6248922467c724abccb, type: 3}
+      - {fileID: -1604282544, guid: b210890c013de6248922467c724abccb, type: 3}
+      - {fileID: 1226034887, guid: b210890c013de6248922467c724abccb, type: 3}
+      - {fileID: -1258221810, guid: b210890c013de6248922467c724abccb, type: 3}
+      - {fileID: 1967620726, guid: b210890c013de6248922467c724abccb, type: 3}
+    _price: 0
+    _reward: 1
+  - _definitionId: bot_02
+    _type: 1
+    _team: 2
+    _baseStats:
+      Health: 1
+      Damage: 1
+    _icon: {fileID: -1890225929, guid: 980337c3ff0239b4d97875d49b0073f9, type: 3}
+    _animations:
+      FrameRate: 8
+      Idle:
+      - {fileID: -1890225929, guid: 980337c3ff0239b4d97875d49b0073f9, type: 3}
+      - {fileID: -1733851840, guid: 980337c3ff0239b4d97875d49b0073f9, type: 3}
+      - {fileID: -1952993355, guid: 980337c3ff0239b4d97875d49b0073f9, type: 3}
+      - {fileID: -1825957624, guid: 980337c3ff0239b4d97875d49b0073f9, type: 3}
+      Move:
+      - {fileID: -79523479, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
+      - {fileID: 1224015763, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
+      - {fileID: -902414937, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
+      - {fileID: 1927952801, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
+      DealDamage:
+      - {fileID: -79523479, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
+      - {fileID: 1224015763, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
+      - {fileID: -902414937, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
+      - {fileID: 1927952801, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
+      TakeDamage:
+      - {fileID: 1457859097, guid: d1f07a9f9fae7d04b94c1bfebba419e7, type: 3}
+      - {fileID: -1957316604, guid: d1f07a9f9fae7d04b94c1bfebba419e7, type: 3}
+      - {fileID: 1554054051, guid: d1f07a9f9fae7d04b94c1bfebba419e7, type: 3}
+      - {fileID: 502077999, guid: d1f07a9f9fae7d04b94c1bfebba419e7, type: 3}
+      Death:
+      - {fileID: -546279509, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
+      - {fileID: 874957174, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
+      - {fileID: -1155772071, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
+      - {fileID: 382250859, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
+      - {fileID: 1127937659, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
+      - {fileID: 748229712, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
+      - {fileID: -1099947577, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
+      - {fileID: 62154434, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
+      - {fileID: 1069945443, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
+    _price: 0
+    _reward: 1
+  - _definitionId: bot_03
+    _type: 1
+    _team: 2
+    _baseStats:
+      Health: 1
+      Damage: 1
+    _icon: {fileID: 81782087, guid: 6b57086601abd414db631dcb91637687, type: 3}
+    _animations:
+      FrameRate: 8
+      Idle:
+      - {fileID: 81782087, guid: 6b57086601abd414db631dcb91637687, type: 3}
+      - {fileID: 90917509, guid: 6b57086601abd414db631dcb91637687, type: 3}
+      - {fileID: 728499341, guid: 6b57086601abd414db631dcb91637687, type: 3}
+      - {fileID: -507888739, guid: 6b57086601abd414db631dcb91637687, type: 3}
+      Move:
+      - {fileID: 233076775, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
+      - {fileID: -1750938132, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
+      - {fileID: 1724425766, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
+      - {fileID: -2025467830, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
+      DealDamage:
+      - {fileID: 233076775, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
+      - {fileID: -1750938132, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
+      - {fileID: 1724425766, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
+      - {fileID: -2025467830, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
+      TakeDamage:
+      - {fileID: -797025369, guid: a391b2f298bed0a41a75c1cb317ba8c0, type: 3}
+      - {fileID: 1492783886, guid: a391b2f298bed0a41a75c1cb317ba8c0, type: 3}
+      - {fileID: 1951264573, guid: a391b2f298bed0a41a75c1cb317ba8c0, type: 3}
+      - {fileID: -337604960, guid: a391b2f298bed0a41a75c1cb317ba8c0, type: 3}
+      Death:
+      - {fileID: -142795214, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
+      - {fileID: 815536468, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
+      - {fileID: 524102831, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
+      - {fileID: -919975027, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
+      - {fileID: -72437095, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
+      - {fileID: -1551831844, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
+      - {fileID: -1071850690, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
+      - {fileID: 897723143, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
+      - {fileID: -1064223161, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
+    _price: 0
+    _reward: 1
+  - _definitionId: bot_04
+    _type: 1
+    _team: 2
+    _baseStats:
+      Health: 1
+      Damage: 1
+    _icon: {fileID: -974431293, guid: 89919de6bb3dc1d4790f8eab22e95cd1, type: 3}
+    _animations:
+      FrameRate: 8
+      Idle:
+      - {fileID: -974431293, guid: 89919de6bb3dc1d4790f8eab22e95cd1, type: 3}
+      - {fileID: 268167427, guid: 89919de6bb3dc1d4790f8eab22e95cd1, type: 3}
+      - {fileID: -143990670, guid: 89919de6bb3dc1d4790f8eab22e95cd1, type: 3}
+      - {fileID: -1717580314, guid: 89919de6bb3dc1d4790f8eab22e95cd1, type: 3}
+      Move:
+      - {fileID: 1118462918, guid: 97594eec5c19c704494377f81668e7af, type: 3}
+      - {fileID: -24773449, guid: 97594eec5c19c704494377f81668e7af, type: 3}
+      - {fileID: 792680285, guid: 97594eec5c19c704494377f81668e7af, type: 3}
+      - {fileID: 1453201939, guid: 97594eec5c19c704494377f81668e7af, type: 3}
+      DealDamage:
+      - {fileID: 1118462918, guid: 97594eec5c19c704494377f81668e7af, type: 3}
+      - {fileID: -24773449, guid: 97594eec5c19c704494377f81668e7af, type: 3}
+      - {fileID: 792680285, guid: 97594eec5c19c704494377f81668e7af, type: 3}
+      - {fileID: 1453201939, guid: 97594eec5c19c704494377f81668e7af, type: 3}
+      TakeDamage:
+      - {fileID: 1924515618, guid: b0af57d440d1c334ba6e7853a78b08af, type: 3}
+      - {fileID: 1581950067, guid: b0af57d440d1c334ba6e7853a78b08af, type: 3}
+      - {fileID: 1793284396, guid: b0af57d440d1c334ba6e7853a78b08af, type: 3}
+      - {fileID: 1740590745, guid: b0af57d440d1c334ba6e7853a78b08af, type: 3}
+      Death:
+      - {fileID: 2040848888, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
+      - {fileID: 1646285558, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
+      - {fileID: 1074690109, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
+      - {fileID: -1495442305, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
+      - {fileID: 788352455, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
+      - {fileID: 349426179, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
+      - {fileID: 400252038, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
+      - {fileID: 1294297030, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
+      - {fileID: -1914220446, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
+    _price: 0
+    _reward: 1
+  - _definitionId: bot_05
+    _type: 1
+    _team: 2
+    _baseStats:
       Health: 2
       Damage: 1
-    Price: 0
-    Reward: 2
+    _icon: {fileID: 446621925, guid: a104535298e36084f9050790c8aab3a4, type: 3}
+    _animations:
+      FrameRate: 8
+      Idle:
+      - {fileID: 446621925, guid: a104535298e36084f9050790c8aab3a4, type: 3}
+      - {fileID: -1573330969, guid: a104535298e36084f9050790c8aab3a4, type: 3}
+      - {fileID: -1464208231, guid: a104535298e36084f9050790c8aab3a4, type: 3}
+      - {fileID: -909981418, guid: a104535298e36084f9050790c8aab3a4, type: 3}
+      Move:
+      - {fileID: -76112747, guid: 72565ba27bde7a443894a2cbbbf8838f, type: 3}
+      - {fileID: 903993462, guid: 72565ba27bde7a443894a2cbbbf8838f, type: 3}
+      - {fileID: -298301570, guid: 72565ba27bde7a443894a2cbbbf8838f, type: 3}
+      - {fileID: -21821378, guid: 72565ba27bde7a443894a2cbbbf8838f, type: 3}
+      DealDamage:
+      - {fileID: -76112747, guid: 72565ba27bde7a443894a2cbbbf8838f, type: 3}
+      - {fileID: 903993462, guid: 72565ba27bde7a443894a2cbbbf8838f, type: 3}
+      - {fileID: -298301570, guid: 72565ba27bde7a443894a2cbbbf8838f, type: 3}
+      - {fileID: -21821378, guid: 72565ba27bde7a443894a2cbbbf8838f, type: 3}
+      TakeDamage:
+      - {fileID: 1763848423, guid: e89ad38704c7b694a9d8ed4319fffc83, type: 3}
+      - {fileID: -472957294, guid: e89ad38704c7b694a9d8ed4319fffc83, type: 3}
+      - {fileID: -1501136707, guid: e89ad38704c7b694a9d8ed4319fffc83, type: 3}
+      - {fileID: -809765529, guid: e89ad38704c7b694a9d8ed4319fffc83, type: 3}
+      Death:
+      - {fileID: -351109269, guid: 21e8a04c0cfaa4e47b39f5a0d66f4fab, type: 3}
+      - {fileID: 395557448, guid: 21e8a04c0cfaa4e47b39f5a0d66f4fab, type: 3}
+      - {fileID: -1431958334, guid: 21e8a04c0cfaa4e47b39f5a0d66f4fab, type: 3}
+      - {fileID: 11928568, guid: 21e8a04c0cfaa4e47b39f5a0d66f4fab, type: 3}
+      - {fileID: 95057380, guid: 21e8a04c0cfaa4e47b39f5a0d66f4fab, type: 3}
+      - {fileID: -1061155525, guid: 21e8a04c0cfaa4e47b39f5a0d66f4fab, type: 3}
+      - {fileID: 1790589809, guid: 21e8a04c0cfaa4e47b39f5a0d66f4fab, type: 3}
+      - {fileID: 1656059318, guid: 21e8a04c0cfaa4e47b39f5a0d66f4fab, type: 3}
+      - {fileID: 1951671949, guid: 21e8a04c0cfaa4e47b39f5a0d66f4fab, type: 3}
+      - {fileID: -902319953, guid: 21e8a04c0cfaa4e47b39f5a0d66f4fab, type: 3}
+      - {fileID: 442657344, guid: 21e8a04c0cfaa4e47b39f5a0d66f4fab, type: 3}
+    _price: 0
+    _reward: 2

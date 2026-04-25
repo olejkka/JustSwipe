@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8603040009cc4cfe8c99e3f8ccd2ed16, type: 3}
   m_Name: Initial Gameplay
   m_EditorClassIdentifier: 
-  MaxPlayerCharactersCount: 4
-  MoneyCount: 5
-  PlayerCharacter: 1
-  BotCharacter: 10
+  _playerCharacter: player_01
+  _botCharacter: bot_01
+  _maxPlayerCharactersCount: 4
+  _moneyCount: 0

@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Creators;
@@ -16,7 +17,7 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
         private readonly CharacterPurchaseService _characterPurchaseService;
         private readonly EventBus _eventBus;
 
-        private CharacterEntry _currentEntry;
+        private CharacterDefinition _currentEntry;
 
         public CharacterPurchaseCasePresenter(
             CharacterPurchaseCaseView view,
@@ -60,14 +61,14 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
             _view.SetData(
                 _currentEntry.Icon,
                 _currentEntry.Price,
-                _currentEntry.CharacterBaseStats.Health,
-                _currentEntry.CharacterBaseStats.Damage
+                _currentEntry.BaseStats.Health,
+                _currentEntry.BaseStats.Damage
             );
         }
 
         private void OnPurchaseClicked()
         {
-            if (!_characterPurchaseService.TryPurchase(_currentEntry.CharacterType, _currentEntry.Price))
+            if (!_characterPurchaseService.TryPurchase(_currentEntry.DefinitionId, _currentEntry.Price))
                 return;
 
             RefreshCase();

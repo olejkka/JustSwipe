@@ -11,7 +11,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
 {
     public class BotTurnState : State
     {
-        private readonly CharacterSpawnChancesConfig _characterSpawnChancesConfig;
+        private readonly BotSpawnChancesConfig _botSpawnChancesConfig;
         private readonly BotMoveCreator _botMoveCreator;
         private readonly CharactersMover _charactersMover;
         private readonly CharacterCreator _characterCreator;
@@ -20,12 +20,14 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
 
         public BotTurnState(
             IReadOnlyList<ITransition> transitions,
+            BotSpawnChancesConfig botSpawnChancesConfig,
             BotMoveCreator botMoveCreator,
             CharactersMover charactersMover,
             CharacterCreator characterCreator,
             CharactersStorage charactersStorage
         ) : base(transitions)
         {
+            _botSpawnChancesConfig = botSpawnChancesConfig;
             _botMoveCreator = botMoveCreator;
             _charactersMover = charactersMover;
             _characterCreator = characterCreator;
@@ -40,18 +42,18 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
 
         public override void Exit()
         {
-            if (Random.value < _characterSpawnChancesConfig.SpawnChanceOneCharacter)
+            if (Random.value < _botSpawnChancesConfig.SpawnChanceOneCharacter)
             {
-                _characterCreator.CreateOnRandomPos(CharacterType.Bot_1);
+                _characterCreator.CreateOnRandomPos(_botSpawnChancesConfig.GetRandomDefaultBot());
             }
-            else if (Random.value < _characterSpawnChancesConfig.SpawnChanceTwoCharacter)
+            else if (Random.value < _botSpawnChancesConfig.SpawnChanceTwoCharacters)
             {
-                _characterCreator.CreateOnRandomPos(CharacterType.Bot_1);
-                _characterCreator.CreateOnRandomPos(CharacterType.Bot_2);
+                _characterCreator.CreateOnRandomPos(_botSpawnChancesConfig.GetRandomDefaultBot());
+                _characterCreator.CreateOnRandomPos(_botSpawnChancesConfig.GetRandomSecondaryBot());
             }
             
             if (!_charactersStorage.GetCharactersByTeam(Team.Bot).Any())
-                _characterCreator.CreateOnRandomPos(CharacterType.Bot_2);
+                _characterCreator.CreateOnRandomPos(_botSpawnChancesConfig.GetRandomDefaultBot());
         }
 
         public override void Update() { }

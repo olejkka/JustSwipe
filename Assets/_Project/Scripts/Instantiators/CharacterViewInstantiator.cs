@@ -38,7 +38,7 @@ namespace _Project.Scripts.Instantiators
             var cell = new Vector3Int(character.Position.x, character.Position.y, 0);
             var worldPos = _tilemap.CellToWorld(cell);
 
-            var entry = _charactersConfig.GetEntry(character.CharacterType);
+            var entry = _charactersConfig.GetEntryByDefinitionId(character.DefinitionId);
             
             if (
                 entry == null || 

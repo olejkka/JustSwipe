@@ -56,7 +56,7 @@ namespace _Project.Scripts.UI.CharacterCase
             
             _assignedCharacter.OnHealthChanged += OnHealthChanged;
             
-            var entry = _charactersConfig.GetEntry(character.CharacterType);
+            var entry = _charactersConfig.GetEntryByDefinitionId(character.DefinitionId);
             if (entry != null)
             {
                 _view.SetIcon(entry.Icon);

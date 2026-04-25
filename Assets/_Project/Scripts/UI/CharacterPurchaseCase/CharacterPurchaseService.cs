@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Configs;
@@ -35,13 +36,13 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
                    _initialGameplayConfig.MaxPlayerCharactersCount;
         }
 
-        public bool TryPurchase(CharacterType characterType, int price)
+        public bool TryPurchase(string definitionId, int price)
         {
             if (!CanPurchase(price))
                 return false;
 
             _gameplayMoney.ChangeAmount(-price);
-            _characterCreator.CreateOnRandomPos(characterType);
+            _characterCreator.CreateOnRandomPos(definitionId);
             return true;
         }
     }

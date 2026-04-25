@@ -38,7 +38,7 @@ namespace _Project.Scripts.Characters
             if (e.Character.Team == Team.Player) 
                 return;
 
-            var entry = _charactersConfig.GetEntry(e.Character.CharacterType);
+            var entry = _charactersConfig.GetEntryByDefinitionId(e.Character.DefinitionId);
             _gameplayMoney.ChangeAmount(entry.Reward);
         }
     }

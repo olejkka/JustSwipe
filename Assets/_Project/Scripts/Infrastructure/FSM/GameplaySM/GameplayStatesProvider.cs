@@ -4,6 +4,7 @@ using System.Linq;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
+using _Project.Scripts.Configs;
 using _Project.Scripts.Creators;
 using _Project.Scripts.Infrastructure.Events;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM.States;
@@ -18,6 +19,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
         private readonly CharactersMover _charactersMover;
         private readonly CharacterCreator _characterCreator;
         private readonly CharactersStorage _charactersStorage;
+        private readonly BotSpawnChancesConfig _botSpawnChancesConfig;
 
 
         public GameplayStatesProvider(
@@ -25,7 +27,8 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
             BotMoveCreator botMoveCreator,
             CharactersMover charactersMover,
             CharacterCreator characterCreator,
-            CharactersStorage charactersStorage
+            CharactersStorage charactersStorage,
+            BotSpawnChancesConfig botSpawnChancesConfig
         )
         {
             _eventBus = eventBus;
@@ -33,6 +36,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
             _charactersMover = charactersMover;
             _characterCreator = characterCreator;
             _charactersStorage = charactersStorage;
+            _botSpawnChancesConfig = botSpawnChancesConfig;
         }
         
         public IReadOnlyList<IState> GetStates()
@@ -53,6 +57,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                     new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any()),
                     new EventTransition<BotMoveCompletedEvent, PlayerTurnState>(_eventBus),
                 },
+                _botSpawnChancesConfig,
                 _botMoveCreator,
                 _charactersMover,
                 _characterCreator,

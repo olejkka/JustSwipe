@@ -1,6 +1,7 @@
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
+using _Project.Scripts.Creators.Generators;
 using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM;
 using _Project.Scripts.InputHandlers;
@@ -42,6 +43,9 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<PositionsCreator>(Lifetime.Singleton);
             builder.Register<CharacterCreator>(Lifetime.Singleton);
             builder.Register<BotMoveCreator>(Lifetime.Singleton);
+            
+            // Generators
+            builder.Register<CharacterInstanceIdGenerator>(Lifetime.Singleton);
 
             //Storages
             builder.Register<TilesPositionsStorage>(Lifetime.Singleton);
