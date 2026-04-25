@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using _Project.Scripts.Characters;
 using UnityEngine;
 
 namespace _Project.Scripts.Configs

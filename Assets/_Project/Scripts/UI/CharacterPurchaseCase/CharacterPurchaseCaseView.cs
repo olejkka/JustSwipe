@@ -30,7 +30,7 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
             _characterCaseView.SetHealth(health);
             _characterCaseView.SetDamage(damage);
 
-            _priceText.text = $"${price}";
+            _priceText.text = $"{price}";
         }
 
         private void HandlePurchaseClick() => OnPurchaseClicked?.Invoke();

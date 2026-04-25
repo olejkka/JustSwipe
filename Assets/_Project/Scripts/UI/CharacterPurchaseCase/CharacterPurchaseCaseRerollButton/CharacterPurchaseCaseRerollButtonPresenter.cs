@@ -44,7 +44,8 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollB
         {
             if (!_rerollPurchaseService.TryPurchase(_gameplayEconomyConfig.RerollPrice))
                 return;
-            
+
+            _view.RotateImage();
             _eventBus.Publish(new CharacterPurchaseCaseRerollEvent());
         }
     }
