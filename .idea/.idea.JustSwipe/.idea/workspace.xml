@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/GameplaySM/States/State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/GameplaySM/States/State.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,13 +22,17 @@
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterDefinition.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Structs/Team.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Creators/PositionsCreator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/ApplicationQuitHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Audio/AudioEventHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Events/ApplicationQuitRequestedEvent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/Events/StartGameplayEvent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/LifetimeScopes/GameplayLifetimeScope.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Tiles/TilesPositionsStorage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/CharacterPurchaseCase/CharacterPurchaseCasePresenter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/SettingsButton/SettingsButtonPresenter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/SettingsButton/SettingsButtonView.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/SettingsPopup/MenuSettingsPopupPresenter.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/UI/SettingsPopup/MenuSettingsPopupView.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/jp.hadashikick.vcontainer@19ee6e1cc8be/Runtime/ContainerBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/jp.hadashikick.vcontainer@19ee6e1cc8be/Runtime/IObjectResolverExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/jp.hadashikick.vcontainer@19ee6e1cc8be/Runtime/Internal/InstanceProviders/CollectionInstanceProvider.cs" root0="SKIP_HIGHLIGHTING" />
@@ -252,6 +256,7 @@
       <workItem from="1777100304821" duration="6166000" />
       <workItem from="1777111349650" duration="7513000" />
       <workItem from="1777138188247" duration="600000" />
+      <workItem from="1777291111512" duration="12335000" />
     </task>
     <servers />
   </component>

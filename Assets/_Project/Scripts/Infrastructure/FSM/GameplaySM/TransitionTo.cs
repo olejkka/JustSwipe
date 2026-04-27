@@ -19,8 +19,8 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
             return _condition();
         }
 
-        public void Reset()
-        {
-        }
+        public void Reset() { }
+        public void Activate() { }
+        public void Deactivate() { }
     }
 }

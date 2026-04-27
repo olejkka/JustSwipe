@@ -22,7 +22,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
             _eventBus.Publish(new ReturnToMenuRequestedEvent());
         }
 
-        public override void Exit() { }
+        protected override void OnExit() { }
 
         public override void Update() { }
     }

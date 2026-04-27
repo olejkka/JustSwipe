@@ -27,7 +27,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
             _eventBus.Subscribe<SwipeEvent>(OnSwipe);
         }
 
-        public override void Exit()
+        protected override void OnExit()
         {
             _eventBus.Unsubscribe<SwipeEvent>(OnSwipe);
         }

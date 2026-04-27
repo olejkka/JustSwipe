@@ -15,14 +15,24 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
         public void Enter()
         {
             foreach (var transition in _transitions)
+            {
                 transition.Reset();
+                transition.Activate();
+            }
 
             OnEnter();
         }
 
+        public void Exit()
+        {
+            foreach (var transition in _transitions)
+                transition.Deactivate();
+            
+            OnExit();
+        }
+        
         protected abstract void OnEnter();
-
-        public abstract void Exit();
+        protected virtual void OnExit() { }
 
         public abstract void Update();
 

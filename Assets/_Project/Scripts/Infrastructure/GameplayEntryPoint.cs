@@ -43,6 +43,7 @@ namespace _Project.Scripts.Infrastructure
 
         public void Dispose()
         {
+            _stateMachine.Stop();
             _eventBus.Unsubscribe<StartGameplayEvent>(OnStartGameplay);
         }
         

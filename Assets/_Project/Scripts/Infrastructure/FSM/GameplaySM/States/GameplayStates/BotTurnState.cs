@@ -40,7 +40,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
             _charactersMover.Move(direction, Team.Bot);
         }
 
-        public override void Exit()
+        protected override void OnExit()
         {
             if (Random.value < _botSpawnChancesConfig.SpawnChanceOneCharacter)
             {

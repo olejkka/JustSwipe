@@ -7,13 +7,13 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
     {
         private readonly EventBus _eventBus;
         private bool _triggered;
+        private bool _active;
 
         public Type NextState => typeof(TState);
 
         public EventTransition(EventBus eventBus)
         {
             _eventBus = eventBus;
-            _eventBus.Subscribe<TEvent>(OnEvent);
         }
 
         public bool CanTransit() => _triggered;
@@ -21,6 +21,24 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
         private void OnEvent(TEvent e)
         {
             _triggered = true;
+        }
+        
+        public void Activate()
+        {
+            if (_active)
+                return;
+            
+            _active = true;
+            _eventBus.Subscribe<TEvent>(OnEvent);
+        }
+        
+        public void Deactivate()
+        {
+            if (!_active)
+                return;
+            
+            _active = false;
+            _eventBus.Unsubscribe<TEvent>(OnEvent);
         }
         
         public void Reset()

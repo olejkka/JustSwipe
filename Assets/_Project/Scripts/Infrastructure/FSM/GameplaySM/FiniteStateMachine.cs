@@ -39,5 +39,11 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
             if (_currentState.TryGetNextState(out Type type))
                 EnterState(type);
         }
+        
+        public void Stop()
+        {
+            _currentState?.Exit();
+            _currentState = null;
+        }
     }
 }
