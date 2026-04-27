@@ -7,6 +7,8 @@ namespace _Project.Scripts.Infrastructure.Audio
 {
     public class AudioService : MonoBehaviour
     {
+        private const string MutedKey = "Audio.Muted";
+        
         private static AudioService _instance;
 
         private AudioConfig _config;
@@ -17,7 +19,7 @@ namespace _Project.Scripts.Infrastructure.Audio
         private bool _muted;
         private float _musicLogicalVolume = 1f;
         
-        public bool Muted { get => _muted; set => _muted = value; }
+        public bool Muted { get => _muted; private set => _muted = value; }
         
         
         [Inject]
@@ -36,16 +38,21 @@ namespace _Project.Scripts.Infrastructure.Audio
 
             _musicSource = CreateSource("MusicSource", loop: true);
             _sfx2DSource = CreateSource("Sfx2DSource", loop: false);
+            
+            var muted = PlayerPrefs.GetInt(MutedKey, 0) == 1;
+            SetMuted(muted, save: false);
         }
 
-        public void SetMuted(bool muted)
+        public void SetMuted(bool muted, bool save = true)
         {
-            Muted = muted;
-            
+            _muted = muted;
             _musicSource.mute = muted;
             _sfx2DSource.mute = muted;
-            
             ApplyMusicVolume();
+            if (!save)
+                return;
+            PlayerPrefs.SetInt(MutedKey, muted ? 1 : 0);
+            PlayerPrefs.Save();
         }
         
         private void ApplyMusicVolume()
@@ -69,14 +76,6 @@ namespace _Project.Scripts.Infrastructure.Audio
                 StopCoroutine(_musicTransitionCoroutine);
 
             _musicTransitionCoroutine = StartCoroutine(PlayMusicRoutine(entries, startIndex, loop, fadeOutSeconds, fadeInSeconds));
-        }
-
-        public void StopMusic(float fadeOutSeconds = 0.5f)
-        {
-            if (_musicTransitionCoroutine != null)
-                StopCoroutine(_musicTransitionCoroutine);
-
-            _musicTransitionCoroutine = StartCoroutine(StopMusicRoutine(fadeOutSeconds));
         }
 
         public void PlaySfx(SoundId id)
@@ -187,8 +186,7 @@ namespace _Project.Scripts.Infrastructure.Audio
 
             int index;
             
-            do
-                index = Random.Range(0, count);
+            do index = Random.Range(0, count);
             while (index == excludedIndex);
 
             return index;
