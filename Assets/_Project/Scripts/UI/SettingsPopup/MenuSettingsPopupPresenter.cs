@@ -6,24 +6,27 @@ using VContainer.Unity;
 
 namespace _Project.Scripts.UI.SettingsPopup
 {
-    public class SettingsPopupPresenter : IStartable, IDisposable
+    public class MenuSettingsPopupPresenter : IStartable, IDisposable
     {
         private readonly EventBus _eventBus;
-        private readonly SettingsPopupView _view;
+        private readonly MenuSettingsPopupView _view;
         private readonly AudioService _audioService;
+        private readonly PauseService _pauseService;
 
         private bool _isPopupOpen;
 
         
-        public SettingsPopupPresenter(
+        public MenuSettingsPopupPresenter(
             EventBus eventBus,
-            SettingsPopupView view,
-            AudioService audioService
+            MenuSettingsPopupView view,
+            AudioService audioService,
+            PauseService pauseService
             )
         {
             _eventBus = eventBus;
             _view = view;
             _audioService = audioService;
+            _pauseService = pauseService;
         }
 
         public void Start()
@@ -31,7 +34,7 @@ namespace _Project.Scripts.UI.SettingsPopup
             _eventBus.Subscribe<SettingsButtonToggleEvent>(OnSettingsButtonToggle);
             
             _view.ClosureAreaClicked += OnClosureAreaClicked;
-            _view.ReturnToMenuClicked += OnReturnToMenuClicked;
+            _view.ApplicationQuitClicked += OnApplicationQuitClicked;
             _view.ToggleSoundClicked += OnToggleSoundClicked;
             
             _view.ToggleSoundIcons(_audioService.Muted);
@@ -42,33 +45,45 @@ namespace _Project.Scripts.UI.SettingsPopup
             _eventBus.Unsubscribe<SettingsButtonToggleEvent>(OnSettingsButtonToggle);
             
             _view.ClosureAreaClicked -= OnClosureAreaClicked;
-            _view.ReturnToMenuClicked -= OnReturnToMenuClicked;
+            _view.ApplicationQuitClicked -= OnApplicationQuitClicked;
             _view.ToggleSoundClicked -= OnToggleSoundClicked;
-
         }
 
         private void OnSettingsButtonToggle(SettingsButtonToggleEvent _)
         {
-            _isPopupOpen = !_isPopupOpen;
-            _view.ToggleActive(_isPopupOpen);
+            if (_isPopupOpen)
+                Close();
+            else
+                Open();
         }
 
+        private void Open()
+        {
+            _isPopupOpen = true;
+            _view.ToggleActive(true);
+            _pauseService.Pause();
+        }
+        
+        private void Close()
+        {
+            _isPopupOpen = false;
+            _view.ToggleActive(false);
+            _pauseService.Resume();
+        }
+        
         private void OnClosureAreaClicked()
         {
-            _isPopupOpen = false;
-            _view.ToggleActive(false);
+            Close();
         }
-
-        private void OnReturnToMenuClicked()
+        
+        private void OnApplicationQuitClicked()
         {
-            _isPopupOpen = false;
-            _view.ToggleActive(false);
-            _eventBus.Publish(new ReturnToMenuEvent());
+            _eventBus.Publish(new ApplicationQuitRequestedEvent());
         }
 
         private void OnToggleSoundClicked()
         {
-            _eventBus.Publish(new ToggleMuteEvent());
+            _audioService.SetMuted(!_audioService.Muted);
             _view.ToggleSoundIcons(_audioService.Muted);
         }
     }

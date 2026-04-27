@@ -15,7 +15,7 @@ namespace _Project.Scripts.Characters
         public int Damage { get; private set; }
         public Character LastDamageSource { get; private set; }
         
-        public event Action<Vector2Int> OnPositionChanged;
+        public event Action<Vector2Int, Vector2Int> OnPositionChanged;
         public event Action<int> OnHealthChanged;
         
         
@@ -39,7 +39,7 @@ namespace _Project.Scripts.Characters
         {
             Position += vector;
             
-            OnPositionChanged?.Invoke(Position);
+            OnPositionChanged?.Invoke(Position, vector);
         }
 
         public void TakeDamage(int amount, Character source = null)

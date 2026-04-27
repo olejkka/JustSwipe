@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace _Project.Scripts.UI.SettingsPopup
 {
-    public class SettingsPopupView : MonoBehaviour
+    public class GameplaySettingsPopupView : MonoBehaviour
     {
         [SerializeField] private GameObject _container;
         [SerializeField] private Button _closureArea;
@@ -52,9 +52,6 @@ namespace _Project.Scripts.UI.SettingsPopup
 
         private void OnClosureAreaClicked() => ClosureAreaClicked?.Invoke();
         private void OnReturnToMenuClicked() => ReturnToMenuClicked?.Invoke();
-        private void OnToggleSoundClicked()
-        {
-            ToggleSoundClicked?.Invoke();
-        }
+        private void OnToggleSoundClicked() => ToggleSoundClicked?.Invoke();
     }
 }

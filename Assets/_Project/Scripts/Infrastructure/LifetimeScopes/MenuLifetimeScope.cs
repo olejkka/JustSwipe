@@ -13,12 +13,12 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             //Views
             builder.RegisterComponentInHierarchy<PlayButtonView>();
             builder.RegisterComponentInHierarchy<SettingsButtonView>();
-            builder.RegisterComponentInHierarchy<SettingsPopupView>();
+            builder.RegisterComponentInHierarchy<MenuSettingsPopupView>();
             
             //Presenters
             builder.RegisterEntryPoint<PlayButtonPresenter>();
             builder.RegisterEntryPoint<SettingsButtonPresenter>();
-            builder.RegisterEntryPoint<SettingsPopupPresenter>();
+            builder.RegisterEntryPoint<MenuSettingsPopupPresenter>();
         }
     }
 }

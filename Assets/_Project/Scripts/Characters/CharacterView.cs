@@ -37,18 +37,9 @@ namespace _Project.Scripts.Characters
 
             _data.OnPositionChanged += OnMoved;
             _data.OnHealthChanged += OnHealthChanged;
-            _eventBus.Subscribe<SwipeEvent>(OnSwipe);
 
             PlayIdle();
             UpdatePosition(_data.Position);
-        }
-        
-        private void OnSwipe(SwipeEvent e)
-        {
-            if (e.Direction.x > 0)
-                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            else if (e.Direction.x < 0)
-                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
 
         private void PlayIdle()
@@ -114,8 +105,9 @@ namespace _Project.Scripts.Characters
                 returnToIdleOnFinish: false);
         }
 
-        private void OnMoved(Vector2Int pos)
+        private void OnMoved(Vector2Int pos, Vector2Int direction)
         {
+            UpdateRotation(direction);
             UpdatePosition(pos);
             TryPlayOneShot(CharacterAnimationType.Move, _animations.Move);
         }
@@ -130,12 +122,19 @@ namespace _Project.Scripts.Characters
             var cell = new Vector3Int(pos.x, pos.y, 0);
             transform.position = _tilemap.CellToWorld(cell);
         }
+        
+        private void UpdateRotation(Vector2Int direction)
+        {
+            if (direction.x > 0)
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            else if (direction.x < 0)
+                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
 
         private void OnDestroy()
         {
             _data.OnPositionChanged -= OnMoved;
             _data.OnHealthChanged -= OnHealthChanged;
-            _eventBus?.Unsubscribe<SwipeEvent>(OnSwipe);
         }
     }
 }

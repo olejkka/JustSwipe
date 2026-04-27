@@ -19,7 +19,7 @@ namespace _Project.Scripts.Infrastructure.FSM.ProjectSM
         public async void Start()
         {
             _eventBus.Subscribe<PlayClickedEvent>(OnPlayClicked);
-            _eventBus.Subscribe<ReturnToMenuEvent>(OnReturnToMenu);
+            _eventBus.Subscribe<ReturnToMenuRequestedEvent>(OnReturnToMenu);
 
             await _stateMachine.EnterState<InitializationState>();
             await _stateMachine.EnterState<MenuState>();
@@ -28,7 +28,7 @@ namespace _Project.Scripts.Infrastructure.FSM.ProjectSM
         public void Dispose()
         {
             _eventBus.Unsubscribe<PlayClickedEvent>(OnPlayClicked);
-            _eventBus.Unsubscribe<ReturnToMenuEvent>(OnReturnToMenu);
+            _eventBus.Unsubscribe<ReturnToMenuRequestedEvent>(OnReturnToMenu);
         }
 
         private async void OnPlayClicked(PlayClickedEvent e)
@@ -36,7 +36,7 @@ namespace _Project.Scripts.Infrastructure.FSM.ProjectSM
             await _stateMachine.EnterState<GameplayState>();
         }
 
-        private async void OnReturnToMenu(ReturnToMenuEvent e)
+        private async void OnReturnToMenu(ReturnToMenuRequestedEvent e)
         {
             await _stateMachine.EnterState<MenuState>();
         }

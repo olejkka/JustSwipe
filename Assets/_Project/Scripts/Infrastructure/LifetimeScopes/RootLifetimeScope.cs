@@ -23,8 +23,10 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<SceneLoader>(Lifetime.Singleton);
             
             builder.RegisterEntryPoint<AudioEventHandler>();
-
+            builder.RegisterEntryPoint<ApplicationQuitHandler>();
+            
             builder.Register<ProjectStatesProvider>(Lifetime.Singleton);
+            builder.Register<PauseService>(Lifetime.Singleton);
             
             builder.Register<ProjectStateMachine>(container =>
             {

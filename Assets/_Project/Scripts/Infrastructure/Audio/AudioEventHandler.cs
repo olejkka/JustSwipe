@@ -22,7 +22,6 @@ namespace _Project.Scripts.Infrastructure.Audio
         {
             _eventBus.Subscribe<MenuEnteredEvent>(OnMenuEnteredEvent);
             _eventBus.Subscribe<StartGameplayEvent>(OnStartGameplayEvent);
-            _eventBus.Subscribe<ToggleMuteEvent>(OnToggleSoundEvent);
             _eventBus.Subscribe<SwipeEvent>(OnSwipe);
             _eventBus.Subscribe<CharacterDiedEvent>(OnCharacterDied);
         }
@@ -31,7 +30,6 @@ namespace _Project.Scripts.Infrastructure.Audio
         {
             _eventBus.Unsubscribe<MenuEnteredEvent>(OnMenuEnteredEvent);
             _eventBus.Unsubscribe<StartGameplayEvent>(OnStartGameplayEvent);
-            _eventBus.Unsubscribe<ToggleMuteEvent>(OnToggleSoundEvent);
             _eventBus.Unsubscribe<SwipeEvent>(OnSwipe);
             _eventBus.Unsubscribe<CharacterDiedEvent>(OnCharacterDied);
         }
@@ -44,11 +42,6 @@ namespace _Project.Scripts.Infrastructure.Audio
         private void OnStartGameplayEvent(StartGameplayEvent e)
         {
             _audioService.PlayMusic(SoundId.GameplayMusic);
-        }
-
-        private void OnToggleSoundEvent(ToggleMuteEvent e)
-        {
-            _audioService.SetMuted(!_audioService.Muted);
         }
         
         private void OnSwipe(SwipeEvent e)

@@ -19,7 +19,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
 
         protected override void OnEnter()
         {
-            _eventBus.Publish(new ReturnToMenuEvent());
+            _eventBus.Publish(new ReturnToMenuRequestedEvent());
         }
 
         public override void Exit() { }

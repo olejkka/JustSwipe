@@ -1,6 +1,6 @@
 ﻿namespace _Project.Scripts.Infrastructure.Events
 {
-    public class ToggleMuteEvent
+    public class ApplicationQuitRequestedEvent
     {
         
     }

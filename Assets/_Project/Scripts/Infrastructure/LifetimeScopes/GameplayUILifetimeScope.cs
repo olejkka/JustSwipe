@@ -24,7 +24,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.RegisterComponentInHierarchy<CharacterPurchaseCaseRerollButtonView>();
             
             builder.RegisterComponentInHierarchy<SettingsButtonView>();
-            builder.RegisterComponentInHierarchy<SettingsPopupView>();
+            builder.RegisterComponentInHierarchy<GameplaySettingsPopupView>();
             
             //Presenters
             builder.RegisterEntryPoint<CharacterPurchaseCasePresenter>();
@@ -32,7 +32,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.RegisterEntryPoint<MoneyPresenter>();
             
             builder.RegisterEntryPoint<SettingsButtonPresenter>();
-            builder.RegisterEntryPoint<SettingsPopupPresenter>();
+            builder.RegisterEntryPoint<GameplaySettingsPopupPresenter>();
         }
     }
 }

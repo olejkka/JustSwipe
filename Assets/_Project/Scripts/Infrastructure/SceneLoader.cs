@@ -8,13 +8,13 @@ namespace _Project.Scripts.Infrastructure
     {
         public async Task LoadMenu()
         {
-            await SceneManager.LoadSceneAsync("Menu", LoadSceneMode.Additive);
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName("Menu"));
+            await SceneManager.LoadSceneAsync("MenuUI", LoadSceneMode.Additive);
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("MenuUI"));
         }
 
         public async Task UnloadMenu()
         {
-            await SceneManager.UnloadSceneAsync("Menu");
+            await SceneManager.UnloadSceneAsync("MenuUI");
         }
 
         public async Task LoadGameplay()
