@@ -63,8 +63,6 @@ namespace _Project.Scripts.Characters
                 _eventBus.Publish(new PlayerMoveCompletedEvent());
             else
                 _eventBus.Publish(new BotMoveCompletedEvent());
-
-            _eventBus.Publish(new CharactersMovedEvent());
         }
         
         private void KillCharactersOutOfBounds()
