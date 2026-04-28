@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/RandomUIImageMover.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/RandomUIImageMover.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Configs/Characters.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Configs/Characters.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Gameplay.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/GameplayUI.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/GameplayUI.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/MenuUI.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/MenuUI.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Sprites/UI/Gameplay_Background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Sprites/UI/Gameplay_Background.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/PauseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/PauseService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,7 +260,7 @@
       <workItem from="1777138188247" duration="600000" />
       <workItem from="1777291111512" duration="12335000" />
       <workItem from="1777316555888" duration="3787000" />
-      <workItem from="1777355605407" duration="2526000" />
+      <workItem from="1777355605407" duration="3136000" />
     </task>
     <servers />
   </component>

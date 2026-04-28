@@ -18,8 +18,11 @@ namespace _Project.Scripts.InputHandlers
 
         private void Update()
         {
-            if (_pauseService.IsPaused)
+            if (_pauseService.IsGameplayInputBlocked)
+            {
+                swiping = false;
                 return;
+            }
             
             foreach (var t in UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches)
             {
