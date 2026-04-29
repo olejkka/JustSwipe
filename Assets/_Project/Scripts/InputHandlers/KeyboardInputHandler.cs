@@ -1,5 +1,6 @@
 ﻿using _Project.Scripts.Infrastructure;
-using _Project.Scripts.Infrastructure.Events;
+using _Project.Scripts.Infrastructure.EventBus;
+using _Project.Scripts.Infrastructure.EventBus.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;

@@ -2,7 +2,7 @@
 using _Project.Scripts.Configs;
 using _Project.Scripts.Creators;
 using _Project.Scripts.GameplayEconomy;
-using _Project.Scripts.Infrastructure.Events;
+using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates;
 using VContainer.Unity;
@@ -16,7 +16,7 @@ namespace _Project.Scripts.Infrastructure
         private readonly CharacterCreator _characterCreator;
         private readonly PositionsCreator _positionsCreator;
         private readonly GameplayMoney _gameplayMoney;
-        private readonly EventBus _eventBus;
+        private readonly EventBus.EventBus _eventBus;
         
 
         public GameplayEntryPoint(
@@ -25,7 +25,7 @@ namespace _Project.Scripts.Infrastructure
             PositionsCreator positionsCreator,
             CharacterCreator characterCreator,
             GameplayMoney gameplayMoney,
-            EventBus eventBus
+            EventBus.EventBus eventBus
         )
         {
             _stateMachine = stateMachine;

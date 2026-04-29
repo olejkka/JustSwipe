@@ -19,7 +19,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             
             builder.RegisterComponent(_audioService);
 
-            builder.Register<EventBus>(Lifetime.Singleton);
+            builder.Register<EventBus.EventBus>(Lifetime.Singleton);
             builder.Register<SceneLoader>(Lifetime.Singleton);
             
             builder.RegisterEntryPoint<AudioEventHandler>();

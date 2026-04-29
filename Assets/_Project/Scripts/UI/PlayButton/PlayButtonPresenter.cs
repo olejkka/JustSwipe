@@ -1,6 +1,7 @@
 ﻿using System;
 using _Project.Scripts.Infrastructure;
-using _Project.Scripts.Infrastructure.Events;
+using _Project.Scripts.Infrastructure.EventBus;
+using _Project.Scripts.Infrastructure.EventBus.Events;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI.PlayButton

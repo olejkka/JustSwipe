@@ -6,7 +6,7 @@ using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Creators;
-using _Project.Scripts.Infrastructure.Events;
+using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM.States;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates;
 
@@ -14,7 +14,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
 {
     public class GameplayStatesProvider : IGameplayStatesProvider
     {
-        private readonly EventBus _eventBus;
+        private readonly EventBus.EventBus _eventBus;
         private readonly BotMoveCreator _botMoveCreator;
         private readonly CharactersMover _charactersMover;
         private readonly CharacterCreator _characterCreator;
@@ -23,7 +23,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
 
 
         public GameplayStatesProvider(
-            EventBus eventBus,
+            EventBus.EventBus eventBus,
             BotMoveCreator botMoveCreator,
             CharactersMover charactersMover,
             CharacterCreator characterCreator,

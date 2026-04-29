@@ -7,10 +7,10 @@ namespace _Project.Scripts.Infrastructure.FSM.ProjectSM
     public class ProjectStatesProvider
     {
         private readonly SceneLoader _sceneLoader;
-        private readonly EventBus _eventBus;
+        private readonly EventBus.EventBus _eventBus;
         
         
-        public ProjectStatesProvider(SceneLoader sceneLoader,  EventBus eventBus)
+        public ProjectStatesProvider(SceneLoader sceneLoader,  EventBus.EventBus eventBus)
         {
             _sceneLoader = sceneLoader;
             _eventBus = eventBus;

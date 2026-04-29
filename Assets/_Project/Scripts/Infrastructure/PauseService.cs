@@ -1,5 +1,4 @@
 ﻿using System;
-using _Project.Scripts.Infrastructure.Events;
 using UnityEngine;
 using VContainer.Unity;
 

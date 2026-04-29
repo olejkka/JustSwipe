@@ -5,13 +5,13 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
 {
     public class EventTransition<TEvent, TState> : ITransition where TState : IState
     {
-        private readonly EventBus _eventBus;
+        private readonly EventBus.EventBus _eventBus;
         private bool _triggered;
         private bool _active;
 
         public Type NextState => typeof(TState);
 
-        public EventTransition(EventBus eventBus)
+        public EventTransition(EventBus.EventBus eventBus)
         {
             _eventBus = eventBus;
         }

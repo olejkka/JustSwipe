@@ -1,15 +1,15 @@
 ﻿using System.Threading.Tasks;
-using _Project.Scripts.Infrastructure.Events;
+using _Project.Scripts.Infrastructure.EventBus.Events;
 
 namespace _Project.Scripts.Infrastructure.FSM.ProjectSM.States
 {
     public class GameplayState : IProjectState
     {
         private readonly SceneLoader _sceneLoader;
-        private readonly EventBus _eventBus;
+        private readonly EventBus.EventBus _eventBus;
         
 
-        public GameplayState(SceneLoader sceneLoader, EventBus eventBus)
+        public GameplayState(SceneLoader sceneLoader, EventBus.EventBus eventBus)
         {
             _sceneLoader = sceneLoader;
             _eventBus = eventBus;

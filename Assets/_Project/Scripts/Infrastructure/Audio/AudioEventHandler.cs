@@ -1,6 +1,6 @@
 ﻿using System;
 using _Project.Scripts.Configs;
-using _Project.Scripts.Infrastructure.Events;
+using _Project.Scripts.Infrastructure.EventBus.Events;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -8,11 +8,11 @@ namespace _Project.Scripts.Infrastructure.Audio
 {
     public sealed class AudioEventHandler : IStartable, IDisposable
     {
-        private readonly EventBus _eventBus;
+        private readonly EventBus.EventBus _eventBus;
         private readonly AudioService _audioService;
 
         
-        public AudioEventHandler(EventBus eventBus, AudioService audioService)
+        public AudioEventHandler(EventBus.EventBus eventBus, AudioService audioService)
         {
             _eventBus = eventBus;
             _audioService = audioService;

@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Structs;
-using _Project.Scripts.Infrastructure.Events;
+using _Project.Scripts.Infrastructure.EventBus.Events;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
 {
     public class PlayerTurnState : State
     {
-        private readonly EventBus _eventBus;
+        private readonly EventBus.EventBus _eventBus;
         private readonly CharactersMover _charactersMover;
         
 
         public PlayerTurnState(
             IReadOnlyList<ITransition> transitions, 
-            EventBus eventBus,
+            EventBus.EventBus eventBus,
             CharactersMover charactersMover
         ) : base(transitions)
         {

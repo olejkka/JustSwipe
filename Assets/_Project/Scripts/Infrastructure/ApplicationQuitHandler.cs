@@ -1,6 +1,6 @@
 ﻿using System;
 using _Project.Scripts.Infrastructure;
-using _Project.Scripts.Infrastructure.Events;
+using _Project.Scripts.Infrastructure.EventBus.Events;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -8,9 +8,9 @@ namespace _Project.Scripts.Infrastructure
 {
     public class ApplicationQuitHandler : IStartable, IDisposable
     {
-        private readonly EventBus _eventBus;
+        private readonly EventBus.EventBus _eventBus;
 
-        public ApplicationQuitHandler(EventBus eventBus)
+        public ApplicationQuitHandler(EventBus.EventBus eventBus)
         {
             _eventBus = eventBus;
         }

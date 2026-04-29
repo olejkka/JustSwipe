@@ -1,5 +1,5 @@
 ﻿using System;
-using _Project.Scripts.Infrastructure.Events;
+using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.FSM.ProjectSM.States;
 using VContainer.Unity;
 
@@ -8,9 +8,9 @@ namespace _Project.Scripts.Infrastructure.FSM.ProjectSM
     public class ProjectFlow : IStartable, IDisposable
     {
         private readonly ProjectStateMachine _stateMachine;
-        private readonly EventBus _eventBus;
+        private readonly EventBus.EventBus _eventBus;
 
-        public ProjectFlow(ProjectStateMachine stateMachine, EventBus eventBus)
+        public ProjectFlow(ProjectStateMachine stateMachine, EventBus.EventBus eventBus)
         {
             _stateMachine = stateMachine;
             _eventBus = eventBus;

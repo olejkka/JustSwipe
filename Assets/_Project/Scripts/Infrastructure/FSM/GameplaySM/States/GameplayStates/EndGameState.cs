@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
-using _Project.Scripts.Infrastructure.Events;
+using _Project.Scripts.Infrastructure.EventBus.Events;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
 {
     public class EndGameState : State
     {
-        private readonly EventBus _eventBus;
+        private readonly EventBus.EventBus _eventBus;
 
         
         public EndGameState(
             IReadOnlyList<ITransition> transitions,
-            EventBus eventBus
+            EventBus.EventBus eventBus
         ) : base(transitions)
         {
             _eventBus = eventBus;
