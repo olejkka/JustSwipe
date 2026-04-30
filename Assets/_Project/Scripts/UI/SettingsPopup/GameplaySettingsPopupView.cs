@@ -1,4 +1,6 @@
 ﻿using System;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,30 +14,22 @@ namespace _Project.Scripts.UI.SettingsPopup
         [SerializeField] private Button _toggleSoundOffButton;
         [SerializeField] private Button _toggleSoundOnButton;
 
-        public event Action ClosureAreaClicked;
-        public event Action ReturnToMenuClicked;
-        public event Action ToggleSoundClicked;
-
+        
+        public void Initialize(
+            Lifetime lifetime,
+            Action closureAreaClicked,
+            Action applicationQuitClicked,
+            Action toggleSoundClicked)
+        {
+            lifetime.BracketButton(_closureArea, () => closureAreaClicked?.Invoke());
+            lifetime.BracketButton(_returnToMenuButton, () => applicationQuitClicked?.Invoke());
+            lifetime.BracketButton(_toggleSoundOffButton, () => toggleSoundClicked?.Invoke());
+            lifetime.BracketButton(_toggleSoundOnButton, () => toggleSoundClicked?.Invoke());
+        }
         
         private void Awake()
         {
             ToggleActive(false);
-        }
-
-        private void OnEnable()
-        {
-            _closureArea.onClick.AddListener(OnClosureAreaClicked);
-            _returnToMenuButton?.onClick.AddListener(OnReturnToMenuClicked);
-            _toggleSoundOffButton.onClick.AddListener(OnToggleSoundClicked);
-            _toggleSoundOnButton.onClick.AddListener(OnToggleSoundClicked);
-        }
-
-        private void OnDisable()
-        {
-            _closureArea.onClick.RemoveListener(OnClosureAreaClicked);
-            _returnToMenuButton?.onClick.RemoveListener(OnReturnToMenuClicked);
-            _toggleSoundOffButton.onClick.RemoveListener(OnToggleSoundClicked);
-            _toggleSoundOnButton.onClick.RemoveListener(OnToggleSoundClicked);
         }
 
         public void ToggleSoundIcons(bool muted)
@@ -49,9 +43,5 @@ namespace _Project.Scripts.UI.SettingsPopup
             _container.SetActive(flag);
             _closureArea.gameObject.SetActive(flag);
         }
-
-        private void OnClosureAreaClicked() => ClosureAreaClicked?.Invoke();
-        private void OnReturnToMenuClicked() => ReturnToMenuClicked?.Invoke();
-        private void OnToggleSoundClicked() => ToggleSoundClicked?.Invoke();
     }
 }

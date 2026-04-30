@@ -3,6 +3,8 @@ using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI.MoneyUI
@@ -13,6 +15,9 @@ namespace _Project.Scripts.UI.MoneyUI
         private readonly MoneyView _view;
         private readonly GameplayMoney _gameplayMoney;
 
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
+        
+        
         public MoneyPresenter(EventBus eventBus, MoneyView view, GameplayMoney gameplayMoney)
         {
             _eventBus = eventBus;
@@ -22,18 +27,19 @@ namespace _Project.Scripts.UI.MoneyUI
 
         public void Start()
         {
-            _eventBus.Subscribe<MoneyChangedEvent>(OnMoneyChanged);
-            _view.UpdateAmountFormatted(_gameplayMoney.Amount);
+            _eventBus.SubscribeWithLifetime<MoneyChangedEvent>(_lifetimeDefinition.Lifetime, OnMoneyChanged);
+            
+            _view.UpdateAmount(_gameplayMoney.Amount);
         }
 
         public void Dispose()
         {
-            _eventBus.Unsubscribe<MoneyChangedEvent>(OnMoneyChanged);
+            _lifetimeDefinition.Terminate();
         }
 
         private void OnMoneyChanged(MoneyChangedEvent e)
         {
-            _view.UpdateAmountFormatted(e.Value);
+            _view.UpdateAmount(e.Value);
         }
     }
 }

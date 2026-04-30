@@ -3,6 +3,8 @@ using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.Audio;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI.SettingsPopup
@@ -14,6 +16,8 @@ namespace _Project.Scripts.UI.SettingsPopup
         private readonly AudioService _audioService;
         private readonly PauseService _pauseService;
 
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
+        
         private bool _isPopupOpen;
 
         
@@ -32,23 +36,18 @@ namespace _Project.Scripts.UI.SettingsPopup
 
         public void Start()
         {
-            _eventBus.Subscribe<SettingsButtonToggleEvent>(OnSettingsButtonToggle);
+            _eventBus.SubscribeWithLifetime<SettingsButtonToggleEvent>(_lifetimeDefinition.Lifetime, OnSettingsButtonToggle);
             
-            _view.ClosureAreaClicked += OnClosureAreaClicked;
-            _view.ApplicationQuitClicked += OnApplicationQuitClicked;
-            _view.ToggleSoundClicked += OnToggleSoundClicked;
+            _view.Initialize(
+                _lifetimeDefinition.Lifetime,
+                OnClosureAreaClicked,
+                OnApplicationQuitClicked,
+                OnToggleSoundClicked);
             
             _view.ToggleSoundIcons(_audioService.Muted);
         }
 
-        public void Dispose()
-        {
-            _eventBus.Unsubscribe<SettingsButtonToggleEvent>(OnSettingsButtonToggle);
-            
-            _view.ClosureAreaClicked -= OnClosureAreaClicked;
-            _view.ApplicationQuitClicked -= OnApplicationQuitClicked;
-            _view.ToggleSoundClicked -= OnToggleSoundClicked;
-        }
+        public void Dispose() => _lifetimeDefinition.Terminate();
 
         private void OnSettingsButtonToggle(SettingsButtonToggleEvent _)
         {

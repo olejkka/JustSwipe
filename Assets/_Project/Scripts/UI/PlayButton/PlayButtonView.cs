@@ -1,4 +1,6 @@
 ﻿using System;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,21 +8,12 @@ namespace _Project.Scripts.UI.PlayButton
 {
     public class PlayButtonView : MonoBehaviour
     {
-        [SerializeField] private Button _playButton;
-
-        public event Action Clicked;
+        [SerializeField] private Button _button;
 
         
-        private void OnEnable()
+        public void Initialize(Lifetime lifetime, Action playClicked)
         {
-            _playButton.onClick.AddListener(OnButtonClicked);
+            lifetime.BracketButton(_button, () => playClicked?.Invoke());
         }
-
-        private void OnDisable()
-        {
-            _playButton.onClick.RemoveListener(OnButtonClicked);
-        }
-
-        private void OnButtonClicked() => Clicked?.Invoke();
     }
 }

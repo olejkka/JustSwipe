@@ -3,6 +3,7 @@ using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Configs;
+using JetBrains.Lifetimes;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -13,16 +14,22 @@ namespace _Project.Scripts.UI.CharacterCase
         private readonly CharacterCaseUIView _view;
         private readonly CharactersStorage _charactersStorage;
         private readonly CharactersConfig _charactersConfig;
+        private readonly LifetimeDefinition _lifetimeDefinition;
+        
+        private LifetimeDefinition _assignmentLifetimeDefinition;
         private Character _assignedCharacter;
+        
         
         public CharacterCaseUIPresenter(
             CharacterCaseUIView view,
             CharactersStorage charactersStorage,
-            CharactersConfig charactersConfig)
+            CharactersConfig charactersConfig,
+            Lifetime parentLifetime)
         {
             _view = view;
             _charactersStorage = charactersStorage;
             _charactersConfig = charactersConfig;
+            _lifetimeDefinition = parentLifetime.CreateNested();
         }
         
         public void Start()
@@ -32,11 +39,11 @@ namespace _Project.Scripts.UI.CharacterCase
         
         public void Dispose()
         {
-            if (_assignedCharacter != null)
-            {
-                _assignedCharacter.OnHealthChanged -= OnHealthChanged;
-                _assignedCharacter = null;
-            }
+            _assignmentLifetimeDefinition?.Terminate();
+            _assignmentLifetimeDefinition = null;
+            
+            _lifetimeDefinition.Terminate();
+            _assignedCharacter = null;
         }
         
         public void AssignCharacter(Character character)
@@ -47,34 +54,30 @@ namespace _Project.Scripts.UI.CharacterCase
                 return;
             }
             
-            if (_assignedCharacter != null)
-            {
-                _assignedCharacter.OnHealthChanged -= OnHealthChanged;
-            }
+            UnassignCharacter();
             
             _assignedCharacter = character;
+            _assignmentLifetimeDefinition = _lifetimeDefinition.Lifetime.CreateNested();
             
-            _assignedCharacter.OnHealthChanged += OnHealthChanged;
+            _assignmentLifetimeDefinition.Lifetime.Bracket(
+                () => _assignedCharacter.OnHealthChanged += OnHealthChanged,
+                () => _assignedCharacter.OnHealthChanged -= OnHealthChanged);
             
             var entry = _charactersConfig.GetEntryByDefinitionId(character.DefinitionId);
+            
             if (entry != null)
-            {
                 _view.SetIcon(entry.Icon);
-            }
             
             UpdateStats();
-            
             _view.SetActive(true);
         }
         
         public void UnassignCharacter()
         {
-            if (_assignedCharacter != null)
-            {
-                _assignedCharacter.OnHealthChanged -= OnHealthChanged;
-                _assignedCharacter = null;
-            }
+            _assignmentLifetimeDefinition?.Terminate();
+            _assignmentLifetimeDefinition = null;
             
+            _assignedCharacter = null;
             _view.SetActive(false);
         }
         

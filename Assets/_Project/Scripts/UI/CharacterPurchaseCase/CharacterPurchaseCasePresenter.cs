@@ -6,6 +6,8 @@ using _Project.Scripts.Creators;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -17,7 +19,9 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
         private readonly CharactersConfig _charactersConfig;
         private readonly CharacterPurchaseService _characterPurchaseService;
         private readonly EventBus _eventBus;
-
+        
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
+        
         private CharacterDefinition _currentEntry;
 
         public CharacterPurchaseCasePresenter(
@@ -35,17 +39,16 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
 
         public void Start()
         {
-            _view.OnPurchaseClicked += OnPurchaseClicked;
-            _eventBus.Subscribe<CharacterPurchaseCaseRerollEvent>(OnRerollClicked);
+            _view.Initialize(_lifetimeDefinition.Lifetime, OnPurchaseClicked);
+            
+            _eventBus.SubscribeWithLifetime<CharacterPurchaseCaseRerollEvent>(
+                _lifetimeDefinition.Lifetime,
+                OnRerollClicked);
             
             RefreshCase();
         }
 
-        public void Dispose()
-        {
-            _view.OnPurchaseClicked -= OnPurchaseClicked;
-            _eventBus.Unsubscribe<CharacterPurchaseCaseRerollEvent>(OnRerollClicked);
-        }
+        public void Dispose() => _lifetimeDefinition.Terminate();
 
         private void RefreshCase()
         {

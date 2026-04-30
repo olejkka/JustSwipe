@@ -1,4 +1,6 @@
 ﻿using System;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +10,10 @@ namespace _Project.Scripts.UI.SettingsButton
     {
         [SerializeField] private Button _button;
 
-        public event Action SettingsClicked;
-
         
-        private void OnEnable() => _button.onClick.AddListener(OnSettingsClicked);
-        private void OnDisable() => _button.onClick.RemoveListener(OnSettingsClicked);
-        private void OnSettingsClicked() => SettingsClicked?.Invoke();
+        public void Initialize(Lifetime lifetime, Action settingsClicked)
+        {
+            lifetime.BracketButton(_button, () => settingsClicked?.Invoke());
+        }
     }
 }

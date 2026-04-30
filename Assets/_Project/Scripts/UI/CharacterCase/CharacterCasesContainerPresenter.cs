@@ -5,6 +5,8 @@ using _Project.Scripts.Configs;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI.CharacterCase
@@ -17,9 +19,12 @@ namespace _Project.Scripts.UI.CharacterCase
         private readonly CharacterCaseUIPresenter[] _casePresenters;
         private readonly CharactersStorage _charactersStorage;
         private readonly CharactersConfig _charactersConfig;
+        
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
 
         private bool _initialized;
 
+        
         public CharacterCasesContainerPresenter(
             EventBus eventBus,
             CharacterCasesContainerView containerView,
@@ -37,8 +42,12 @@ namespace _Project.Scripts.UI.CharacterCase
 
         public void Start()
         {
-            _eventBus.Subscribe<CharacterCreatedEvent>(OnCharacterCreated);
-            _eventBus.Subscribe<CharacterDiedEvent>(OnCharacterDied);
+            _eventBus.SubscribeWithLifetime<CharacterCreatedEvent>(
+                _lifetimeDefinition.Lifetime,
+                OnCharacterCreated);
+            _eventBus.SubscribeWithLifetime<CharacterDiedEvent>(
+                _lifetimeDefinition.Lifetime,
+                OnCharacterDied);
 
             EnsureInitialized();
             SyncExistingCharacters();
@@ -46,8 +55,7 @@ namespace _Project.Scripts.UI.CharacterCase
 
         public void Dispose()
         {
-            _eventBus.Unsubscribe<CharacterCreatedEvent>(OnCharacterCreated);
-            _eventBus.Unsubscribe<CharacterDiedEvent>(OnCharacterDied);
+            _lifetimeDefinition.Terminate();
 
             for (int i = 0; i < _casePresenters.Length; i++)
             {
@@ -104,7 +112,7 @@ namespace _Project.Scripts.UI.CharacterCase
 
             for (int i = 0; i < _caseViews.Length; i++)
             {
-                _casePresenters[i] = new CharacterCaseUIPresenter(_caseViews[i], _charactersStorage, _charactersConfig);
+                _casePresenters[i] = new CharacterCaseUIPresenter(_caseViews[i], _charactersStorage, _charactersConfig, _lifetimeDefinition.Lifetime);
                 _casePresenters[i].Start();
             }
 

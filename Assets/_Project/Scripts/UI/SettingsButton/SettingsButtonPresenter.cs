@@ -1,7 +1,7 @@
 ﻿using System;
-using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using JetBrains.Lifetimes;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI.SettingsButton
@@ -10,7 +10,10 @@ namespace _Project.Scripts.UI.SettingsButton
     {
         private readonly EventBus _eventBus;
         private readonly SettingsButtonView _view;
+        
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
 
+        
         public SettingsButtonPresenter(
             EventBus eventBus,
             SettingsButtonView view)
@@ -19,8 +22,16 @@ namespace _Project.Scripts.UI.SettingsButton
             _view = view;
         }
 
-        public void Start() => _view.SettingsClicked += OnSettingsClicked;
-        public void Dispose() => _view.SettingsClicked -= OnSettingsClicked;
-        private void OnSettingsClicked() => _eventBus.Publish(new SettingsButtonToggleEvent());
+        public void Start()
+        {
+            _view.Initialize(_lifetimeDefinition.Lifetime, OnSettingsClicked);
+        }
+
+        public void Dispose() => _lifetimeDefinition.Terminate();
+
+        private void OnSettingsClicked()
+        {
+            _eventBus.Publish(new SettingsButtonToggleEvent());
+        }
     }
 }

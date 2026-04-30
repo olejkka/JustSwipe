@@ -7,16 +7,10 @@ namespace _Project.Scripts.UI.MoneyUI
     {
         [SerializeField] private TMP_Text _text;
 
+        
         public void UpdateAmount(int amount)
         {
-            if (_text != null)
-                _text.text = amount.ToString();
-        }
-
-        public void UpdateAmountFormatted(int amount)
-        {
-            if (_text != null)
-                _text.text = $"{amount:N0}";
+            _text.text = amount.ToString();
         }
     }
 }

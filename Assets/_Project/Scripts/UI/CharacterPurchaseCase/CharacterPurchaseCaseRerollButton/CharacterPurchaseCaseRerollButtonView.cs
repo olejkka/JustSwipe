@@ -1,9 +1,10 @@
 ﻿using System;
-using DG.Tweening;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using VContainer;
+
 
 namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollButton
 {
@@ -13,16 +14,10 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollB
         [SerializeField] private TMP_Text _priceText;
         [SerializeField] private IconRotateBehaviour _iconRotateBehaviour;
         
-        public event Action OnRerollClicked;
         
-        private void OnEnable()
+        public void Initialize(Lifetime lifetime, Action rerollClicked)
         {
-            _button.onClick.AddListener(HandleRerollClick);
-        }
-
-        private void OnDisable()
-        {
-            _button.onClick.RemoveListener(HandleRerollClick);
+            lifetime.BracketButton(_button, () => rerollClicked?.Invoke());
         }
         
         public void SetData(int price)
@@ -39,7 +34,5 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollB
         {
             _iconRotateBehaviour.PlayShakeRotation();
         }
-            
-        private void HandleRerollClick() => OnRerollClicked?.Invoke();
     }
 }

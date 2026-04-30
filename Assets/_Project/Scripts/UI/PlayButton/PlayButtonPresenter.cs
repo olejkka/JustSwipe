@@ -2,6 +2,7 @@
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using JetBrains.Lifetimes;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI.PlayButton
@@ -11,6 +12,8 @@ namespace _Project.Scripts.UI.PlayButton
         private readonly EventBus _eventBus;
         private readonly PlayButtonView _view;
 
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
+        
         
         public PlayButtonPresenter(EventBus eventBus, PlayButtonView view)
         {
@@ -20,13 +23,10 @@ namespace _Project.Scripts.UI.PlayButton
 
         public void Start()
         {
-            _view.Clicked += OnPlayClicked;
+            _view.Initialize(_lifetimeDefinition.Lifetime, OnPlayClicked);
         }
 
-        public void Dispose()
-        {
-            _view.Clicked -= OnPlayClicked;
-        }
+        public void Dispose() => _lifetimeDefinition.Terminate();
 
         private void OnPlayClicked()
         {

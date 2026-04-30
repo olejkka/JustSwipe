@@ -29,13 +29,6 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
             _charactersStorage = charactersStorage;
         }
 
-        private bool CanPurchase(int price)
-        {
-            return _gameplayMoney.Amount >= price && 
-                   _charactersStorage.GetCharactersByTeam(Team.Player).Count() < 
-                   _initialGameplayConfig.MaxPlayerCharactersCount;
-        }
-
         public bool TryPurchase(string definitionId, int price)
         {
             if (!CanPurchase(price))
@@ -44,6 +37,13 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
             _gameplayMoney.ChangeAmount(-price);
             _characterCreator.CreateOnRandomPos(definitionId);
             return true;
+        }
+        
+        private bool CanPurchase(int price)
+        {
+            return _gameplayMoney.Amount >= price && 
+                   _charactersStorage.GetCharactersByTeam(Team.Player).Count() < 
+                   _initialGameplayConfig.MaxPlayerCharactersCount;
         }
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System;
 using _Project.Scripts.Configs;
-using _Project.Scripts.GameplayEconomy;
-using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using JetBrains.Lifetimes;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollButton
@@ -14,6 +13,8 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollB
         private readonly EventBus _eventBus;
         private readonly RerollPurchaseService _rerollPurchaseService;
         private readonly GameplayEconomyConfig _gameplayEconomyConfig;
+        
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
         
 
         public CharacterPurchaseCaseRerollButtonPresenter(
@@ -31,14 +32,13 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollB
         
         public void Start()
         {
-            _view.OnRerollClicked += OnRerollClicked;
-
+            _view.Initialize(_lifetimeDefinition.Lifetime, OnRerollClicked);
             _view.SetData(_gameplayEconomyConfig.RerollPrice);
         }
 
         public void Dispose()
         {
-            _view.OnRerollClicked -= OnRerollClicked;
+            _lifetimeDefinition.Terminate();
         }
 
         private void OnRerollClicked()
