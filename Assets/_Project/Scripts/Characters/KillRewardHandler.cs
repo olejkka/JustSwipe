@@ -5,6 +5,8 @@ using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using VContainer.Unity;
 
 namespace _Project.Scripts.Characters
@@ -14,6 +16,8 @@ namespace _Project.Scripts.Characters
         private readonly EventBus _eventBus;
         private readonly GameplayMoney _gameplayMoney;
         private readonly CharactersConfig _charactersConfig;
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
+        
 
         public KillRewardHandler(EventBus eventBus, GameplayMoney gameplayMoney, CharactersConfig charactersConfig)
         {
@@ -23,20 +27,14 @@ namespace _Project.Scripts.Characters
         }
 
         public void Start() =>
-            _eventBus.Subscribe<CharacterDiedEvent>(OnCharacterDied);
-
+            _eventBus.SubscribeWithLifetime<CharacterDiedEvent>(_lifetimeDefinition.Lifetime, OnCharacterDied);
+        
         public void Dispose() =>
-            _eventBus.Unsubscribe<CharacterDiedEvent>(OnCharacterDied);
+            _lifetimeDefinition.Terminate();
 
         private void OnCharacterDied(CharacterDiedEvent e)
         {
-            if (e.Killer == null)
-                return;
-            
-            if (e.Killer.Team != Team.Player) 
-                return;
-            
-            if (e.Character.Team == Team.Player) 
+            if (e.Killer == null || e.Killer.Team != Team.Player || e.Character.Team == Team.Player)
                 return;
 
             var entry = _charactersConfig.GetEntryByDefinitionId(e.Character.DefinitionId);

@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="" />
+    <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -257,6 +259,9 @@
       <workItem from="1777291111512" duration="12335000" />
       <workItem from="1777316555888" duration="3787000" />
       <workItem from="1777355605407" duration="3136000" />
+      <workItem from="1777627613855" duration="627000" />
+      <workItem from="1777656042627" duration="622000" />
+      <workItem from="1777659207789" duration="720000" />
     </task>
     <servers />
   </component>

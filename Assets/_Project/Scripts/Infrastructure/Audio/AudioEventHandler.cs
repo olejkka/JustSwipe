@@ -1,6 +1,8 @@
 ﻿using System;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -10,6 +12,7 @@ namespace _Project.Scripts.Infrastructure.Audio
     {
         private readonly EventBus.EventBus _eventBus;
         private readonly AudioService _audioService;
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
 
         
         public AudioEventHandler(EventBus.EventBus eventBus, AudioService audioService)
@@ -20,18 +23,15 @@ namespace _Project.Scripts.Infrastructure.Audio
 
         public void Start()
         {
-            _eventBus.Subscribe<MenuEnteredEvent>(OnMenuEnteredEvent);
-            _eventBus.Subscribe<StartGameplayEvent>(OnStartGameplayEvent);
-            _eventBus.Subscribe<SwipeEvent>(OnSwipe);
-            _eventBus.Subscribe<CharacterDiedEvent>(OnCharacterDied);
+            _eventBus.SubscribeWithLifetime<MenuEnteredEvent>(_lifetimeDefinition.Lifetime, OnMenuEnteredEvent);
+            _eventBus.SubscribeWithLifetime<StartGameplayEvent>(_lifetimeDefinition.Lifetime, OnStartGameplayEvent);
+            _eventBus.SubscribeWithLifetime<SwipeEvent>(_lifetimeDefinition.Lifetime, OnSwipe);
+            _eventBus.SubscribeWithLifetime<CharacterDiedEvent>(_lifetimeDefinition.Lifetime, OnCharacterDied);
         }
 
         public void Dispose()
         {
-            _eventBus.Unsubscribe<MenuEnteredEvent>(OnMenuEnteredEvent);
-            _eventBus.Unsubscribe<StartGameplayEvent>(OnStartGameplayEvent);
-            _eventBus.Unsubscribe<SwipeEvent>(OnSwipe);
-            _eventBus.Unsubscribe<CharacterDiedEvent>(OnCharacterDied);
+            _lifetimeDefinition.Terminate();
         }
 
         private void OnMenuEnteredEvent(MenuEnteredEvent e)

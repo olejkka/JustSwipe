@@ -3,7 +3,9 @@ using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using _Project.Scripts.Utilities;
+using JetBrains.Lifetimes;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -13,6 +15,8 @@ namespace _Project.Scripts.Characters
     {
         [SerializeField] private SpriteAnimator _animator;
 
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
+        
         private EventBus _eventBus;
         private Character _data;
         private Tilemap _tilemap;
@@ -27,16 +31,20 @@ namespace _Project.Scripts.Characters
             Character data, 
             Tilemap tilemap, 
             CharacterAnimationData animations, 
-            EventBus eventBus
-            )
+            EventBus eventBus)
         {
             _data = data;
             _tilemap = tilemap;
             _animations = animations;
             _eventBus = eventBus;
 
-            _data.OnPositionChanged += OnMoved;
-            _data.OnHealthChanged += OnHealthChanged;
+            _lifetimeDefinition.Lifetime.BracketSubscription(
+                () => _data.OnPositionChanged += OnMoved,
+                () => _data.OnPositionChanged -= OnMoved);
+            
+            _lifetimeDefinition.Lifetime.BracketSubscription(
+                () => _data.OnHealthChanged += OnHealthChanged,
+                () => _data.OnHealthChanged -= OnHealthChanged);
 
             PlayIdle();
             UpdatePosition(_data.Position);
@@ -133,8 +141,7 @@ namespace _Project.Scripts.Characters
 
         private void OnDestroy()
         {
-            _data.OnPositionChanged -= OnMoved;
-            _data.OnHealthChanged -= OnHealthChanged;
+            _lifetimeDefinition.Terminate();
         }
     }
 }

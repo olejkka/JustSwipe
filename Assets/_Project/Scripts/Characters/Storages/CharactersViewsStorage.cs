@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using VContainer.Unity;
 
 namespace _Project.Scripts.Characters.Storages
@@ -11,6 +13,7 @@ namespace _Project.Scripts.Characters.Storages
     {
         private readonly EventBus _eventBus;
         private readonly Dictionary<Character, CharacterView> _map = new();
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
 
 
         public CharactersViewsStorage(EventBus eventBus)
@@ -19,11 +22,11 @@ namespace _Project.Scripts.Characters.Storages
         }
         
         public void Start() =>
-            _eventBus.Subscribe<CharacterDiedEvent>(OnCharacterDied);
+            _eventBus.SubscribeWithLifetime<CharacterDiedEvent>(_lifetimeDefinition.Lifetime, OnCharacterDied);
         
         public void Dispose()
         {
-            _eventBus.Unsubscribe<CharacterDiedEvent>(OnCharacterDied);
+            _lifetimeDefinition.Terminate();
 
             foreach (var kv in _map)
             {

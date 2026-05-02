@@ -1,6 +1,8 @@
 ﻿using System;
 using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.FSM.ProjectSM.States;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using VContainer.Unity;
 
 namespace _Project.Scripts.Infrastructure.FSM.ProjectSM
@@ -9,7 +11,9 @@ namespace _Project.Scripts.Infrastructure.FSM.ProjectSM
     {
         private readonly ProjectStateMachine _stateMachine;
         private readonly EventBus.EventBus _eventBus;
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
 
+        
         public ProjectFlow(ProjectStateMachine stateMachine, EventBus.EventBus eventBus)
         {
             _stateMachine = stateMachine;
@@ -18,8 +22,8 @@ namespace _Project.Scripts.Infrastructure.FSM.ProjectSM
 
         public async void Start()
         {
-            _eventBus.Subscribe<PlayClickedEvent>(OnPlayClicked);
-            _eventBus.Subscribe<ReturnToMenuRequestedEvent>(OnReturnToMenu);
+            _eventBus.SubscribeWithLifetime<PlayClickedEvent>(_lifetimeDefinition.Lifetime, OnPlayClicked);
+            _eventBus.SubscribeWithLifetime<ReturnToMenuRequestedEvent>(_lifetimeDefinition.Lifetime, OnReturnToMenu);
 
             await _stateMachine.EnterState<InitializationState>();
             await _stateMachine.EnterState<MenuState>();
@@ -27,8 +31,7 @@ namespace _Project.Scripts.Infrastructure.FSM.ProjectSM
 
         public void Dispose()
         {
-            _eventBus.Unsubscribe<PlayClickedEvent>(OnPlayClicked);
-            _eventBus.Unsubscribe<ReturnToMenuRequestedEvent>(OnReturnToMenu);
+            _lifetimeDefinition.Terminate();
         }
 
         private async void OnPlayClicked(PlayClickedEvent e)

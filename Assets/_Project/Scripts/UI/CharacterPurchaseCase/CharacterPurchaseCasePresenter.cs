@@ -2,8 +2,6 @@
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Configs;
-using _Project.Scripts.Creators;
-using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
@@ -19,17 +17,16 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
         private readonly CharactersConfig _charactersConfig;
         private readonly CharacterPurchaseService _characterPurchaseService;
         private readonly EventBus _eventBus;
-        
         private readonly LifetimeDefinition _lifetimeDefinition = new();
         
         private CharacterDefinition _currentEntry;
 
+        
         public CharacterPurchaseCasePresenter(
             CharacterPurchaseCaseView view,
             CharactersConfig charactersConfig,
             CharacterPurchaseService characterPurchaseService,
-            EventBus eventBus
-            )
+            EventBus eventBus)
         {
             _view = view;
             _charactersConfig = charactersConfig;

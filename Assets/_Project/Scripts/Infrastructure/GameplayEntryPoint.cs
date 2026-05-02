@@ -5,6 +5,8 @@ using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using VContainer.Unity;
 
 namespace _Project.Scripts.Infrastructure
@@ -17,6 +19,7 @@ namespace _Project.Scripts.Infrastructure
         private readonly PositionsCreator _positionsCreator;
         private readonly GameplayMoney _gameplayMoney;
         private readonly EventBus.EventBus _eventBus;
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
         
 
         public GameplayEntryPoint(
@@ -38,13 +41,13 @@ namespace _Project.Scripts.Infrastructure
 
         public void Start()
         {
-            _eventBus.Subscribe<StartGameplayEvent>(OnStartGameplay);
+            _eventBus.SubscribeWithLifetime<StartGameplayEvent>(_lifetimeDefinition.Lifetime, OnStartGameplay);
         }
 
         public void Dispose()
         {
             _stateMachine.Stop();
-            _eventBus.Unsubscribe<StartGameplayEvent>(OnStartGameplay);
+            _lifetimeDefinition.Terminate();
         }
         
         public void OnStartGameplay(StartGameplayEvent e)

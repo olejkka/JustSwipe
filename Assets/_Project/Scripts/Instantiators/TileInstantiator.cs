@@ -1,9 +1,10 @@
 ﻿using System;
 using _Project.Scripts.Configs;
-using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using _Project.Scripts.Tiles;
+using JetBrains.Lifetimes;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using VContainer;
@@ -17,16 +18,19 @@ namespace _Project.Scripts.Instantiators
         [SerializeField] private TilesPrefabsConfig _prefabsConfig;
 
         [Inject] private EventBus _eventBus;
+        
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
+
 
         [Inject]
         public void Initialize()
         {
-            _eventBus.Subscribe<PositionCreatedEvent>(OnPositionCreated);
+            _eventBus.SubscribeWithLifetime<PositionCreatedEvent>(_lifetimeDefinition.Lifetime, OnPositionCreated);
         }
 
         public void Dispose()
         {
-            _eventBus?.Unsubscribe<PositionCreatedEvent>(OnPositionCreated);
+            _lifetimeDefinition.Terminate();
         }
 
         private void OnPositionCreated(PositionCreatedEvent e)
@@ -52,11 +56,6 @@ namespace _Project.Scripts.Instantiators
             }
 
             return _prefabsConfig.GetTile(TileType.Ground);
-        }
-
-        private void OnDestroy()
-        {
-            Dispose();
         }
     }
 }

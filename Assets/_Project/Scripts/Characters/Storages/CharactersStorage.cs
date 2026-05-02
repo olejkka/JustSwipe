@@ -5,6 +5,8 @@ using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -14,7 +16,8 @@ namespace _Project.Scripts.Characters.Storages
     {
         private readonly EventBus _eventBus;
         private readonly List<Character> _characters = new();
-
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
+        
         
         public CharactersStorage(EventBus eventBus)
         {
@@ -22,11 +25,11 @@ namespace _Project.Scripts.Characters.Storages
         }
 
         public void Start() =>
-            _eventBus.Subscribe<CharacterDiedEvent>(OnCharacterDied);
+            _eventBus.SubscribeWithLifetime<CharacterDiedEvent>(_lifetimeDefinition.Lifetime, OnCharacterDied);
         
         public void Dispose()
         {
-            _eventBus.Unsubscribe<CharacterDiedEvent>(OnCharacterDied);
+            _lifetimeDefinition.Terminate();
             _characters.Clear();
         }
 

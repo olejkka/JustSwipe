@@ -2,13 +2,13 @@
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Configs;
-using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using VContainer;
-using VContainer.Unity;
 
 namespace _Project.Scripts.Instantiators
 {
@@ -20,16 +20,18 @@ namespace _Project.Scripts.Instantiators
         [Inject] private CharactersViewsStorage _charactersViewsStorage;
         [Inject] private CharactersConfig _charactersConfig;
         [Inject] private EventBus _eventBus;
-
+        
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
+        
         
         [Inject]
         public void Initialize()
         {
-            _eventBus.Subscribe<CharacterCreatedEvent>(OnCharacterCreated);
+            _eventBus.SubscribeWithLifetime<CharacterCreatedEvent>(_lifetimeDefinition.Lifetime, OnCharacterCreated);
         }
 
         public void Dispose() => 
-            _eventBus.Unsubscribe<CharacterCreatedEvent>(OnCharacterCreated);
+            _lifetimeDefinition.Terminate();
 
         private void OnCharacterCreated(CharacterCreatedEvent e) => 
             Instantiate(e.Character);
@@ -45,10 +47,9 @@ namespace _Project.Scripts.Instantiators
                 entry == null || 
                 entry.Animations == null || 
                 entry.Animations.Idle == null || 
-                entry.Animations.Idle.Length == 0
-                )
+                entry.Animations.Idle.Length == 0)
             {
-                Debug.LogError($"No animations found for {character.CharacterType}");
+                Debug.LogError($"No animations found for {character.DefinitionId}");
                 return;
             }
 
