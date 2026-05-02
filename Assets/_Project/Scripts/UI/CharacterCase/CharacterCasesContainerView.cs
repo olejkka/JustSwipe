@@ -7,6 +7,7 @@ namespace _Project.Scripts.UI.CharacterCase
         [SerializeField] private CharacterCaseUIView _casePrefab;
         [SerializeField] private Transform _container;
 
+        
         public CharacterCaseUIView[] CreateCases(int count)
         {
             var cases = new CharacterCaseUIView[count];

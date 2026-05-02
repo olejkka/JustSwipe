@@ -45,5 +45,6 @@ namespace _Project.Scripts.Characters
         public Sprite[] DealDamage;
         public Sprite[] TakeDamage;
         public Sprite[] Death;
+        public Sprite[] Selected;
     }
 }

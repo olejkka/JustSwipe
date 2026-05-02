@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +10,7 @@ namespace _Project.Scripts.UI.CharacterCase
     public class CharacterCaseUIView : MonoBehaviour
     {
         [SerializeField] private Image _characterIcon;
+        [SerializeField] private Button _button;
         [SerializeField] private RectTransform _hpContainer;
         [SerializeField] private RectTransform _damageContainer;
         [SerializeField] private Image _hpIconPrefab;
@@ -15,6 +19,11 @@ namespace _Project.Scripts.UI.CharacterCase
         private readonly List<Image> _hpIconsPool = new();
         private readonly List<Image> _damageIconsPool = new();
 
+        
+        public void BindClick(Lifetime lifetime, Action onClick)
+        {
+            lifetime.BracketButton(_button, () => onClick?.Invoke());
+        }
         
         public void SetIcon(Sprite sprite)
         {

@@ -1,10 +1,9 @@
 ﻿using System;
 using _Project.Scripts.Characters.Structs;
-using _Project.Scripts.Configs;
-using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using _Project.Scripts.Utilities;
+using DG.Tweening;
 using JetBrains.Lifetimes;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -14,29 +13,39 @@ namespace _Project.Scripts.Characters
     public class CharacterView : MonoBehaviour
     {
         [SerializeField] private SpriteAnimator _animator;
+        [SerializeField] private Transform _visual;
+        
+        [Header("Jump Animation")]
+        [SerializeField] private float _selectedJumpHeight;
+        [SerializeField] private float _selectedJumpDuration;
+        [SerializeField] private Ease _selectedJumpEaseUp = Ease.OutQuad;
+        [SerializeField] private Ease _selectedJumpEaseDown = Ease.InQuad;
 
         private readonly LifetimeDefinition _lifetimeDefinition = new();
         
-        private EventBus _eventBus;
         private Character _data;
         private Tilemap _tilemap;
         private CharacterAnimationData _animations;
-
-        private bool _isOneShotPlaying;
         private CharacterAnimationType _currentAnimationType = CharacterAnimationType.None;
+        private bool _isOneShotPlaying;
         private int _currentPriority;
+        private Tween _selectedJumpTween;
+        private Vector3 _visualStartLocalPos;
         
 
+        private void Awake()
+        {
+            _visualStartLocalPos = _visual.localPosition;
+        }
+        
         public void Init(
             Character data, 
             Tilemap tilemap, 
-            CharacterAnimationData animations, 
-            EventBus eventBus)
+            CharacterAnimationData animations)
         {
             _data = data;
             _tilemap = tilemap;
             _animations = animations;
-            _eventBus = eventBus;
 
             _lifetimeDefinition.Lifetime.BracketSubscription(
                 () => _data.OnPositionChanged += OnMoved,
@@ -57,6 +66,21 @@ namespace _Project.Scripts.Characters
             _currentPriority = (int)CharacterAnimationType.Idle;
 
             _animator.Play(_animations.Idle, _animations.FrameRate, loop: true);
+        }
+        
+        public void PlaySelected()
+        {
+            TryPlayOneShot(CharacterAnimationType.Selected, _animations.Selected);
+            
+            _selectedJumpTween?.Kill();
+            _visual.localPosition = _visualStartLocalPos;
+            
+            _selectedJumpTween = DOTween.Sequence()
+                .Append(_visual.DOLocalMoveY(_visualStartLocalPos.y + _selectedJumpHeight, _selectedJumpDuration)
+                    .SetEase(_selectedJumpEaseUp))
+                .Append(_visual.DOLocalMoveY(_visualStartLocalPos.y, _selectedJumpDuration)
+                    .SetEase(_selectedJumpEaseDown))
+                .SetUpdate(UpdateType.Normal, isIndependentUpdate: false);
         }
 
         private void TryPlayOneShot(
@@ -141,6 +165,7 @@ namespace _Project.Scripts.Characters
 
         private void OnDestroy()
         {
+            _selectedJumpTween?.Kill();
             _lifetimeDefinition.Terminate();
         }
     }

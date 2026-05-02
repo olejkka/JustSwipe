@@ -5,6 +5,7 @@ namespace _Project.Scripts.Characters.Structs
     {
         None = 0,
         Idle = 10,
+        Selected = 11,
         Move = 20,
         DealDamage = 30,
         TakingDamage = 40,

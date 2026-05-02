@@ -52,6 +52,11 @@ MonoBehaviour:
       - {fileID: -847956095, guid: bb0b33ab1db252341938b6037c64f78f, type: 3}
       - {fileID: 1545337665, guid: bb0b33ab1db252341938b6037c64f78f, type: 3}
       - {fileID: 1554786234, guid: bb0b33ab1db252341938b6037c64f78f, type: 3}
+      Selected:
+      - {fileID: 1592911036, guid: b30c562491493c846828175b024bff30, type: 3}
+      - {fileID: 795876029, guid: b30c562491493c846828175b024bff30, type: 3}
+      - {fileID: -451706759, guid: b30c562491493c846828175b024bff30, type: 3}
+      - {fileID: 1149880576, guid: b30c562491493c846828175b024bff30, type: 3}
     _price: 1
     _reward: 0
   - _definitionId: player_02
@@ -93,6 +98,11 @@ MonoBehaviour:
       - {fileID: -630979369, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
       - {fileID: 1919340665, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
       - {fileID: -196287458, guid: 5cfc7124a3aeed247996eac0d2444b93, type: 3}
+      Selected:
+      - {fileID: -1216448912, guid: 871eb977057c6c2458efd685c55f1b36, type: 3}
+      - {fileID: -1149128803, guid: 871eb977057c6c2458efd685c55f1b36, type: 3}
+      - {fileID: -1453028716, guid: 871eb977057c6c2458efd685c55f1b36, type: 3}
+      - {fileID: 170708273, guid: 871eb977057c6c2458efd685c55f1b36, type: 3}
     _price: 2
     _reward: 0
   - _definitionId: player_03
@@ -134,6 +144,11 @@ MonoBehaviour:
       - {fileID: 1553337913, guid: 92445a452d22fe146a6a6c4fcac8aaa7, type: 3}
       - {fileID: -1366611355, guid: 92445a452d22fe146a6a6c4fcac8aaa7, type: 3}
       - {fileID: -1154499586, guid: 92445a452d22fe146a6a6c4fcac8aaa7, type: 3}
+      Selected:
+      - {fileID: 1609123883, guid: 4223ae47d5848c14aa70a5d984f7733f, type: 3}
+      - {fileID: -967921377, guid: 4223ae47d5848c14aa70a5d984f7733f, type: 3}
+      - {fileID: 2106122295, guid: 4223ae47d5848c14aa70a5d984f7733f, type: 3}
+      - {fileID: -1484549530, guid: 4223ae47d5848c14aa70a5d984f7733f, type: 3}
     _price: 5
     _reward: 0
   - _definitionId: player_04
@@ -175,6 +190,11 @@ MonoBehaviour:
       - {fileID: -1883880346, guid: db7444338d29c3c4bad89aaca988da11, type: 3}
       - {fileID: -641123023, guid: db7444338d29c3c4bad89aaca988da11, type: 3}
       - {fileID: -877037418, guid: db7444338d29c3c4bad89aaca988da11, type: 3}
+      Selected:
+      - {fileID: 629487236, guid: b7e38f038aaa6f54e94dd17398b7cf3b, type: 3}
+      - {fileID: -1780183973, guid: b7e38f038aaa6f54e94dd17398b7cf3b, type: 3}
+      - {fileID: -657364832, guid: b7e38f038aaa6f54e94dd17398b7cf3b, type: 3}
+      - {fileID: -890876067, guid: b7e38f038aaa6f54e94dd17398b7cf3b, type: 3}
     _price: 10
     _reward: 0
   - _definitionId: bot_01
@@ -216,6 +236,7 @@ MonoBehaviour:
       - {fileID: 1226034887, guid: b210890c013de6248922467c724abccb, type: 3}
       - {fileID: -1258221810, guid: b210890c013de6248922467c724abccb, type: 3}
       - {fileID: 1967620726, guid: b210890c013de6248922467c724abccb, type: 3}
+      Selected: []
     _price: 0
     _reward: 1
   - _definitionId: bot_02
@@ -257,6 +278,7 @@ MonoBehaviour:
       - {fileID: -1099947577, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
       - {fileID: 62154434, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
       - {fileID: 1069945443, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
+      Selected: []
     _price: 0
     _reward: 1
   - _definitionId: bot_03
@@ -298,6 +320,7 @@ MonoBehaviour:
       - {fileID: -1071850690, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
       - {fileID: 897723143, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
       - {fileID: -1064223161, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
+      Selected: []
     _price: 0
     _reward: 1
   - _definitionId: bot_04
@@ -339,6 +362,7 @@ MonoBehaviour:
       - {fileID: 400252038, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
       - {fileID: 1294297030, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
       - {fileID: -1914220446, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
+      Selected: []
     _price: 0
     _reward: 1
   - _definitionId: bot_05
@@ -382,5 +406,6 @@ MonoBehaviour:
       - {fileID: 1951671949, guid: 21e8a04c0cfaa4e47b39f5a0d66f4fab, type: 3}
       - {fileID: -902319953, guid: 21e8a04c0cfaa4e47b39f5a0d66f4fab, type: 3}
       - {fileID: 442657344, guid: 21e8a04c0cfaa4e47b39f5a0d66f4fab, type: 3}
+      Selected: []
     _price: 0
     _reward: 2

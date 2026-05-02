@@ -2,7 +2,6 @@ using System;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Configs;
-using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
@@ -14,7 +13,7 @@ namespace _Project.Scripts.UI.CharacterCase
     public class CharacterCasesContainerPresenter : IStartable, IDisposable
     {
         private readonly EventBus _eventBus;
-        private readonly CharacterCasesContainerView _characterCasesContainerView;
+        private readonly CharactersViewsStorage _charactersViewsStorage;
         private readonly CharacterCaseUIView[] _caseViews;
         private readonly CharacterCaseUIPresenter[] _casePresenters;
         private readonly CharactersStorage _charactersStorage;
@@ -27,12 +26,14 @@ namespace _Project.Scripts.UI.CharacterCase
         
         public CharacterCasesContainerPresenter(
             EventBus eventBus,
+            CharactersViewsStorage charactersViewsStorage,
             CharacterCasesContainerView containerView,
             InitialGameplayConfig config,
             CharactersStorage charactersStorage,
             CharactersConfig charactersConfig)
         {
             _eventBus = eventBus;
+            _charactersViewsStorage = charactersViewsStorage;
             _caseViews = containerView.CreateCases(config.MaxPlayerCharactersCount);
             _charactersStorage = charactersStorage;
             _charactersConfig = charactersConfig;
@@ -42,14 +43,15 @@ namespace _Project.Scripts.UI.CharacterCase
 
         public void Start()
         {
+            EnsureInitialized();
+            
             _eventBus.SubscribeWithLifetime<CharacterCreatedEvent>(
                 _lifetimeDefinition.Lifetime,
                 OnCharacterCreated);
             _eventBus.SubscribeWithLifetime<CharacterDiedEvent>(
                 _lifetimeDefinition.Lifetime,
                 OnCharacterDied);
-
-            EnsureInitialized();
+            
             SyncExistingCharacters();
         }
 
@@ -66,7 +68,8 @@ namespace _Project.Scripts.UI.CharacterCase
 
         private void OnCharacterCreated(CharacterCreatedEvent e)
         {
-            if (e.Character.Team != Team.Player) return;
+            if (e.Character.Team != Team.Player) 
+                return;
 
             for (int i = 0; i < _casePresenters.Length; i++)
             {
@@ -112,7 +115,7 @@ namespace _Project.Scripts.UI.CharacterCase
 
             for (int i = 0; i < _caseViews.Length; i++)
             {
-                _casePresenters[i] = new CharacterCaseUIPresenter(_caseViews[i], _charactersStorage, _charactersConfig, _lifetimeDefinition.Lifetime);
+                _casePresenters[i] = new CharacterCaseUIPresenter(_lifetimeDefinition.Lifetime, _caseViews[i], _charactersConfig, _charactersViewsStorage);
                 _casePresenters[i].Start();
             }
 
