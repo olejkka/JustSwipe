@@ -6,6 +6,7 @@ using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using _Project.Scripts.UI.GameplayStatistic;
 using JetBrains.Lifetimes;
 using VContainer.Unity;
 
@@ -19,6 +20,8 @@ namespace _Project.Scripts.Infrastructure
         private readonly PositionsCreator _positionsCreator;
         private readonly GameplayMoney _gameplayMoney;
         private readonly EventBus.EventBus _eventBus;
+        private readonly GameplayStatisticsService _gameplayStatisticsService;
+        
         private readonly LifetimeDefinition _lifetimeDefinition = new();
         
 
@@ -28,8 +31,8 @@ namespace _Project.Scripts.Infrastructure
             PositionsCreator positionsCreator,
             CharacterCreator characterCreator,
             GameplayMoney gameplayMoney,
-            EventBus.EventBus eventBus
-        )
+            EventBus.EventBus eventBus,
+            GameplayStatisticsService gameplayStatisticsService)
         {
             _stateMachine = stateMachine;
             _initialGameplayConfig = initialGameplayConfig;
@@ -37,6 +40,7 @@ namespace _Project.Scripts.Infrastructure
             _characterCreator = characterCreator;
             _gameplayMoney = gameplayMoney;
             _eventBus = eventBus;
+            _gameplayStatisticsService = gameplayStatisticsService;
         }
 
         public void Start()
@@ -52,6 +56,7 @@ namespace _Project.Scripts.Infrastructure
         
         public void OnStartGameplay(StartGameplayEvent e)
         {
+            _gameplayStatisticsService.Reset();
             _positionsCreator.Create();
             _gameplayMoney.SetAmount(_initialGameplayConfig.MoneyCount);
             _characterCreator.CreateOnRandomPos(_initialGameplayConfig.PlayerCharacter);

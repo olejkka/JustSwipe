@@ -1,6 +1,7 @@
 ﻿using _Project.Scripts.UI.CharacterCase;
 using _Project.Scripts.UI.CharacterPurchaseCase;
 using _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollButton;
+using _Project.Scripts.UI.GameplayStatistic;
 using _Project.Scripts.UI.MoneyUI;
 using _Project.Scripts.UI.SettingsButton;
 using _Project.Scripts.UI.SettingsPopup;
@@ -18,21 +19,21 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<RerollPurchaseService>(Lifetime.Singleton);
             
             //Views
-            builder.RegisterComponentInHierarchy<CharacterCasesContainerView>();
-            builder.RegisterComponentInHierarchy<MoneyView>();
-            builder.RegisterComponentInHierarchy<CharacterPurchaseCaseView>();
-            builder.RegisterComponentInHierarchy<CharacterPurchaseCaseRerollButtonView>();
-            
             builder.RegisterComponentInHierarchy<SettingsButtonView>();
             builder.RegisterComponentInHierarchy<GameplaySettingsPopupView>();
+            builder.RegisterComponentInHierarchy<CharacterCasesContainerView>();
+            builder.RegisterComponentInHierarchy<CharacterPurchaseCaseView>();
+            builder.RegisterComponentInHierarchy<CharacterPurchaseCaseRerollButtonView>();
+            builder.RegisterComponentInHierarchy<MoneyView>();
+            builder.RegisterComponentInHierarchy<GameplayStatisticView>();
             
             //Presenters
+            builder.RegisterEntryPoint<SettingsButtonPresenter>();
+            builder.RegisterEntryPoint<GameplaySettingsPopupPresenter>();
             builder.RegisterEntryPoint<CharacterPurchaseCasePresenter>();
             builder.RegisterEntryPoint<CharacterPurchaseCaseRerollButtonPresenter>();
             builder.RegisterEntryPoint<MoneyPresenter>();
-            
-            builder.RegisterEntryPoint<SettingsButtonPresenter>();
-            builder.RegisterEntryPoint<GameplaySettingsPopupPresenter>();
+            builder.RegisterEntryPoint<GameplayStatisticPresenter>();
         }
     }
 }

@@ -24,8 +24,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
             BotMoveCreator botMoveCreator,
             CharactersMover charactersMover,
             CharacterCreator characterCreator,
-            CharactersStorage charactersStorage
-        ) : base(transitions)
+            CharactersStorage charactersStorage) : base(transitions)
         {
             _botSpawnChancesConfig = botSpawnChancesConfig;
             _botMoveCreator = botMoveCreator;

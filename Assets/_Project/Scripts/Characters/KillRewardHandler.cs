@@ -2,10 +2,10 @@
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Configs;
 using _Project.Scripts.GameplayEconomy;
-using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using _Project.Scripts.UI.GameplayStatistic;
 using JetBrains.Lifetimes;
 using VContainer.Unity;
 
@@ -16,14 +16,20 @@ namespace _Project.Scripts.Characters
         private readonly EventBus _eventBus;
         private readonly GameplayMoney _gameplayMoney;
         private readonly CharactersConfig _charactersConfig;
+        private readonly GameplayStatisticsService _gameplayStatisticsService;
         private readonly LifetimeDefinition _lifetimeDefinition = new();
         
 
-        public KillRewardHandler(EventBus eventBus, GameplayMoney gameplayMoney, CharactersConfig charactersConfig)
+        public KillRewardHandler(
+            EventBus eventBus,
+            GameplayMoney gameplayMoney, 
+            CharactersConfig charactersConfig, 
+            GameplayStatisticsService gameplayStatisticsService)
         {
             _eventBus = eventBus;
             _gameplayMoney = gameplayMoney;
             _charactersConfig = charactersConfig;
+            _gameplayStatisticsService = gameplayStatisticsService;
         }
 
         public void Start() =>
@@ -39,6 +45,7 @@ namespace _Project.Scripts.Characters
 
             var entry = _charactersConfig.GetEntryByDefinitionId(e.Character.DefinitionId);
             _gameplayMoney.ChangeAmount(entry.Reward);
+            _gameplayStatisticsService.AddEnemyKillReward(entry.Reward);
         }
     }
 }

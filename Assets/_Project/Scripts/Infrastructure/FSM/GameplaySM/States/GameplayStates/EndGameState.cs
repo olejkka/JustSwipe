@@ -11,15 +11,14 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
         
         public EndGameState(
             IReadOnlyList<ITransition> transitions,
-            EventBus.EventBus eventBus
-        ) : base(transitions)
+            EventBus.EventBus eventBus) : base(transitions)
         {
             _eventBus = eventBus;
         }
 
         protected override void OnEnter()
         {
-            _eventBus.Publish(new ReturnToMenuRequestedEvent());
+            _eventBus.Publish(new ShowGameplayStatisticEvent());
         }
 
         protected override void OnExit() { }

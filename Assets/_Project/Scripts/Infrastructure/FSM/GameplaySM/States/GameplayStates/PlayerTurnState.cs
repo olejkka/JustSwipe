@@ -15,8 +15,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
         public PlayerTurnState(
             IReadOnlyList<ITransition> transitions, 
             EventBus.EventBus eventBus,
-            CharactersMover charactersMover
-        ) : base(transitions)
+            CharactersMover charactersMover) : base(transitions)
         {
             _eventBus = eventBus;
             _charactersMover = charactersMover;
@@ -29,6 +28,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
 
         protected override void OnExit()
         {
+            _eventBus.Publish(new TurnEndedEvent(Team.Player));
             _eventBus.Unsubscribe<SwipeEvent>(OnSwipe);
         }
 

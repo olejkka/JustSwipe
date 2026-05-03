@@ -7,6 +7,7 @@ using _Project.Scripts.Infrastructure.FSM.GameplaySM;
 using _Project.Scripts.InputHandlers;
 using _Project.Scripts.Instantiators;
 using _Project.Scripts.Tiles;
+using _Project.Scripts.UI.GameplayStatistic;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -60,6 +61,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.RegisterEntryPoint<CharacterDeathHandler>();
             builder.RegisterEntryPoint<KillRewardHandler>();
             builder.RegisterEntryPoint<GameplayEntryPoint>();
+            builder.RegisterEntryPoint<GameplayStatisticsService>().AsSelf();
         }
     }
 }

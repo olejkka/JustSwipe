@@ -10,9 +10,6 @@ namespace _Project.Scripts.UI
         
         private void Awake()
         {
-            if (_rectTransform == null)
-                _rectTransform = GetComponent<RectTransform>();
-            
             ApplySafeArea();
         }
 

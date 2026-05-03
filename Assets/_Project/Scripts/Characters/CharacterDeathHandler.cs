@@ -4,6 +4,8 @@ using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using JetBrains.Lifetimes;
 using VContainer.Unity;
 
 namespace _Project.Scripts.Characters
@@ -12,7 +14,8 @@ namespace _Project.Scripts.Characters
     {
         private readonly EventBus _eventBus;
         private readonly Dictionary<Character, Action<int>> _subs = new();
-
+        private readonly LifetimeDefinition _lifetimeDefinition = new();
+        
         
         public CharacterDeathHandler(EventBus eventBus)
         {
@@ -20,11 +23,11 @@ namespace _Project.Scripts.Characters
         }
         
         public void Start() => 
-            _eventBus.Subscribe<CharacterCreatedEvent>(OnCharacterCreated);
+            _eventBus.SubscribeWithLifetime<CharacterCreatedEvent>(_lifetimeDefinition.Lifetime, OnCharacterCreated);
 
         public void Dispose()
         {
-            _eventBus.Unsubscribe<CharacterCreatedEvent>(OnCharacterCreated);
+            _lifetimeDefinition.Terminate();
 
             foreach (var kv in _subs)
                 kv.Key.OnHealthChanged -= kv.Value;
