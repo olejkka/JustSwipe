@@ -46,7 +46,7 @@ namespace _Project.Scripts.UI.GameplayStatistic
 
         private void ApplicationQuitClicked()
         {
-            _eventBus.Publish(new ApplicationQuitRequestedEvent());
+            _eventBus.Publish(new ReturnToMenuRequestedEvent());
         }
     }
 }
