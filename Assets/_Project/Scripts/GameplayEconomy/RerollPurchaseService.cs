@@ -1,6 +1,4 @@
-﻿using _Project.Scripts.GameplayEconomy;
-
-namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollButton
+﻿namespace _Project.Scripts.GameplayEconomy
 {
     public class RerollPurchaseService
     {

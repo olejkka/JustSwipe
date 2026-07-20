@@ -34,13 +34,11 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 
             //Creators
             builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
-            
             builder.Register<GameplayStateMachine>(container =>
             {
                 var creator = container.Resolve<GameplayStateMachineCreator>();
                 return creator.Create();
             }, Lifetime.Singleton).AsSelf().As<ITickable>();
-            
             builder.Register<PositionsCreator>(Lifetime.Singleton);
             builder.Register<CharacterCreator>(Lifetime.Singleton);
             builder.Register<BotMoveCreator>(Lifetime.Singleton);
@@ -53,15 +51,19 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<CharactersStorage>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<CharactersViewsStorage>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             
-            
+            //Economy
             builder.Register<GameplayMoney>(Lifetime.Singleton);
-            builder.Register<CharactersMover>(Lifetime.Singleton);
-            builder.Register<GameplayStatesProvider>(Lifetime.Singleton);
-            
-            builder.RegisterEntryPoint<CharacterDeathHandler>();
+            builder.Register<CharacterPurchaseService>(Lifetime.Singleton);
+            builder.Register<RerollPurchaseService>(Lifetime.Singleton);
             builder.RegisterEntryPoint<KillRewardHandler>();
-            builder.RegisterEntryPoint<GameplayEntryPoint>();
+
+            builder.Register<CharactersMover>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<CharacterDeathHandler>();
+            
             builder.RegisterEntryPoint<GameplayStatisticsService>().AsSelf();
+            
+            builder.Register<GameplayStatesProvider>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<GameplayEntryPoint>();
         }
     }
 }

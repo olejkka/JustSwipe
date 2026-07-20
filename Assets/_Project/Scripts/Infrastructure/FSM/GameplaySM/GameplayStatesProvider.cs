@@ -7,8 +7,8 @@ using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Creators;
 using _Project.Scripts.Infrastructure.EventBus.Events;
+using _Project.Scripts.Infrastructure.FSM.Core;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM.States;
-using _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates;
 
 namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
 {

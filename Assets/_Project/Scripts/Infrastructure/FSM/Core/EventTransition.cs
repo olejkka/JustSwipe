@@ -1,7 +1,8 @@
 ﻿using System;
+using _Project.Scripts.Infrastructure.FSM.GameplaySM;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM.States;
 
-namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
+namespace _Project.Scripts.Infrastructure.FSM.Core
 {
     public class EventTransition<TEvent, TState> : ITransition where TState : IState
     {

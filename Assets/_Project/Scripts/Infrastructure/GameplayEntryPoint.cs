@@ -4,7 +4,7 @@ using _Project.Scripts.Creators;
 using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM;
-using _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates;
+using _Project.Scripts.Infrastructure.FSM.GameplaySM.States;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using _Project.Scripts.UI.GameplayStatistic;
 using JetBrains.Lifetimes;

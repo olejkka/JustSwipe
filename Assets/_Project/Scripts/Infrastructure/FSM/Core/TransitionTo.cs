@@ -1,7 +1,6 @@
 ﻿using System;
-using _Project.Scripts.Infrastructure.FSM.GameplaySM.States;
 
-namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
+namespace _Project.Scripts.Infrastructure.FSM.Core
 {
     public class TransitionTo<T> : ITransition where T : IState
     {

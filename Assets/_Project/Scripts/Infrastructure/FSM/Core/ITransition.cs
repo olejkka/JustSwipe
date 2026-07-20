@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
+namespace _Project.Scripts.Infrastructure.FSM.Core
 {
     public interface ITransition
     {

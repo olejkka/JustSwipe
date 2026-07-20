@@ -5,9 +5,10 @@ using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Creators;
+using _Project.Scripts.Infrastructure.FSM.Core;
 using UnityEngine;
 
-namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
+namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
 {
     public class BotTurnState : State
     {

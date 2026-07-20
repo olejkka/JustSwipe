@@ -1,7 +1,6 @@
 ﻿using System;
 using _Project.Scripts.Characters.Structs;
 using _Project.Scripts.Configs;
-using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
@@ -9,7 +8,7 @@ using _Project.Scripts.UI.GameplayStatistic;
 using JetBrains.Lifetimes;
 using VContainer.Unity;
 
-namespace _Project.Scripts.Characters
+namespace _Project.Scripts.GameplayEconomy
 {
     public class KillRewardHandler : IStartable, IDisposable
     {

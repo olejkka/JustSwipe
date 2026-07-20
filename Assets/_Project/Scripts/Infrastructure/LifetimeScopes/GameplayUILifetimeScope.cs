@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.UI.CharacterCase;
+﻿using _Project.Scripts.GameplayEconomy;
+using _Project.Scripts.UI.CharacterCase;
 using _Project.Scripts.UI.CharacterPurchaseCase;
 using _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollButton;
 using _Project.Scripts.UI.GameplayStatistic;
@@ -15,8 +16,6 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<CharacterCasesContainerPresenter>();
-            builder.Register<CharacterPurchaseService>(Lifetime.Singleton);
-            builder.Register<RerollPurchaseService>(Lifetime.Singleton);
             
             //Views
             builder.RegisterComponentInHierarchy<SettingsButtonView>();

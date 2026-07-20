@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Infrastructure.EventBus.Events;
-using UnityEngine;
+using _Project.Scripts.Infrastructure.FSM.Core;
 
-namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States.GameplayStates
+namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
 {
     public class EndGameState : State
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
+namespace _Project.Scripts.Infrastructure.FSM.Core
 {
     public abstract class State : IState
     {

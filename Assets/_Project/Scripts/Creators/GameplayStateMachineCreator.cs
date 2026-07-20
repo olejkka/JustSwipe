@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Project.Scripts.Infrastructure.FSM;
+using _Project.Scripts.Infrastructure.FSM.Core;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM.States;
 
