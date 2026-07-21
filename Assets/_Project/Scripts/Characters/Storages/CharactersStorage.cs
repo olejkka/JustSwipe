@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Characters.Structs;
-using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;

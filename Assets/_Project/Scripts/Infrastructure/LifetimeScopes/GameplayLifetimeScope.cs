@@ -1,4 +1,5 @@
 using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Effects;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
 using _Project.Scripts.Creators.Generators;
@@ -59,6 +60,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 
             builder.Register<CharactersMover>(Lifetime.Singleton);
             builder.RegisterEntryPoint<CharacterDeathHandler>();
+            builder.RegisterEntryPoint<EffectsService>();
             
             builder.RegisterEntryPoint<GameplayStatisticsService>().AsSelf();
             
