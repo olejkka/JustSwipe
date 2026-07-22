@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using _Project.Scripts.Characters.Structs;
+using _Project.Scripts.Characters.Structs___Enums;
 using UnityEngine;
 
 namespace _Project.Scripts.Characters

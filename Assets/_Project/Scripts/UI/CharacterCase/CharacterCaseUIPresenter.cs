@@ -1,7 +1,7 @@
 ﻿using System;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
-using _Project.Scripts.Characters.Structs;
+using _Project.Scripts.Characters.Structs___Enums;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using JetBrains.Lifetimes;

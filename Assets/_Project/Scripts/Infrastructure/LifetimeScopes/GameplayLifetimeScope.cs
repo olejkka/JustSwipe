@@ -61,6 +61,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
 
             //Processors
             builder.Register<HealthIncreaseEffectProcessor>(Lifetime.Singleton).As<IEffectProcessor>();
+            builder.Register<DamageIncreaseEffectProcessor>(Lifetime.Singleton).As<IEffectProcessor>();
 
             builder.Register<CharactersMover>(Lifetime.Singleton);
             builder.RegisterEntryPoint<CharacterDeathHandler>();

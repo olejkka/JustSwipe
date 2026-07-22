@@ -1,4 +1,4 @@
-﻿namespace _Project.Scripts.Characters.Structs
+﻿namespace _Project.Scripts.Characters.Structs___Enums
 {
     public enum CharacterType
     {

@@ -2,13 +2,13 @@
 
 namespace _Project.Scripts.Characters.Effects.EffectProcessors
 {
-    public class HealthIncreaseEffectProcessor : IEffectProcessor
+    public class DamageIncreaseEffectProcessor : IEffectProcessor
     {
-        public EffectType Type => EffectType.HealthIncrease;
+        public EffectType Type => EffectType.DamageIncrease;
         
         public void Process(Character character, CharacterEffect effect)
         {
-            character.AddBonusHealth(effect.Parameter);
+            character.AddBonusDamage(effect.Parameter);
         }
     }
 }

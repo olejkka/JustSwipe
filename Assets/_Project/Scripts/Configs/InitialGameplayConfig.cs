@@ -1,5 +1,4 @@
 ﻿using _Project.Scripts.Characters;
-using _Project.Scripts.Characters.Structs;
 using UnityEngine;
 
 namespace _Project.Scripts.Configs

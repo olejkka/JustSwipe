@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using _Project.Scripts.Characters.Effects.EffectProcessors;
 using _Project.Scripts.Characters.Storages;
-using _Project.Scripts.Characters.Structs;
+using _Project.Scripts.Characters.Structs___Enums;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
