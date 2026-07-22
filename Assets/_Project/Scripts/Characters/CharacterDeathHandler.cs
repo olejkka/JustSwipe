@@ -13,7 +13,7 @@ namespace _Project.Scripts.Characters
     public class CharacterDeathHandler : IStartable, IDisposable
     {
         private readonly EventBus _eventBus;
-        private readonly Dictionary<Character, Action<int>> _subs = new();
+        private readonly Dictionary<Character, Action> _subs = new();
         private readonly LifetimeDefinition _lifetimeDefinition = new();
         
         
@@ -30,7 +30,7 @@ namespace _Project.Scripts.Characters
             _lifetimeDefinition.Terminate();
 
             foreach (var kv in _subs)
-                kv.Key.OnHealthChanged -= kv.Value;
+                kv.Key.OnStatsChanged -= kv.Value;
 
             _subs.Clear();
         }
@@ -43,9 +43,9 @@ namespace _Project.Scripts.Characters
             if (_subs.ContainsKey(character))
                 return;
 
-            void OnHealth(int newHealth)
+            void OnStatsChanged()
             {
-                if (newHealth > 0)
+                if (character.Health > 0)
                     return;
                 
                 Unregister(character);
@@ -53,15 +53,15 @@ namespace _Project.Scripts.Characters
                 _eventBus.Publish(new CharacterDiedEvent(character, character.LastDamageSource));
             }
 
-            _subs[character] = OnHealth;
-            character.OnHealthChanged += OnHealth;
+            _subs[character] = OnStatsChanged;
+            character.OnStatsChanged += OnStatsChanged;
         }
 
         public void Unregister(Character character)
         {
             if (_subs.TryGetValue(character, out var h))
             {
-                character.OnHealthChanged -= h;
+                character.OnStatsChanged -= h;
                 _subs.Remove(character);
             }
         }

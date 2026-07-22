@@ -62,8 +62,8 @@ namespace _Project.Scripts.UI.CharacterCase
             _view.BindClick(_assignmentLifetimeDefinition.Lifetime, OnCaseClicked);
             
             _assignmentLifetimeDefinition.Lifetime.Bracket(
-                () => _assignedCharacter.OnHealthChanged += OnHealthChanged,
-                () => _assignedCharacter.OnHealthChanged -= OnHealthChanged);
+                () => _assignedCharacter.OnStatsChanged += OnHealthChanged,
+                () => _assignedCharacter.OnStatsChanged -= OnHealthChanged);
             
             var entry = _charactersConfig.GetEntryByDefinitionId(character.DefinitionId);
             
@@ -83,7 +83,7 @@ namespace _Project.Scripts.UI.CharacterCase
             _view.SetActive(false);
         }
         
-        private void OnHealthChanged(int newHealth)
+        private void OnHealthChanged()
         {
             UpdateStats();
         }

@@ -370,7 +370,7 @@ MonoBehaviour:
     _team: 2
     _baseStats:
       Health: 2
-      Damage: 1
+      Damage: 2
     _icon: {fileID: 446621925, guid: a104535298e36084f9050790c8aab3a4, type: 3}
     _animations:
       FrameRate: 8

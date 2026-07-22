@@ -1,5 +1,6 @@
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Effects;
+using _Project.Scripts.Characters.Effects.EffectProcessors;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
 using _Project.Scripts.Creators.Generators;
@@ -57,6 +58,9 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<CharacterPurchaseService>(Lifetime.Singleton);
             builder.Register<RerollPurchaseService>(Lifetime.Singleton);
             builder.RegisterEntryPoint<KillRewardHandler>();
+
+            //Processors
+            builder.Register<HealthIncreaseEffectProcessor>(Lifetime.Singleton).As<IEffectProcessor>();
 
             builder.Register<CharactersMover>(Lifetime.Singleton);
             builder.RegisterEntryPoint<CharacterDeathHandler>();

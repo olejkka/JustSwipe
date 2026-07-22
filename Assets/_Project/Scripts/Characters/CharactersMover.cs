@@ -49,7 +49,7 @@ namespace _Project.Scripts.Characters
                 {
                     if (defender.Team != attacker.Team)
                     {
-                        defender.TakeDamage(attacker.Damage, attacker);
+                        defender.TakeDamage(attacker.TotalDamage, attacker);
                     }
                     
                     continue;

@@ -52,8 +52,8 @@ namespace _Project.Scripts.Characters
                 () => _data.OnPositionChanged -= OnMoved);
             
             _lifetimeDefinition.Lifetime.BracketSubscription(
-                () => _data.OnHealthChanged += OnHealthChanged,
-                () => _data.OnHealthChanged -= OnHealthChanged);
+                () => _data.OnDamageTaken += OnHealthChanged,
+                () => _data.OnDamageTaken -= OnHealthChanged);
 
             PlayIdle();
             UpdatePosition(_data.Position);
@@ -144,7 +144,7 @@ namespace _Project.Scripts.Characters
             TryPlayOneShot(CharacterAnimationType.Move, _animations.Move);
         }
 
-        private void OnHealthChanged(int health)
+        private void OnHealthChanged(int amount)
         {
             TryPlayOneShot(CharacterAnimationType.TakingDamage, _animations.TakeDamage);
         }
