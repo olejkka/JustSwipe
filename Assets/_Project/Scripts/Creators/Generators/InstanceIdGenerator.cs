@@ -2,13 +2,11 @@
 
 namespace _Project.Scripts.Creators.Generators
 {
-    public class CharacterInstanceIdGenerator
+    public class InstanceIdGenerator
     {
         private int _nextId = 1;
         
-        public int Next()
-        {
-            return _nextId++;
-        }
+        
+        public int Next() => _nextId++;
     }
 }

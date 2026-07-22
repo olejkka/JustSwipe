@@ -5,17 +5,13 @@ namespace _Project.Scripts.Infrastructure.EventBus.Events
     public class ApplyEffectEvent
     {
         public Team Team { get; }
-        public EffectType EffectType { get; }
-        public int Parameter { get; }
-        public int Turns { get; }
-
+        public string DefinitionId { get; }
         
-        public ApplyEffectEvent(Team team, EffectType effectType, int parameter, int turns)
+        
+        public ApplyEffectEvent(Team team, string definitionId)
         {
             Team = team;
-            EffectType = effectType;
-            Parameter = parameter;
-            Turns = turns;
+            DefinitionId = definitionId;
         }
     }
 }

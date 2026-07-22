@@ -46,7 +46,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<BotMoveCreator>(Lifetime.Singleton);
             
             // Generators
-            builder.Register<CharacterInstanceIdGenerator>(Lifetime.Singleton);
+            builder.Register<InstanceIdGenerator>(Lifetime.Singleton);
 
             //Storages
             builder.Register<TilesPositionsStorage>(Lifetime.Singleton);

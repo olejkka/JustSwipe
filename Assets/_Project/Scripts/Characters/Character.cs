@@ -37,8 +37,7 @@ namespace _Project.Scripts.Characters
             int instanceId,
             Vector2Int position,
             Team team, 
-            CharacterBaseStats baseStats
-            )
+            CharacterBaseStats baseStats)
         {
             DefinitionId = definitionId;
             InstanceId = instanceId;
@@ -146,8 +145,8 @@ namespace _Project.Scripts.Characters
                 case EffectType.HealthIncrease:
                     BonusHealth -= effect.Parameter;
                     break;
-                // case EffectType.DamageIncrease: // когда добавите тип
-                //     BonusDamage -= effect.Parameter;
+                case EffectType.DamageIncrease:
+                    BonusDamage -= effect.Parameter;
                     break;
             }
             

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d74f043c1d4019afaeae5d7fea0708, type: 3}
+  m_Name: Character Effects
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Configs.CharacterEffectsConfig
+  EffectEntries:
+  - _definitionId: health_increase_01
+    _type: 1
+    _parameter: 1
+    _turns: 2
+    _icon: {fileID: 1966149262, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
+    _price: 5
+  - _definitionId: damage_increase_01
+    _type: 2
+    _parameter: 1
+    _turns: 2
+    _icon: {fileID: 1739781925, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
+    _price: 5

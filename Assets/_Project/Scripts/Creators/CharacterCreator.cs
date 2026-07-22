@@ -19,7 +19,7 @@ namespace _Project.Scripts.Creators
         private readonly CharactersStorage _charactersStorage;
         private readonly TilesPositionsStorage _tilesPositionsStorage;
         private readonly CharactersConfig _charactersConfig;
-        private readonly CharacterInstanceIdGenerator _characterInstanceIdGenerator;
+        private readonly InstanceIdGenerator _instanceIdGenerator;
 
 
         public CharacterCreator(
@@ -27,14 +27,14 @@ namespace _Project.Scripts.Creators
             CharactersStorage charactersStorage,
             TilesPositionsStorage tilesPositionsStorage,
             CharactersConfig charactersConfig,
-            CharacterInstanceIdGenerator characterInstanceIdGenerator
+            InstanceIdGenerator instanceIdGenerator
         )
         {
             _eventBus = eventBus;
             _charactersStorage = charactersStorage;
             _tilesPositionsStorage = tilesPositionsStorage;
             _charactersConfig = charactersConfig;
-            _characterInstanceIdGenerator = characterInstanceIdGenerator;
+            _instanceIdGenerator = instanceIdGenerator;
         }
         
         public void CreateOnRandomPos(string definitionId)
@@ -47,7 +47,7 @@ namespace _Project.Scripts.Creators
             var spawnPos = positions[Random.Range(0, positions.Count)];
             
             var entry = _charactersConfig.GetEntryByDefinitionId(definitionId);
-            var instanceId = _characterInstanceIdGenerator.Next();
+            var instanceId = _instanceIdGenerator.Next();
             
             if (entry == null)
             {
