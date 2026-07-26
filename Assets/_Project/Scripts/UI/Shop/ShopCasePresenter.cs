@@ -10,28 +10,31 @@ using JetBrains.Lifetimes;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace _Project.Scripts.UI.CharacterPurchaseCase
+namespace _Project.Scripts.UI.Shop
 {
-    public class CharacterPurchaseCasePresenter : IStartable, IDisposable
+    public class ShopCasePresenter : IStartable, IDisposable
     {
-        private readonly CharacterPurchaseCaseView _view;
+        private readonly ShopCaseView _view;
         private readonly CharactersConfig _charactersConfig;
-        private readonly CharacterPurchaseService _characterPurchaseService;
+        private readonly CharacterEffectsConfig _characterEffectsConfig;
+        private readonly ShopPurchaseService _shopPurchaseService;
         private readonly EventBus _eventBus;
         private readonly LifetimeDefinition _lifetimeDefinition = new();
         
         private CharacterDefinition _currentEntry;
 
         
-        public CharacterPurchaseCasePresenter(
-            CharacterPurchaseCaseView view,
+        public ShopCasePresenter(
+            ShopCaseView view,
             CharactersConfig charactersConfig,
-            CharacterPurchaseService characterPurchaseService,
+            CharacterEffectsConfig characterEffectsConfig,
+            ShopPurchaseService shopPurchaseService,
             EventBus eventBus)
         {
             _view = view;
             _charactersConfig = charactersConfig;
-            _characterPurchaseService = characterPurchaseService;
+            _characterEffectsConfig = characterEffectsConfig;
+            _shopPurchaseService = shopPurchaseService;
             _eventBus = eventBus;
         }
 
@@ -39,7 +42,7 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
         {
             _view.Initialize(_lifetimeDefinition.Lifetime, OnPurchaseClicked);
             
-            _eventBus.SubscribeWithLifetime<CharacterPurchaseCaseRerollEvent>(
+            _eventBus.SubscribeWithLifetime<ShopCaseRerollEvent>(
                 _lifetimeDefinition.Lifetime,
                 OnRerollClicked);
             
@@ -70,13 +73,13 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase
 
         private void OnPurchaseClicked()
         {
-            if (!_characterPurchaseService.TryPurchase(_currentEntry.DefinitionId, _currentEntry.Price))
+            if (!_shopPurchaseService.TryPurchase(_currentEntry.DefinitionId, _currentEntry.Price))
                 return;
 
             RefreshCase();
         }
 
-        private void OnRerollClicked(CharacterPurchaseCaseRerollEvent e)
+        private void OnRerollClicked(ShopCaseRerollEvent e)
         {
             RefreshCase();
         }

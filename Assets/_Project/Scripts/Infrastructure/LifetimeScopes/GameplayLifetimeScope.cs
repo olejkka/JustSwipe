@@ -55,7 +55,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             
             //Economy
             builder.Register<GameplayMoney>(Lifetime.Singleton);
-            builder.Register<CharacterPurchaseService>(Lifetime.Singleton);
+            builder.Register<ShopPurchaseService>(Lifetime.Singleton);
             builder.Register<RerollPurchaseService>(Lifetime.Singleton);
             builder.RegisterEntryPoint<KillRewardHandler>();
 

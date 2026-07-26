@@ -6,7 +6,7 @@ using _Project.Scripts.Creators;
 
 namespace _Project.Scripts.GameplayEconomy
 {
-    public class CharacterPurchaseService
+    public class ShopPurchaseService
     {
         private readonly CharacterCreator _characterCreator;
         private readonly GameplayMoney _gameplayMoney;
@@ -14,12 +14,11 @@ namespace _Project.Scripts.GameplayEconomy
         private readonly CharactersStorage _charactersStorage;
 
         
-        public CharacterPurchaseService(
+        public ShopPurchaseService(
             CharacterCreator characterCreator, 
             GameplayMoney gameplayMoney,
             InitialGameplayConfig initialGameplayConfig,
-            CharactersStorage charactersStorage
-            )
+            CharactersStorage charactersStorage)
         {
             _characterCreator = characterCreator;
             _gameplayMoney = gameplayMoney;

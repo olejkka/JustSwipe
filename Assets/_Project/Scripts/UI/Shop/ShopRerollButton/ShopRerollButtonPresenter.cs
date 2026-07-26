@@ -6,11 +6,11 @@ using _Project.Scripts.Infrastructure.EventBus.Events;
 using JetBrains.Lifetimes;
 using VContainer.Unity;
 
-namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollButton
+namespace _Project.Scripts.UI.Shop.ShopRerollButton
 {
-    public class CharacterPurchaseCaseRerollButtonPresenter : IStartable, IDisposable
+    public class ShopRerollButtonPresenter : IStartable, IDisposable
     {
-        private readonly CharacterPurchaseCaseRerollButtonView _view;
+        private readonly ShopRerollButtonView _view;
         private readonly EventBus _eventBus;
         private readonly RerollPurchaseService _rerollPurchaseService;
         private readonly GameplayEconomyConfig _gameplayEconomyConfig;
@@ -18,12 +18,11 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollB
         private readonly LifetimeDefinition _lifetimeDefinition = new();
         
 
-        public CharacterPurchaseCaseRerollButtonPresenter(
-            CharacterPurchaseCaseRerollButtonView view, 
+        public ShopRerollButtonPresenter(
+            ShopRerollButtonView view, 
             EventBus eventBus,
             RerollPurchaseService rerollPurchaseService,
-            GameplayEconomyConfig gameplayEconomyConfig
-            )
+            GameplayEconomyConfig gameplayEconomyConfig)
         {
             _view = view;
             _eventBus = eventBus;
@@ -52,7 +51,7 @@ namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollB
                 
 
             _view.RotateImage();
-            _eventBus.Publish(new CharacterPurchaseCaseRerollEvent());
+            _eventBus.Publish(new ShopCaseRerollEvent());
         }
     }
 }

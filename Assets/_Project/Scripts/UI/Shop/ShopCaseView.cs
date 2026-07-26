@@ -6,9 +6,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.Scripts.UI.CharacterPurchaseCase
+namespace _Project.Scripts.UI.Shop
 {
-    public class CharacterPurchaseCaseView : MonoBehaviour
+    public class ShopCaseView : MonoBehaviour
     {
         [SerializeField] private CharacterCaseUIView _characterCaseView;
         [SerializeField] private TMP_Text _priceText;

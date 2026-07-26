@@ -6,10 +6,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-namespace _Project.Scripts.UI.CharacterPurchaseCase.CharacterPurchaseCaseRerollButton
+namespace _Project.Scripts.UI.Shop.ShopRerollButton
 {
-    public class CharacterPurchaseCaseRerollButtonView : MonoBehaviour
+    public class ShopRerollButtonView : MonoBehaviour
     {
         [SerializeField] private Button _button;
         [SerializeField] private TMP_Text _priceText;

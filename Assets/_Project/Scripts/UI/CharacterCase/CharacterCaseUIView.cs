@@ -9,15 +9,25 @@ namespace _Project.Scripts.UI.CharacterCase
 {
     public class CharacterCaseUIView : MonoBehaviour
     {
-        [SerializeField] private Image _characterIcon;
         [SerializeField] private Button _button;
+        
+        [Header("Icons")]
+        [SerializeField] private Image _characterIcon;
+        [SerializeField] private Image _hpIcon;
+        [SerializeField] private Image _damageIcon;
+        [SerializeField] private Image _bonusHPIcon;
+        [SerializeField] private Image _bonusDamageIcon;
+        
+        [Header("Containers")]
         [SerializeField] private RectTransform _hpContainer;
         [SerializeField] private RectTransform _damageContainer;
-        [SerializeField] private Image _hpIconPrefab;
-        [SerializeField] private Image _damageIconPrefab;
+        [SerializeField] private RectTransform _bonusHPContainer;
+        [SerializeField] private RectTransform _bonusDamageContainer;
 
         private readonly List<Image> _hpIconsPool = new();
         private readonly List<Image> _damageIconsPool = new();
+        private readonly List<Image> _bonusHPIconsPool = new();
+        private readonly List<Image> _bonusDamageIconsPool = new();
 
         
         public void BindClick(Lifetime lifetime, Action onClick)
@@ -32,12 +42,22 @@ namespace _Project.Scripts.UI.CharacterCase
 
         public void SetHealth(int health)
         {
-            ShowIcons(_hpIconsPool, _hpContainer, _hpIconPrefab, Mathf.Max(0, health));
+            ShowIcons(_hpIconsPool, _hpContainer, _hpIcon, Mathf.Max(0, health));
         }
 
         public void SetDamage(int damage)
         {
-            ShowIcons(_damageIconsPool, _damageContainer, _damageIconPrefab, Mathf.Max(0, damage));
+            ShowIcons(_damageIconsPool, _damageContainer, _damageIcon, Mathf.Max(0, damage));
+        }
+        
+        public void SetBonusHealth(int bonusHealth)
+        {
+            ShowIcons(_bonusHPIconsPool, _bonusHPContainer, _bonusHPIcon, Mathf.Max(0, bonusHealth));
+        }
+        
+        public void SetBonusDamage(int bonusDamage)
+        {
+            ShowIcons(_bonusDamageIconsPool, _bonusDamageContainer, _bonusDamageIcon, Mathf.Max(0, bonusDamage));
         }
 
         public void SetActive(bool active)

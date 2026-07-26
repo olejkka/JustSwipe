@@ -58,12 +58,16 @@ namespace _Project.Scripts.UI.CharacterCase
             UnassignCharacter();
             
             _assignedCharacter = character;
-            _assignmentLifetimeDefinition = _lifetimeDefinition.Lifetime.CreateNested();
-            _view.BindClick(_assignmentLifetimeDefinition.Lifetime, OnCaseClicked);
+            var assigned = character;
             
-            _assignmentLifetimeDefinition.Lifetime.Bracket(
-                () => _assignedCharacter.OnStatsChanged += OnHealthChanged,
-                () => _assignedCharacter.OnStatsChanged -= OnHealthChanged);
+            _assignmentLifetimeDefinition = _lifetimeDefinition.Lifetime.CreateNested();
+            var lifetime = _assignmentLifetimeDefinition.Lifetime;
+            
+            _view.BindClick(lifetime , OnCaseClicked);
+            
+            lifetime .Bracket(
+                () => assigned .OnStatsChanged += OnStatsChanged,
+                () => assigned .OnStatsChanged -= OnStatsChanged);
             
             var entry = _charactersConfig.GetEntryByDefinitionId(character.DefinitionId);
             
@@ -83,7 +87,7 @@ namespace _Project.Scripts.UI.CharacterCase
             _view.SetActive(false);
         }
         
-        private void OnHealthChanged()
+        private void OnStatsChanged()
         {
             UpdateStats();
         }
@@ -104,6 +108,8 @@ namespace _Project.Scripts.UI.CharacterCase
             
             _view.SetHealth(_assignedCharacter.Health);
             _view.SetDamage(_assignedCharacter.Damage);
+            _view.SetBonusHealth(_assignedCharacter.BonusHealth);
+            _view.SetBonusDamage(_assignedCharacter.BonusDamage);
         }
 
         public bool IsAssigned()
