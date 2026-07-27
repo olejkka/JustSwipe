@@ -15,4 +15,5 @@ MonoBehaviour:
   _playerCharacter: player_01
   _botCharacter: bot_01
   _maxPlayerCharactersCount: 4
+  _maxEffectsCount: 7
   _moneyCount: 0

@@ -29,15 +29,15 @@ namespace _Project.Scripts.UI.EffectCase.EffectCasesContainerView
             CharactersStorage charactersStorage,
             CharactersViewsStorage charactersViewsStorage,
             CharacterEffectsConfig characterEffectsConfig,
-            EffectsCasesContainerView containerView)
+            EffectsCasesContainerView containerView,
+            InitialGameplayConfig initialGameplayConfig)
         {
             _eventBus = eventBus;
             _charactersStorage = charactersStorage;
             _charactersViewsStorage = charactersViewsStorage;
             _characterEffectsConfig = characterEffectsConfig;
-
-            var count = Math.Max(1, _characterEffectsConfig.EffectEntries.Count);
-            _caseViews = containerView.CreateCases(count);
+            
+            _caseViews = containerView.CreateCases(Math.Max(1, initialGameplayConfig.MaxEffectsCount));
             _casePresenters = new EffectCaseUIPresenter[_caseViews.Length];
         }
 
@@ -96,35 +96,33 @@ namespace _Project.Scripts.UI.EffectCase.EffectCasesContainerView
             foreach (var presenter in _casePresenters)
                 presenter.UnassignEffect();
 
+            var index = 0;
             foreach (var effect in activeEffects.Values)
             {
-                for (var i = 0; i < _casePresenters.Length; i++)
-                {
-                    if (_casePresenters[i].IsAssigned())
-                        continue;
-
-                    _casePresenters[i].AssignEffect(effect);
+                if (index >= _casePresenters.Length)
                     break;
-                }
+
+                _casePresenters[index].AssignEffect(effect);
+                index++;
             }
         }
 
-        private Dictionary<string, CharacterEffect> CollectActiveEffects()
+        private Dictionary<int, CharacterEffect> CollectActiveEffects()
         {
-            var result = new Dictionary<string, CharacterEffect>();
+            var result = new Dictionary<int, CharacterEffect>();
 
             foreach (var character in _charactersStorage.GetCharactersByTeam(Team.Player))
             {
                 foreach (var effect in character.Effects)
                 {
-                    if (result.TryGetValue(effect.DefinitionId, out var existing))
+                    if (result.TryGetValue(effect.InstanceId, out var existing))
                     {
                         if (effect.RemainingTurns > existing.RemainingTurns)
-                            result[effect.DefinitionId] = effect;
+                            result[effect.InstanceId] = effect;
                     }
                     else
                     {
-                        result.Add(effect.DefinitionId, effect);
+                        result.Add(effect.InstanceId, effect);
                     }
                 }
             }

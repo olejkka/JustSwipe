@@ -57,11 +57,20 @@ namespace _Project.Scripts.UI.EffectCase
         private static void ShowIcons(RectTransform container, Image iconPrefab, int requiredCount)
         {
             for (var i = container.childCount - 1; i >= 0; i--)
-                Destroy(container.GetChild(i).gameObject);
-
+            {
+                var child = container.GetChild(i).gameObject;
+                
+                if (child == iconPrefab.gameObject)
+                    continue;
+                
+                Destroy(child);
+            }
             for (var i = 0; i < requiredCount; i++)
-                Instantiate(iconPrefab, container);
-            
+            {
+                var icon = Instantiate(iconPrefab, container);
+                icon.gameObject.SetActive(true);
+            }
+            iconPrefab.gameObject.SetActive(false);
             container.gameObject.SetActive(requiredCount > 0);
         }
     }

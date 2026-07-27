@@ -106,11 +106,11 @@ namespace _Project.Scripts.UI.EffectCase
             if (!_hasAssignedEffect)
                 return;
 
-            var definitionId = _assignedEffect.DefinitionId;
+            var instanceId = _assignedEffect.InstanceId;
 
             foreach (var character in _charactersStorage.GetCharactersByTeam(Team.Player))
             {
-                if (!character.Effects.Any(e => e.DefinitionId == definitionId))
+                if (!character.Effects.Any(e => e.InstanceId == instanceId))
                     continue;
 
                 if (_charactersViewsStorage.TryGet(character, out var characterView) && characterView != null)

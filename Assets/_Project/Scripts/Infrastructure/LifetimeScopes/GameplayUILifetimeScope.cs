@@ -1,6 +1,7 @@
 ﻿using _Project.Scripts.UI.CharacterCase;
 using _Project.Scripts.UI.CheatsPanel;
 using _Project.Scripts.UI.CheatsPanel.AddMoneyButton;
+using _Project.Scripts.UI.EffectCase.EffectCasesContainerView;
 using _Project.Scripts.UI.GameplayStatistic;
 using _Project.Scripts.UI.MoneyUI;
 using _Project.Scripts.UI.SettingsButton;
@@ -20,6 +21,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.RegisterComponentInHierarchy<SettingsButtonView>();
             builder.RegisterComponentInHierarchy<GameplaySettingsPopupView>();
             builder.RegisterComponentInHierarchy<CharacterCasesContainerView>();
+            builder.RegisterComponentInHierarchy<EffectsCasesContainerView>();
             builder.RegisterComponentInHierarchy<ShopCaseView>();
             builder.RegisterComponentInHierarchy<ShopRerollButtonView>();
             builder.RegisterComponentInHierarchy<MoneyView>();
@@ -33,6 +35,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.RegisterEntryPoint<MoneyPresenter>();
             builder.RegisterEntryPoint<GameplayStatisticPresenter>();
             builder.RegisterEntryPoint<CharacterCasesContainerPresenter>();
+            builder.RegisterEntryPoint<EffectsCasesContainerPresenter>();
             
             //Cheats
             builder.RegisterComponentInHierarchy<CheatsPanelView>();

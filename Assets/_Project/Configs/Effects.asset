@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57d74f043c1d4019afaeae5d7fea0708, type: 3}
-  m_Name: Character Effects
+  m_Name: Effects
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Configs.CharacterEffectsConfig
   EffectEntries:
   - _definitionId: health_increase_01
     _type: 1
     _parameter: 1
     _turns: 2
-    _icon: {fileID: 1966149262, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
+    _icon: {fileID: -596270937, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
     _price: 5
   - _definitionId: damage_increase_01
     _type: 2

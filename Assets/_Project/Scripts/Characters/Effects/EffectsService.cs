@@ -59,6 +59,8 @@ namespace _Project.Scripts.Characters.Effects
                 return;
             }
             
+            var instanceId = _instanceIdGenerator.Next();
+            
             foreach (var character in _charactersStorage.GetCharactersByTeam(e.Team))
             {
                 var effect = new CharacterEffect(
@@ -66,7 +68,7 @@ namespace _Project.Scripts.Characters.Effects
                     definition.Parameter,
                     definition.Turns,
                     definition.DefinitionId,
-                    _instanceIdGenerator.Next());
+                    instanceId);
                 
                 character.AddEffect(effect);
                 
