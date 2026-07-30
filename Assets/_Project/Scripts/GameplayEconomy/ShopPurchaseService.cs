@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Characters.Storages;
-using _Project.Scripts.Characters.Structs___Enums;
+using _Project.Scripts.Characters.StructsEnums;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Creators;
 using _Project.Scripts.Infrastructure.EventBus;
@@ -34,11 +34,18 @@ namespace _Project.Scripts.GameplayEconomy
         }
 
         public bool TryPurchase(ShopOffer offer)
-        {
+        {   
             return offer.Type switch
             {
-                ShopOfferType.Character => TryPurchaseCharacter(offer.DefinitionId, offer.Price),
-                ShopOfferType.Effect => TryPurchaseEffect(offer.DefinitionId, offer.Price, Team.Player),
+                ShopOfferType.Character =>
+                    TryPurchaseCharacter(offer.DefinitionId, offer.Price),
+
+                ShopOfferType.Effect =>
+                    TryPurchaseEffect(
+                        offer.DefinitionId,
+                        offer.Price,
+                        offer.TargetTeam),
+
                 _ => false
             };
         }

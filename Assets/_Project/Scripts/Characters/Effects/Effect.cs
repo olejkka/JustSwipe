@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace _Project.Scripts.Characters.Structs___Enums
+namespace _Project.Scripts.Characters.StructsEnums
 {
     [Serializable]
-    public struct CharacterEffect
+    public struct Effect
     {
         public string DefinitionId;
         public int InstanceId;
@@ -12,7 +12,7 @@ namespace _Project.Scripts.Characters.Structs___Enums
         public int RemainingTurns;
         
         
-        public CharacterEffect(
+        public Effect(
             EffectType type,
             int parameter,
             int remainingTurns,

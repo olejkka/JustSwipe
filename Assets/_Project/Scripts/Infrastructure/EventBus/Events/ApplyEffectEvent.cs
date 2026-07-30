@@ -1,4 +1,4 @@
-﻿using _Project.Scripts.Characters.Structs___Enums;
+﻿using _Project.Scripts.Characters.StructsEnums;
 
 namespace _Project.Scripts.Infrastructure.EventBus.Events
 {

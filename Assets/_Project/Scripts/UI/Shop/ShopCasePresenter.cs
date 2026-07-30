@@ -1,7 +1,7 @@
 ﻿using System;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Effects;
-using _Project.Scripts.Characters.Structs___Enums;
+using _Project.Scripts.Characters.StructsEnums;
 using _Project.Scripts.Configs;
 using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure.EventBus;
@@ -17,7 +17,8 @@ namespace _Project.Scripts.UI.Shop
     {
         private readonly ShopCaseView _view;
         private readonly CharactersConfig _charactersConfig;
-        private readonly CharacterEffectsConfig _characterEffectsConfig;
+        private readonly EffectsConfig _effectsConfig;
+        private readonly EffectCaseColorsConfig _colorsConfig;
         private readonly ShopPurchaseService _shopPurchaseService;
         private readonly EventBus _eventBus;
         private readonly LifetimeDefinition _lifetimeDefinition = new();
@@ -28,13 +29,15 @@ namespace _Project.Scripts.UI.Shop
         public ShopCasePresenter(
             ShopCaseView view,
             CharactersConfig charactersConfig,
-            CharacterEffectsConfig characterEffectsConfig,
+            EffectsConfig effectsConfig,
+            EffectCaseColorsConfig colorsConfig,
             ShopPurchaseService shopPurchaseService,
             EventBus eventBus)
         {
             _view = view;
             _charactersConfig = charactersConfig;
-            _characterEffectsConfig = characterEffectsConfig;
+            _effectsConfig = effectsConfig;
+            _colorsConfig = colorsConfig;
             _shopPurchaseService = shopPurchaseService;
             _eventBus = eventBus;
         }
@@ -100,12 +103,14 @@ namespace _Project.Scripts.UI.Shop
         
         private ShopOffer BuildEffectOffer()
         {
-            var entries = _characterEffectsConfig.EffectEntries;
-            
-            if (entries == null || entries.Count == 0)
+            var entries = _effectsConfig.EffectEntries.FindAll(
+                entry => entry.Polarity != EffectPolarity.None);
+
+            if (entries.Count == 0)
                 return null;
 
-            string excludedId = _currentOffer != null && _currentOffer.Type == ShopOfferType.Effect
+            string excludedId = _currentOffer != null &&
+                                _currentOffer.Type == ShopOfferType.Effect
                 ? _currentOffer.DefinitionId
                 : null;
 
@@ -113,13 +118,21 @@ namespace _Project.Scripts.UI.Shop
 
             if (!string.IsNullOrEmpty(excludedId))
             {
-                var filtered = entries.FindAll(e => e.DefinitionId != excludedId);
-                
+                var filtered = entries.FindAll(
+                    entry => entry.DefinitionId != excludedId);
+
                 if (filtered.Count > 0)
                     selected = filtered[UnityEngine.Random.Range(0, filtered.Count)];
             }
 
             selected ??= entries[UnityEngine.Random.Range(0, entries.Count)];
+
+            var targetTeam = selected.Polarity switch
+            {
+                EffectPolarity.Buff => Team.Player,
+                EffectPolarity.Debuff => Team.Bot,
+                _ => Team.None
+            };
 
             return new ShopOffer
             {
@@ -127,9 +140,11 @@ namespace _Project.Scripts.UI.Shop
                 DefinitionId = selected.DefinitionId,
                 Price = selected.Price,
                 Icon = selected.Icon,
+                TargetTeam = targetTeam,
                 EffectType = selected.Type,
                 EffectParameter = selected.Parameter,
-                Turns = selected.Turns
+                Turns = selected.Turns,
+                BackgroundColor = _colorsConfig.GetBackgroundColor(selected.Polarity)
             };
         }
 

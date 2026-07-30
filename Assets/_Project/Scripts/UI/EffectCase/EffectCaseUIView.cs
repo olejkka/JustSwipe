@@ -16,6 +16,9 @@ namespace _Project.Scripts.UI.EffectCase
         [SerializeField] private Image _hpEffectIcon;
         [SerializeField] private Image _damageEffectIcon;
 
+        [Header("Background")]
+        [SerializeField] private Image _background;
+        
         [Header("Timer")]
         [SerializeField] private TextMeshProUGUI _turnsLeftText;
 
@@ -42,6 +45,11 @@ namespace _Project.Scripts.UI.EffectCase
         public void SetDamageBuffIcons(int damage)
         {
             ShowIcons(_damageEffectIconsContainer, _damageEffectIcon, Mathf.Max(0, damage));
+        }
+        
+        public void SetBackgroundColor(Color color)
+        {
+            _background.color = color;
         }
 
         public void SetTurnsLeft(int turnsLeft)

@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Configs.CharacterEffectsConfig
   EffectEntries:
   - _definitionId: health_increase_01
+    _polarity: 1
     _type: 1
     _parameter: 1
     _turns: 2
     _icon: {fileID: -596270937, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
-    _price: 5
+    _price: 1
   - _definitionId: damage_increase_01
+    _polarity: 1
     _type: 2
     _parameter: 1
     _turns: 2
     _icon: {fileID: 1739781925, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
-    _price: 5
+    _price: 1

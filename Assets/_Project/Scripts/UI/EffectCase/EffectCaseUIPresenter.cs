@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using _Project.Scripts.Characters.Storages;
-using _Project.Scripts.Characters.Structs___Enums;
+using _Project.Scripts.Characters.StructsEnums;
 using _Project.Scripts.Configs;
 using JetBrains.Lifetimes;
 using UnityEngine;
@@ -13,27 +13,33 @@ namespace _Project.Scripts.UI.EffectCase
     {
         private readonly LifetimeDefinition _lifetimeDefinition;
         private readonly EffectCaseUIView _view;
-        private readonly CharacterEffectsConfig _characterEffectsConfig;
+        private readonly EffectsConfig _effectsConfig;
+        private readonly EffectCaseColorsConfig _colorsConfig;
         private readonly CharactersStorage _charactersStorage;
         private readonly CharactersViewsStorage _charactersViewsStorage;
+        private readonly Team _team;
 
         private LifetimeDefinition _assignmentLifetimeDefinition;
-        private CharacterEffect _assignedEffect;
+        private Effect _assignedEffect;
         private bool _hasAssignedEffect;
 
         
         public EffectCaseUIPresenter(
             Lifetime parentLifetime,
             EffectCaseUIView view,
-            CharacterEffectsConfig characterEffectsConfig,
+            EffectsConfig effectsConfig,
+            EffectCaseColorsConfig colorsConfig,
             CharactersStorage charactersStorage,
-            CharactersViewsStorage charactersViewsStorage)
+            CharactersViewsStorage charactersViewsStorage,
+            Team team)
         {
             _lifetimeDefinition = parentLifetime.CreateNested();
             _view = view;
-            _characterEffectsConfig = characterEffectsConfig;
+            _effectsConfig = effectsConfig;
+            _colorsConfig = colorsConfig;
             _charactersStorage = charactersStorage;
             _charactersViewsStorage = charactersViewsStorage;
+            _team = team;
         }
 
         public void Start()
@@ -49,7 +55,7 @@ namespace _Project.Scripts.UI.EffectCase
             _hasAssignedEffect = false;
         }
 
-        public void AssignEffect(CharacterEffect effect)
+        public void AssignEffect(Effect effect)
         {
             UnassignEffect();
 
@@ -71,27 +77,15 @@ namespace _Project.Scripts.UI.EffectCase
             _view.SetActive(false);
         }
 
-        public bool IsAssigned() => _hasAssignedEffect;
-
-        public bool IsAssignedTo(string definitionId) =>
-            _hasAssignedEffect && _assignedEffect.DefinitionId == definitionId;
-
-        public void Refresh(CharacterEffect effect)
-        {
-            if (!_hasAssignedEffect)
-                return;
-
-            _assignedEffect = effect;
-            UpdateView();
-        }
-
         private void UpdateView()
         {
-            var entry = _characterEffectsConfig.GetEntryByDefinitionId(_assignedEffect.DefinitionId);
-            _view.SetIcon(entry != null ? entry.Icon : null);
-
+            var entry = _effectsConfig.GetEntryByDefinitionId(_assignedEffect.DefinitionId);
+            
             if (entry == null)
                 Debug.LogError($"No effect definition: {_assignedEffect.DefinitionId}");
+            
+            _view.SetIcon(entry != null ? entry.Icon : null);
+            _view.SetBackgroundColor(_colorsConfig.GetBackgroundColor(entry.Polarity));
 
             _view.SetTurnsLeft(_assignedEffect.RemainingTurns);
 
@@ -108,7 +102,7 @@ namespace _Project.Scripts.UI.EffectCase
 
             var instanceId = _assignedEffect.InstanceId;
 
-            foreach (var character in _charactersStorage.GetCharactersByTeam(Team.Player))
+            foreach (var character in _charactersStorage.GetCharactersByTeam(_team))
             {
                 if (!character.Effects.Any(e => e.InstanceId == instanceId))
                     continue;

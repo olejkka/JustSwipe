@@ -11,7 +11,8 @@ namespace _Project.Scripts.Configs
     {
         [SerializeField] private TilesGenerationConfig _tilesGeneration;
         [SerializeField] private CharactersConfig _characters;
-        [SerializeField] private CharacterEffectsConfig characterEffectsConfig;
+        [SerializeField] private EffectsConfig effectsConfig;
+        [SerializeField] private EffectCaseColorsConfig _effectCaseColors;
         [SerializeField] private InitialGameplayConfig _initialGameplay;
         [SerializeField] private GameplayEconomyConfig _gameplayEconomy;
         [SerializeField] private AudioConfig _audioConfig;
@@ -22,7 +23,8 @@ namespace _Project.Scripts.Configs
         {
             builder.RegisterInstance(_tilesGeneration);
             builder.RegisterInstance(_characters);
-            builder.RegisterInstance(characterEffectsConfig);
+            builder.RegisterInstance(effectsConfig);
+            builder.RegisterInstance(_effectCaseColors);
             builder.RegisterInstance(_initialGameplay);
             builder.RegisterInstance(_gameplayEconomy);
             builder.RegisterInstance(_audioConfig);

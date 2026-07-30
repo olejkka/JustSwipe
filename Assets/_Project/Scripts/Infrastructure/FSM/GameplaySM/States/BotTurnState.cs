@@ -2,9 +2,10 @@
 using System.Linq;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
-using _Project.Scripts.Characters.Structs___Enums;
+using _Project.Scripts.Characters.StructsEnums;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Creators;
+using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.FSM.Core;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
 {
     public class BotTurnState : State
     {
+        private readonly EventBus.EventBus _eventBus;
         private readonly BotSpawnChancesConfig _botSpawnChancesConfig;
         private readonly BotMoveCreator _botMoveCreator;
         private readonly CharactersMover _charactersMover;
@@ -21,12 +23,14 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
 
         public BotTurnState(
             IReadOnlyList<ITransition> transitions,
+            EventBus.EventBus eventBus,
             BotSpawnChancesConfig botSpawnChancesConfig,
             BotMoveCreator botMoveCreator,
             CharactersMover charactersMover,
             CharacterCreator characterCreator,
             CharactersStorage charactersStorage) : base(transitions)
         {
+            _eventBus = eventBus;
             _botSpawnChancesConfig = botSpawnChancesConfig;
             _botMoveCreator = botMoveCreator;
             _charactersMover = charactersMover;
@@ -42,6 +46,8 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
 
         protected override void OnExit()
         {
+            _eventBus.Publish(new TurnEndedEvent(Team.Bot));
+            
             if (Random.value < _botSpawnChancesConfig.SpawnChanceOneCharacter)
             {
                 _characterCreator.CreateOnRandomPos(_botSpawnChancesConfig.GetRandomDefaultBot());

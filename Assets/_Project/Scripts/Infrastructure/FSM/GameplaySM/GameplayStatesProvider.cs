@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
-using _Project.Scripts.Characters.Structs___Enums;
+using _Project.Scripts.Characters.StructsEnums;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Creators;
 using _Project.Scripts.Infrastructure.EventBus.Events;
@@ -57,6 +57,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                     new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any()),
                     new EventTransition<BotMoveCompletedEvent, PlayerTurnState>(_eventBus),
                 },
+                _eventBus,
                 _botSpawnChancesConfig,
                 _botMoveCreator,
                 _charactersMover,

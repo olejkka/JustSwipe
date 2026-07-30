@@ -1,4 +1,4 @@
-﻿using _Project.Scripts.Characters.Structs___Enums;
+﻿using _Project.Scripts.Characters.StructsEnums;
 
 namespace _Project.Scripts.Characters.Effects.EffectProcessors
 {
@@ -7,6 +7,6 @@ namespace _Project.Scripts.Characters.Effects.EffectProcessors
         EffectType Type { get; }
         
         
-        void Process(Character character, CharacterEffect effect);
+        void Process(Character character, Effect effect);
     }
 }

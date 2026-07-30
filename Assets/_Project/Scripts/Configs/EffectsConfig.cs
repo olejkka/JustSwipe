@@ -9,7 +9,7 @@ namespace _Project.Scripts.Configs
         menuName = "Gameplay Configs/Character Effects",
         fileName = "Character Effects"
     )]
-    public class CharacterEffectsConfig : ScriptableObject
+    public class EffectsConfig : ScriptableObject
     {
         public List<EffectDefinition> EffectEntries = new();
         

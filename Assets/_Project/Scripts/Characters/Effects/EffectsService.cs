@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using _Project.Scripts.Characters.Effects.EffectProcessors;
 using _Project.Scripts.Characters.Storages;
-using _Project.Scripts.Characters.Structs___Enums;
+using _Project.Scripts.Characters.StructsEnums;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Creators.Generators;
 using _Project.Scripts.Infrastructure.EventBus;
@@ -18,7 +18,7 @@ namespace _Project.Scripts.Characters.Effects
     {
         private readonly EventBus _eventBus;
         private readonly CharactersStorage _charactersStorage;
-        private readonly CharacterEffectsConfig _characterEffectsConfig;
+        private readonly EffectsConfig _effectsConfig;
         private readonly InstanceIdGenerator _instanceIdGenerator;
         private readonly Dictionary<EffectType, IEffectProcessor> _processors;
         private readonly LifetimeDefinition _lifetimeDefinition = new();
@@ -27,13 +27,13 @@ namespace _Project.Scripts.Characters.Effects
         public EffectsService(
             EventBus eventBus, 
             CharactersStorage charactersStorage,
-            CharacterEffectsConfig characterEffectsConfig,
+            EffectsConfig effectsConfig,
             InstanceIdGenerator instanceIdGenerator,
             IEnumerable<IEffectProcessor> processors)
         {
             _eventBus = eventBus;
             _charactersStorage = charactersStorage;
-            _characterEffectsConfig = characterEffectsConfig;
+            _effectsConfig = effectsConfig;
             _instanceIdGenerator = instanceIdGenerator;
             _processors = new Dictionary<EffectType, IEffectProcessor>();
             
@@ -51,7 +51,7 @@ namespace _Project.Scripts.Characters.Effects
 
         private void OnApplyEffect(ApplyEffectEvent e)
         {
-            var definition = _characterEffectsConfig.GetEntryByDefinitionId(e.DefinitionId);
+            var definition = _effectsConfig.GetEntryByDefinitionId(e.DefinitionId);
 
             if (definition == null)
             {
@@ -63,7 +63,7 @@ namespace _Project.Scripts.Characters.Effects
             
             foreach (var character in _charactersStorage.GetCharactersByTeam(e.Team))
             {
-                var effect = new CharacterEffect(
+                var effect = new Effect(
                     definition.Type,
                     definition.Parameter,
                     definition.Turns,

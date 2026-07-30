@@ -1,5 +1,5 @@
 ﻿using System;
-using _Project.Scripts.Characters.Structs___Enums;
+using _Project.Scripts.Characters.StructsEnums;
 using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using _Project.Scripts.UI.CharacterCase;
@@ -46,11 +46,11 @@ namespace _Project.Scripts.UI.Shop
                     _effectCaseView.SetActive(true);
 
                     _effectCaseView.SetIcon(offer.Icon);
+                    _effectCaseView.SetBackgroundColor(offer.BackgroundColor);
+                    
                     _effectCaseView.SetTurnsLeft(offer.Turns);
-                    _effectCaseView.SetHealthBuffIcons(
-                        offer.EffectType == EffectType.HealthIncrease ? offer.EffectParameter : 0);
-                    _effectCaseView.SetDamageBuffIcons(
-                        offer.EffectType == EffectType.DamageIncrease ? offer.EffectParameter : 0);
+                    _effectCaseView.SetHealthBuffIcons(offer.EffectType == EffectType.HealthIncrease ? offer.EffectParameter : 0);
+                    _effectCaseView.SetDamageBuffIcons(offer.EffectType == EffectType.DamageIncrease ? offer.EffectParameter : 0);
                     break;
             }
         }

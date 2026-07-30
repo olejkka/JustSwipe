@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using _Project.Scripts.Characters.Structs___Enums;
+using _Project.Scripts.Characters.StructsEnums;
 using UnityEngine;
 
 namespace _Project.Scripts.Characters
@@ -23,8 +23,8 @@ namespace _Project.Scripts.Characters
         public Character LastDamageSource { get; private set; }
 
         // effects
-        private readonly List<CharacterEffect> _effects = new();
-        public IReadOnlyList<CharacterEffect> Effects => _effects;
+        private readonly List<Effect> _effects = new();
+        public IReadOnlyList<Effect> Effects => _effects;
         
         // events
         public event Action<Vector2Int, Vector2Int> OnPositionChanged;
@@ -118,7 +118,7 @@ namespace _Project.Scripts.Characters
             OnStatsChanged?.Invoke();
         }
 
-        public void AddEffect(CharacterEffect effect) => 
+        public void AddEffect(Effect effect) => 
             _effects.Add(effect);
 
         public void TickEffects()
@@ -138,7 +138,7 @@ namespace _Project.Scripts.Characters
             }
         }
         
-        private void RemoveBonusFromEffect(CharacterEffect effect)
+        private void RemoveBonusFromEffect(Effect effect)
         {
             switch (effect.Type)
             {

@@ -484,6 +484,7 @@ MonoBehaviour:
   _effectIcon: {fileID: 7618144235037570184}
   _hpEffectIcon: {fileID: 7843401448039457010}
   _damageEffectIcon: {fileID: 7861446221215232228}
+  _background: {fileID: 4384144875695629779}
   _turnsLeftText: {fileID: 2529101879672962762}
   _hpEffectIconsContainer: {fileID: 8198672083997079281}
   _damageEffectIconsContainer: {fileID: 1850311529831433941}
@@ -609,7 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.5031446, b: 0.01414137, a: 1}
+  m_Color: {r: 0.019607844, g: 0.54901963, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0

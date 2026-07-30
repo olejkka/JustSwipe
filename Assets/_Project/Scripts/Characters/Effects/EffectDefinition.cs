@@ -1,5 +1,5 @@
 ﻿using System;
-using _Project.Scripts.Characters.Structs___Enums;
+using _Project.Scripts.Characters.StructsEnums;
 using UnityEngine;
 
 namespace _Project.Scripts.Characters.Effects
@@ -9,8 +9,9 @@ namespace _Project.Scripts.Characters.Effects
     {
         [Header("Identity")]
         [SerializeField] private string _definitionId;
+        [SerializeField] private EffectPolarity _polarity;
         [SerializeField] private EffectType _type;
-        
+
         [Header("Gameplay")]
         [SerializeField] private int _parameter;
         [SerializeField] private int _turns;
@@ -22,6 +23,7 @@ namespace _Project.Scripts.Characters.Effects
         [SerializeField] private int _price;
         
         public string DefinitionId => _definitionId;
+        public EffectPolarity Polarity => _polarity;
         public EffectType Type => _type;
         public int Parameter => _parameter;
         public int Turns => _turns;

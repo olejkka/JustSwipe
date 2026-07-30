@@ -1,4 +1,4 @@
-﻿using _Project.Scripts.Characters.Structs___Enums;
+﻿using _Project.Scripts.Characters.StructsEnums;
 
 namespace _Project.Scripts.Characters.Effects.EffectProcessors
 {
@@ -6,7 +6,7 @@ namespace _Project.Scripts.Characters.Effects.EffectProcessors
     {
         public EffectType Type => EffectType.DamageIncrease;
         
-        public void Process(Character character, CharacterEffect effect)
+        public void Process(Character character, Effect effect)
         {
             character.AddBonusDamage(effect.Parameter);
         }
