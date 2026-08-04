@@ -1,5 +1,4 @@
 ﻿using System;
-using _Project.Scripts.Characters.StructsEnums;
 using UnityEngine;
 
 namespace _Project.Scripts.Characters.Effects

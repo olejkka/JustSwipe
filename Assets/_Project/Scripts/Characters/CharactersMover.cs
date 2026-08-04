@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Characters.Storages;
-using _Project.Scripts.Characters.StructsEnums;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
@@ -49,7 +48,7 @@ namespace _Project.Scripts.Characters
                 {
                     if (defender.Team != attacker.Team)
                     {
-                        defender.TakeDamage(attacker.TotalDamage, attacker);
+                        defender.ChangeHealth(-attacker.TotalDamage, attacker);
                     }
                     
                     continue;
@@ -75,7 +74,7 @@ namespace _Project.Scripts.Characters
                 var character = allCharacters[i];
                 
                 if (!_tilesPositionsStorage.Contains(character.Position)) 
-                    character.TakeDamage(character.Health);
+                    character.ChangeHealth(-character.Health);
             }
         }
     }

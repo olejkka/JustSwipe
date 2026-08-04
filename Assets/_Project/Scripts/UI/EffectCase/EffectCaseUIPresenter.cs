@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
+using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Effects;
 using _Project.Scripts.Characters.Storages;
-using _Project.Scripts.Characters.StructsEnums;
 using _Project.Scripts.Configs;
 using JetBrains.Lifetimes;
 using UnityEngine;

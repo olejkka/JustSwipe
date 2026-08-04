@@ -1,4 +1,4 @@
-﻿namespace _Project.Scripts.Characters.StructsEnums
+﻿namespace _Project.Scripts.Characters.Effects
 {
     public enum EffectType
     {

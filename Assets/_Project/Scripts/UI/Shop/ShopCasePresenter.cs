@@ -1,7 +1,6 @@
 ﻿using System;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Effects;
-using _Project.Scripts.Characters.StructsEnums;
 using _Project.Scripts.Configs;
 using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure.EventBus;

@@ -1,5 +1,5 @@
-﻿using _Project.Scripts.Characters.Storages;
-using _Project.Scripts.Characters.StructsEnums;
+﻿using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Storages;
 using UnityEngine;
 
 namespace _Project.Scripts.Creators

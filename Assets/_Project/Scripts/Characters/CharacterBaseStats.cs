@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _Project.Scripts.Characters.StructsEnums
+namespace _Project.Scripts.Characters
 {
     [Serializable]
     public struct CharacterBaseStats

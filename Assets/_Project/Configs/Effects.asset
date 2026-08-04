@@ -19,11 +19,81 @@ MonoBehaviour:
     _parameter: 1
     _turns: 2
     _icon: {fileID: -596270937, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
-    _price: 1
+    _price: 2
+  - _definitionId: health_increase_02
+    _polarity: 1
+    _type: 1
+    _parameter: 1
+    _turns: 3
+    _icon: {fileID: -596270937, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
+    _price: 3
+  - _definitionId: health_increase_03
+    _polarity: 1
+    _type: 1
+    _parameter: 1
+    _turns: 4
+    _icon: {fileID: -596270937, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
+    _price: 4
+  - _definitionId: health_increase_04
+    _polarity: 1
+    _type: 1
+    _parameter: 2
+    _turns: 2
+    _icon: {fileID: -596270937, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
+    _price: 5
+  - _definitionId: health_increase_05
+    _polarity: 1
+    _type: 1
+    _parameter: 2
+    _turns: 3
+    _icon: {fileID: -596270937, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
+    _price: 7
   - _definitionId: damage_increase_01
     _polarity: 1
     _type: 2
     _parameter: 1
     _turns: 2
-    _icon: {fileID: 1739781925, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
-    _price: 1
+    _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
+    _price: 2
+  - _definitionId: damage_increase_02
+    _polarity: 1
+    _type: 2
+    _parameter: 1
+    _turns: 3
+    _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
+    _price: 3
+  - _definitionId: damage_increase_03
+    _polarity: 1
+    _type: 2
+    _parameter: 1
+    _turns: 4
+    _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
+    _price: 4
+  - _definitionId: damage_increase_04
+    _polarity: 1
+    _type: 2
+    _parameter: 2
+    _turns: 2
+    _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
+    _price: 5
+  - _definitionId: damage_increase_05
+    _polarity: 1
+    _type: 2
+    _parameter: 2
+    _turns: 3
+    _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
+    _price: 7
+  - _definitionId: damage_increase_06
+    _polarity: 1
+    _type: 2
+    _parameter: 2
+    _turns: 4
+    _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
+    _price: 10
+  - _definitionId: damage_decrease_01
+    _polarity: 2
+    _type: 2
+    _parameter: 2
+    _turns: 4
+    _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
+    _price: 10

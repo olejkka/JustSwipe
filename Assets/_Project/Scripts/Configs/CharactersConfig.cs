@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Characters;
-using _Project.Scripts.Characters.StructsEnums;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

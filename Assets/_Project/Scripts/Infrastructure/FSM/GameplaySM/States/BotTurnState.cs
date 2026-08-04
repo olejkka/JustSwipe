@@ -2,7 +2,6 @@
 using System.Linq;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
-using _Project.Scripts.Characters.StructsEnums;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Creators;
 using _Project.Scripts.Infrastructure.EventBus.Events;

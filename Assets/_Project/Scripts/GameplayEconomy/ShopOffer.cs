@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Characters.StructsEnums;
+﻿using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Effects;
 using UnityEngine;
 
 namespace _Project.Scripts.GameplayEconomy
