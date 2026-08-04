@@ -60,8 +60,11 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.RegisterEntryPoint<KillRewardHandler>();
 
             //Processors
+            builder.Register<HealEffectProcessor>(Lifetime.Singleton).As<IEffectProcessor>();
+            builder.Register<DealDamageEffectProcessor>(Lifetime.Singleton).As<IEffectProcessor>();
             builder.Register<HealthIncreaseEffectProcessor>(Lifetime.Singleton).As<IEffectProcessor>();
             builder.Register<DamageIncreaseEffectProcessor>(Lifetime.Singleton).As<IEffectProcessor>();
+            builder.Register<DamageDecreaseEffectProcessor>(Lifetime.Singleton).As<IEffectProcessor>();
 
             builder.Register<CharactersMover>(Lifetime.Singleton);
             builder.RegisterEntryPoint<CharacterDeathHandler>();

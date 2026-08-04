@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using _Project.Scripts.Characters.Effects.EffectProcessors;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Configs;
@@ -60,7 +61,7 @@ namespace _Project.Scripts.Characters.Effects
             
             var instanceId = _instanceIdGenerator.Next();
             
-            foreach (var character in _charactersStorage.GetCharactersByTeam(e.Team))
+            foreach (var character in _charactersStorage.GetCharactersByTeam(e.Team).ToArray())
             {
                 var effect = new Effect(
                     definition.Type,
@@ -69,7 +70,8 @@ namespace _Project.Scripts.Characters.Effects
                     definition.DefinitionId,
                     instanceId);
                 
-                character.AddEffect(effect);
+                if (!definition.IsInstant)
+                    character.AddEffect(effect);
                 
                 if (_processors.TryGetValue(effect.Type, out var processor))
                     processor.Process(character, effect);
@@ -78,7 +80,7 @@ namespace _Project.Scripts.Characters.Effects
 
         private void OnTurnEnded(TurnEndedEvent e)
         {
-            foreach (var character in _charactersStorage.GetCharactersByTeam(e.Team))
+            foreach (var character in _charactersStorage.GetCharactersByTeam(e.Team).ToArray())
                 character.TickEffects();
         }
     }

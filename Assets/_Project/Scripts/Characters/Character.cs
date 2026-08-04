@@ -177,6 +177,9 @@ namespace _Project.Scripts.Characters
                 case EffectType.DamageIncrease:
                     BonusDamage = ClampToBase(BonusDamage - effect.Parameter, MaxDamage);
                     break;
+                case EffectType.DamageDecrease:
+                    ChangeDamage(effect.Parameter, affectBaseDamage: true);
+                    break;
             }
 
             OnStatsChanged?.Invoke();

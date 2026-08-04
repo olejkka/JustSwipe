@@ -13,87 +13,43 @@ MonoBehaviour:
   m_Name: Effects
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Configs.CharacterEffectsConfig
   EffectEntries:
-  - _definitionId: health_increase_01
+  - _definitionId: heal_instant_01
     _polarity: 1
     _type: 1
     _parameter: 1
-    _turns: 2
-    _icon: {fileID: -596270937, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
+    _isInstant: 1
+    _turns: 0
+    _icon: {fileID: -741886, guid: 2948ef9ecb57f93458354c6d23427334, type: 3}
     _price: 2
-  - _definitionId: health_increase_02
-    _polarity: 1
-    _type: 1
-    _parameter: 1
-    _turns: 3
-    _icon: {fileID: -596270937, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
-    _price: 3
-  - _definitionId: health_increase_03
-    _polarity: 1
-    _type: 1
-    _parameter: 1
-    _turns: 4
-    _icon: {fileID: -596270937, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
-    _price: 4
-  - _definitionId: health_increase_04
-    _polarity: 1
-    _type: 1
-    _parameter: 2
-    _turns: 2
-    _icon: {fileID: -596270937, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
-    _price: 5
-  - _definitionId: health_increase_05
-    _polarity: 1
-    _type: 1
-    _parameter: 2
-    _turns: 3
-    _icon: {fileID: -596270937, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
-    _price: 7
-  - _definitionId: damage_increase_01
-    _polarity: 1
-    _type: 2
-    _parameter: 1
-    _turns: 2
-    _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
-    _price: 2
-  - _definitionId: damage_increase_02
-    _polarity: 1
-    _type: 2
-    _parameter: 1
-    _turns: 3
-    _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
-    _price: 3
-  - _definitionId: damage_increase_03
-    _polarity: 1
-    _type: 2
-    _parameter: 1
-    _turns: 4
-    _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
-    _price: 4
-  - _definitionId: damage_increase_04
-    _polarity: 1
-    _type: 2
-    _parameter: 2
-    _turns: 2
-    _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
-    _price: 5
-  - _definitionId: damage_increase_05
-    _polarity: 1
-    _type: 2
-    _parameter: 2
-    _turns: 3
-    _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
-    _price: 7
-  - _definitionId: damage_increase_06
-    _polarity: 1
-    _type: 2
-    _parameter: 2
-    _turns: 4
-    _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
-    _price: 10
-  - _definitionId: damage_decrease_01
+  - _definitionId: damage_instant_01
     _polarity: 2
     _type: 2
-    _parameter: 2
-    _turns: 4
+    _parameter: 1
+    _isInstant: 1
+    _turns: 0
+    _icon: {fileID: -864277646, guid: f9a5907d2268dce4a8d75613537e7b2e, type: 3}
+    _price: 2
+  - _definitionId: health_increase_01
+    _polarity: 1
+    _type: 10
+    _parameter: 1
+    _isInstant: 0
+    _turns: 2
+    _icon: {fileID: -596270937, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
+    _price: 2
+  - _definitionId: damage_increase_01
+    _polarity: 1
+    _type: 11
+    _parameter: 1
+    _isInstant: 0
+    _turns: 2
     _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
-    _price: 10
+    _price: 2
+  - _definitionId: damage_decrease_01
+    _polarity: 2
+    _type: 13
+    _parameter: 1
+    _isInstant: 0
+    _turns: 2
+    _icon: {fileID: 1739781925, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
+    _price: 2

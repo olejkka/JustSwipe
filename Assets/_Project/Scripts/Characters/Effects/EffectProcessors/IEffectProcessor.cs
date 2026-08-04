@@ -5,6 +5,6 @@
         EffectType Type { get; }
         
         
-        void Process(Characters.Character character, Effect effect);
+        void Process(Character character, Effect effect);
     }
 }

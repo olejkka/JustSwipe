@@ -4,7 +4,8 @@
     {
         public EffectType Type => EffectType.DamageIncrease;
         
-        public void Process(Characters.Character character, Effect effect)
+        
+        public void Process(Character character, Effect effect)
         {
             character.AddBonusDamage(effect.Parameter);
         }

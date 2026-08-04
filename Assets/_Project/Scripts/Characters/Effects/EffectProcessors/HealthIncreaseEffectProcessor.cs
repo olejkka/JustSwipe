@@ -4,7 +4,8 @@
     {
         public EffectType Type => EffectType.HealthIncrease;
         
-        public void Process(Characters.Character character, Effect effect)
+        
+        public void Process(Character character, Effect effect)
         {
             character.AddBonusHealth(effect.Parameter);
         }

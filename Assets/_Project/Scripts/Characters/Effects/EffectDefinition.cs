@@ -8,13 +8,14 @@ namespace _Project.Scripts.Characters.Effects
     {
         [Header("Identity")]
         [SerializeField] private string _definitionId;
-        [SerializeField] private EffectPolarity _polarity;
-        [SerializeField] private EffectType _type;
 
         [Header("Gameplay")]
+        [SerializeField] private EffectPolarity _polarity;
+        [SerializeField] private EffectType _type;
         [SerializeField] private int _parameter;
+        [SerializeField] private bool _isInstant;
         [SerializeField] private int _turns;
-        
+
         [Header("Presentation")]
         [SerializeField] private Sprite _icon;
         
@@ -25,8 +26,20 @@ namespace _Project.Scripts.Characters.Effects
         public EffectPolarity Polarity => _polarity;
         public EffectType Type => _type;
         public int Parameter => _parameter;
-        public int Turns => _turns;
+        public bool IsInstant => _isInstant;
+        public int Turns => _isInstant ? 0 : _turns;
         public Sprite Icon => _icon;
         public int Price => _price;
+        
+        
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            if (_isInstant)
+                _turns = 0;
+            else if (_turns < 1)
+                _turns = 1;
+        }
+#endif
     }
 }

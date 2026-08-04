@@ -3,7 +3,13 @@
     public enum EffectType
     {
         None = 0,
-        HealthIncrease = 1,
-        DamageIncrease = 2,
+        
+        Heal = 1,
+        DealDamage = 2,
+        
+        HealthIncrease = 10,
+        DamageIncrease = 11,
+        HealthDecrease = 12,
+        DamageDecrease = 13,
     }
 }
