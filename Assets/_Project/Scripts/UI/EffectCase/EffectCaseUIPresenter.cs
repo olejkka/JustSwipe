@@ -23,6 +23,7 @@ namespace _Project.Scripts.UI.EffectCase
         private LifetimeDefinition _assignmentLifetimeDefinition;
         private Effect _assignedEffect;
         private bool _hasAssignedEffect;
+        private int _clickCount;
 
         
         public EffectCaseUIPresenter(
@@ -45,7 +46,7 @@ namespace _Project.Scripts.UI.EffectCase
 
         public void Start()
         {
-            _view.SetActive(false);
+            _view.gameObject.SetActive(false);
         }
 
         public void Dispose()
@@ -67,7 +68,7 @@ namespace _Project.Scripts.UI.EffectCase
             _view.BindClick(_assignmentLifetimeDefinition.Lifetime, OnCaseClicked);
 
             UpdateView();
-            _view.SetActive(true);
+            _view.gameObject.SetActive(true);
         }
 
         public void UnassignEffect()
@@ -75,25 +76,23 @@ namespace _Project.Scripts.UI.EffectCase
             _assignmentLifetimeDefinition?.Terminate();
             _assignmentLifetimeDefinition = null;
             _hasAssignedEffect = false;
-            _view.SetActive(false);
+            _view.gameObject.SetActive(false);
         }
 
         private void UpdateView()
         {
             var entry = _effectsConfig.GetEntryByDefinitionId(_assignedEffect.DefinitionId);
-            
+
             if (entry == null)
                 Debug.LogError($"No effect definition: {_assignedEffect.DefinitionId}");
-            
+
             _view.SetIcon(entry != null ? entry.Icon : null);
             _view.SetBackgroundColor(_colorsConfig.GetBackgroundColor(entry.Polarity));
 
-            _view.SetTurnsLeft(_assignedEffect.RemainingTurns);
-
-            _view.SetHealthBuffIcons(
-                _assignedEffect.Type == EffectType.HealthIncrease ? _assignedEffect.Parameter : 0);
-            _view.SetDamageBuffIcons(
-                _assignedEffect.Type == EffectType.DamageIncrease ? _assignedEffect.Parameter : 0);
+            _view.SetEffectData(
+                _assignedEffect.Type,
+                _assignedEffect.Parameter,
+                _assignedEffect.RemainingTurns);
         }
 
         private void OnCaseClicked()
@@ -102,14 +101,23 @@ namespace _Project.Scripts.UI.EffectCase
                 return;
 
             var instanceId = _assignedEffect.InstanceId;
+            
+            _clickCount++;
 
-            foreach (var character in _charactersStorage.GetCharactersByTeam(_team))
+            if (_clickCount == 1)
             {
-                if (!character.Effects.Any(e => e.InstanceId == instanceId))
-                    continue;
+                foreach (var character in _charactersStorage.GetCharactersByTeam(_team))
+                {
+                    if (!character.Effects.Any(e => e.InstanceId == instanceId))
+                        continue;
 
-                if (_charactersViewsStorage.TryGet(character, out var characterView) && characterView != null)
-                    characterView.PlaySelected();
+                    if (_charactersViewsStorage.TryGet(character, out var characterView) && characterView != null)
+                        characterView.PlaySelected();
+                }
+            }
+            else if (_clickCount == 2)
+            {
+                _clickCount = 0;
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace _Project.Scripts.Tiles
+﻿namespace _Project.Scripts.Board
 {
     public enum TileType
     {

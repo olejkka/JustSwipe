@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Project.Scripts.Tiles
+namespace _Project.Scripts.Board
 {
     public class TilesPositionsStorage
     {

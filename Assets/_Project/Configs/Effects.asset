@@ -19,7 +19,7 @@ MonoBehaviour:
     _parameter: 1
     _isInstant: 1
     _turns: 0
-    _icon: {fileID: -741886, guid: 2948ef9ecb57f93458354c6d23427334, type: 3}
+    _icon: {fileID: 21300000, guid: 56b6d779582183d49878dc21bb5496bf, type: 3}
     _price: 2
   - _definitionId: damage_instant_01
     _polarity: 2
@@ -27,7 +27,7 @@ MonoBehaviour:
     _parameter: 1
     _isInstant: 1
     _turns: 0
-    _icon: {fileID: -864277646, guid: f9a5907d2268dce4a8d75613537e7b2e, type: 3}
+    _icon: {fileID: 21300000, guid: 56b6d779582183d49878dc21bb5496bf, type: 3}
     _price: 2
   - _definitionId: health_increase_01
     _polarity: 1
@@ -35,7 +35,7 @@ MonoBehaviour:
     _parameter: 1
     _isInstant: 0
     _turns: 2
-    _icon: {fileID: -596270937, guid: 05b01459b0ed3c14a8ddd11d33481541, type: 3}
+    _icon: {fileID: 21300000, guid: f816f63babfcb3e4d92c5cd9bb193149, type: 3}
     _price: 2
   - _definitionId: damage_increase_01
     _polarity: 1
@@ -43,7 +43,7 @@ MonoBehaviour:
     _parameter: 1
     _isInstant: 0
     _turns: 2
-    _icon: {fileID: -1320484762, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
+    _icon: {fileID: 21300000, guid: f816f63babfcb3e4d92c5cd9bb193149, type: 3}
     _price: 2
   - _definitionId: damage_decrease_01
     _polarity: 2
@@ -51,5 +51,5 @@ MonoBehaviour:
     _parameter: 1
     _isInstant: 0
     _turns: 2
-    _icon: {fileID: 1739781925, guid: 663d5c7d2c6af404898404d20929c5d4, type: 3}
+    _icon: {fileID: 21300000, guid: f816f63babfcb3e4d92c5cd9bb193149, type: 3}
     _price: 2

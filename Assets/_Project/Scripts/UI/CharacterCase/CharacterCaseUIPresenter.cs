@@ -104,11 +104,9 @@ namespace _Project.Scripts.UI.CharacterCase
         {
             if (_assignedCharacter == null) 
                 return;
-            
-            _view.SetHealth(_assignedCharacter.Health);
-            _view.SetDamage(_assignedCharacter.Damage);
-            _view.SetBonusHealth(_assignedCharacter.BonusHealth);
-            _view.SetBonusDamage(_assignedCharacter.BonusDamage);
+    
+            _view.SetHealth(_assignedCharacter.Health, _assignedCharacter.BonusHealth);
+            _view.SetDamage(_assignedCharacter.Damage, _assignedCharacter.BonusDamage);
         }
 
         public bool IsAssigned()

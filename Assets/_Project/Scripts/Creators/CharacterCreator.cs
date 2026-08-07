@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using _Project.Scripts.Board;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Configs;
@@ -7,7 +8,6 @@ using _Project.Scripts.Creators.Generators;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
-using _Project.Scripts.Tiles;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

@@ -80,11 +80,22 @@ namespace _Project.Scripts.Characters
                 OnStatsChanged?.Invoke();
                 return;
             }
-            
-            Health = ClampToBase(Health + delta, MaxHealth);
 
-            if (HasActiveBonusHealthEffect())
-                BonusHealth = ClampToBase(BonusHealth + delta, MaxHealth);
+            var toBase = Math.Min(delta, MaxHealth - Health);
+            Health = ClampToBase(Health + toBase, MaxHealth);
+
+            var remainingHeal = delta - toBase;
+            
+            if (remainingHeal > 0)
+            {
+                var bonusMissing = GetBonusHealthCapacity() - BonusHealth;
+                
+                if (bonusMissing > 0)
+                {
+                    var toBonus = Math.Min(remainingHeal, bonusMissing);
+                    BonusHealth = ClampToBase(BonusHealth + toBonus, MaxHealth);
+                }
+            }
 
             OnStatsChanged?.Invoke();
         }
@@ -125,46 +136,24 @@ namespace _Project.Scripts.Characters
 
         private int AbsorbBonusHealth(int amount)
         {
-            var remaining = amount;
-
-            for (var i = 0; i < _effects.Count && remaining > 0;)
-            {
-                var effect = _effects[i];
-
-                if (effect.Type != EffectType.HealthIncrease || effect.Parameter <= 0)
-                {
-                    i++;
-                    continue;
-                }
-
-                var absorbed = Math.Min(remaining, effect.Parameter);
-                effect.Parameter -= absorbed;
-                BonusHealth = ClampToBase(BonusHealth - absorbed, MaxHealth);
-                remaining -= absorbed;
-
-                if (effect.Parameter <= 0)
-                {
-                    _effects.RemoveAt(i);
-                }
-                else
-                {
-                    _effects[i] = effect;
-                    i++;
-                }
-            }
-
-            return remaining;
+            var absorbed = Math.Min(amount, BonusHealth);
+            BonusHealth = ClampToBase(BonusHealth - absorbed, MaxHealth);
+            return amount - absorbed;
         }
 
-        private bool HasActiveBonusHealthEffect()
+        private int GetBonusHealthCapacity()
         {
+            var capacity = 0;
+
             for (var i = 0; i < _effects.Count; i++)
             {
-                if (_effects[i].Type == EffectType.HealthIncrease && _effects[i].RemainingTurns > 0)
-                    return true;
+                var effect = _effects[i];
+                
+                if (effect.Type == EffectType.HealthIncrease && effect.RemainingTurns > 0)
+                    capacity += effect.Parameter;
             }
 
-            return false;
+            return Math.Min(capacity, MaxHealth);
         }
 
         private void RemoveBonusFromEffect(Effect effect)

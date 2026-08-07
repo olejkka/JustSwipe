@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using _Project.Scripts.Tiles;
+using _Project.Scripts.Board;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 

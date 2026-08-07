@@ -32,25 +32,21 @@ namespace _Project.Scripts.UI.Shop
             {
                 case ShopOfferType.Character:
                     _characterCaseView.SetActive(true);
-                    _effectCaseView.SetActive(false);
+                    _effectCaseView.gameObject.SetActive(false);
 
                     _characterCaseView.SetIcon(offer.Icon);
-                    _characterCaseView.SetHealth(offer.Health);
-                    _characterCaseView.SetDamage(offer.Damage);
-                    _characterCaseView.SetBonusHealth(0);
-                    _characterCaseView.SetBonusDamage(0);
+                    _characterCaseView.SetHealth(offer.Health, 0);
+                    _characterCaseView.SetDamage(offer.Damage, 0);
                     break;
 
                 case ShopOfferType.Effect:
                     _characterCaseView.SetActive(false);
-                    _effectCaseView.SetActive(true);
+                    _effectCaseView.gameObject.SetActive(true);
 
                     _effectCaseView.SetIcon(offer.Icon);
                     _effectCaseView.SetBackgroundColor(offer.BackgroundColor);
                     
-                    _effectCaseView.SetTurnsLeft(offer.Turns);
-                    _effectCaseView.SetHealthBuffIcons(offer.EffectType == EffectType.HealthIncrease ? offer.EffectParameter : 0);
-                    _effectCaseView.SetDamageBuffIcons(offer.EffectType == EffectType.DamageIncrease ? offer.EffectParameter : 0);
+                    _effectCaseView.SetEffectData(offer.EffectType, offer.EffectParameter, offer.Turns);
                     break;
             }
         }

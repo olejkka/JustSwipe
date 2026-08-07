@@ -1,3 +1,4 @@
+using _Project.Scripts.Board;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Effects;
 using _Project.Scripts.Characters.Effects.EffectProcessors;
@@ -8,7 +9,6 @@ using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure.FSM.GameplaySM;
 using _Project.Scripts.InputHandlers;
 using _Project.Scripts.Instantiators;
-using _Project.Scripts.Tiles;
 using _Project.Scripts.UI.GameplayStatistic;
 using UnityEngine;
 using VContainer;
