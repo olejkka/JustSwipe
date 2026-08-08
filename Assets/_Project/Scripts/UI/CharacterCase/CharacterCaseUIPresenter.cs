@@ -48,12 +48,6 @@ namespace _Project.Scripts.UI.CharacterCase
         
         public void AssignCharacter(Character character)
         {
-            if (character.Team != Team.Player)
-            {
-                Debug.LogWarning($"Trying to assign non-player character to case: {character.Team}");
-                return;
-            }
-            
             UnassignCharacter();
             
             _assignedCharacter = character;

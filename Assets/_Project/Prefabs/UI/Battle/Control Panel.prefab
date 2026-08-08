@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9109856393063815505}
+  - component: {fileID: 8940328192480389950}
   - component: {fileID: 7611658071683392655}
   - component: {fileID: 1794788555556366467}
-  - component: {fileID: 8940328192480389950}
   m_Layer: 5
   m_Name: Reroll Icon Image
   m_TagString: Untagged
@@ -38,6 +38,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8940328192480389950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62196345844816370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a8e78e3e2bf458fb0c2a28c29576135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.UI.IconRotateBehaviour
+  _target: {fileID: 9109856393063815505}
+  _duration: 0.25
+  _ease: 6
+  _shakeAngle: 12
+  _shakeDuration: 0.25
+  _shakeEase: 6
 --- !u!222 &7611658071683392655
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -76,24 +94,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8940328192480389950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 62196345844816370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a8e78e3e2bf458fb0c2a28c29576135, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.UI.IconRotateBehaviour
-  _target: {fileID: 9109856393063815505}
-  _duration: 0.25
-  _ease: 6
-  _shakeAngle: 12
-  _shakeDuration: 0.25
-  _shakeEase: 6
 --- !u!1 &394634036585663644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,7 +1263,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8418220649568414971}
-  - component: {fileID: 4182945459272530824}
   m_Layer: 5
   m_Name: 'Reroll Button '
   m_TagString: Untagged
@@ -1293,21 +1292,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0}
---- !u!114 &4182945459272530824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7683543094906106082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24fb7b93af374ebebdd32e40794470ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _button: {fileID: 6339138782686294262}
-  _priceText: {fileID: 2641756101417798499}
-  _iconRotateBehaviour: {fileID: 8940328192480389950}
 --- !u!1 &8265580299416414335
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,6 @@ using _Project.Scripts.UI.MoneyUI;
 using _Project.Scripts.UI.SettingsButton;
 using _Project.Scripts.UI.SettingsPopup;
 using _Project.Scripts.UI.Shop;
-using _Project.Scripts.UI.Shop.ShopRerollButton;
 using VContainer;
 using VContainer.Unity;
 
@@ -22,16 +21,14 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.RegisterComponentInHierarchy<GameplaySettingsPopupView>();
             builder.RegisterComponentInHierarchy<CharacterCasesContainerView>();
             builder.RegisterComponentInHierarchy<EffectsCasesContainerView>();
-            builder.RegisterComponentInHierarchy<ShopCaseView>();
-            builder.RegisterComponentInHierarchy<ShopRerollButtonView>();
+            builder.RegisterComponentInHierarchy<ShopView>();
             builder.RegisterComponentInHierarchy<MoneyView>();
             builder.RegisterComponentInHierarchy<GameplayStatisticView>();
             
             //Presenters
             builder.RegisterEntryPoint<SettingsButtonPresenter>();
             builder.RegisterEntryPoint<GameplaySettingsPopupPresenter>();
-            builder.RegisterEntryPoint<ShopCasePresenter>();
-            builder.RegisterEntryPoint<ShopRerollButtonPresenter>();
+            builder.RegisterEntryPoint<ShopPresenter>();
             builder.RegisterEntryPoint<MoneyPresenter>();
             builder.RegisterEntryPoint<GameplayStatisticPresenter>();
             builder.RegisterEntryPoint<CharacterCasesContainerPresenter>();

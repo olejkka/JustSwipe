@@ -3,88 +3,138 @@ using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Effects;
 using _Project.Scripts.Configs;
 using _Project.Scripts.GameplayEconomy;
-using _Project.Scripts.Infrastructure.EventBus;
-using _Project.Scripts.Infrastructure.EventBus.Events;
-using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using JetBrains.Lifetimes;
 using UnityEngine;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI.Shop
 {
-    public class ShopCasePresenter : IStartable, IDisposable
+    public class ShopPresenter : IStartable, IDisposable
     {
-        private readonly ShopCaseView _view;
+        private readonly ShopView _view;
         private readonly CharactersConfig _charactersConfig;
         private readonly EffectsConfig _effectsConfig;
         private readonly EffectCaseColorsConfig _colorsConfig;
         private readonly ShopPurchaseService _shopPurchaseService;
-        private readonly EventBus _eventBus;
+        private readonly RerollPurchaseService _rerollPurchaseService;
+        private readonly GameplayEconomyConfig _gameplayEconomyConfig;
         private readonly LifetimeDefinition _lifetimeDefinition = new();
-        
-        private ShopOffer _currentOffer;
+
+        private ShopOffer _characterOffer;
+        private ShopOffer _effectOffer;
 
         
-        public ShopCasePresenter(
-            ShopCaseView view,
+        public ShopPresenter(
+            ShopView view,
             CharactersConfig charactersConfig,
             EffectsConfig effectsConfig,
             EffectCaseColorsConfig colorsConfig,
             ShopPurchaseService shopPurchaseService,
-            EventBus eventBus)
+            RerollPurchaseService rerollPurchaseService,
+            GameplayEconomyConfig gameplayEconomyConfig)
         {
             _view = view;
             _charactersConfig = charactersConfig;
             _effectsConfig = effectsConfig;
             _colorsConfig = colorsConfig;
             _shopPurchaseService = shopPurchaseService;
-            _eventBus = eventBus;
+            _rerollPurchaseService = rerollPurchaseService;
+            _gameplayEconomyConfig = gameplayEconomyConfig;
         }
 
         public void Start()
         {
-            _view.Initialize(_lifetimeDefinition.Lifetime, OnPurchaseClicked);
-            
-            _eventBus.SubscribeWithLifetime<ShopCaseRerollEvent>(
+            _view.Initialize(
                 _lifetimeDefinition.Lifetime,
-                OnRerollClicked);
-            
-            RefreshCase();
+                OnCharacterPurchaseClicked,
+                OnCharacterRerollClicked,
+                OnEffectPurchaseClicked,
+                OnEffectRerollClicked);
+
+            _view.SetRerollPrice(_gameplayEconomyConfig.RerollPrice);
+
+            RefreshCharacterCase();
+            RefreshEffectCase();
         }
 
         public void Dispose() => _lifetimeDefinition.Terminate();
 
-        private void RefreshCase()
+        private void OnCharacterPurchaseClicked()
         {
-            var offerType = UnityEngine.Random.value < 0.5f
-                ? ShopOfferType.Character
-                : ShopOfferType.Effect;
-            _currentOffer = offerType == ShopOfferType.Character
-                ? BuildCharacterOffer()
-                : BuildEffectOffer();
-            if (_currentOffer == null)
+            if (!_shopPurchaseService.TryPurchase(_characterOffer))
+                return;
+
+            RefreshCharacterCase();
+        }
+
+        private void OnEffectPurchaseClicked()
+        {
+            if (!_shopPurchaseService.TryPurchase(_effectOffer))
+                return;
+
+            RefreshEffectCase();
+        }
+
+        private void OnCharacterRerollClicked()
+        {
+            if (!_rerollPurchaseService.TryPurchase(_gameplayEconomyConfig.RerollPrice))
             {
-                Debug.LogError("Failed to build shop offer");
+                _view.PlayCharacterRerollFail();
                 return;
             }
-            _view.SetData(_currentOffer);
+
+            _view.PlayCharacterRerollSuccess();
+            RefreshCharacterCase();
         }
-        
+
+        private void OnEffectRerollClicked()
+        {
+            if (!_rerollPurchaseService.TryPurchase(_gameplayEconomyConfig.RerollPrice))
+            {
+                _view.PlayEffectRerollFail();
+                return;
+            }
+
+            _view.PlayEffectRerollSuccess();
+            RefreshEffectCase();
+        }
+
+        private void RefreshCharacterCase()
+        {
+            _characterOffer = BuildCharacterOffer();
+            if (_characterOffer == null)
+            {
+                Debug.LogError("Failed to build character shop offer");
+                return;
+            }
+
+            _view.SetCharacterOffer(_characterOffer);
+        }
+
+        private void RefreshEffectCase()
+        {
+            _effectOffer = BuildEffectOffer();
+            if (_effectOffer == null)
+            {
+                Debug.LogError("Failed to build effect shop offer");
+                return;
+            }
+
+            _view.SetEffectOffer(_effectOffer);
+        }
+
         private ShopOffer BuildCharacterOffer()
         {
             CharacterType? excludedType = null;
 
-            if (_currentOffer != null && _currentOffer.Type == ShopOfferType.Character)
+            if (_characterOffer != null)
             {
-                var previous = _charactersConfig.GetEntryByDefinitionId(_currentOffer.DefinitionId);
+                var previous = _charactersConfig.GetEntryByDefinitionId(_characterOffer.DefinitionId);
                 excludedType = previous?.CharacterType;
             }
 
-            var entry = _charactersConfig.GetRandomEntryByTeamExcept(
-                            Team.Player,
-                            excludedType)
-                        ?? _charactersConfig.GetRandomEntryByTeam(
-                            Team.Player);
+            var entry = _charactersConfig.GetRandomEntryByTeamExcept(Team.Player, excludedType)
+                        ?? _charactersConfig.GetRandomEntryByTeam(Team.Player);
 
             if (entry == null)
                 return null;
@@ -99,7 +149,7 @@ namespace _Project.Scripts.UI.Shop
                 Damage = entry.BaseStats.Damage
             };
         }
-        
+
         private ShopOffer BuildEffectOffer()
         {
             var entries = _effectsConfig.EffectEntries.FindAll(
@@ -108,18 +158,13 @@ namespace _Project.Scripts.UI.Shop
             if (entries.Count == 0)
                 return null;
 
-            string excludedId = _currentOffer != null &&
-                                _currentOffer.Type == ShopOfferType.Effect
-                ? _currentOffer.DefinitionId
-                : null;
+            string excludedId = _effectOffer?.DefinitionId;
 
             EffectDefinition selected = null;
 
             if (!string.IsNullOrEmpty(excludedId))
             {
-                var filtered = entries.FindAll(
-                    entry => entry.DefinitionId != excludedId);
-
+                var filtered = entries.FindAll(entry => entry.DefinitionId != excludedId);
                 if (filtered.Count > 0)
                     selected = filtered[UnityEngine.Random.Range(0, filtered.Count)];
             }
@@ -145,19 +190,6 @@ namespace _Project.Scripts.UI.Shop
                 Turns = selected.Turns,
                 BackgroundColor = _colorsConfig.GetBackgroundColor(selected.Polarity)
             };
-        }
-
-        private void OnPurchaseClicked()
-        {
-            if (!_shopPurchaseService.TryPurchase(_currentOffer))
-                return;
-            
-            RefreshCase();
-        }
-
-        private void OnRerollClicked(ShopCaseRerollEvent e)
-        {
-            RefreshCase();
         }
     }
 }

@@ -14,11 +14,14 @@ namespace _Project.Scripts.UI.CharacterCase
     {
         private readonly EventBus _eventBus;
         private readonly CharactersViewsStorage _charactersViewsStorage;
-        private readonly CharacterCaseUIView[] _caseViews;
-        private readonly CharacterCaseUIPresenter[] _casePresenters;
         private readonly CharactersStorage _charactersStorage;
         private readonly CharactersConfig _charactersConfig;
-        
+
+        private readonly CharacterCaseUIView[] _playerCaseViews;
+        private readonly CharacterCaseUIView[] _botCaseViews;
+        private readonly CharacterCaseUIPresenter[] _playerCasePresenters;
+        private readonly CharacterCaseUIPresenter[] _botCasePresenters;
+
         private readonly LifetimeDefinition _lifetimeDefinition = new();
 
         private bool _initialized;
@@ -34,11 +37,19 @@ namespace _Project.Scripts.UI.CharacterCase
         {
             _eventBus = eventBus;
             _charactersViewsStorage = charactersViewsStorage;
-            _caseViews = containerView.CreateCases(config.MaxPlayerCharactersCount);
             _charactersStorage = charactersStorage;
             _charactersConfig = charactersConfig;
 
-            _casePresenters = new CharacterCaseUIPresenter[_caseViews.Length];
+            var casesCount = Math.Max(1, config.MaxPlayerCharactersCount);
+
+            _playerCaseViews = containerView.CreatePlayerCases(casesCount);
+            _botCaseViews = containerView.CreateBotCases(casesCount);
+
+            _playerCasePresenters =
+                new CharacterCaseUIPresenter[_playerCaseViews.Length];
+
+            _botCasePresenters =
+                new CharacterCaseUIPresenter[_botCaseViews.Length];
         }
 
         public void Start()
@@ -52,30 +63,27 @@ namespace _Project.Scripts.UI.CharacterCase
                 _lifetimeDefinition.Lifetime,
                 OnCharacterDied);
             
-            SyncExistingCharacters();
+            SyncExistingCharacters(Team.Player);
+            SyncExistingCharacters(Team.Bot);
         }
 
         public void Dispose()
         {
             _lifetimeDefinition.Terminate();
 
-            for (int i = 0; i < _casePresenters.Length; i++)
-            {
-                _casePresenters[i]?.Dispose();
-                _casePresenters[i] = null;
-            }
+            DisposePresenters(_playerCasePresenters);
+            DisposePresenters(_botCasePresenters);
         }
 
         private void OnCharacterCreated(CharacterCreatedEvent e)
         {
-            if (e.Character.Team != Team.Player) 
-                return;
+            var presenters = GetPresenters(e.Character.Team);
 
-            for (int i = 0; i < _casePresenters.Length; i++)
+            for (var i = 0; i < presenters.Length; i++)
             {
-                if (!_casePresenters[i].IsAssigned())
+                if (!presenters[i].IsAssigned())
                 {
-                    _casePresenters[i].AssignCharacter(e.Character);
+                    presenters[i].AssignCharacter(e.Character);
                     return;
                 }
             }
@@ -83,25 +91,29 @@ namespace _Project.Scripts.UI.CharacterCase
 
         private void OnCharacterDied(CharacterDiedEvent e)
         {
-            for (int i = 0; i < _casePresenters.Length; i++)
+            var presenters = GetPresenters(e.Character.Team);
+
+            for (var i = 0; i < presenters.Length; i++)
             {
-                if (_casePresenters[i].IsAssignedTo(e.Character))
+                if (presenters[i].IsAssignedTo(e.Character))
                 {
-                    _casePresenters[i].UnassignCharacter();
+                    presenters[i].UnassignCharacter();
                     return;
                 }
             }
         }
 
-        private void SyncExistingCharacters()
+        private void SyncExistingCharacters(Team team)
         {
-            foreach (var character in _charactersStorage.GetCharactersByTeam(Team.Player))
+            var presenters = GetPresenters(team);
+
+            foreach (var character in _charactersStorage.GetCharactersByTeam(team))
             {
-                for (int i = 0; i < _casePresenters.Length; i++)
+                for (var i = 0; i < presenters.Length; i++)
                 {
-                    if (!_casePresenters[i].IsAssigned())
+                    if (!presenters[i].IsAssigned())
                     {
-                        _casePresenters[i].AssignCharacter(character);
+                        presenters[i].AssignCharacter(character);
                         break;
                     }
                 }
@@ -113,13 +125,49 @@ namespace _Project.Scripts.UI.CharacterCase
             if (_initialized)
                 return;
 
-            for (int i = 0; i < _caseViews.Length; i++)
-            {
-                _casePresenters[i] = new CharacterCaseUIPresenter(_lifetimeDefinition.Lifetime, _caseViews[i], _charactersConfig, _charactersViewsStorage);
-                _casePresenters[i].Start();
-            }
+            InitializePresenters(_playerCaseViews, _playerCasePresenters);
+            InitializePresenters(_botCaseViews, _botCasePresenters);
 
             _initialized = true;
+        }
+
+        private void InitializePresenters(
+            CharacterCaseUIView[] views,
+            CharacterCaseUIPresenter[] presenters)
+        {
+            for (var i = 0; i < views.Length; i++)
+            {
+                presenters[i] = new CharacterCaseUIPresenter(
+                    _lifetimeDefinition.Lifetime,
+                    views[i],
+                    _charactersConfig,
+                    _charactersViewsStorage);
+
+                presenters[i].Start();
+            }
+        }
+
+        private CharacterCaseUIPresenter[] GetPresenters(Team team)
+        {
+            return team switch
+            {
+                Team.Player => _playerCasePresenters,
+                Team.Bot => _botCasePresenters,
+                _ => throw new ArgumentOutOfRangeException(
+                    nameof(team),
+                    team,
+                    null)
+            };
+        }
+
+        private static void DisposePresenters(
+            CharacterCaseUIPresenter[] presenters)
+        {
+            for (var i = 0; i < presenters.Length; i++)
+            {
+                presenters[i]?.Dispose();
+                presenters[i] = null;
+            }
         }
     }
 }
