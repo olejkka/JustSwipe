@@ -31,7 +31,7 @@ namespace _Project.Scripts.Characters
         public IReadOnlyList<Effect> Effects => _effects;
 
         // events
-        public event Action<Vector2Int, Vector2Int> OnPositionChanged;
+        public event Action<Vector2Int> OnPositionChanged;
         public event Action OnStatsChanged;
         public event Action<int> OnDamageTaken;
 
@@ -58,7 +58,7 @@ namespace _Project.Scripts.Characters
         public void Move(Vector2Int vector)
         {
             Position += vector;
-            OnPositionChanged?.Invoke(Position, vector);
+            OnPositionChanged?.Invoke(Position);
         }
         
         public void ChangeHealth(int delta, Character source = null)

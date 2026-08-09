@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Project.Scripts.Characters;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using JetBrains.Lifetimes;
 using UnityEngine;
@@ -103,6 +104,13 @@ namespace _Project.Scripts.UI.CharacterCase
 
             iconPrefab.gameObject.SetActive(false);
             iconPrefab.transform.SetSiblingIndex(0);
+        }
+        
+        public void UpdateRotation(Team team)
+        {
+            _characterIcon.transform.rotation = team == Team.Player
+                ? Quaternion.identity
+                : Quaternion.Euler(0f, 180f, 0f);
         }
     }
 }

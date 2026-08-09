@@ -69,6 +69,7 @@ namespace _Project.Scripts.UI.CharacterCase
             
             UpdateStats();
             _view.SetActive(true);
+            _view.UpdateRotation(character.Team);
         }
         
         public void UnassignCharacter()

@@ -54,6 +54,7 @@ namespace _Project.Scripts.Characters
                 () => _data.OnDamageTaken += OnHealthChanged,
                 () => _data.OnDamageTaken -= OnHealthChanged);
 
+            UpdateRotation(data.Team);
             PlayIdle();
             UpdatePosition(_data.Position);
         }
@@ -136,9 +137,8 @@ namespace _Project.Scripts.Characters
                 returnToIdleOnFinish: false);
         }
 
-        private void OnMoved(Vector2Int pos, Vector2Int direction)
+        private void OnMoved(Vector2Int pos)
         {
-            UpdateRotation(direction);
             UpdatePosition(pos);
             TryPlayOneShot(CharacterAnimationType.Move, _animations.Move);
         }
@@ -154,12 +154,11 @@ namespace _Project.Scripts.Characters
             transform.position = _tilemap.CellToWorld(cell);
         }
         
-        private void UpdateRotation(Vector2Int direction)
+        private void UpdateRotation(Team team)
         {
-            if (direction.x > 0)
-                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            else if (direction.x < 0)
-                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            transform.rotation = team == Team.Player
+                ? Quaternion.identity
+                : Quaternion.Euler(0f, 180f, 0f);
         }
 
         private void OnDestroy()
