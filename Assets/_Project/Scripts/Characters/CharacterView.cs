@@ -13,12 +13,6 @@ namespace _Project.Scripts.Characters
     {
         [SerializeField] private SpriteAnimator _animator;
         [SerializeField] private Transform _visual;
-        
-        [Header("Jump Animation")]
-        [SerializeField] private float _selectedJumpHeight;
-        [SerializeField] private float _selectedJumpDuration;
-        [SerializeField] private Ease _selectedJumpEaseUp = Ease.OutQuad;
-        [SerializeField] private Ease _selectedJumpEaseDown = Ease.InQuad;
 
         private readonly LifetimeDefinition _lifetimeDefinition = new();
         
@@ -53,6 +47,10 @@ namespace _Project.Scripts.Characters
             _lifetimeDefinition.Lifetime.BracketSubscription(
                 () => _data.OnDamageTaken += OnHealthChanged,
                 () => _data.OnDamageTaken -= OnHealthChanged);
+            
+            _lifetimeDefinition.Lifetime.BracketSubscription(
+                () => _data.OnMeleeAttack += PlayMeleeAttack,
+                () => _data.OnMeleeAttack -= PlayMeleeAttack);
 
             UpdateRotation(data.Team);
             PlayIdle();
@@ -76,10 +74,10 @@ namespace _Project.Scripts.Characters
             _visual.localPosition = _visualStartLocalPos;
             
             _selectedJumpTween = DOTween.Sequence()
-                .Append(_visual.DOLocalMoveY(_visualStartLocalPos.y + _selectedJumpHeight, _selectedJumpDuration)
-                    .SetEase(_selectedJumpEaseUp))
-                .Append(_visual.DOLocalMoveY(_visualStartLocalPos.y, _selectedJumpDuration)
-                    .SetEase(_selectedJumpEaseDown))
+                .Append(_visual.DOLocalMoveY(_visualStartLocalPos.y + _animations.SelectedJumpHeight, _animations.SelectedJumpDuration)
+                    .SetEase(_animations.SelectedJumpEaseUp))
+                .Append(_visual.DOLocalMoveY(_visualStartLocalPos.y, _animations.SelectedJumpDuration)
+                    .SetEase(_animations.SelectedJumpEaseDown))
                 .SetUpdate(UpdateType.Normal, isIndependentUpdate: false);
         }
 
@@ -146,6 +144,11 @@ namespace _Project.Scripts.Characters
         private void OnHealthChanged(int amount)
         {
             TryPlayOneShot(CharacterAnimationType.TakingDamage, _animations.TakeDamage);
+        }
+        
+        public void PlayMeleeAttack()
+        {
+            TryPlayOneShot(CharacterAnimationType.MeleeAttack, _animations.MeleeAttack);
         }
 
         private void UpdatePosition(Vector2Int pos)

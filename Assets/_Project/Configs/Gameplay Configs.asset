@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tilesGeneration: {fileID: 11400000, guid: 78b017ed30d583747a66f61f5bdb0175, type: 2}
   _characters: {fileID: 11400000, guid: 1956db181fccd544e9dd5bee55c7dee9, type: 2}
+  _characterCaseColors: {fileID: 11400000, guid: 3d8e53c1f0df5804c8add25fbe1cdd24, type: 2}
   effectsConfig: {fileID: 11400000, guid: 473f50c377915c04ca7b421432b9ac6f, type: 2}
   _effectCaseColors: {fileID: 11400000, guid: 05ec5f6a4d6ec7d44a843ab5f8346201, type: 2}
   _initialGameplay: {fileID: 11400000, guid: 97d079d7e17b68743b5c493a84147421, type: 2}

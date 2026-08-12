@@ -4,11 +4,16 @@ namespace _Project.Scripts.Characters
     public enum CharacterAnimationType
     {
         None = 0,
+        
         Idle = 10,
         Selected = 11,
+        
         Move = 20,
-        DealDamage = 30,
+        
+        MeleeAttack = 30,
+        
         TakingDamage = 40,
+        
         Death = 100,
     }
 }

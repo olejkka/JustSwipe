@@ -3,8 +3,26 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeSettings">
+    <configurations />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="" />
+    <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/AndroidProjectSystem.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DOTweenSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DOTweenSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Configs/Characters.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Configs/Characters.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Character.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Character.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterAnimationType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterAnimationType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterDefinition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterDefinition.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersMover.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharactersMover.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Texturies/New Render Texture.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Texturies/New Render Texture.renderTexture" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,6 +69,65 @@
     <urls />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="7.091170655165385E-221" />
+      <entry key="MS500" value="1.2768427748140765E-44" />
+      <entry key="S2" value="1.7490603316130308E-11" />
+      <entry key="S5" value="7.761520647045463E-5" />
+      <entry key="S10" value="0.014412330953586733" />
+      <entry key="S30" value="0.5810773896788739" />
+      <entry key="S60" value="1.8084668592047097" />
+      <entry key="M2" value="4.3315070331343835" />
+      <entry key="M5" value="9.365817538406526" />
+      <entry key="M10" value="12.928051375195636" />
+      <entry key="M15" value="14.562797625749479" />
+      <entry key="M30" value="16.542023011872992" />
+      <entry key="H1" value="17.70004782548054" />
+      <entry key="H2" value="18.330574010868503" />
+      <entry key="H4" value="18.660186500911" />
+      <entry key="D1" value="18.94263454527657" />
+      <entry key="W1" value="18.99178677169441" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000028041598061" />
+      <entry key="S2" value="1.0409214194713614" />
+      <entry key="S5" value="1.2784711933914317" />
+      <entry key="S10" value="1.5277037312156776" />
+      <entry key="S30" value="1.815775667649413" />
+      <entry key="S60" value="2.0730048935593692" />
+      <entry key="M2" value="2.7810754986869095" />
+      <entry key="M5" value="4.113426083558351" />
+      <entry key="M10" value="4.91118446189344" />
+      <entry key="M15" value="5.2371521570895885" />
+      <entry key="M30" value="5.598775213270611" />
+      <entry key="H1" value="5.7941741912161655" />
+      <entry key="H2" value="5.895749308214961" />
+      <entry key="H4" value="5.947535803386118" />
+      <entry key="D1" value="5.99120852611597" />
+      <entry key="W1" value="5.99874290836823" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.6819495589631484E-26" />
+      <entry key="MS500" value="7.541987229308027E-6" />
+      <entry key="S2" value="0.07855875301042706" />
+      <entry key="S5" value="0.5414469994142099" />
+      <entry key="S10" value="1.0526678304847676" />
+      <entry key="S30" value="2.1933269423866504" />
+      <entry key="S60" value="3.767426263083369" />
+      <entry key="M2" value="7.038306262152835" />
+      <entry key="M5" value="13.431111529742598" />
+      <entry key="M10" value="17.808087250812463" />
+      <entry key="M15" value="19.777035714531102" />
+      <entry key="M30" value="22.128073368306133" />
+      <entry key="H1" value="23.48749987227282" />
+      <entry key="H2" value="24.22286629499658" />
+      <entry key="H4" value="24.605969003028004" />
+      <entry key="D1" value="24.93354734113681" />
+      <entry key="W1" value="24.99048734590604" />
+    </decayedShown>
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -72,8 +149,12 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -91,10 +172,9 @@
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\UnityProjects\JustSwipe -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\UnityProjects\JustSwipe" />
       <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
       <method v="2" />
     </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
@@ -113,10 +193,9 @@
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\UnityProjects\JustSwipe -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\UnityProjects\JustSwipe" />
       <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
@@ -130,7 +209,7 @@
       <option name="PTY_MODE" value="Auto" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" useMixedMode="false">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
@@ -141,7 +220,6 @@
       <option name="selectedOptions">
         <list />
       </option>
-      <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
@@ -158,7 +236,7 @@
       <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" useMixedMode="false">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
@@ -169,7 +247,6 @@
       <option name="selectedOptions">
         <list />
       </option>
-      <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
     <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">

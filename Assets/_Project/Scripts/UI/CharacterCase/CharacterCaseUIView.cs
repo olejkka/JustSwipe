@@ -17,6 +17,9 @@ namespace _Project.Scripts.UI.CharacterCase
         [SerializeField] private Image _hpIcon;
         [SerializeField] private Image _damageIcon;
         
+        [Header("Background")]
+        [SerializeField] private Image _background;
+        
         [Header("Containers")]
         [SerializeField] private RectTransform _hpContainer;
         [SerializeField] private RectTransform _damageContainer;
@@ -36,6 +39,11 @@ namespace _Project.Scripts.UI.CharacterCase
         public void SetIcon(Sprite sprite)
         {
             _characterIcon.sprite = sprite;
+        }
+        
+        public void SetBackgroundColor(Color color)
+        {
+            _background.color = color;
         }
 
         public void SetHealth(int health, int bonusHealth)

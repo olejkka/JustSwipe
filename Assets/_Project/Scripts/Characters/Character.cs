@@ -34,6 +34,7 @@ namespace _Project.Scripts.Characters
         public event Action<Vector2Int> OnPositionChanged;
         public event Action OnStatsChanged;
         public event Action<int> OnDamageTaken;
+        public event Action OnMeleeAttack;
 
         
         public Character(
@@ -185,6 +186,8 @@ namespace _Project.Scripts.Characters
             BonusDamage = ClampToBase(BonusDamage + amount, MaxDamage);
             OnStatsChanged?.Invoke();
         }
+        
+        public void PerformMeleeAttack() => OnMeleeAttack?.Invoke();
 
         private static int ClampToBase(int value, int max) =>
             Math.Clamp(value, 0, max);

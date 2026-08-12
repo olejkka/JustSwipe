@@ -403,6 +403,7 @@ MonoBehaviour:
   _characterIcon: {fileID: 7618144235037570184}
   _hpIcon: {fileID: 7843401448039457010}
   _damageIcon: {fileID: 3061037915307308338}
+  _background: {fileID: 4384144875695629779}
   _hpContainer: {fileID: 8198672083997079281}
   _damageContainer: {fileID: 2661749722530154349}
   _bonusStatColor: {r: 1, g: 0.7294118, b: 0, a: 1}
@@ -526,7 +527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.63207537, g: 1, b: 0.7845209, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0

@@ -16,6 +16,7 @@ namespace _Project.Scripts.UI.CharacterCase
         private readonly CharactersViewsStorage _charactersViewsStorage;
         private readonly CharactersStorage _charactersStorage;
         private readonly CharactersConfig _charactersConfig;
+        private readonly CharacterCaseColorsConfig _colorsConfig;
 
         private readonly CharacterCaseUIView[] _playerCaseViews;
         private readonly CharacterCaseUIView[] _botCaseViews;
@@ -33,12 +34,14 @@ namespace _Project.Scripts.UI.CharacterCase
             CharacterCasesContainerView containerView,
             InitialGameplayConfig config,
             CharactersStorage charactersStorage,
-            CharactersConfig charactersConfig)
+            CharactersConfig charactersConfig,
+            CharacterCaseColorsConfig colorsConfig)
         {
             _eventBus = eventBus;
             _charactersViewsStorage = charactersViewsStorage;
             _charactersStorage = charactersStorage;
             _charactersConfig = charactersConfig;
+            _colorsConfig = colorsConfig;
 
             var casesCount = Math.Max(1, config.MaxPlayerCharactersCount);
 
@@ -141,7 +144,8 @@ namespace _Project.Scripts.UI.CharacterCase
                     _lifetimeDefinition.Lifetime,
                     views[i],
                     _charactersConfig,
-                    _charactersViewsStorage);
+                    _charactersViewsStorage,
+                    _colorsConfig);
 
                 presenters[i].Start();
             }

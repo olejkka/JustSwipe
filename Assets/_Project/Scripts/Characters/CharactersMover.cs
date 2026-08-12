@@ -48,6 +48,7 @@ namespace _Project.Scripts.Characters
                 {
                     if (defender.Team != attacker.Team)
                     {
+                        attacker.PerformMeleeAttack();
                         defender.ChangeHealth(-attacker.TotalDamage, attacker);
                     }
                     

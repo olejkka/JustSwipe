@@ -11,6 +11,7 @@ namespace _Project.Scripts.Configs
     {
         [SerializeField] private TilesGenerationConfig _tilesGeneration;
         [SerializeField] private CharactersConfig _characters;
+        [SerializeField] private CharacterCaseColorsConfig _characterCaseColors;
         [SerializeField] private EffectsConfig effectsConfig;
         [SerializeField] private EffectCaseColorsConfig _effectCaseColors;
         [SerializeField] private InitialGameplayConfig _initialGameplay;
@@ -23,6 +24,7 @@ namespace _Project.Scripts.Configs
         {
             builder.RegisterInstance(_tilesGeneration);
             builder.RegisterInstance(_characters);
+            builder.RegisterInstance(_characterCaseColors);
             builder.RegisterInstance(effectsConfig);
             builder.RegisterInstance(_effectCaseColors);
             builder.RegisterInstance(_initialGameplay);

@@ -1,6 +1,8 @@
 ﻿using System;
 using _Project.Scripts.Configs;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace _Project.Scripts.Characters
@@ -41,9 +43,15 @@ namespace _Project.Scripts.Characters
         public float FrameRate = 8f;
         public Sprite[] Idle;
         public Sprite[] Move;
-        public Sprite[] DealDamage;
+        public Sprite[] MeleeAttack;
         public Sprite[] TakeDamage;
         public Sprite[] Death;
         public Sprite[] Selected;
+        
+        [Header("Selected Parameters")]
+        public float SelectedJumpHeight = 0.3f;
+        public float SelectedJumpDuration = 0.1f;
+        public Ease SelectedJumpEaseUp = Ease.OutQuad;
+        public Ease SelectedJumpEaseDown = Ease.InQuad;
     }
 }

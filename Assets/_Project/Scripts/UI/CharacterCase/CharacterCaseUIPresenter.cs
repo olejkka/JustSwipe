@@ -14,6 +14,7 @@ namespace _Project.Scripts.UI.CharacterCase
         private readonly LifetimeDefinition _lifetimeDefinition;
         private readonly CharacterCaseUIView _view;
         private readonly CharactersConfig _charactersConfig;
+        private readonly CharacterCaseColorsConfig _colorsConfig;
         private readonly CharactersViewsStorage _charactersViewsStorage;
         
         private LifetimeDefinition _assignmentLifetimeDefinition;
@@ -24,12 +25,14 @@ namespace _Project.Scripts.UI.CharacterCase
             Lifetime parentLifetime,
             CharacterCaseUIView view,
             CharactersConfig charactersConfig,
-            CharactersViewsStorage charactersViewsStorage)
+            CharactersViewsStorage charactersViewsStorage,
+            CharacterCaseColorsConfig colorsConfig)
         {
             _lifetimeDefinition = parentLifetime.CreateNested();
             _view = view;
             _charactersConfig = charactersConfig;
             _charactersViewsStorage = charactersViewsStorage;
+            _colorsConfig = colorsConfig;
         }
         
         public void Start()
@@ -70,6 +73,7 @@ namespace _Project.Scripts.UI.CharacterCase
             UpdateStats();
             _view.SetActive(true);
             _view.UpdateRotation(character.Team);
+            _view.SetBackgroundColor(_colorsConfig.GetBackgroundColor(character.Team));
         }
         
         public void UnassignCharacter()
