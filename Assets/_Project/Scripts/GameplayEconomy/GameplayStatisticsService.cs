@@ -6,7 +6,7 @@ using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using JetBrains.Lifetimes;
 using VContainer.Unity;
 
-namespace _Project.Scripts.UI.GameplayStatistic
+namespace _Project.Scripts.GameplayEconomy
 {
     public class GameplayStatisticsService : IStartable, IDisposable
     {
@@ -14,8 +14,11 @@ namespace _Project.Scripts.UI.GameplayStatistic
         private readonly LifetimeDefinition _lifetimeDefinition = new();
 
         private int _turnsCount;
+        private int _enemiesKilledUntilBoss;
         private int _enemiesKilled;
         private int _goldEarned;
+        
+        public int EnemiesKilledUntilBoss => _enemiesKilledUntilBoss;
         
         
         public GameplayStatisticsService(EventBus eventBus)
@@ -35,6 +38,7 @@ namespace _Project.Scripts.UI.GameplayStatistic
 
         public void AddEnemyKillReward(int reward)
         {
+            _enemiesKilledUntilBoss++;
             _enemiesKilled++;
             _goldEarned += reward;
         }
@@ -46,12 +50,18 @@ namespace _Project.Scripts.UI.GameplayStatistic
                 _goldEarned,
                 _turnsCount);
         }
+        
+        public void ResetEnemiesKilledUntilBoss()
+        {
+            _enemiesKilledUntilBoss = 0;
+        }
 
         public void Reset()
         {
+            _turnsCount = 0;
+            _enemiesKilledUntilBoss = 0;
             _enemiesKilled = 0;
             _goldEarned = 0;
-            _turnsCount = 0;
         }
 
         private void OnTurnEnded(TurnEndedEvent e)

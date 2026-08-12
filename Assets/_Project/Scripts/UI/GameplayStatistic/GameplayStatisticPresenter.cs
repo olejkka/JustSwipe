@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
