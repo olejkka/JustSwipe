@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Movement;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Creators;
@@ -15,7 +16,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
     {
         private readonly EventBus.EventBus _eventBus;
         private readonly BotMoveCreator _botMoveCreator;
-        private readonly CharactersMover _charactersMover;
+        private readonly CharactersMovementOrchestrator _charactersMovementOrchestrator;
         private readonly CharacterCreator _characterCreator;
         private readonly CharactersStorage _charactersStorage;
         private readonly BotSpawnChancesConfig _botSpawnChancesConfig;
@@ -24,7 +25,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
         public GameplayStatesProvider(
             EventBus.EventBus eventBus,
             BotMoveCreator botMoveCreator,
-            CharactersMover charactersMover,
+            CharactersMovementOrchestrator charactersMovementOrchestrator,
             CharacterCreator characterCreator,
             CharactersStorage charactersStorage,
             BotSpawnChancesConfig botSpawnChancesConfig
@@ -32,7 +33,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
         {
             _eventBus = eventBus;
             _botMoveCreator = botMoveCreator;
-            _charactersMover = charactersMover;
+            _charactersMovementOrchestrator = charactersMovementOrchestrator;
             _characterCreator = characterCreator;
             _charactersStorage = charactersStorage;
             _botSpawnChancesConfig = botSpawnChancesConfig;
@@ -47,7 +48,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                     new EventTransition<PlayerMoveCompletedEvent, BotTurnState>(_eventBus),
                 },
                 _eventBus,
-                _charactersMover
+                _charactersMovementOrchestrator
             );
             
             var botTurnState = new BotTurnState(
@@ -59,7 +60,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                 _eventBus,
                 _botSpawnChancesConfig,
                 _botMoveCreator,
-                _charactersMover,
+                _charactersMovementOrchestrator,
                 _characterCreator,
                 _charactersStorage
             );

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Movement;
 using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.FSM.Core;
 
@@ -8,16 +9,16 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
     public class PlayerTurnState : State
     {
         private readonly EventBus.EventBus _eventBus;
-        private readonly CharactersMover _charactersMover;
+        private readonly CharactersMovementOrchestrator _charactersMovementOrchestrator;
         
 
         public PlayerTurnState(
             IReadOnlyList<ITransition> transitions, 
             EventBus.EventBus eventBus,
-            CharactersMover charactersMover) : base(transitions)
+            CharactersMovementOrchestrator charactersMovementOrchestrator) : base(transitions)
         {
             _eventBus = eventBus;
-            _charactersMover = charactersMover;
+            _charactersMovementOrchestrator = charactersMovementOrchestrator;
         }
 
         protected override void OnEnter()
@@ -35,7 +36,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
 
         private void OnSwipe(SwipeEvent e)
         {
-            _charactersMover.Move(e.Direction, Team.Player);
+            _charactersMovementOrchestrator.ExecuteMovement(e.Direction, Team.Player);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Movement;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Creators;
@@ -15,7 +16,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
         private readonly EventBus.EventBus _eventBus;
         private readonly BotSpawnChancesConfig _botSpawnChancesConfig;
         private readonly BotMoveCreator _botMoveCreator;
-        private readonly CharactersMover _charactersMover;
+        private readonly CharactersMovementOrchestrator _charactersMovementOrchestrator;
         private readonly CharacterCreator _characterCreator;
         private readonly CharactersStorage _charactersStorage;
         
@@ -25,14 +26,14 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
             EventBus.EventBus eventBus,
             BotSpawnChancesConfig botSpawnChancesConfig,
             BotMoveCreator botMoveCreator,
-            CharactersMover charactersMover,
+            CharactersMovementOrchestrator charactersMovementOrchestrator,
             CharacterCreator characterCreator,
             CharactersStorage charactersStorage) : base(transitions)
         {
             _eventBus = eventBus;
             _botSpawnChancesConfig = botSpawnChancesConfig;
             _botMoveCreator = botMoveCreator;
-            _charactersMover = charactersMover;
+            _charactersMovementOrchestrator = charactersMovementOrchestrator;
             _characterCreator = characterCreator;
             _charactersStorage = charactersStorage;
         }
@@ -40,7 +41,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
         protected override void OnEnter()
         {
             var direction = _botMoveCreator.GenerateDirectionToANearbyPlayerCharacter();
-            _charactersMover.Move(direction, Team.Bot);
+            _charactersMovementOrchestrator.ExecuteMovement(direction, Team.Bot);
         }
 
         protected override void OnExit()
