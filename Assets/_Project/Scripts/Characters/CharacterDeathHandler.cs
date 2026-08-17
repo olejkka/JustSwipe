@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using _Project.Scripts.Characters.Storages;
-using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
@@ -50,7 +48,7 @@ namespace _Project.Scripts.Characters
                 
                 Unregister(character);
 
-                _eventBus.Publish(new CharacterDiedEvent(character, character.LastDamageSource));
+                _eventBus.Publish(new CharacterDiedEvent(character, character.LastHealthChangeSource));
             }
 
             _subs[character] = OnStatsChanged;

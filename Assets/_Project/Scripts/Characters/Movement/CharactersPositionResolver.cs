@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using _Project.Scripts.Board;
+using _Project.Scripts.Characters.Health;
 using _Project.Scripts.Characters.Storages;
 
 namespace _Project.Scripts.Characters.Movement
@@ -8,14 +9,17 @@ namespace _Project.Scripts.Characters.Movement
     {
         private readonly CharactersStorage _charactersStorage;
         private readonly TilesPositionsStorage _tilesPositionsStorage;
+        private readonly HealthChangeService _healthChangeService;
 
         
         public CharactersPositionResolver(
             CharactersStorage charactersStorage,
-            TilesPositionsStorage tilesPositionsStorage)
+            TilesPositionsStorage tilesPositionsStorage,
+            HealthChangeService healthChangeService)
         {
             _charactersStorage = charactersStorage;
             _tilesPositionsStorage = tilesPositionsStorage;
+            _healthChangeService = healthChangeService;
         }
 
         public void Resolve()
@@ -27,7 +31,11 @@ namespace _Project.Scripts.Characters.Movement
                 var character = characters[i];
 
                 if (!_tilesPositionsStorage.Contains(character.Position))
-                    character.ChangeHealth(-character.Health);
+                    _healthChangeService.Enqueue(
+                        HealthChangeRequest.Damage(
+                            HealthChangeSource.None,
+                            character,
+                            character.Health + character.BonusHealth));
             }
         }
     }

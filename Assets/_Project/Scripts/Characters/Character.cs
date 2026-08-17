@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Project.Scripts.Characters.Effects;
+using _Project.Scripts.Characters.Health;
 using UnityEngine;
 
 namespace _Project.Scripts.Characters
@@ -24,7 +25,7 @@ namespace _Project.Scripts.Characters
         public int BonusHealth { get; private set; }
         public int BonusDamage { get; private set; }
         public int TotalDamage => Damage + BonusDamage;
-        public Character LastDamageSource { get; private set; }
+        public HealthChangeSource LastHealthChangeSource { get; private set; }
 
         // effects
         private readonly List<Effect> _effects = new();
@@ -62,14 +63,15 @@ namespace _Project.Scripts.Characters
             OnPositionChanged?.Invoke(Position);
         }
         
-        public void ChangeHealth(int delta, Character source = null)
+        internal void ChangeHealth(int delta, HealthChangeSource source = default)
         {
             if (delta == 0)
                 return;
 
+            LastHealthChangeSource = source;
+
             if (delta < 0)
             {
-                LastDamageSource = source;
                 var damageAmount = -delta;
 
                 var remaining = AbsorbBonusHealth(damageAmount);

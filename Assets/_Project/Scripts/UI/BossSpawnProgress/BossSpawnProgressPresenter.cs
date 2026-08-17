@@ -1,11 +1,11 @@
 ﻿using System;
 using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Health;
 using _Project.Scripts.Configs;
 using _Project.Scripts.GameplayEconomy;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
-using _Project.Scripts.UI.GameplayStatistic;
 using JetBrains.Lifetimes;
 using VContainer.Unity;
 
@@ -45,10 +45,18 @@ namespace _Project.Scripts.UI.BossSpawnProgress
 
         private void OnCharacterDied(CharacterDiedEvent e)
         {
-            if (e.Killer == null || e.Killer.Team != Team.Player || e.Character.Team == Team.Player)
+            if (e.Character.Team == Team.Player || !IsPlayerKill(e.Source))
                 return;
 
             Refresh();
+        }
+
+        private static bool IsPlayerKill(HealthChangeSource source)
+        {
+            if (source.Type == HealthChangeSourceType.Character)
+                return source.Character.Team == Team.Player;
+
+            return source.Type == HealthChangeSourceType.Effect;
         }
 
         private void Refresh()

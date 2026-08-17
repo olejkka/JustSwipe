@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Characters.Effects.EffectProcessors;
+using _Project.Scripts.Characters.Health;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Creators.Generators;
@@ -20,6 +21,7 @@ namespace _Project.Scripts.Characters.Effects
         private readonly CharactersStorage _charactersStorage;
         private readonly EffectsConfig _effectsConfig;
         private readonly InstanceIdGenerator _instanceIdGenerator;
+        private readonly HealthChangeService _healthChangeService;
         private readonly Dictionary<EffectType, IEffectProcessor> _processors;
         private readonly LifetimeDefinition _lifetimeDefinition = new();
 
@@ -29,12 +31,14 @@ namespace _Project.Scripts.Characters.Effects
             CharactersStorage charactersStorage,
             EffectsConfig effectsConfig,
             InstanceIdGenerator instanceIdGenerator,
+            HealthChangeService healthChangeService,
             IEnumerable<IEffectProcessor> processors)
         {
             _eventBus = eventBus;
             _charactersStorage = charactersStorage;
             _effectsConfig = effectsConfig;
             _instanceIdGenerator = instanceIdGenerator;
+            _healthChangeService = healthChangeService;
             _processors = new Dictionary<EffectType, IEffectProcessor>();
             
             foreach (var processor in processors)
@@ -76,6 +80,8 @@ namespace _Project.Scripts.Characters.Effects
                 if (_processors.TryGetValue(effect.Type, out var processor))
                     processor.Process(character, effect);
             }
+
+            _healthChangeService.Apply();
         }
 
         private void OnTurnEnded(TurnEndedEvent e)

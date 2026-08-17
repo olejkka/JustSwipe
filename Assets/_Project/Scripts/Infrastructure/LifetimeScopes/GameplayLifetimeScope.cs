@@ -2,6 +2,7 @@ using _Project.Scripts.Board;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Effects;
 using _Project.Scripts.Characters.Effects.EffectProcessors;
+using _Project.Scripts.Characters.Health;
 using _Project.Scripts.Characters.Movement;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
@@ -66,6 +67,9 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<HealthIncreaseEffectProcessor>(Lifetime.Singleton).As<IEffectProcessor>();
             builder.Register<DamageIncreaseEffectProcessor>(Lifetime.Singleton).As<IEffectProcessor>();
             builder.Register<DamageDecreaseEffectProcessor>(Lifetime.Singleton).As<IEffectProcessor>();
+
+            // Health
+            builder.Register<HealthChangeService>(Lifetime.Singleton);
             
             // Character movement
             builder.Register<CharactersMover>(Lifetime.Singleton);

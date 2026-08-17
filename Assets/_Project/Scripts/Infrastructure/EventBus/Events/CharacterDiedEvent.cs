@@ -1,15 +1,17 @@
 ﻿using _Project.Scripts.Characters;
+using _Project.Scripts.Characters.Health;
 
 namespace _Project.Scripts.Infrastructure.EventBus.Events
 {
     public class CharacterDiedEvent
     {
         public Character Character { get; }
-        public Character Killer { get; }
-        public CharacterDiedEvent(Character character, Character killer = null)
+        public HealthChangeSource Source { get; }
+
+        public CharacterDiedEvent(Character character, HealthChangeSource source)
         {
             Character = character;
-            Killer = killer;
+            Source = source;
         }
     }
 }
