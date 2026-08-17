@@ -65,14 +65,15 @@ namespace _Project.Scripts.Characters.Effects
             
             var instanceId = _instanceIdGenerator.Next();
             
-            foreach (var character in _charactersStorage.GetCharactersByTeam(e.Team).ToArray())
+            foreach (var character in _charactersStorage.GetCharactersByTeam(e.TargetTeam).ToArray())
             {
                 var effect = new Effect(
                     definition.Type,
                     definition.Parameter,
                     definition.Turns,
                     definition.DefinitionId,
-                    instanceId);
+                    instanceId,
+                    e.OwnerTeam);
                 
                 if (!definition.IsInstant)
                     character.AddEffect(effect);

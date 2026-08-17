@@ -4,13 +4,15 @@ namespace _Project.Scripts.Infrastructure.EventBus.Events
 {
     public class ApplyEffectEvent
     {
-        public Team Team { get; }
+        public Team TargetTeam { get; }
+        public Team OwnerTeam { get; }
         public string DefinitionId { get; }
+
         
-        
-        public ApplyEffectEvent(Team team, string definitionId)
+        public ApplyEffectEvent(Team targetTeam, Team ownerTeam, string definitionId)
         {
-            Team = team;
+            TargetTeam = targetTeam;
+            OwnerTeam = ownerTeam;
             DefinitionId = definitionId;
         }
     }

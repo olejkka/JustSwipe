@@ -88,7 +88,7 @@ namespace _Project.Scripts.UI.EffectCase.EffectCasesContainerView
         }
 
         private void OnApplyEffect(ApplyEffectEvent e) =>
-            SyncEffectCases(e.Team);
+            SyncEffectCases(e.TargetTeam);
 
         private void OnTurnEnded(TurnEndedEvent e) =>
             SyncEffectCases(e.Team);

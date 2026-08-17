@@ -8,6 +8,13 @@ namespace _Project.Scripts.Characters.Health
         public Character Character { get; }
         public Effect Effect { get; }
 
+        public Team OwnerTeam => Type switch
+        {
+            HealthChangeSourceType.Character => Character.Team,
+            HealthChangeSourceType.Effect => Effect.OwnerTeam,
+            _ => Team.None
+        };
+
         public static HealthChangeSource None => default;
 
         public static HealthChangeSource FromCharacter(Character character) =>

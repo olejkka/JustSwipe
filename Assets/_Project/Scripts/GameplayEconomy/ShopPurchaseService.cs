@@ -66,7 +66,7 @@ namespace _Project.Scripts.GameplayEconomy
                 return false;
 
             _gameplayMoney.ChangeAmount(-price);
-            _eventBus.Publish(new ApplyEffectEvent(team, definitionId));
+            _eventBus.Publish(new ApplyEffectEvent(team, Team.Player, definitionId));
             return true;
         }
 

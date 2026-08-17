@@ -1,6 +1,5 @@
 ﻿using System;
 using _Project.Scripts.Characters;
-using _Project.Scripts.Characters.Health;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
@@ -40,20 +39,12 @@ namespace _Project.Scripts.GameplayEconomy
 
         private void OnCharacterDied(CharacterDiedEvent e)
         {
-            if (e.Character.Team == Team.Player || !IsPlayerKill(e.Source))
+            if (e.Character.Team == Team.Player || e.Source.OwnerTeam != Team.Player)
                 return;
 
             var entry = _charactersConfig.GetEntryByDefinitionId(e.Character.DefinitionId);
             _gameplayMoney.ChangeAmount(entry.Reward);
             _gameplayStatisticsService.AddEnemyKillReward(entry.Reward);
-        }
-
-        private static bool IsPlayerKill(HealthChangeSource source)
-        {
-            if (source.Type == HealthChangeSourceType.Character)
-                return source.Character.Team == Team.Player;
-
-            return source.Type == HealthChangeSourceType.Effect;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.Characters;
 
 namespace _Project.Scripts.Characters.Effects
 {
@@ -10,6 +11,7 @@ namespace _Project.Scripts.Characters.Effects
         public EffectType Type;
         public int Parameter;
         public int RemainingTurns;
+        public Team OwnerTeam;
         
         
         public Effect(
@@ -17,13 +19,15 @@ namespace _Project.Scripts.Characters.Effects
             int parameter,
             int remainingTurns,
             string definitionId,
-            int instanceId)
+            int instanceId,
+            Team ownerTeam)
         {
             DefinitionId = definitionId;
             InstanceId = instanceId;
             Type = type;
             Parameter = parameter;
             RemainingTurns = remainingTurns;
+            OwnerTeam = ownerTeam;
         }
     }
 }
