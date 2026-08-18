@@ -24,3 +24,4 @@ MonoBehaviour:
     height: 4
   <CommonGenerationChance>k__BackingField: 60
   <CoreGenerationChance>k__BackingField: 95
+  <ObstaclesCount>k__BackingField: 4

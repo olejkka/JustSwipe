@@ -17,7 +17,7 @@ namespace _Project.Scripts.Creators
     {
         private readonly EventBus _eventBus;
         private readonly CharactersStorage _charactersStorage;
-        private readonly TilesPositionsStorage _tilesPositionsStorage;
+        private readonly TilesStorage _tilesStorage;
         private readonly CharactersConfig _charactersConfig;
         private readonly InstanceIdGenerator _instanceIdGenerator;
 
@@ -25,22 +25,22 @@ namespace _Project.Scripts.Creators
         public CharacterCreator(
             EventBus eventBus,
             CharactersStorage charactersStorage,
-            TilesPositionsStorage tilesPositionsStorage,
+            TilesStorage tilesStorage,
             CharactersConfig charactersConfig,
             InstanceIdGenerator instanceIdGenerator
         )
         {
             _eventBus = eventBus;
             _charactersStorage = charactersStorage;
-            _tilesPositionsStorage = tilesPositionsStorage;
+            _tilesStorage = tilesStorage;
             _charactersConfig = charactersConfig;
             _instanceIdGenerator = instanceIdGenerator;
         }
         
         public void CreateOnRandomPos(string definitionId)
         {
-            var positions = _tilesPositionsStorage
-                .GetAllPositions()
+            var positions = _tilesStorage
+                .GetWalkablePositions()
                 .Except(_charactersStorage.GetAllPositions())
                 .ToList();
             

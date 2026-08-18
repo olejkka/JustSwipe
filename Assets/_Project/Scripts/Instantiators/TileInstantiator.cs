@@ -8,7 +8,7 @@ using JetBrains.Lifetimes;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using VContainer;
-using Random = UnityEngine.Random;
+using BoardTile = _Project.Scripts.Board.Tile;
 
 namespace _Project.Scripts.Instantiators
 {
@@ -18,6 +18,7 @@ namespace _Project.Scripts.Instantiators
         [SerializeField] private TilesPrefabsConfig _prefabsConfig;
 
         [Inject] private EventBus _eventBus;
+        [Inject] private TilesStorage _tilesStorage;
         
         private readonly LifetimeDefinition _lifetimeDefinition = new();
 
@@ -25,7 +26,9 @@ namespace _Project.Scripts.Instantiators
         [Inject]
         public void Initialize()
         {
-            _eventBus.SubscribeWithLifetime<PositionCreatedEvent>(_lifetimeDefinition.Lifetime, OnPositionCreated);
+            _eventBus.SubscribeWithLifetime<TilesCreatedEvent>(
+                _lifetimeDefinition.Lifetime,
+                OnTilesCreated);
         }
 
         public void Dispose()
@@ -33,29 +36,23 @@ namespace _Project.Scripts.Instantiators
             _lifetimeDefinition.Terminate();
         }
 
-        private void OnPositionCreated(PositionCreatedEvent e)
+        private void OnTilesCreated(TilesCreatedEvent _)
         {
-            Instantiate(e.Position);
+            foreach (var tile in _tilesStorage.GetAll())
+                Instantiate(tile);
         }
 
-        public void Instantiate(Vector2Int position)
+        public void Instantiate(BoardTile tile)
         {
-            var pos = new Vector3Int(position.x, position.y, 0);
-            var tile = PickTile();
-            _tilemap.SetTile(pos, tile);
-        }
-
-        private TileBase PickTile()
-        {
-            foreach (var entry in _prefabsConfig.Entries)
+            var tileAsset = _prefabsConfig.GetRandomTile(tile.Type);
+            if (tileAsset == null)
             {
-                if (entry.TileType == TileType.Ground)
-                    continue;
-                if (Random.Range(0, 100) < entry.Chance)
-                    return entry.TileAsset;
+                Debug.LogError($"No tile prefab found for {tile.Type}");
+                return;
             }
 
-            return _prefabsConfig.GetTile(TileType.Ground);
+            var pos = new Vector3Int(tile.Position.x, tile.Position.y, 0);
+            _tilemap.SetTile(pos, tileAsset);
         }
     }
 }

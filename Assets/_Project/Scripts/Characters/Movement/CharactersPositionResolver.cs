@@ -8,17 +8,17 @@ namespace _Project.Scripts.Characters.Movement
     public class CharactersPositionResolver
     {
         private readonly CharactersStorage _charactersStorage;
-        private readonly TilesPositionsStorage _tilesPositionsStorage;
+        private readonly TilesStorage _tilesStorage;
         private readonly HealthChangeService _healthChangeService;
 
         
         public CharactersPositionResolver(
             CharactersStorage charactersStorage,
-            TilesPositionsStorage tilesPositionsStorage,
+            TilesStorage tilesStorage,
             HealthChangeService healthChangeService)
         {
             _charactersStorage = charactersStorage;
-            _tilesPositionsStorage = tilesPositionsStorage;
+            _tilesStorage = tilesStorage;
             _healthChangeService = healthChangeService;
         }
 
@@ -30,7 +30,7 @@ namespace _Project.Scripts.Characters.Movement
             {
                 var character = characters[i];
 
-                if (!_tilesPositionsStorage.Contains(character.Position))
+                if (!_tilesStorage.Contains(character.Position))
                     _healthChangeService.Enqueue(
                         HealthChangeRequest.Damage(
                             HealthChangeSource.None,

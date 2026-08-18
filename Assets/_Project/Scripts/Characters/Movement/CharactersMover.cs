@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using _Project.Scripts.Board;
 using _Project.Scripts.Characters.Storages;
 using UnityEngine;
 
@@ -8,11 +9,13 @@ namespace _Project.Scripts.Characters.Movement
     public class CharactersMover
     {
         private readonly CharactersStorage _charactersStorage;
+        private readonly TilesStorage _tilesStorage;
 
         
-        public CharactersMover(CharactersStorage charactersStorage)
+        public CharactersMover(CharactersStorage charactersStorage, TilesStorage tilesStorage)
         {
             _charactersStorage = charactersStorage;
+            _tilesStorage = tilesStorage;
         }
 
         public IReadOnlyList<MeleeCollision> Move(Vector2Int vector, Team team)
@@ -38,6 +41,9 @@ namespace _Project.Scripts.Characters.Movement
 
                     continue;
                 }
+
+                if (_tilesStorage.TryGet(target, out var tile) && !tile.IsWalkable)
+                    continue;
 
                 attacker.Move(vector);
             }

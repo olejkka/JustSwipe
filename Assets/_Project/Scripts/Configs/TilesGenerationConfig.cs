@@ -25,5 +25,10 @@ namespace _Project.Scripts.Configs
         [field: Range(0, 100)]
         [field: SerializeField]
         public int CoreGenerationChance { get; private set; }
+
+        [field: Header("Количество препятствий")]
+        [field: Min(0)]
+        [field: SerializeField]
+        public int ObstaclesCount { get; private set; }
     }
 }

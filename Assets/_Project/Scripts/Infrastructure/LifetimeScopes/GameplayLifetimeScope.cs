@@ -43,7 +43,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
                 var creator = container.Resolve<GameplayStateMachineCreator>();
                 return creator.Create();
             }, Lifetime.Singleton).AsSelf().As<ITickable>();
-            builder.Register<PositionsCreator>(Lifetime.Singleton);
+            builder.Register<TilesCreator>(Lifetime.Singleton);
             builder.Register<CharacterCreator>(Lifetime.Singleton);
             builder.Register<BotMoveCreator>(Lifetime.Singleton);
             
@@ -51,7 +51,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<InstanceIdGenerator>(Lifetime.Singleton);
 
             //Storages
-            builder.Register<TilesPositionsStorage>(Lifetime.Singleton);
+            builder.Register<TilesStorage>(Lifetime.Singleton);
             builder.Register<CharactersStorage>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<CharactersViewsStorage>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             

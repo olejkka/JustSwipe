@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _Project.Scripts.Board;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 namespace _Project.Scripts.Configs
 {
@@ -14,35 +15,44 @@ namespace _Project.Scripts.Configs
     {
         [SerializeField] private List<TileEntry> _entries = new();
 
-        private Dictionary<TileType, TileBase> _map;
-
         public IReadOnlyList<TileEntry> Entries => _entries;
 
-#if UNITY_EDITOR
-        private void OnValidate()
+        
+        public TileBase GetRandomTile(TileType type)
         {
-            _map = null;
-        }
-#endif
-
-        private void InitMap()
-        {
-            if (_map != null)
-                return;
-
-            _map = new Dictionary<TileType, TileBase>();
+            var totalChance = 0;
 
             foreach (var entry in _entries)
-                if (entry.TileAsset != null)
-                    _map[entry.TileType] = entry.TileAsset;
+            {
+                if (!IsCandidate(entry, type))
+                    continue;
+                
+                totalChance += entry.Chance;
+            }
+
+            if (totalChance <= 0)
+                return null;
+
+            var roll = Random.Range(0, totalChance);
+
+            foreach (var entry in _entries)
+            {
+                if (!IsCandidate(entry, type))
+                    continue;
+                
+                if (roll < entry.Chance)
+                    return entry.TileAsset;
+                
+                roll -= entry.Chance;
+            }
+
+            return null;
         }
 
-        public TileBase GetTile(TileType type)
-        {
-            InitMap();
-            return _map.TryGetValue(type, out var tile) ? tile : null;
-        }
+        private static bool IsCandidate(TileEntry entry, TileType type) =>
+            entry.TileType == type && entry.TileAsset != null && entry.Chance > 0;
 
+        
         [Serializable]
         public class TileEntry
         {

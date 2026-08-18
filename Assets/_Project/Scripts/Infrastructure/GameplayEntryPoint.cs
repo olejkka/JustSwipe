@@ -17,7 +17,7 @@ namespace _Project.Scripts.Infrastructure
         private readonly GameplayStateMachine _stateMachine;
         private readonly InitialGameplayConfig _initialGameplayConfig;
         private readonly CharacterCreator _characterCreator;
-        private readonly PositionsCreator _positionsCreator;
+        private readonly TilesCreator _tilesCreator;
         private readonly GameplayMoney _gameplayMoney;
         private readonly EventBus.EventBus _eventBus;
         private readonly GameplayStatisticsService _gameplayStatisticsService;
@@ -28,7 +28,7 @@ namespace _Project.Scripts.Infrastructure
         public GameplayEntryPoint(
             GameplayStateMachine stateMachine,
             InitialGameplayConfig initialGameplayConfig,
-            PositionsCreator positionsCreator,
+            TilesCreator tilesCreator,
             CharacterCreator characterCreator,
             GameplayMoney gameplayMoney,
             EventBus.EventBus eventBus,
@@ -36,7 +36,7 @@ namespace _Project.Scripts.Infrastructure
         {
             _stateMachine = stateMachine;
             _initialGameplayConfig = initialGameplayConfig;
-            _positionsCreator = positionsCreator;
+            _tilesCreator = tilesCreator;
             _characterCreator = characterCreator;
             _gameplayMoney = gameplayMoney;
             _eventBus = eventBus;
@@ -57,7 +57,7 @@ namespace _Project.Scripts.Infrastructure
         public void OnStartGameplay(StartGameplayEvent e)
         {
             _gameplayStatisticsService.Reset();
-            _positionsCreator.Create();
+            _tilesCreator.Create();
             _gameplayMoney.SetAmount(_initialGameplayConfig.MoneyCount);
             _characterCreator.CreateOnRandomPos(_initialGameplayConfig.PlayerCharacter);
             _characterCreator.CreateOnRandomPos(_initialGameplayConfig.BotCharacter);
