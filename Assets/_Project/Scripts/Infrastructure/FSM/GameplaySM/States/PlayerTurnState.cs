@@ -9,16 +9,16 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
     public class PlayerTurnState : State
     {
         private readonly EventBus.EventBus _eventBus;
-        private readonly CharactersMovementOrchestrator _charactersMovementOrchestrator;
+        private readonly CharactersTurnOrchestrator _charactersTurnOrchestrator;
         
 
         public PlayerTurnState(
             IReadOnlyList<ITransition> transitions, 
             EventBus.EventBus eventBus,
-            CharactersMovementOrchestrator charactersMovementOrchestrator) : base(transitions)
+            CharactersTurnOrchestrator charactersTurnOrchestrator) : base(transitions)
         {
             _eventBus = eventBus;
-            _charactersMovementOrchestrator = charactersMovementOrchestrator;
+            _charactersTurnOrchestrator = charactersTurnOrchestrator;
         }
 
         protected override void OnEnter()
@@ -36,7 +36,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
 
         private void OnSwipe(SwipeEvent e)
         {
-            _charactersMovementOrchestrator.ExecuteMovement(e.Direction, Team.Player);
+            _charactersTurnOrchestrator.Execute(e.Direction, Team.Player);
         }
     }
 }

@@ -7,13 +7,15 @@ namespace _Project.Scripts.Characters
     {
         public int Health;
         public int Damage;
+        public int AttackRange;
 
-        public CharacterBaseStats(int health, int damage)
+        public CharacterBaseStats(int health, int damage, int attackRange)
         {
             Health = health;
             Damage = damage;
+            AttackRange = attackRange;
         }
 
-        public CharacterBaseStats Copy() => new CharacterBaseStats(Health, Damage);
+        public CharacterBaseStats Copy() => new CharacterBaseStats(Health, Damage, AttackRange);
     }
 }

@@ -32,6 +32,10 @@ namespace _Project.Scripts.Characters.Movement
             for (int i = 0; i < attackers.Length; i++)
             {
                 var attacker = attackers[i];
+
+                if (attacker.IsRanged)
+                    continue;
+
                 var target = attacker.Position + vector;
 
                 if (claimedPositions.TryGetValue(target, out var occupant))

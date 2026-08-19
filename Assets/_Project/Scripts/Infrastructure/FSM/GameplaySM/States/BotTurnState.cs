@@ -16,7 +16,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
         private readonly EventBus.EventBus _eventBus;
         private readonly BotSpawnChancesConfig _botSpawnChancesConfig;
         private readonly BotMoveCreator _botMoveCreator;
-        private readonly CharactersMovementOrchestrator _charactersMovementOrchestrator;
+        private readonly CharactersTurnOrchestrator _charactersTurnOrchestrator;
         private readonly CharacterCreator _characterCreator;
         private readonly CharactersStorage _charactersStorage;
         
@@ -26,14 +26,14 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
             EventBus.EventBus eventBus,
             BotSpawnChancesConfig botSpawnChancesConfig,
             BotMoveCreator botMoveCreator,
-            CharactersMovementOrchestrator charactersMovementOrchestrator,
+            CharactersTurnOrchestrator charactersTurnOrchestrator,
             CharacterCreator characterCreator,
             CharactersStorage charactersStorage) : base(transitions)
         {
             _eventBus = eventBus;
             _botSpawnChancesConfig = botSpawnChancesConfig;
             _botMoveCreator = botMoveCreator;
-            _charactersMovementOrchestrator = charactersMovementOrchestrator;
+            _charactersTurnOrchestrator = charactersTurnOrchestrator;
             _characterCreator = characterCreator;
             _charactersStorage = charactersStorage;
         }
@@ -41,7 +41,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
         protected override void OnEnter()
         {
             var direction = _botMoveCreator.GenerateDirectionToANearbyPlayerCharacter();
-            _charactersMovementOrchestrator.ExecuteMovement(direction, Team.Bot);
+            _charactersTurnOrchestrator.Execute(direction, Team.Bot);
         }
 
         protected override void OnExit()

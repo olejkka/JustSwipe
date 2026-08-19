@@ -24,6 +24,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
         [SerializeField] private KeyboardInputHandler _keyboardInputHandler;
         [SerializeField] private TileInstantiator _tileInstantiator;
         [SerializeField] private CharacterViewInstantiator _characterViewInstantiator;
+        [SerializeField] private ProjectileViewInstantiator _projectileViewInstantiator;
 
 
         protected override void Configure(IContainerBuilder builder)
@@ -35,6 +36,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             //Instantiators
             builder.RegisterComponent(_tileInstantiator);
             builder.RegisterComponent(_characterViewInstantiator);
+            builder.RegisterComponent(_projectileViewInstantiator);
 
             //Creators
             builder.Register<GameplayStateMachineCreator>(Lifetime.Singleton);
@@ -45,6 +47,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             }, Lifetime.Singleton).AsSelf().As<ITickable>();
             builder.Register<TilesCreator>(Lifetime.Singleton);
             builder.Register<CharacterCreator>(Lifetime.Singleton);
+            builder.Register<ProjectileCreator>(Lifetime.Singleton);
             builder.Register<BotMoveCreator>(Lifetime.Singleton);
             
             // Generators
@@ -75,7 +78,8 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<CharactersMover>(Lifetime.Singleton);
             builder.Register<CharactersPositionResolver>(Lifetime.Singleton);
             builder.Register<CharactersMeleeResolver>(Lifetime.Singleton);
-            builder.Register<CharactersMovementOrchestrator>(Lifetime.Singleton);
+            builder.Register<ProjectilesResolver>(Lifetime.Singleton);
+            builder.Register<CharactersTurnOrchestrator>(Lifetime.Singleton);
             
             builder.RegisterEntryPoint<CharacterDeathHandler>();
             builder.RegisterEntryPoint<EffectsService>();

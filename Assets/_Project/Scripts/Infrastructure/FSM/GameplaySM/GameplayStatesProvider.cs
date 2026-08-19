@@ -16,7 +16,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
     {
         private readonly EventBus.EventBus _eventBus;
         private readonly BotMoveCreator _botMoveCreator;
-        private readonly CharactersMovementOrchestrator _charactersMovementOrchestrator;
+        private readonly CharactersTurnOrchestrator _charactersTurnOrchestrator;
         private readonly CharacterCreator _characterCreator;
         private readonly CharactersStorage _charactersStorage;
         private readonly BotSpawnChancesConfig _botSpawnChancesConfig;
@@ -25,7 +25,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
         public GameplayStatesProvider(
             EventBus.EventBus eventBus,
             BotMoveCreator botMoveCreator,
-            CharactersMovementOrchestrator charactersMovementOrchestrator,
+            CharactersTurnOrchestrator charactersTurnOrchestrator,
             CharacterCreator characterCreator,
             CharactersStorage charactersStorage,
             BotSpawnChancesConfig botSpawnChancesConfig
@@ -33,7 +33,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
         {
             _eventBus = eventBus;
             _botMoveCreator = botMoveCreator;
-            _charactersMovementOrchestrator = charactersMovementOrchestrator;
+            _charactersTurnOrchestrator = charactersTurnOrchestrator;
             _characterCreator = characterCreator;
             _charactersStorage = charactersStorage;
             _botSpawnChancesConfig = botSpawnChancesConfig;
@@ -48,7 +48,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                     new EventTransition<PlayerMoveCompletedEvent, BotTurnState>(_eventBus),
                 },
                 _eventBus,
-                _charactersMovementOrchestrator
+                _charactersTurnOrchestrator
             );
             
             var botTurnState = new BotTurnState(
@@ -60,7 +60,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                 _eventBus,
                 _botSpawnChancesConfig,
                 _botMoveCreator,
-                _charactersMovementOrchestrator,
+                _charactersTurnOrchestrator,
                 _characterCreator,
                 _charactersStorage
             );

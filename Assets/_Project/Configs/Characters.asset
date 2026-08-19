@@ -19,6 +19,9 @@ MonoBehaviour:
     _baseStats:
       Health: 2
       Damage: 1
+      AttackRange: 0
+    _isRanged: 0
+    _projectileDefinitionId: 
     _icon: {fileID: -1625386022, guid: 6dab75d7ff81216429cfc6d6ea8a4712, type: 3}
     _animations:
       FrameRate: 8
@@ -69,6 +72,9 @@ MonoBehaviour:
     _baseStats:
       Health: 2
       Damage: 2
+      AttackRange: 0
+    _isRanged: 0
+    _projectileDefinitionId: 
     _icon: {fileID: -1701976148, guid: 1b67a795747b04c4c80d2c1d242ea24e, type: 3}
     _animations:
       FrameRate: 8
@@ -119,6 +125,9 @@ MonoBehaviour:
     _baseStats:
       Health: 3
       Damage: 2
+      AttackRange: 0
+    _isRanged: 0
+    _projectileDefinitionId: 
     _icon: {fileID: -1214402316, guid: 4a350331c4bf2fd4bb8994072e7c1c85, type: 3}
     _animations:
       FrameRate: 8
@@ -169,6 +178,9 @@ MonoBehaviour:
     _baseStats:
       Health: 5
       Damage: 3
+      AttackRange: 0
+    _isRanged: 0
+    _projectileDefinitionId: 
     _icon: {fileID: 605253563, guid: d72c2c24f8790254ea01da3be234727b, type: 3}
     _animations:
       FrameRate: 8
@@ -219,6 +231,9 @@ MonoBehaviour:
     _baseStats:
       Health: 1
       Damage: 1
+      AttackRange: 2
+    _isRanged: 1
+    _projectileDefinitionId: projectile_test
     _icon: {fileID: 887015444, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
     _animations:
       FrameRate: 8
@@ -266,155 +281,11 @@ MonoBehaviour:
     _type: 1
     _team: 2
     _baseStats:
-      Health: 1
-      Damage: 1
-    _icon: {fileID: -1890225929, guid: 980337c3ff0239b4d97875d49b0073f9, type: 3}
-    _animations:
-      FrameRate: 8
-      Idle:
-      - {fileID: -1890225929, guid: 980337c3ff0239b4d97875d49b0073f9, type: 3}
-      - {fileID: -1733851840, guid: 980337c3ff0239b4d97875d49b0073f9, type: 3}
-      - {fileID: -1952993355, guid: 980337c3ff0239b4d97875d49b0073f9, type: 3}
-      - {fileID: -1825957624, guid: 980337c3ff0239b4d97875d49b0073f9, type: 3}
-      Move:
-      - {fileID: -79523479, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
-      - {fileID: 1224015763, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
-      - {fileID: -902414937, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
-      - {fileID: 1927952801, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
-      MeleeAttack:
-      - {fileID: -79523479, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
-      - {fileID: 1224015763, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
-      - {fileID: -902414937, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
-      - {fileID: 1927952801, guid: 87ef52e1a0441534c9d0d527889be55d, type: 3}
-      TakeDamage:
-      - {fileID: 1457859097, guid: d1f07a9f9fae7d04b94c1bfebba419e7, type: 3}
-      - {fileID: -1957316604, guid: d1f07a9f9fae7d04b94c1bfebba419e7, type: 3}
-      - {fileID: 1554054051, guid: d1f07a9f9fae7d04b94c1bfebba419e7, type: 3}
-      - {fileID: 502077999, guid: d1f07a9f9fae7d04b94c1bfebba419e7, type: 3}
-      Death:
-      - {fileID: -546279509, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
-      - {fileID: 874957174, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
-      - {fileID: -1155772071, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
-      - {fileID: 382250859, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
-      - {fileID: 1127937659, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
-      - {fileID: 748229712, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
-      - {fileID: -1099947577, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
-      - {fileID: 62154434, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
-      - {fileID: 1069945443, guid: 0294e7ccbf0a4d24d88f8c2a26a9a2de, type: 3}
-      Selected:
-      - {fileID: -636564586, guid: 18bc73968e46fad48992f4330f41bb21, type: 3}
-      - {fileID: -430300109, guid: 18bc73968e46fad48992f4330f41bb21, type: 3}
-      - {fileID: 533672255, guid: 18bc73968e46fad48992f4330f41bb21, type: 3}
-      SelectedJumpHeight: 0.3
-      SelectedJumpDuration: 0.1
-      SelectedJumpEaseUp: 6
-      SelectedJumpEaseDown: 5
-    _price: 0
-    _reward: 1
-  - _definitionId: bot_03
-    _type: 1
-    _team: 2
-    _baseStats:
-      Health: 1
-      Damage: 1
-    _icon: {fileID: 81782087, guid: 6b57086601abd414db631dcb91637687, type: 3}
-    _animations:
-      FrameRate: 8
-      Idle:
-      - {fileID: 81782087, guid: 6b57086601abd414db631dcb91637687, type: 3}
-      - {fileID: 90917509, guid: 6b57086601abd414db631dcb91637687, type: 3}
-      - {fileID: 728499341, guid: 6b57086601abd414db631dcb91637687, type: 3}
-      - {fileID: -507888739, guid: 6b57086601abd414db631dcb91637687, type: 3}
-      Move:
-      - {fileID: 233076775, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
-      - {fileID: -1750938132, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
-      - {fileID: 1724425766, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
-      - {fileID: -2025467830, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
-      MeleeAttack:
-      - {fileID: 233076775, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
-      - {fileID: -1750938132, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
-      - {fileID: 1724425766, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
-      - {fileID: -2025467830, guid: c5151847b162f944ba3a1d21aff5c43f, type: 3}
-      TakeDamage:
-      - {fileID: -797025369, guid: a391b2f298bed0a41a75c1cb317ba8c0, type: 3}
-      - {fileID: 1492783886, guid: a391b2f298bed0a41a75c1cb317ba8c0, type: 3}
-      - {fileID: 1951264573, guid: a391b2f298bed0a41a75c1cb317ba8c0, type: 3}
-      - {fileID: -337604960, guid: a391b2f298bed0a41a75c1cb317ba8c0, type: 3}
-      Death:
-      - {fileID: -142795214, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
-      - {fileID: 815536468, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
-      - {fileID: 524102831, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
-      - {fileID: -919975027, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
-      - {fileID: -72437095, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
-      - {fileID: -1551831844, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
-      - {fileID: -1071850690, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
-      - {fileID: 897723143, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
-      - {fileID: -1064223161, guid: 59dda64818de2ce459eecb2d87addaa6, type: 3}
-      Selected:
-      - {fileID: 1291307490, guid: 1115e95e068592c4e9db4babe3b9fd7e, type: 3}
-      - {fileID: 481811827, guid: 1115e95e068592c4e9db4babe3b9fd7e, type: 3}
-      - {fileID: -2018067063, guid: 1115e95e068592c4e9db4babe3b9fd7e, type: 3}
-      SelectedJumpHeight: 0.3
-      SelectedJumpDuration: 0.1
-      SelectedJumpEaseUp: 6
-      SelectedJumpEaseDown: 5
-    _price: 0
-    _reward: 1
-  - _definitionId: bot_04
-    _type: 1
-    _team: 2
-    _baseStats:
-      Health: 1
-      Damage: 1
-    _icon: {fileID: -974431293, guid: 89919de6bb3dc1d4790f8eab22e95cd1, type: 3}
-    _animations:
-      FrameRate: 8
-      Idle:
-      - {fileID: -974431293, guid: 89919de6bb3dc1d4790f8eab22e95cd1, type: 3}
-      - {fileID: 268167427, guid: 89919de6bb3dc1d4790f8eab22e95cd1, type: 3}
-      - {fileID: -143990670, guid: 89919de6bb3dc1d4790f8eab22e95cd1, type: 3}
-      - {fileID: -1717580314, guid: 89919de6bb3dc1d4790f8eab22e95cd1, type: 3}
-      Move:
-      - {fileID: 1118462918, guid: 97594eec5c19c704494377f81668e7af, type: 3}
-      - {fileID: -24773449, guid: 97594eec5c19c704494377f81668e7af, type: 3}
-      - {fileID: 792680285, guid: 97594eec5c19c704494377f81668e7af, type: 3}
-      - {fileID: 1453201939, guid: 97594eec5c19c704494377f81668e7af, type: 3}
-      MeleeAttack:
-      - {fileID: 1118462918, guid: 97594eec5c19c704494377f81668e7af, type: 3}
-      - {fileID: -24773449, guid: 97594eec5c19c704494377f81668e7af, type: 3}
-      - {fileID: 792680285, guid: 97594eec5c19c704494377f81668e7af, type: 3}
-      - {fileID: 1453201939, guid: 97594eec5c19c704494377f81668e7af, type: 3}
-      TakeDamage:
-      - {fileID: 1924515618, guid: b0af57d440d1c334ba6e7853a78b08af, type: 3}
-      - {fileID: 1581950067, guid: b0af57d440d1c334ba6e7853a78b08af, type: 3}
-      - {fileID: 1793284396, guid: b0af57d440d1c334ba6e7853a78b08af, type: 3}
-      - {fileID: 1740590745, guid: b0af57d440d1c334ba6e7853a78b08af, type: 3}
-      Death:
-      - {fileID: 2040848888, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
-      - {fileID: 1646285558, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
-      - {fileID: 1074690109, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
-      - {fileID: -1495442305, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
-      - {fileID: 788352455, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
-      - {fileID: 349426179, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
-      - {fileID: 400252038, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
-      - {fileID: 1294297030, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
-      - {fileID: -1914220446, guid: 5b2045b132eccbc4fac7225c0d9ee168, type: 3}
-      Selected:
-      - {fileID: 476362421, guid: 34043e3ecf325c2448d6033fb22773b3, type: 3}
-      - {fileID: -1251817115, guid: 34043e3ecf325c2448d6033fb22773b3, type: 3}
-      - {fileID: -1569886478, guid: 34043e3ecf325c2448d6033fb22773b3, type: 3}
-      SelectedJumpHeight: 0.3
-      SelectedJumpDuration: 0.1
-      SelectedJumpEaseUp: 6
-      SelectedJumpEaseDown: 5
-    _price: 0
-    _reward: 1
-  - _definitionId: bot_05
-    _type: 1
-    _team: 2
-    _baseStats:
       Health: 2
       Damage: 2
+      AttackRange: 0
+    _isRanged: 0
+    _projectileDefinitionId: 
     _icon: {fileID: 446621925, guid: a104535298e36084f9050790c8aab3a4, type: 3}
     _animations:
       FrameRate: 8

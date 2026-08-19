@@ -25,5 +25,21 @@ namespace _Project.Scripts.Board
                     yield return tile.Position;
             }
         }
+
+        public bool TryGetBounds(out Vector2Int min, out Vector2Int max)
+        {
+            min = new Vector2Int(int.MaxValue, int.MaxValue);
+            max = new Vector2Int(int.MinValue, int.MinValue);
+            var hasAny = false;
+
+            foreach (var pos in _tiles.Keys)
+            {
+                hasAny = true;
+                min = Vector2Int.Min(min, pos);
+                max = Vector2Int.Max(max, pos);
+            }
+
+            return hasAny;
+        }
     }
 }

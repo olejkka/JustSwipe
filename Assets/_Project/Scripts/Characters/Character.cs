@@ -13,10 +13,12 @@ namespace _Project.Scripts.Characters
         public int InstanceId { get; private set; }
         public CharacterType CharacterType { get; private set; }
         public Team Team { get; private set; }
+        public bool IsRanged { get; private set; }
 
         // base stats caps
         public int MaxHealth { get; }
         public int MaxDamage { get; }
+        public int AttackRange { get; }
 
         // state
         public Vector2Int Position { get; private set; }
@@ -43,15 +45,20 @@ namespace _Project.Scripts.Characters
             int instanceId,
             Vector2Int position,
             Team team,
+            CharacterType characterType,
+            bool isRanged,
             CharacterBaseStats baseStats)
         {
             DefinitionId = definitionId;
             InstanceId = instanceId;
             Position = position;
             Team = team;
+            CharacterType = characterType;
+            IsRanged = isRanged;
 
             MaxHealth = baseStats.Health;
             MaxDamage = baseStats.Damage;
+            AttackRange = baseStats.AttackRange;
 
             Health = MaxHealth;
             Damage = MaxDamage;

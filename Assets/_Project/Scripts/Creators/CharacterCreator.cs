@@ -55,7 +55,14 @@ namespace _Project.Scripts.Creators
                 return;
             }
 
-            var character = new Character(definitionId, instanceId, spawnPos, entry.Team, entry.BaseStats.Copy());
+            var character = new Character(
+                definitionId,
+                instanceId,
+                spawnPos,
+                entry.Team,
+                entry.CharacterType,
+                entry.IsRanged,
+                entry.BaseStats.Copy());
 
             _charactersStorage.Add(character);
             _eventBus.Publish(new CharacterCreatedEvent(character));

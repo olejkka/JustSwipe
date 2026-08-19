@@ -1,9 +1,6 @@
 ﻿using System;
-using _Project.Scripts.Configs;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace _Project.Scripts.Characters
 {
@@ -17,6 +14,8 @@ namespace _Project.Scripts.Characters
         [Header("Gameplay")]
         [SerializeField] private Team _team;
         [SerializeField] private CharacterBaseStats _baseStats;
+        [SerializeField] private bool _isRanged;
+        [SerializeField] private string _projectileDefinitionId;
         
         [Header("Presentation")]
         [SerializeField] private Sprite _icon;
@@ -31,8 +30,10 @@ namespace _Project.Scripts.Characters
         public CharacterType CharacterType => _type;
         public Team Team => _team;
         public CharacterBaseStats BaseStats => _baseStats;
+        public bool IsRanged => _isRanged;
         public Sprite Icon => _icon;
         public CharacterAnimationData Animations => _animations;
+        public string ProjectileDefinitionId => _projectileDefinitionId;
         public int Price => _price;
         public int Reward => _reward;
     }

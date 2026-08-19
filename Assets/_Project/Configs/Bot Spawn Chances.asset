@@ -14,10 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Configs.CharacterSpawnChancesConfig
   _defaultBots:
   - bot_01
-  - bot_02
-  - bot_03
-  - bot_04
   _secondaryBots:
-  - bot_05
-  _spawnChanceOneCharacter: 0.35
+  - bot_02
+  _spawnChanceOneCharacter: 0.25
   _spawnChanceTwoCharacters: 0.1

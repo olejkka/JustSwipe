@@ -125,15 +125,9 @@ namespace _Project.Scripts.UI.Shop
 
         private ShopOffer BuildCharacterOffer()
         {
-            CharacterType? excludedType = null;
+            var excludedDefinitionId = _characterOffer?.DefinitionId;
 
-            if (_characterOffer != null)
-            {
-                var previous = _charactersConfig.GetEntryByDefinitionId(_characterOffer.DefinitionId);
-                excludedType = previous?.CharacterType;
-            }
-
-            var entry = _charactersConfig.GetRandomEntryByTeamExcept(Team.Player, excludedType)
+            var entry = _charactersConfig.GetRandomEntryByTeamExcept(Team.Player, excludedDefinitionId)
                         ?? _charactersConfig.GetRandomEntryByTeam(Team.Player);
 
             if (entry == null)

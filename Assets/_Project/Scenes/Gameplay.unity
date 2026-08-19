@@ -791,6 +791,7 @@ MonoBehaviour:
   _keyboardInputHandler: {fileID: 703701141}
   _tileInstantiator: {fileID: 730333553}
   _characterViewInstantiator: {fileID: 1924401467}
+  _projectileViewInstantiator: {fileID: 2045123402}
 --- !u!4 &1988570165
 Transform:
   m_ObjectHideFlags: 0
@@ -806,12 +807,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2045123401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2045123403}
+  - component: {fileID: 2045123402}
+  m_Layer: 0
+  m_Name: Projectile View Instantiator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2045123402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045123401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c8d1a7e5f924b6a9d0e4c2f1b8a5736, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tilemap: {fileID: 1130102325}
+  _projectileViewPrefab: {fileID: 7128471938472910343, guid: 7b2e9c4f1a584d3e8c6b0f5a2d9e1478, type: 3}
+--- !u!4 &2045123403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045123401}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1988570165}
   - {fileID: 1924401468}
+  - {fileID: 2045123403}
   - {fileID: 47509532}
   - {fileID: 703701142}
   - {fileID: 1154624395}

@@ -25,10 +25,10 @@ namespace _Project.Scripts.Configs
             return entries.Count > 0 ? entries[Random.Range(0, entries.Count)] : null;
         }
         
-        public CharacterDefinition GetRandomEntryByTeamExcept(Team team, CharacterType? excludedType)
+        public CharacterDefinition GetRandomEntryByTeamExcept(Team team, string excludedDefinitionId)
         {
             var entries = CharacterEntries
-                .Where(e => e.Team == team && (!excludedType.HasValue || e.CharacterType != excludedType.Value))
+                .Where(e => e.Team == team && (string.IsNullOrEmpty(excludedDefinitionId) || e.DefinitionId != excludedDefinitionId))
                 .ToList();
             return entries.Count > 0 ? entries[Random.Range(0, entries.Count)] : null;
         }
