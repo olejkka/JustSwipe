@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 8128471938472910344}
+  _visual: {fileID: 1128471938472910346}
 --- !u!114 &8128471938472910344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 9128471938472910345}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.285, z: 0}
+  m_LocalPosition: {x: 0, y: 0.143, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []

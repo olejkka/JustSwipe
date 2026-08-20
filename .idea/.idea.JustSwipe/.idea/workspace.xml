@@ -60,61 +60,61 @@
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="3.122168834382614E-48" />
-      <entry key="MS500" value="3.1542148848189197E-10" />
-      <entry key="S2" value="0.004214274489480822" />
-      <entry key="S5" value="0.11217320474735779" />
-      <entry key="S10" value="0.3349226847309059" />
-      <entry key="S30" value="0.6944615222289847" />
-      <entry key="S60" value="0.8333435799410617" />
-      <entry key="M2" value="0.9128765414562156" />
-      <entry key="M5" value="0.9641948751195324" />
-      <entry key="M10" value="0.9819342519331589" />
-      <entry key="M15" value="0.9879196102095509" />
-      <entry key="M30" value="0.9939419596385713" />
-      <entry key="H1" value="1.0006611327163502" />
-      <entry key="H2" value="1.3141836979954296" />
-      <entry key="H4" value="3.918451929276989" />
-      <entry key="D1" value="19.63531186095204" />
-      <entry key="W1" value="26.607065662192078" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000000000194424" />
+      <entry key="S2" value="1.002099847103688" />
+      <entry key="S5" value="1.0848936232134079" />
+      <entry key="S10" value="1.2913651029437256" />
+      <entry key="S30" value="1.662947562631245" />
+      <entry key="S60" value="1.8142159189252227" />
+      <entry key="M2" value="1.9023391374229661" />
+      <entry key="M5" value="1.959727452669441" />
+      <entry key="M10" value="1.9796568035130675" />
+      <entry key="M15" value="1.9863914654076202" />
+      <entry key="M30" value="1.9931729319547542" />
+      <entry key="H1" value="2.0002739446045537" />
+      <entry key="H2" value="2.3139294233370222" />
+      <entry key="H4" value="4.918072830362858" />
+      <entry key="D1" value="20.6349952382303" />
+      <entry key="W1" value="27.607004369849943" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0" />
-      <entry key="M2" value="1.0" />
-      <entry key="M5" value="1.0" />
-      <entry key="M10" value="1.0" />
-      <entry key="M15" value="1.0000000000000064" />
-      <entry key="M30" value="1.000000307996488" />
-      <entry key="H1" value="1.0021482510424444" />
-      <entry key="H2" value="1.1794853736287259" />
-      <entry key="H4" value="2.6407609210071943" />
-      <entry key="D1" value="11.373250419544448" />
-      <entry key="W1" value="15.23012994199275" />
+      <entry key="MS100" value="8.898096003883425E-7" />
+      <entry key="MS500" value="0.06163954403083495" />
+      <entry key="S2" value="0.4982701314139339" />
+      <entry key="S5" value="0.7568083964847896" />
+      <entry key="S10" value="0.8699473527086508" />
+      <entry key="S30" value="0.9546210141397169" />
+      <entry key="S60" value="0.9770470890083635" />
+      <entry key="M2" value="0.9884569231930966" />
+      <entry key="M5" value="0.9953666809839271" />
+      <entry key="M10" value="0.9976806508016115" />
+      <entry key="M15" value="0.9984531688751473" />
+      <entry key="M30" value="0.9992265928783994" />
+      <entry key="H1" value="1.0017604875165362" />
+      <entry key="H2" value="1.1792571610577334" />
+      <entry key="H4" value="2.6405054350102493" />
+      <entry key="D1" value="11.373067023959576" />
+      <entry key="W1" value="15.230094857690446" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="2.087199594995E-6" />
-      <entry key="MS500" value="0.07309922917227689" />
-      <entry key="S2" value="0.5235756064867388" />
-      <entry key="S5" value="0.8752129819045554" />
-      <entry key="S10" value="1.2020331268994682" />
-      <entry key="S30" value="1.6446162815943504" />
-      <entry key="S60" value="1.8074590106596735" />
-      <entry key="M2" value="1.8996662284081252" />
-      <entry key="M5" value="1.9588424974389989" />
-      <entry key="M10" value="1.9792463423556186" />
-      <entry key="M15" value="1.9861250396260304" />
-      <entry key="M30" value="1.9930436597836148" />
-      <entry key="H1" value="2.0023579796673623" />
-      <entry key="H2" value="2.4933694512082325" />
-      <entry key="H4" value="6.558756888355947" />
-      <entry key="D1" value="31.00817983485794" />
-      <entry key="W1" value="41.8371215912241" />
+      <entry key="MS100" value="8.8981145759858E-7" />
+      <entry key="MS500" value="0.06614534718601961" />
+      <entry key="S2" value="0.7591522176632114" />
+      <entry key="S5" value="1.4191769299026473" />
+      <entry key="S10" value="1.9156528893229445" />
+      <entry key="S30" value="2.524606276746006" />
+      <entry key="S60" value="2.743019653875334" />
+      <entry key="M2" value="2.8661951584192265" />
+      <entry key="M5" value="2.9451332362300504" />
+      <entry key="M10" value="2.972336429739674" />
+      <entry key="M15" value="2.9815060084720155" />
+      <entry key="M30" value="2.9907278973681874" />
+      <entry key="H1" value="3.0011962703942845" />
+      <entry key="H2" value="3.4926935370835546" />
+      <entry key="H4" value="7.558025600444222" />
+      <entry key="D1" value="32.007663697549354" />
+      <entry key="W1" value="42.83702291113867" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -132,29 +132,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;rider.code.cleanup.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.ColorSchemeFont&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "cidr.known.project.marker": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "rider.code.cleanup.on.save": "true",
+    "settings.editor.selected.configurable": "editor.preferences.tabs",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.3.19f1\Editor\Unity.exe" />

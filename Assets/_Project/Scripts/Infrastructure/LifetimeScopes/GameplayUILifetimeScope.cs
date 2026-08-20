@@ -2,6 +2,7 @@
 using _Project.Scripts.UI.CharacterCase;
 using _Project.Scripts.UI.CheatsPanel;
 using _Project.Scripts.UI.CheatsPanel.AddMoneyButton;
+using _Project.Scripts.UI.CheatsPanel.SetTimescale;
 using _Project.Scripts.UI.EffectCase.EffectCasesContainerView;
 using _Project.Scripts.UI.GameplayStatistic;
 using _Project.Scripts.UI.MoneyUI;
@@ -42,6 +43,8 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.RegisterEntryPoint<CheatsPanelPresenter>();
             builder.RegisterComponentInHierarchy<AddMoneyButtonView>();
             builder.RegisterEntryPoint<AddMoneyButtonPresenter>();
+            builder.RegisterComponentInHierarchy<SetTimescalePanelView>();
+            builder.RegisterEntryPoint<SetTimescalePanelPresenter>();
         }
     }
 }

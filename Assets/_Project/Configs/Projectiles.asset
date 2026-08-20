@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MissTravelBoardSizeMultiplier: 2
   ProjectileEntries:
-  - _definitionId: projectile_test
+  - _definitionId: projectile_default
     _animations:
       FrameRate: 8
       Projectile:
-      - {fileID: -725425884, guid: e03923f4febfa334ba737a766f0ef0d6, type: 3}
-      Speed: 8
+      - {fileID: -2102180605, guid: cf882e687ad7871488423fb7a4155ebc, type: 3}
+      - {fileID: 1353988294, guid: cf882e687ad7871488423fb7a4155ebc, type: 3}
+      - {fileID: -1899048603, guid: cf882e687ad7871488423fb7a4155ebc, type: 3}
+      - {fileID: 711520131, guid: cf882e687ad7871488423fb7a4155ebc, type: 3}
+      Speed: 2

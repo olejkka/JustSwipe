@@ -9,6 +9,7 @@ namespace _Project.Scripts.Characters.Projectiles
     public class ProjectileView : MonoBehaviour
     {
         [SerializeField] private SpriteAnimator _animator;
+        [SerializeField] private Transform _visual;
 
         private Tween _moveTween;
 
@@ -22,7 +23,9 @@ namespace _Project.Scripts.Characters.Projectiles
             Stop();
 
             transform.position = CellToWorld(tilemap, projectile.StartPosition);
-            transform.rotation = DirectionToRotation(projectile.Direction);
+            _visual.rotation = ShouldFlip(projectile.Direction)
+                ? Quaternion.Euler(0f, 180f, 0f)
+                : Quaternion.identity;
 
             _animator.Play(animations.Projectile, animations.FrameRate, loop: true);
 
@@ -52,10 +55,7 @@ namespace _Project.Scripts.Characters.Projectiles
         private static Vector3 CellToWorld(Tilemap tilemap, Vector2Int pos) =>
             tilemap.CellToWorld(new Vector3Int(pos.x, pos.y, 0));
 
-        private static Quaternion DirectionToRotation(Vector2Int direction)
-        {
-            var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            return Quaternion.Euler(0f, 0f, angle);
-        }
+        private static bool ShouldFlip(Vector2Int direction) =>
+            direction.x < 0 || direction.y > 0;
     }
 }

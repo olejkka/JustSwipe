@@ -231,9 +231,9 @@ MonoBehaviour:
     _baseStats:
       Health: 1
       Damage: 1
-      AttackRange: 2
-    _isRanged: 1
-    _projectileDefinitionId: projectile_test
+      AttackRange: 0
+    _isRanged: 0
+    _projectileDefinitionId: 
     _icon: {fileID: 887015444, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
     _animations:
       FrameRate: 8
@@ -281,11 +281,11 @@ MonoBehaviour:
     _type: 1
     _team: 2
     _baseStats:
-      Health: 2
-      Damage: 2
-      AttackRange: 0
-    _isRanged: 0
-    _projectileDefinitionId: 
+      Health: 1
+      Damage: 1
+      AttackRange: 2
+    _isRanged: 1
+    _projectileDefinitionId: projectile_default
     _icon: {fileID: 446621925, guid: a104535298e36084f9050790c8aab3a4, type: 3}
     _animations:
       FrameRate: 8
