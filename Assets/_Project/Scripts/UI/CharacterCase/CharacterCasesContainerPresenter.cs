@@ -143,6 +143,7 @@ namespace _Project.Scripts.UI.CharacterCase
                 presenters[i] = new CharacterCaseUIPresenter(
                     _lifetimeDefinition.Lifetime,
                     views[i],
+                    _eventBus,
                     _charactersConfig,
                     _charactersViewsStorage,
                     _colorsConfig);

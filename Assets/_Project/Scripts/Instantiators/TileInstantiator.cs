@@ -17,6 +17,8 @@ namespace _Project.Scripts.Instantiators
         [SerializeField] private Tilemap _tilemap;
         [SerializeField] private TilesPrefabsConfig _prefabsConfig;
 
+        public Tilemap Tilemap => _tilemap;
+
         [Inject] private EventBus _eventBus;
         [Inject] private TilesStorage _tilesStorage;
         

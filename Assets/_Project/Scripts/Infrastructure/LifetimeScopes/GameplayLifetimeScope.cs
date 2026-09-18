@@ -82,6 +82,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<CharactersTurnOrchestrator>(Lifetime.Singleton);
             
             builder.RegisterEntryPoint<CharacterDeathHandler>();
+            builder.RegisterEntryPoint<TileHighlightService>();
             builder.RegisterEntryPoint<EffectsService>();
             
             builder.RegisterEntryPoint<GameplayStatisticsService>().AsSelf();

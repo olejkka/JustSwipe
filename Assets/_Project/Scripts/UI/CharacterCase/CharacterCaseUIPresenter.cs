@@ -2,6 +2,8 @@
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Configs;
+using _Project.Scripts.Infrastructure.EventBus;
+using _Project.Scripts.Infrastructure.EventBus.Events;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using JetBrains.Lifetimes;
 using VContainer.Unity;
@@ -12,6 +14,7 @@ namespace _Project.Scripts.UI.CharacterCase
     {
         private readonly LifetimeDefinition _lifetimeDefinition;
         private readonly CharacterCaseUIView _view;
+        private readonly EventBus _eventBus;
         private readonly CharactersConfig _charactersConfig;
         private readonly CharacterCaseColorsConfig _colorsConfig;
         private readonly CharactersViewsStorage _charactersViewsStorage;
@@ -26,12 +29,14 @@ namespace _Project.Scripts.UI.CharacterCase
         public CharacterCaseUIPresenter(
             Lifetime parentLifetime,
             CharacterCaseUIView view,
+            EventBus eventBus,
             CharactersConfig charactersConfig,
             CharactersViewsStorage charactersViewsStorage,
             CharacterCaseColorsConfig colorsConfig)
         {
             _lifetimeDefinition = parentLifetime.CreateNested();
             _view = view;
+            _eventBus = eventBus;
             _charactersConfig = charactersConfig;
             _charactersViewsStorage = charactersViewsStorage;
             _colorsConfig = colorsConfig;
@@ -226,6 +231,7 @@ namespace _Project.Scripts.UI.CharacterCase
                 return;
 
             _characterView.PlaySelected();
+            _eventBus.Publish(new CharacterAttackHighlightRequestedEvent(_assignedCharacter));
         }
         
         private void UpdateStats()
