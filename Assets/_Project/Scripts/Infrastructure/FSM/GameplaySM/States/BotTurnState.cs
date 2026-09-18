@@ -15,6 +15,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
     {
         private readonly EventBus.EventBus _eventBus;
         private readonly BotSpawnChancesConfig _botSpawnChancesConfig;
+        private readonly InitialGameplayConfig _initialGameplayConfig;
         private readonly BotMoveCreator _botMoveCreator;
         private readonly CharactersTurnOrchestrator _charactersTurnOrchestrator;
         private readonly CharacterCreator _characterCreator;
@@ -25,6 +26,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
             IReadOnlyList<ITransition> transitions,
             EventBus.EventBus eventBus,
             BotSpawnChancesConfig botSpawnChancesConfig,
+            InitialGameplayConfig initialGameplayConfig,
             BotMoveCreator botMoveCreator,
             CharactersTurnOrchestrator charactersTurnOrchestrator,
             CharacterCreator characterCreator,
@@ -32,6 +34,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
         {
             _eventBus = eventBus;
             _botSpawnChancesConfig = botSpawnChancesConfig;
+            _initialGameplayConfig = initialGameplayConfig;
             _botMoveCreator = botMoveCreator;
             _charactersTurnOrchestrator = charactersTurnOrchestrator;
             _characterCreator = characterCreator;
@@ -50,12 +53,11 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
             
             if (Random.value < _botSpawnChancesConfig.SpawnChanceOneCharacter)
             {
-                _characterCreator.CreateOnRandomPos(_botSpawnChancesConfig.GetRandomDefaultBot());
+                TrySpawnBots(1);
             }
             else if (Random.value < _botSpawnChancesConfig.SpawnChanceTwoCharacters)
             {
-                _characterCreator.CreateOnRandomPos(_botSpawnChancesConfig.GetRandomDefaultBot());
-                _characterCreator.CreateOnRandomPos(_botSpawnChancesConfig.GetRandomSecondaryBot());
+                TrySpawnBots(2);
             }
             
             if (!_charactersStorage.GetCharactersByTeam(Team.Bot).Any())
@@ -63,5 +65,21 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
         }
 
         public override void Update() { }
+
+        private void TrySpawnBots(int requestedCount)
+        {
+            var remaining =
+                _initialGameplayConfig.MaxCharactersCount -
+                _charactersStorage.GetCharactersByTeam(Team.Bot).Count();
+            var spawnCount = remaining < requestedCount ? remaining : requestedCount;
+
+            if (spawnCount <= 0)
+                return;
+
+            _characterCreator.CreateOnRandomPos(_botSpawnChancesConfig.GetRandomDefaultBot());
+
+            if (spawnCount >= 2)
+                _characterCreator.CreateOnRandomPos(_botSpawnChancesConfig.GetRandomSecondaryBot());
+        }
     }
 }

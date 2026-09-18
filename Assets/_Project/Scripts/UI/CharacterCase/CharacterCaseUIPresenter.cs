@@ -113,6 +113,11 @@ namespace _Project.Scripts.UI.CharacterCase
             return _assignedCharacter != null;
         }
 
+        public bool CanAssign()
+        {
+            return _assignedCharacter == null || _unassignPending;
+        }
+
         public bool IsAssignedTo(Character character)
         {
             return _assignedCharacter != null && ReferenceEquals(_assignedCharacter, character);

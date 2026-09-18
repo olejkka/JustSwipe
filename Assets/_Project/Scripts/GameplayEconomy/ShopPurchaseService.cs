@@ -73,7 +73,7 @@ namespace _Project.Scripts.GameplayEconomy
         private bool CanPurchaseCharacter(int price) =>
             _gameplayMoney.Amount >= price &&
             _charactersStorage.GetCharactersByTeam(Team.Player).Count() <
-            _initialGameplayConfig.MaxPlayerCharactersCount;
+            _initialGameplayConfig.MaxCharactersCount;
 
         private bool CanPurchaseEffect(int price, Team team) =>
             _gameplayMoney.Amount >= price &&

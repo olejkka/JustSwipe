@@ -43,7 +43,7 @@ namespace _Project.Scripts.UI.CharacterCase
             _charactersConfig = charactersConfig;
             _colorsConfig = colorsConfig;
 
-            var casesCount = Math.Max(1, config.MaxPlayerCharactersCount);
+            var casesCount = Math.Max(1, config.MaxCharactersCount);
 
             _playerCaseViews = containerView.CreatePlayerCases(casesCount);
             _botCaseViews = containerView.CreateBotCases(casesCount);
@@ -84,7 +84,7 @@ namespace _Project.Scripts.UI.CharacterCase
 
             for (var i = 0; i < presenters.Length; i++)
             {
-                if (!presenters[i].IsAssigned())
+                if (presenters[i].CanAssign())
                 {
                     presenters[i].AssignCharacter(e.Character);
                     return;

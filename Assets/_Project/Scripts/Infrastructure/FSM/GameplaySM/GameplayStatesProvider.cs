@@ -20,6 +20,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
         private readonly CharacterCreator _characterCreator;
         private readonly CharactersStorage _charactersStorage;
         private readonly BotSpawnChancesConfig _botSpawnChancesConfig;
+        private readonly InitialGameplayConfig _initialGameplayConfig;
 
 
         public GameplayStatesProvider(
@@ -28,7 +29,8 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
             CharactersTurnOrchestrator charactersTurnOrchestrator,
             CharacterCreator characterCreator,
             CharactersStorage charactersStorage,
-            BotSpawnChancesConfig botSpawnChancesConfig
+            BotSpawnChancesConfig botSpawnChancesConfig,
+            InitialGameplayConfig initialGameplayConfig
         )
         {
             _eventBus = eventBus;
@@ -37,6 +39,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
             _characterCreator = characterCreator;
             _charactersStorage = charactersStorage;
             _botSpawnChancesConfig = botSpawnChancesConfig;
+            _initialGameplayConfig = initialGameplayConfig;
         }
         
         public IReadOnlyList<IState> GetStates()
@@ -59,6 +62,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                 },
                 _eventBus,
                 _botSpawnChancesConfig,
+                _initialGameplayConfig,
                 _botMoveCreator,
                 _charactersTurnOrchestrator,
                 _characterCreator,
