@@ -50,12 +50,14 @@ namespace _Project.Scripts.Characters.Movement
             {
                 var attacker = attackers[i];
 
-                if (!attacker.IsRanged)
+                if (!attacker.IsRanged || !attacker.CanAttack)
                     continue;
 
                 var shot = Trace(attacker, vector, min, max, occupants);
-                shots.Add(shot);
 
+                shots.Add(shot);
+                attacker.StartAttackCooldown();
+                
                 if (shot.Target == null)
                     continue;
 

@@ -1,4 +1,5 @@
 using _Project.Scripts.Characters.Health;
+using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Creators;
 using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.EventBus.Events;
@@ -14,6 +15,7 @@ namespace _Project.Scripts.Characters.Movement
         private readonly ProjectilesResolver _projectilesResolver;
         private readonly ProjectileCreator _projectileCreator;
         private readonly HealthChangeService _healthChangeService;
+        private readonly CharactersStorage _charactersStorage;
         private readonly EventBus _eventBus;
 
 
@@ -24,6 +26,7 @@ namespace _Project.Scripts.Characters.Movement
             ProjectilesResolver projectilesResolver,
             ProjectileCreator projectileCreator,
             HealthChangeService healthChangeService,
+            CharactersStorage charactersStorage,
             EventBus eventBus)
         {
             _mover = mover;
@@ -32,11 +35,14 @@ namespace _Project.Scripts.Characters.Movement
             _projectilesResolver = projectilesResolver;
             _projectileCreator = projectileCreator;
             _healthChangeService = healthChangeService;
+            _charactersStorage = charactersStorage;
             _eventBus = eventBus;
         }
 
         public void Execute(Vector2Int vector, Team team)
         {
+            TickAttackCDs(team);
+
             var collisions = _mover.Move(vector, team);
             _positionResolver.Resolve();
             _meleeResolver.Resolve(collisions);
@@ -49,6 +55,12 @@ namespace _Project.Scripts.Characters.Movement
                 _eventBus.Publish(new PlayerMoveCompletedEvent());
             else
                 _eventBus.Publish(new BotMoveCompletedEvent());
+        }
+
+        private void TickAttackCDs(Team team)
+        {
+            foreach (var character in _charactersStorage.GetCharactersByTeam(team))
+                character.TickAttackCD();
         }
     }
 }

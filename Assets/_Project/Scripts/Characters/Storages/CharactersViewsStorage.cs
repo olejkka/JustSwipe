@@ -37,7 +37,13 @@ namespace _Project.Scripts.Characters.Storages
             _map.Clear();
         }
 
-        public void Register(Character character, CharacterView view) => _map[character] = view;
+        public event Action<Character, CharacterView> OnRegistered;
+
+        public void Register(Character character, CharacterView view)
+        {
+            _map[character] = view;
+            OnRegistered?.Invoke(character, view);
+        }
 
         public bool TryGet(Character character, out CharacterView view) =>
             _map.TryGetValue(character, out view);

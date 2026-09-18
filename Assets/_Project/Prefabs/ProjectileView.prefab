@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 2128471938472910347}
+  _image: {fileID: 0}
 --- !u!1 &9128471938472910345
 GameObject:
   m_ObjectHideFlags: 0

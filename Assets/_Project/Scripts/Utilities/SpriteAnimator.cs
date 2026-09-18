@@ -1,11 +1,13 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Project.Scripts.Utilities
 {
     public class SpriteAnimator : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _renderer;
+        [SerializeField] private Image _image;
 
         private Sprite[] _frames;
         private float _frameRate;
@@ -29,7 +31,7 @@ namespace _Project.Scripts.Utilities
             _currentFrame = 0;
             _timer = 0f;
             _playing = true;
-            _renderer.sprite = _frames[0];
+            SetSprite(_frames[0]);
         }
 
         public void Stop()
@@ -64,7 +66,16 @@ namespace _Project.Scripts.Utilities
                 }
             }
 
-            _renderer.sprite = _frames[_currentFrame];
+            SetSprite(_frames[_currentFrame]);
+        }
+
+        private void SetSprite(Sprite sprite)
+        {
+            if (_renderer != null)
+                _renderer.sprite = sprite;
+
+            if (_image != null)
+                _image.sprite = sprite;
         }
     }
 }

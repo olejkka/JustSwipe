@@ -19,6 +19,7 @@ namespace _Project.Scripts.Characters
         public int MaxHealth { get; }
         public int MaxDamage { get; }
         public int AttackRange { get; }
+        public int MaxAttackCD { get; }
 
         // state
         public Vector2Int Position { get; private set; }
@@ -26,7 +27,9 @@ namespace _Project.Scripts.Characters
         public int Damage { get; private set; }
         public int BonusHealth { get; private set; }
         public int BonusDamage { get; private set; }
+        public int AttackCD { get; private set; }
         public int TotalDamage => Damage + BonusDamage;
+        public bool CanAttack { get; private set; }
         public HealthChangeSource LastHealthChangeSource { get; private set; }
 
         // effects
@@ -59,9 +62,12 @@ namespace _Project.Scripts.Characters
             MaxHealth = baseStats.Health;
             MaxDamage = baseStats.Damage;
             AttackRange = baseStats.AttackRange;
+            MaxAttackCD = baseStats.AttackCD;
 
             Health = MaxHealth;
             Damage = MaxDamage;
+            AttackCD = 0;
+            CanAttack = true;
         }
 
         public void Move(Vector2Int vector)
@@ -196,6 +202,25 @@ namespace _Project.Scripts.Characters
             OnStatsChanged?.Invoke();
         }
         
+        public void TickAttackCD()
+        {
+            CanAttack = AttackCD <= 0;
+
+            if (AttackCD <= 0)
+                return;
+
+            AttackCD--;
+        }
+
+        public void StartAttackCooldown()
+        {
+            if (MaxAttackCD <= 0)
+                return;
+
+            AttackCD = MaxAttackCD;
+            CanAttack = false;
+        }
+
         public void PerformMeleeAttack() => OnMeleeAttack?.Invoke();
 
         private static int ClampToBase(int value, int max) =>

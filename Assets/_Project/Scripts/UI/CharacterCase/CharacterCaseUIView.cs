@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
+using _Project.Scripts.Utilities;
 using JetBrains.Lifetimes;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ namespace _Project.Scripts.UI.CharacterCase
     public class CharacterCaseUIView : MonoBehaviour
     {
         [SerializeField] private Button _button;
+        [SerializeField] private SpriteAnimator _animator;
         
         [Header("Icons")]
         [SerializeField] private Image _characterIcon;
@@ -30,6 +32,17 @@ namespace _Project.Scripts.UI.CharacterCase
         private readonly List<Image> _hpIconsPool = new();
         private readonly List<Image> _damageIconsPool = new();
 
+        private CharacterAnimationPlayer _animationPlayer;
+        private CharacterAnimationData _animations;
+
+        public CharacterAnimationType CurrentAnimationType =>
+            _animationPlayer != null
+                ? _animationPlayer.CurrentAnimationType
+                : CharacterAnimationType.None;
+
+        private CharacterAnimationPlayer AnimationPlayer =>
+            _animationPlayer ??= new CharacterAnimationPlayer(_animator);
+
         
         public void BindClick(Lifetime lifetime, Action onClick)
         {
@@ -39,6 +52,37 @@ namespace _Project.Scripts.UI.CharacterCase
         public void SetIcon(Sprite sprite)
         {
             _characterIcon.sprite = sprite;
+        }
+
+        public void SetAnimations(CharacterAnimationData animations)
+        {
+            _animations = animations;
+            AnimationPlayer.SetAnimations(animations);
+        }
+
+        public void PlayIdle()
+        {
+            AnimationPlayer.PlayIdle();
+        }
+
+        public void PlayTakingDamage()
+        {
+            if (_animations == null)
+                return;
+
+            AnimationPlayer.TryPlayOneShot(
+                CharacterAnimationType.TakingDamage,
+                _animations.TakeDamage);
+        }
+
+        public void PlayDeath(Action onComplete)
+        {
+            AnimationPlayer.PlayDeath(onComplete);
+        }
+
+        public void StopAnimation()
+        {
+            _animationPlayer?.Stop();
         }
         
         public void SetBackgroundColor(Color color)

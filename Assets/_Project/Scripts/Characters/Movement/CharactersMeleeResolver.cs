@@ -18,11 +18,16 @@ namespace _Project.Scripts.Characters.Movement
             {
                 var collision = collisions[i];
 
+                if (!collision.Attacker.CanAttack)
+                    continue;
+
                 _healthChangeService.Enqueue(
                     HealthChangeRequest.Damage(
                         HealthChangeSource.FromCharacter(collision.Attacker),
                         collision.Defender,
                         collision.Attacker.TotalDamage));
+
+                collision.Attacker.StartAttackCooldown();
             }
         }
     }

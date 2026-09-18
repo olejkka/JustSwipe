@@ -10,7 +10,26 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="" />
+    <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Configs/Characters.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Configs/Characters.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/CharacterView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/CharacterView.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/ProjectileView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/ProjectileView.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Battle/Bottom Panel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Battle/Bottom Panel.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Character Case.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Character Case.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Popups/Settings Popup View.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/UI/Popups/Settings Popup View.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/GameplayUI.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/GameplayUI.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Character.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Character.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterBaseStats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterBaseStats.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/CharacterView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Movement/CharactersMeleeResolver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Movement/CharactersMeleeResolver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Movement/CharactersTurnOrchestrator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Movement/CharactersTurnOrchestrator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Movement/ProjectilesResolver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Movement/ProjectilesResolver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Storages/CharactersViewsStorage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/Storages/CharactersViewsStorage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/CharacterCase/CharacterCaseUIPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/CharacterCase/CharacterCaseUIPresenter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/CharacterCase/CharacterCaseUIView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/UI/CharacterCase/CharacterCaseUIView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Utilities/SpriteAnimator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Utilities/SpriteAnimator.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,61 +79,61 @@
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0000000000194424" />
-      <entry key="S2" value="1.002099847103688" />
-      <entry key="S5" value="1.0848936232134079" />
-      <entry key="S10" value="1.2913651029437256" />
-      <entry key="S30" value="1.662947562631245" />
-      <entry key="S60" value="1.8142159189252227" />
-      <entry key="M2" value="1.9023391374229661" />
-      <entry key="M5" value="1.959727452669441" />
-      <entry key="M10" value="1.9796568035130675" />
-      <entry key="M15" value="1.9863914654076202" />
-      <entry key="M30" value="1.9931729319547542" />
-      <entry key="H1" value="2.0002739446045537" />
-      <entry key="H2" value="2.3139294233370222" />
-      <entry key="H4" value="4.918072830362858" />
-      <entry key="D1" value="20.6349952382303" />
-      <entry key="W1" value="27.607004369849943" />
+      <entry key="MS100" value="1.141610485663672" />
+      <entry key="MS500" value="1.6808508027440876" />
+      <entry key="S2" value="2.206593756267873" />
+      <entry key="S5" value="3.0732207622730248" />
+      <entry key="S10" value="4.3062424394284475" />
+      <entry key="S30" value="6.585323388867187" />
+      <entry key="S60" value="7.621681470850885" />
+      <entry key="M2" value="8.260381815370254" />
+      <entry key="M5" value="8.690870067823997" />
+      <entry key="M10" value="8.843114511679708" />
+      <entry key="M15" value="8.89488574680386" />
+      <entry key="M30" value="8.947179313071997" />
+      <entry key="H1" value="8.977199391119285" />
+      <entry key="H2" value="9.301650587119656" />
+      <entry key="H4" value="11.908896784684137" />
+      <entry key="D1" value="27.63041226901306" />
+      <entry key="W1" value="34.60615612111278" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="8.898096003883425E-7" />
-      <entry key="MS500" value="0.06163954403083495" />
-      <entry key="S2" value="0.4982701314139339" />
-      <entry key="S5" value="0.7568083964847896" />
-      <entry key="S10" value="0.8699473527086508" />
-      <entry key="S30" value="0.9546210141397169" />
-      <entry key="S60" value="0.9770470890083635" />
-      <entry key="M2" value="0.9884569231930966" />
-      <entry key="M5" value="0.9953666809839271" />
-      <entry key="M10" value="0.9976806508016115" />
-      <entry key="M15" value="0.9984531688751473" />
-      <entry key="M30" value="0.9992265928783994" />
-      <entry key="H1" value="1.0017604875165362" />
-      <entry key="H2" value="1.1792571610577334" />
-      <entry key="H4" value="2.6405054350102493" />
-      <entry key="D1" value="11.373067023959576" />
-      <entry key="W1" value="15.230094857690446" />
+      <entry key="MS100" value="1.9838911054386796E-51" />
+      <entry key="MS500" value="7.236099693841475E-11" />
+      <entry key="S2" value="0.003029506480210175" />
+      <entry key="S5" value="0.12318596168384913" />
+      <entry key="S10" value="0.47353994381548264" />
+      <entry key="S30" value="1.223197506038797" />
+      <entry key="S60" value="1.561808361344406" />
+      <entry key="M2" value="1.7667275229519463" />
+      <entry key="M5" value="1.9030384850249549" />
+      <entry key="M10" value="1.9508883098186904" />
+      <entry key="M15" value="1.967116972892835" />
+      <entry key="M30" value="1.9834874129686733" />
+      <entry key="H1" value="1.9938630597145937" />
+      <entry key="H2" value="2.174891122690558" />
+      <entry key="H4" value="3.6366190567813312" />
+      <entry key="D1" value="12.370722726936734" />
+      <entry key="W1" value="16.22965289101795" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="8.8981145759858E-7" />
-      <entry key="MS500" value="0.06614534718601961" />
-      <entry key="S2" value="0.7591522176632114" />
-      <entry key="S5" value="1.4191769299026473" />
-      <entry key="S10" value="1.9156528893229445" />
-      <entry key="S30" value="2.524606276746006" />
-      <entry key="S60" value="2.743019653875334" />
-      <entry key="M2" value="2.8661951584192265" />
-      <entry key="M5" value="2.9451332362300504" />
-      <entry key="M10" value="2.972336429739674" />
-      <entry key="M15" value="2.9815060084720155" />
-      <entry key="M30" value="2.9907278973681874" />
-      <entry key="H1" value="3.0011962703942845" />
-      <entry key="H2" value="3.4926935370835546" />
-      <entry key="H4" value="7.558025600444222" />
-      <entry key="D1" value="32.007663697549354" />
-      <entry key="W1" value="42.83702291113867" />
+      <entry key="MS100" value="0.1416181150579632" />
+      <entry key="MS500" value="0.775448804172388" />
+      <entry key="S2" value="1.7306054090834184" />
+      <entry key="S5" value="2.7727624373029767" />
+      <entry key="S10" value="4.3454556460355045" />
+      <entry key="S30" value="7.525449022284616" />
+      <entry key="S60" value="9.012071101516682" />
+      <entry key="M2" value="9.93245128510843" />
+      <entry key="M5" value="10.553675391537242" />
+      <entry key="M10" value="10.773471143249107" />
+      <entry key="M15" value="10.848221140117944" />
+      <entry key="M30" value="10.923728645127227" />
+      <entry key="H1" value="10.967579753850208" />
+      <entry key="H2" value="11.474723726392776" />
+      <entry key="H4" value="15.544300310885243" />
+      <entry key="D1" value="40.00062585885482" />
+      <entry key="W1" value="50.835716889130396" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -132,29 +151,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "cidr.known.project.marker": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "rider.code.cleanup.on.save": "true",
-    "settings.editor.selected.configurable": "editor.preferences.tabs",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;rider.code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.3.19f1\Editor\Unity.exe" />

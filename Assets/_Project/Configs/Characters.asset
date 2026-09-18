@@ -20,6 +20,7 @@ MonoBehaviour:
       Health: 2
       Damage: 1
       AttackRange: 0
+      AttackCD: 0
     _isRanged: 0
     _projectileDefinitionId: 
     _icon: {fileID: -1625386022, guid: 6dab75d7ff81216429cfc6d6ea8a4712, type: 3}
@@ -73,6 +74,7 @@ MonoBehaviour:
       Health: 2
       Damage: 2
       AttackRange: 0
+      AttackCD: 0
     _isRanged: 0
     _projectileDefinitionId: 
     _icon: {fileID: -1701976148, guid: 1b67a795747b04c4c80d2c1d242ea24e, type: 3}
@@ -126,6 +128,7 @@ MonoBehaviour:
       Health: 3
       Damage: 2
       AttackRange: 0
+      AttackCD: 0
     _isRanged: 0
     _projectileDefinitionId: 
     _icon: {fileID: -1214402316, guid: 4a350331c4bf2fd4bb8994072e7c1c85, type: 3}
@@ -179,6 +182,7 @@ MonoBehaviour:
       Health: 5
       Damage: 3
       AttackRange: 0
+      AttackCD: 0
     _isRanged: 0
     _projectileDefinitionId: 
     _icon: {fileID: 605253563, guid: d72c2c24f8790254ea01da3be234727b, type: 3}
@@ -232,6 +236,7 @@ MonoBehaviour:
       Health: 1
       Damage: 1
       AttackRange: 0
+      AttackCD: 0
     _isRanged: 0
     _projectileDefinitionId: 
     _icon: {fileID: 887015444, guid: 6ee0ca78720e140469093a80cefc57d5, type: 3}
@@ -284,6 +289,7 @@ MonoBehaviour:
       Health: 1
       Damage: 1
       AttackRange: 2
+      AttackCD: 1
     _isRanged: 1
     _projectileDefinitionId: projectile_default
     _icon: {fileID: 446621925, guid: a104535298e36084f9050790c8aab3a4, type: 3}

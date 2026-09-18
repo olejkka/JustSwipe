@@ -1,5 +1,4 @@
 ﻿using System;
-using _Project.Scripts.Infrastructure.EventBus;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using _Project.Scripts.Utilities;
 using DG.Tweening;
@@ -19,13 +18,25 @@ namespace _Project.Scripts.Characters
         private Character _data;
         private Tilemap _tilemap;
         private CharacterAnimationData _animations;
-        private CharacterAnimationType _currentAnimationType = CharacterAnimationType.None;
-        private bool _isOneShotPlaying;
-        private int _currentPriority;
+        private CharacterAnimationPlayer _animationPlayer;
         private Tween _selectedJumpTween;
         private Vector3 _visualStartLocalPos;
-        
 
+        public CharacterAnimationType CurrentAnimationType =>
+            _animationPlayer != null
+                ? _animationPlayer.CurrentAnimationType
+                : CharacterAnimationType.None;
+
+        public event Action<CharacterAnimationType> OnAnimationStarted
+        {
+            add => AnimationPlayer.OnAnimationStarted += value;
+            remove => AnimationPlayer.OnAnimationStarted -= value;
+        }
+
+        private CharacterAnimationPlayer AnimationPlayer =>
+            _animationPlayer ??= new CharacterAnimationPlayer(_animator);
+
+        
         private void Awake()
         {
             _visualStartLocalPos = _visual.localPosition;
@@ -39,6 +50,7 @@ namespace _Project.Scripts.Characters
             _data = data;
             _tilemap = tilemap;
             _animations = animations;
+            AnimationPlayer.SetAnimations(animations);
 
             _lifetimeDefinition.Lifetime.BracketSubscription(
                 () => _data.OnPositionChanged += OnMoved,
@@ -53,22 +65,13 @@ namespace _Project.Scripts.Characters
                 () => _data.OnMeleeAttack -= PlayMeleeAttack);
 
             UpdateRotation(data.Team);
-            PlayIdle();
+            AnimationPlayer.PlayIdle();
             UpdatePosition(_data.Position);
-        }
-
-        private void PlayIdle()
-        {
-            _isOneShotPlaying = false;
-            _currentAnimationType = CharacterAnimationType.Idle;
-            _currentPriority = (int)CharacterAnimationType.Idle;
-
-            _animator.Play(_animations.Idle, _animations.FrameRate, loop: true);
         }
         
         public void PlaySelected()
         {
-            TryPlayOneShot(CharacterAnimationType.Selected, _animations.Selected);
+            AnimationPlayer.TryPlayOneShot(CharacterAnimationType.Selected, _animations.Selected);
             
             _selectedJumpTween?.Kill();
             _visual.localPosition = _visualStartLocalPos;
@@ -81,74 +84,25 @@ namespace _Project.Scripts.Characters
                 .SetUpdate(UpdateType.Normal, isIndependentUpdate: false);
         }
 
-        private void TryPlayOneShot(
-            CharacterAnimationType animationType,
-            Sprite[] frames,
-            Action onComplete = null,
-            bool returnToIdleOnFinish = true)
-        {
-            var newPriority = (int)animationType;
-            
-            if (!_isOneShotPlaying)
-            {
-                PlayOneShotInternal(animationType, frames, onComplete, returnToIdleOnFinish);
-                return;
-            }
-            
-            if (newPriority > _currentPriority)
-            {
-                PlayOneShotInternal(animationType, frames, onComplete, returnToIdleOnFinish);
-            }
-        }
-
-        private void PlayOneShotInternal(
-            CharacterAnimationType animationType,
-            Sprite[] frames,
-            Action onComplete,
-            bool returnToIdleOnFinish)
-        {
-            _isOneShotPlaying = true;
-            _currentAnimationType = animationType;
-            _currentPriority = (int)animationType;
-
-            _animator.Play(frames, _animations.FrameRate, loop: false);
-            
-            _animator.OnAnimationFinished += () =>
-            {
-                _isOneShotPlaying = false;
-                _currentAnimationType = CharacterAnimationType.None;
-                _currentPriority = (int)CharacterAnimationType.None;
-
-                onComplete?.Invoke();
-
-                if (returnToIdleOnFinish)
-                    PlayIdle();
-            };
-        }
-
         public void PlayDeath(Action onComplete)
         {
-            TryPlayOneShot(
-                CharacterAnimationType.Death,
-                _animations.Death,
-                onComplete,
-                returnToIdleOnFinish: false);
+            AnimationPlayer.PlayDeath(onComplete);
         }
 
         private void OnMoved(Vector2Int pos)
         {
             UpdatePosition(pos);
-            TryPlayOneShot(CharacterAnimationType.Move, _animations.Move);
+            AnimationPlayer.TryPlayOneShot(CharacterAnimationType.Move, _animations.Move);
         }
 
         private void OnHealthChanged(int amount)
         {
-            TryPlayOneShot(CharacterAnimationType.TakingDamage, _animations.TakeDamage);
+            AnimationPlayer.TryPlayOneShot(CharacterAnimationType.TakingDamage, _animations.TakeDamage);
         }
         
         public void PlayMeleeAttack()
         {
-            TryPlayOneShot(CharacterAnimationType.MeleeAttack, _animations.MeleeAttack);
+            AnimationPlayer.TryPlayOneShot(CharacterAnimationType.MeleeAttack, _animations.MeleeAttack);
         }
 
         private void UpdatePosition(Vector2Int pos)

@@ -4,7 +4,6 @@ using _Project.Scripts.Characters.Storages;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using JetBrains.Lifetimes;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace _Project.Scripts.UI.CharacterCase
@@ -19,6 +18,9 @@ namespace _Project.Scripts.UI.CharacterCase
         
         private LifetimeDefinition _assignmentLifetimeDefinition;
         private Character _assignedCharacter;
+        private CharacterView _characterView;
+        private CharacterAnimationData _animations;
+        private bool _unassignPending;
         
         
         public CharacterCaseUIPresenter(
@@ -42,6 +44,10 @@ namespace _Project.Scripts.UI.CharacterCase
         
         public void Dispose()
         {
+            _unassignPending = false;
+            _characterView = null;
+            _animations = null;
+            
             _assignmentLifetimeDefinition?.Terminate();
             _assignmentLifetimeDefinition = null;
             
@@ -51,7 +57,7 @@ namespace _Project.Scripts.UI.CharacterCase
         
         public void AssignCharacter(Character character)
         {
-            UnassignCharacter();
+            ExecuteUnassign();
             
             _assignedCharacter = character;
             var assigned = character;
@@ -59,30 +65,140 @@ namespace _Project.Scripts.UI.CharacterCase
             _assignmentLifetimeDefinition = _lifetimeDefinition.Lifetime.CreateNested();
             var lifetime = _assignmentLifetimeDefinition.Lifetime;
             
-            _view.BindClick(lifetime , OnCaseClicked);
+            _view.BindClick(lifetime, OnCaseClicked);
             
-            lifetime .Bracket(
-                () => assigned .OnStatsChanged += OnStatsChanged,
-                () => assigned .OnStatsChanged -= OnStatsChanged);
+            lifetime.Bracket(
+                () => assigned.OnStatsChanged += OnStatsChanged,
+                () => assigned.OnStatsChanged -= OnStatsChanged);
             
             var entry = _charactersConfig.GetEntryByDefinitionId(character.DefinitionId);
             
             if (entry != null)
+            {
+                _animations = entry.Animations;
+                _view.SetAnimations(_animations);
                 _view.SetIcon(entry.Icon);
+            }
             
             UpdateStats();
             _view.SetActive(true);
             _view.UpdateRotation(character.Team);
             _view.SetBackgroundColor(_colorsConfig.GetBackgroundColor(character.Team));
+            
+            BindCharacterView(lifetime, character);
         }
         
         public void UnassignCharacter()
         {
+            if (_unassignPending)
+                return;
+
+            if (_assignedCharacter == null || !HasDeathFrames())
+            {
+                ExecuteUnassign();
+                return;
+            }
+
+            _unassignPending = true;
+
+            if (_view.CurrentAnimationType == CharacterAnimationType.Death)
+                return;
+
+            if (_characterView == null)
+                _view.PlayDeath(OnCaseDeathFinished);
+        }
+        
+        public bool IsAssigned()
+        {
+            return _assignedCharacter != null;
+        }
+
+        public bool IsAssignedTo(Character character)
+        {
+            return _assignedCharacter != null && ReferenceEquals(_assignedCharacter, character);
+        }
+
+        private void ExecuteUnassign()
+        {
+            _unassignPending = false;
+            _characterView = null;
+            _animations = null;
+            _view.StopAnimation();
+
             _assignmentLifetimeDefinition?.Terminate();
             _assignmentLifetimeDefinition = null;
             
             _assignedCharacter = null;
             _view.SetActive(false);
+        }
+
+        private void BindCharacterView(Lifetime lifetime, Character character)
+        {
+            if (_charactersViewsStorage.TryGet(character, out var view) && view != null)
+            {
+                SubscribeToCharacterView(lifetime, view);
+                return;
+            }
+
+            lifetime.BracketSubscription(
+                () => _charactersViewsStorage.OnRegistered += OnViewRegistered,
+                () => _charactersViewsStorage.OnRegistered -= OnViewRegistered);
+        }
+
+        private void OnViewRegistered(Character character, CharacterView view)
+        {
+            if (!IsAssignedTo(character) || view == null || _assignmentLifetimeDefinition == null)
+                return;
+
+            SubscribeToCharacterView(_assignmentLifetimeDefinition.Lifetime, view);
+        }
+
+        private void SubscribeToCharacterView(Lifetime lifetime, CharacterView view)
+        {
+            if (ReferenceEquals(_characterView, view))
+                return;
+
+            _characterView = view;
+
+            lifetime.BracketSubscription(
+                () => view.OnAnimationStarted += OnCharacterAnimationStarted,
+                () =>
+                {
+                    if (view != null)
+                        view.OnAnimationStarted -= OnCharacterAnimationStarted;
+                });
+
+            MirrorAnimation(view.CurrentAnimationType);
+        }
+
+        private void OnCharacterAnimationStarted(CharacterAnimationType animationType) => 
+            MirrorAnimation(animationType);
+
+        private void MirrorAnimation(CharacterAnimationType animationType)
+        {
+            if (_unassignPending && animationType != CharacterAnimationType.Death)
+                return;
+
+            switch (animationType)
+            {
+                case CharacterAnimationType.Idle:
+                    _view.PlayIdle();
+                    break;
+                case CharacterAnimationType.TakingDamage:
+                    _view.PlayTakingDamage();
+                    break;
+                case CharacterAnimationType.Death:
+                    _view.PlayDeath(OnCaseDeathFinished);
+                    break;
+            }
+        }
+
+        private void OnCaseDeathFinished()
+        {
+            if (!_unassignPending)
+                return;
+
+            ExecuteUnassign();
         }
         
         private void OnStatsChanged()
@@ -92,11 +208,19 @@ namespace _Project.Scripts.UI.CharacterCase
         
         private void OnCaseClicked()
         {
-            if (_assignedCharacter == null)
+            if (_assignedCharacter == null || _unassignPending)
                 return;
-            
-            if (_charactersViewsStorage.TryGet(_assignedCharacter, out var view) && view != null)
-                view.PlaySelected();
+
+            if (_view.CurrentAnimationType == CharacterAnimationType.Death)
+                return;
+
+            if (_characterView == null)
+                return;
+
+            if (_characterView.CurrentAnimationType == CharacterAnimationType.Death)
+                return;
+
+            _characterView.PlaySelected();
         }
         
         private void UpdateStats()
@@ -108,14 +232,11 @@ namespace _Project.Scripts.UI.CharacterCase
             _view.SetDamage(_assignedCharacter.Damage, _assignedCharacter.BonusDamage);
         }
 
-        public bool IsAssigned()
+        private bool HasDeathFrames()
         {
-            return _assignedCharacter != null;
-        }
-
-        public bool IsAssignedTo(Character character)
-        {
-            return _assignedCharacter != null && ReferenceEquals(_assignedCharacter, character);
+            return _animations != null &&
+                   _animations.Death != null &&
+                   _animations.Death.Length > 0;
         }
     }
 }
