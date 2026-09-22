@@ -21,6 +21,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
         private readonly CharactersStorage _charactersStorage;
         private readonly BotSpawnChancesConfig _botSpawnChancesConfig;
         private readonly InitialGameplayConfig _initialGameplayConfig;
+        private readonly BotPhaseService _botPhaseService;
 
 
         public GameplayStatesProvider(
@@ -30,7 +31,8 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
             CharacterCreator characterCreator,
             CharactersStorage charactersStorage,
             BotSpawnChancesConfig botSpawnChancesConfig,
-            InitialGameplayConfig initialGameplayConfig
+            InitialGameplayConfig initialGameplayConfig,
+            BotPhaseService botPhaseService
         )
         {
             _eventBus = eventBus;
@@ -40,6 +42,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
             _charactersStorage = charactersStorage;
             _botSpawnChancesConfig = botSpawnChancesConfig;
             _initialGameplayConfig = initialGameplayConfig;
+            _botPhaseService = botPhaseService;
         }
         
         public IReadOnlyList<IState> GetStates()
@@ -48,13 +51,18 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                 new ITransition[]
                 {
                     new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any()),
-                    new EventTransition<PlayerMoveCompletedEvent, BotTurnState>(_eventBus),
+                    new EventTransition<PlayerMoveCompletedEvent, BotHardPhaseTurnState>(
+                        _eventBus,
+                        () => _botPhaseService.Phase == BotPhase.Hard),
+                    new EventTransition<PlayerMoveCompletedEvent, BotDefaultPhaseTurnState>(
+                        _eventBus,
+                        () => _botPhaseService.Phase == BotPhase.Default),
                 },
                 _eventBus,
                 _charactersTurnOrchestrator
             );
             
-            var botTurnState = new BotTurnState(
+            var botDefaultPhaseTurnState = new BotDefaultPhaseTurnState(
                 new ITransition[]
                 {
                     new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any()),
@@ -68,6 +76,22 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                 _characterCreator,
                 _charactersStorage
             );
+
+            var botHardPhaseTurnState = new BotHardPhaseTurnState(
+                new ITransition[]
+                {
+                    new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any()),
+                    new EventTransition<BotMoveCompletedEvent, PlayerTurnState>(_eventBus),
+                },
+                _eventBus,
+                _botSpawnChancesConfig,
+                _initialGameplayConfig,
+                _botMoveCreator,
+                _charactersTurnOrchestrator,
+                _characterCreator,
+                _charactersStorage,
+                _botPhaseService
+            );
             
             var endGameState = new EndGameState(
                 new ITransition[]
@@ -79,7 +103,8 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
             return new IState[] 
             {
                 playerTurnState,
-                botTurnState,
+                botDefaultPhaseTurnState,
+                botHardPhaseTurnState,
                 endGameState
             };
         }

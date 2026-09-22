@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Characters;
+﻿using System.Linq;
+using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using UnityEngine;
 
@@ -57,6 +58,41 @@ namespace _Project.Scripts.Creators
             if (Random.value < 0.5f)
                 return new Vector2Int(bestDelta.x > 0 ? 1 : -1, 0);
             
+            return new Vector2Int(0, bestDelta.y > 0 ? 1 : -1);
+        }
+
+        public Vector2Int GenerateDirectionToANearbyPlayerCharacter(int instanceId)
+        {
+            var origin = _charactersStorage.GetAllCharacters().First(character => character.InstanceId == instanceId);
+            var playerCharacters = _charactersStorage.GetCharactersByTeam(Team.Player);
+
+            var bestDistance = int.MaxValue;
+            var bestDelta = Vector2Int.zero;
+
+            foreach (var playerCharacter in playerCharacters)
+            {
+                var delta = playerCharacter.Position - origin.Position;
+                var distance = Mathf.Abs(delta.x) + Mathf.Abs(delta.y);
+
+                if (distance < bestDistance)
+                {
+                    bestDistance = distance;
+                    bestDelta = delta;
+                }
+            }
+
+            var absX = Mathf.Abs(bestDelta.x);
+            var absY = Mathf.Abs(bestDelta.y);
+
+            if (absX > absY)
+                return new Vector2Int(bestDelta.x > 0 ? 1 : -1, 0);
+
+            if (absY > absX)
+                return new Vector2Int(0, bestDelta.y > 0 ? 1 : -1);
+
+            if (Random.value < 0.5f)
+                return new Vector2Int(bestDelta.x > 0 ? 1 : -1, 0);
+
             return new Vector2Int(0, bestDelta.y > 0 ? 1 : -1);
         }
         

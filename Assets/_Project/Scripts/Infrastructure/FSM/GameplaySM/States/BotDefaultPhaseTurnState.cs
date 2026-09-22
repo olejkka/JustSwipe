@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Movement;
@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
 {
-    public class BotTurnState : State
+    public class BotDefaultPhaseTurnState : State
     {
         private readonly EventBus.EventBus _eventBus;
         private readonly BotSpawnChancesConfig _botSpawnChancesConfig;
@@ -22,7 +22,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
         private readonly CharactersStorage _charactersStorage;
         
 
-        public BotTurnState(
+        public BotDefaultPhaseTurnState(
             IReadOnlyList<ITransition> transitions,
             EventBus.EventBus eventBus,
             BotSpawnChancesConfig botSpawnChancesConfig,
@@ -71,6 +71,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
             var remaining =
                 _initialGameplayConfig.MaxCharactersCount -
                 _charactersStorage.GetCharactersByTeam(Team.Bot).Count();
+            
             var spawnCount = remaining < requestedCount ? remaining : requestedCount;
 
             if (spawnCount <= 0)

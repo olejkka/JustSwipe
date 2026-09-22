@@ -63,6 +63,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.Register<ShopPurchaseService>(Lifetime.Singleton);
             builder.Register<RerollPurchaseService>(Lifetime.Singleton);
             builder.RegisterEntryPoint<KillRewardHandler>();
+            builder.RegisterEntryPoint<BotPhaseService>().AsSelf();
 
             //Processors
             builder.Register<HealEffectProcessor>(Lifetime.Singleton).As<IEffectProcessor>();

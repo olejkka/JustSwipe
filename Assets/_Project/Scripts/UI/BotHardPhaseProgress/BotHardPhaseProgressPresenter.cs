@@ -8,20 +8,20 @@ using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using JetBrains.Lifetimes;
 using VContainer.Unity;
 
-namespace _Project.Scripts.UI.BossSpawnProgress
+namespace _Project.Scripts.UI.BotHardPhaseProgress
 {
-    public class BossSpawnProgressPresenter : IStartable, IDisposable
+    public class BotHardPhaseProgressPresenter : IStartable, IDisposable
     {
         private readonly EventBus _eventBus;
-        private readonly BossSpawnProgressView _view;
+        private readonly BotHardPhaseProgressView _view;
         private readonly GameplayStatisticsService _gameplayStatisticsService;
         private readonly InitialGameplayConfig _initialGameplayConfig;
         private readonly LifetimeDefinition _lifetimeDefinition = new();
 
         
-        public BossSpawnProgressPresenter(
+        public BotHardPhaseProgressPresenter(
             EventBus eventBus,
-            BossSpawnProgressView view,
+            BotHardPhaseProgressView view,
             GameplayStatisticsService gameplayStatisticsService,
             InitialGameplayConfig initialGameplayConfig)
         {
@@ -37,6 +37,10 @@ namespace _Project.Scripts.UI.BossSpawnProgress
                 _lifetimeDefinition.Lifetime,
                 OnCharacterDied);
 
+            _eventBus.SubscribeWithLifetime<BotHardPhaseEndedEvent>(
+                _lifetimeDefinition.Lifetime,
+                OnBotHardPhaseEnded);
+
             Refresh();
         }
 
@@ -50,6 +54,9 @@ namespace _Project.Scripts.UI.BossSpawnProgress
             Refresh();
         }
 
+        private void OnBotHardPhaseEnded(BotHardPhaseEndedEvent e) =>
+            _gameplayStatisticsService.UnfreezeEnemiesKilledUntilBoss();
+
         private void Refresh()
         {
             var killed = _gameplayStatisticsService.EnemiesKilledUntilBoss;
@@ -58,7 +65,9 @@ namespace _Project.Scripts.UI.BossSpawnProgress
             if (threshold > 0 && killed >= threshold)
             {
                 _gameplayStatisticsService.ResetEnemiesKilledUntilBoss();
+                _gameplayStatisticsService.FreezeEnemiesKilledUntilBoss();
                 killed = 0;
+                _eventBus.Publish(new BossSpawnThresholdReachedEvent());
             }
 
             _view.SetProgress(killed, threshold);

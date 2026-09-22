@@ -2,14 +2,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.Scripts.UI.BossSpawnProgress
+namespace _Project.Scripts.UI.BotHardPhaseProgress
 {
-    public class BossSpawnProgressView : MonoBehaviour
+    public class BotHardPhaseProgressView : MonoBehaviour
     {
         [SerializeField] private TMP_Text _killedCount;
         [SerializeField] private TMP_Text _threshold;
         [SerializeField] private Image _fillImage;
 
+        
         public void SetProgress(int killed, int threshold)
         {
             _killedCount.text = killed.ToString();

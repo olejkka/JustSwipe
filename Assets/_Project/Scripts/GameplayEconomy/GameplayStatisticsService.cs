@@ -17,6 +17,7 @@ namespace _Project.Scripts.GameplayEconomy
         private int _enemiesKilledUntilBoss;
         private int _enemiesKilled;
         private int _goldEarned;
+        private bool _enemiesKilledUntilBossFrozen;
         
         public int EnemiesKilledUntilBoss => _enemiesKilledUntilBoss;
         
@@ -38,7 +39,9 @@ namespace _Project.Scripts.GameplayEconomy
 
         public void AddEnemyKillReward(int reward)
         {
-            _enemiesKilledUntilBoss++;
+            if (!_enemiesKilledUntilBossFrozen)
+                _enemiesKilledUntilBoss++;
+
             _enemiesKilled++;
             _goldEarned += reward;
         }
@@ -56,12 +59,23 @@ namespace _Project.Scripts.GameplayEconomy
             _enemiesKilledUntilBoss = 0;
         }
 
+        public void FreezeEnemiesKilledUntilBoss()
+        {
+            _enemiesKilledUntilBossFrozen = true;
+        }
+
+        public void UnfreezeEnemiesKilledUntilBoss()
+        {
+            _enemiesKilledUntilBossFrozen = false;
+        }
+
         public void Reset()
         {
             _turnsCount = 0;
             _enemiesKilledUntilBoss = 0;
             _enemiesKilled = 0;
             _goldEarned = 0;
+            _enemiesKilledUntilBossFrozen = false;
         }
 
         private void OnTurnEnded(TurnEndedEvent e)

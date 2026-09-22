@@ -1,4 +1,4 @@
-﻿using _Project.Scripts.UI.BossSpawnProgress;
+﻿using _Project.Scripts.UI.BotHardPhaseProgress;
 using _Project.Scripts.UI.CharacterCase;
 using _Project.Scripts.UI.CheatsPanel;
 using _Project.Scripts.UI.CheatsPanel.AddMoneyButton;
@@ -26,7 +26,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.RegisterComponentInHierarchy<ShopView>();
             builder.RegisterComponentInHierarchy<MoneyView>();
             builder.RegisterComponentInHierarchy<GameplayStatisticView>();
-            builder.RegisterComponentInHierarchy<BossSpawnProgressView>();
+            builder.RegisterComponentInHierarchy<BotHardPhaseProgressView>();
             
             //Presenters
             builder.RegisterEntryPoint<SettingsButtonPresenter>();
@@ -36,7 +36,7 @@ namespace _Project.Scripts.Infrastructure.LifetimeScopes
             builder.RegisterEntryPoint<GameplayStatisticPresenter>();
             builder.RegisterEntryPoint<CharacterCasesContainerPresenter>();
             builder.RegisterEntryPoint<EffectsCasesContainerPresenter>();
-            builder.RegisterEntryPoint<BossSpawnProgressPresenter>();
+            builder.RegisterEntryPoint<BotHardPhaseProgressPresenter>();
             
             //Cheats
             builder.RegisterComponentInHierarchy<CheatsPanelView>();
