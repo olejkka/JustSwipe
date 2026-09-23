@@ -21,6 +21,7 @@ namespace _Project.Scripts.Infrastructure
         private readonly GameplayMoney _gameplayMoney;
         private readonly EventBus.EventBus _eventBus;
         private readonly GameplayStatisticsService _gameplayStatisticsService;
+        private readonly BotPhaseCharactersConfig _botPhaseCharactersConfig;
         
         private readonly LifetimeDefinition _lifetimeDefinition = new();
         
@@ -32,7 +33,8 @@ namespace _Project.Scripts.Infrastructure
             CharacterCreator characterCreator,
             GameplayMoney gameplayMoney,
             EventBus.EventBus eventBus,
-            GameplayStatisticsService gameplayStatisticsService)
+            GameplayStatisticsService gameplayStatisticsService,
+            BotPhaseCharactersConfig botPhaseCharactersConfig)
         {
             _stateMachine = stateMachine;
             _initialGameplayConfig = initialGameplayConfig;
@@ -41,6 +43,7 @@ namespace _Project.Scripts.Infrastructure
             _gameplayMoney = gameplayMoney;
             _eventBus = eventBus;
             _gameplayStatisticsService = gameplayStatisticsService;
+            _botPhaseCharactersConfig = botPhaseCharactersConfig;
         }
 
         public void Start()
@@ -60,7 +63,7 @@ namespace _Project.Scripts.Infrastructure
             _tilesCreator.Create();
             _gameplayMoney.SetAmount(_initialGameplayConfig.MoneyCount);
             _characterCreator.CreateOnRandomPos(_initialGameplayConfig.PlayerCharacter);
-            _characterCreator.CreateOnRandomPos(_initialGameplayConfig.BotCharacter);
+            _characterCreator.CreateOnRandomPos(_botPhaseCharactersConfig.GetRandomDefaultBot());
 
             _stateMachine.EnterState<PlayerTurnState>();
         }

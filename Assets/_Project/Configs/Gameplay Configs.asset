@@ -22,4 +22,5 @@ MonoBehaviour:
   _gameplayEconomy: {fileID: 11400000, guid: 851efd8d0daae7848be84944cf22e1ec, type: 2}
   _audioConfig: {fileID: 11400000, guid: d635b358e353d78438ef388891181b18, type: 2}
   botSpawnChances: {fileID: 11400000, guid: 8928520352c69bc46a37f154e8dfaef7, type: 2}
+  _botPhaseCharacters: {fileID: 11400000, guid: 3e9b7c21a5d84f0eb6c2a184d7f05e91, type: 2}
   _tileHighlight: {fileID: 11400000, guid: 5f8b1c39a6d247e0b4c9d2e7a1f05c84, type: 2}

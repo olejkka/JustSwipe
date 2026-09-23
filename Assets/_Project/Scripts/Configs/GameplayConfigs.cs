@@ -19,6 +19,7 @@ namespace _Project.Scripts.Configs
         [SerializeField] private GameplayEconomyConfig _gameplayEconomy;
         [SerializeField] private AudioConfig _audioConfig;
         [SerializeField] private BotSpawnChancesConfig botSpawnChances;
+        [SerializeField] private BotPhaseCharactersConfig _botPhaseCharacters;
         [SerializeField] private TileHighlightConfig _tileHighlight;
 
         
@@ -34,6 +35,7 @@ namespace _Project.Scripts.Configs
             builder.RegisterInstance(_gameplayEconomy);
             builder.RegisterInstance(_audioConfig);
             builder.RegisterInstance(botSpawnChances);
+            builder.RegisterInstance(_botPhaseCharacters);
             builder.RegisterInstance(_tileHighlight);
         }
     }

@@ -14,18 +14,18 @@ namespace _Project.Scripts.Characters
 {
     public class BotPhaseService : IStartable, IDisposable
     {
-        private const string HardBotDefinitionId = "bot_03";
-
         private readonly EventBus _eventBus;
         private readonly CharacterCreator _characterCreator;
         private readonly CharactersStorage _charactersStorage;
         private readonly InitialGameplayConfig _initialGameplayConfig;
         private readonly HealthChangeService _healthChangeService;
+        private readonly BotPhaseCharactersConfig _botPhaseCharactersConfig;
         private readonly LifetimeDefinition _lifetimeDefinition = new();
 
         private BotPhase _phase = BotPhase.Default;
         private int _hardInstanceId;
         private bool _capturingSpawn;
+        private string _pendingHardDefinitionId;
 
         public BotPhase Phase => _phase;
 
@@ -35,13 +35,15 @@ namespace _Project.Scripts.Characters
             CharacterCreator characterCreator,
             CharactersStorage charactersStorage,
             InitialGameplayConfig initialGameplayConfig,
-            HealthChangeService healthChangeService)
+            HealthChangeService healthChangeService,
+            BotPhaseCharactersConfig botPhaseCharactersConfig)
         {
             _eventBus = eventBus;
             _characterCreator = characterCreator;
             _charactersStorage = charactersStorage;
             _initialGameplayConfig = initialGameplayConfig;
             _healthChangeService = healthChangeService;
+            _botPhaseCharactersConfig = botPhaseCharactersConfig;
         }
 
         public void Start()
@@ -86,15 +88,18 @@ namespace _Project.Scripts.Characters
                 _healthChangeService.Apply();
             }
 
+            var definitionId = _botPhaseCharactersConfig.GetRandomHardBot();
+            _pendingHardDefinitionId = definitionId;
             _capturingSpawn = true;
 
             try
             {
-                _characterCreator.CreateOnRandomPos(HardBotDefinitionId);
+                _characterCreator.CreateOnRandomPos(definitionId);
             }
             finally
             {
                 _capturingSpawn = false;
+                _pendingHardDefinitionId = null;
             }
         }
 
@@ -113,7 +118,7 @@ namespace _Project.Scripts.Characters
 
         private void OnCharacterCreated(CharacterCreatedEvent e)
         {
-            if (!_capturingSpawn || e.Character.DefinitionId != HardBotDefinitionId)
+            if (!_capturingSpawn || e.Character.DefinitionId != _pendingHardDefinitionId)
                 return;
 
             _hardInstanceId = e.Character.InstanceId;

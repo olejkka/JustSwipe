@@ -20,6 +20,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
         private readonly CharacterCreator _characterCreator;
         private readonly CharactersStorage _charactersStorage;
         private readonly BotSpawnChancesConfig _botSpawnChancesConfig;
+        private readonly BotPhaseCharactersConfig _botPhaseCharactersConfig;
         private readonly InitialGameplayConfig _initialGameplayConfig;
         private readonly BotPhaseService _botPhaseService;
 
@@ -31,6 +32,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
             CharacterCreator characterCreator,
             CharactersStorage charactersStorage,
             BotSpawnChancesConfig botSpawnChancesConfig,
+            BotPhaseCharactersConfig botPhaseCharactersConfig,
             InitialGameplayConfig initialGameplayConfig,
             BotPhaseService botPhaseService
         )
@@ -41,6 +43,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
             _characterCreator = characterCreator;
             _charactersStorage = charactersStorage;
             _botSpawnChancesConfig = botSpawnChancesConfig;
+            _botPhaseCharactersConfig = botPhaseCharactersConfig;
             _initialGameplayConfig = initialGameplayConfig;
             _botPhaseService = botPhaseService;
         }
@@ -70,6 +73,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                 },
                 _eventBus,
                 _botSpawnChancesConfig,
+                _botPhaseCharactersConfig,
                 _initialGameplayConfig,
                 _botMoveCreator,
                 _charactersTurnOrchestrator,
@@ -85,6 +89,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                 },
                 _eventBus,
                 _botSpawnChancesConfig,
+                _botPhaseCharactersConfig,
                 _initialGameplayConfig,
                 _botMoveCreator,
                 _charactersTurnOrchestrator,

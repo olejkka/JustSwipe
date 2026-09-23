@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Configs.TileHighlightConfig
   _overlayTile: {fileID: 11400000, guid: 0a41072b333f2aa45bd8d9a926189873, type: 2}
   _entries:
-  - Type: 0
+  - Type: 1
     Color: {r: 1, g: 0.6949685, b: 0.6949685, a: 1}
     Duration: 0.3
-  - Type: 1
-    Color: {r: 0.88235295, g: 0.88235295, b: 0.88235295, a: 0}
+  - Type: 2
+    Color: {r: 0.88235295, g: 0.88235295, b: 0.88235295, a: 1}
     Duration: 0.3

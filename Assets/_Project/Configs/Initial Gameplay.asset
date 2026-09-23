@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Initial Gameplay
   m_EditorClassIdentifier: 
   _playerCharacter: player_01
-  _botCharacter: bot_01
   _maxCharactersCount: 4
   _maxEffectsCount: 9
-  _bossSpawnThreshold: 10
   _moneyCount: 0

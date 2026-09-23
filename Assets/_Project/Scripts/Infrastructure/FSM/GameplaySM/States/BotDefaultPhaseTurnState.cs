@@ -15,6 +15,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
     {
         private readonly EventBus.EventBus _eventBus;
         private readonly BotSpawnChancesConfig _botSpawnChancesConfig;
+        private readonly BotPhaseCharactersConfig _botPhaseCharactersConfig;
         private readonly InitialGameplayConfig _initialGameplayConfig;
         private readonly BotMoveCreator _botMoveCreator;
         private readonly CharactersTurnOrchestrator _charactersTurnOrchestrator;
@@ -26,6 +27,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
             IReadOnlyList<ITransition> transitions,
             EventBus.EventBus eventBus,
             BotSpawnChancesConfig botSpawnChancesConfig,
+            BotPhaseCharactersConfig botPhaseCharactersConfig,
             InitialGameplayConfig initialGameplayConfig,
             BotMoveCreator botMoveCreator,
             CharactersTurnOrchestrator charactersTurnOrchestrator,
@@ -34,6 +36,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
         {
             _eventBus = eventBus;
             _botSpawnChancesConfig = botSpawnChancesConfig;
+            _botPhaseCharactersConfig = botPhaseCharactersConfig;
             _initialGameplayConfig = initialGameplayConfig;
             _botMoveCreator = botMoveCreator;
             _charactersTurnOrchestrator = charactersTurnOrchestrator;
@@ -61,7 +64,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
             }
             
             if (!_charactersStorage.GetCharactersByTeam(Team.Bot).Any())
-                _characterCreator.CreateOnRandomPos(_botSpawnChancesConfig.GetRandomDefaultBot());
+                _characterCreator.CreateOnRandomPos(_botPhaseCharactersConfig.GetRandomDefaultBot());
         }
 
         public override void Update() { }
@@ -77,10 +80,10 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM.States
             if (spawnCount <= 0)
                 return;
 
-            _characterCreator.CreateOnRandomPos(_botSpawnChancesConfig.GetRandomDefaultBot());
+            _characterCreator.CreateOnRandomPos(_botPhaseCharactersConfig.GetRandomDefaultBot());
 
             if (spawnCount >= 2)
-                _characterCreator.CreateOnRandomPos(_botSpawnChancesConfig.GetRandomSecondaryBot());
+                _characterCreator.CreateOnRandomPos(_botPhaseCharactersConfig.GetRandomDefaultBot());
         }
     }
 }

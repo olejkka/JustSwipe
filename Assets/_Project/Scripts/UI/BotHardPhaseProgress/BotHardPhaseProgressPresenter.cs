@@ -15,7 +15,7 @@ namespace _Project.Scripts.UI.BotHardPhaseProgress
         private readonly EventBus _eventBus;
         private readonly BotHardPhaseProgressView _view;
         private readonly GameplayStatisticsService _gameplayStatisticsService;
-        private readonly InitialGameplayConfig _initialGameplayConfig;
+        private readonly BotPhaseCharactersConfig _botPhaseCharactersConfig;
         private readonly LifetimeDefinition _lifetimeDefinition = new();
 
         
@@ -23,12 +23,12 @@ namespace _Project.Scripts.UI.BotHardPhaseProgress
             EventBus eventBus,
             BotHardPhaseProgressView view,
             GameplayStatisticsService gameplayStatisticsService,
-            InitialGameplayConfig initialGameplayConfig)
+            BotPhaseCharactersConfig botPhaseCharactersConfig)
         {
             _eventBus = eventBus;
             _view = view;
             _gameplayStatisticsService = gameplayStatisticsService;
-            _initialGameplayConfig = initialGameplayConfig;
+            _botPhaseCharactersConfig = botPhaseCharactersConfig;
         }
 
         public void Start()
@@ -60,7 +60,7 @@ namespace _Project.Scripts.UI.BotHardPhaseProgress
         private void Refresh()
         {
             var killed = _gameplayStatisticsService.EnemiesKilledUntilBoss;
-            var threshold = _initialGameplayConfig.BossSpawnThreshold;
+            var threshold = _botPhaseCharactersConfig.BotHardPhaseThreshold;
 
             if (threshold > 0 && killed >= threshold)
             {

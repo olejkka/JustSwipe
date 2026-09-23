@@ -12,9 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd94f670bfb24c0db1fba5985a43a12e, type: 3}
   m_Name: Bot Spawn Chances
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Scripts.Configs.CharacterSpawnChancesConfig
-  _defaultBots:
-  - bot_01
-  _secondaryBots:
-  - bot_02
   _spawnChanceOneCharacter: 0.25
   _spawnChanceTwoCharacters: 0.1

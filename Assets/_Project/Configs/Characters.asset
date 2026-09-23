@@ -338,3 +338,59 @@ MonoBehaviour:
       SelectedJumpEaseDown: 5
     _price: 0
     _reward: 2
+  - _definitionId: bot_03
+    _type: 1
+    _team: 2
+    _baseStats:
+      Health: 5
+      Damage: 2
+      AttackRange: 0
+      AttackCD: 1
+    _isRanged: 0
+    _projectileDefinitionId: 
+    _icon: {fileID: -31263223, guid: 22cc214054f59734d9d800403f1a57d7, type: 3}
+    _animations:
+      FrameRate: 8
+      Idle:
+      - {fileID: -31263223, guid: 22cc214054f59734d9d800403f1a57d7, type: 3}
+      - {fileID: -31263223, guid: 22cc214054f59734d9d800403f1a57d7, type: 3}
+      - {fileID: 1263191229, guid: 22cc214054f59734d9d800403f1a57d7, type: 3}
+      - {fileID: 1458739490, guid: 22cc214054f59734d9d800403f1a57d7, type: 3}
+      - {fileID: 268652370, guid: 22cc214054f59734d9d800403f1a57d7, type: 3}
+      Move:
+      - {fileID: -1546888328, guid: 536131144e42a284dbfad3b9de0fcd0c, type: 3}
+      - {fileID: 2133237871, guid: 536131144e42a284dbfad3b9de0fcd0c, type: 3}
+      - {fileID: 514306768, guid: 536131144e42a284dbfad3b9de0fcd0c, type: 3}
+      - {fileID: -496390637, guid: 536131144e42a284dbfad3b9de0fcd0c, type: 3}
+      MeleeAttack:
+      - {fileID: 1731930537, guid: 526c00322c61599419e368362857a900, type: 3}
+      - {fileID: 1720467295, guid: 526c00322c61599419e368362857a900, type: 3}
+      - {fileID: 1901330026, guid: 526c00322c61599419e368362857a900, type: 3}
+      - {fileID: -1568179354, guid: 526c00322c61599419e368362857a900, type: 3}
+      TakeDamage:
+      - {fileID: -780015666, guid: acf32aa0e9ea4b740a19fbd803c4a90c, type: 3}
+      - {fileID: -1457712612, guid: acf32aa0e9ea4b740a19fbd803c4a90c, type: 3}
+      - {fileID: -2137652366, guid: acf32aa0e9ea4b740a19fbd803c4a90c, type: 3}
+      - {fileID: 271444725, guid: acf32aa0e9ea4b740a19fbd803c4a90c, type: 3}
+      Death:
+      - {fileID: -191771304, guid: e2d94bb807ea88d4983aa6263808a327, type: 3}
+      - {fileID: 1229987115, guid: e2d94bb807ea88d4983aa6263808a327, type: 3}
+      - {fileID: 1326289742, guid: e2d94bb807ea88d4983aa6263808a327, type: 3}
+      - {fileID: 1723287326, guid: e2d94bb807ea88d4983aa6263808a327, type: 3}
+      - {fileID: 956475106, guid: e2d94bb807ea88d4983aa6263808a327, type: 3}
+      - {fileID: -762349153, guid: e2d94bb807ea88d4983aa6263808a327, type: 3}
+      - {fileID: -1897284137, guid: e2d94bb807ea88d4983aa6263808a327, type: 3}
+      - {fileID: -1624060609, guid: e2d94bb807ea88d4983aa6263808a327, type: 3}
+      - {fileID: 31426116, guid: e2d94bb807ea88d4983aa6263808a327, type: 3}
+      Selected:
+      - {fileID: 2101225415, guid: 2892eb2b65cef754191a2f751abc8e04, type: 3}
+      - {fileID: -412806990, guid: 2892eb2b65cef754191a2f751abc8e04, type: 3}
+      - {fileID: 1898514696, guid: 2892eb2b65cef754191a2f751abc8e04, type: 3}
+      - {fileID: -1555204799, guid: 2892eb2b65cef754191a2f751abc8e04, type: 3}
+      - {fileID: 78714349, guid: 2892eb2b65cef754191a2f751abc8e04, type: 3}
+      SelectedJumpHeight: 0.3
+      SelectedJumpDuration: 0.1
+      SelectedJumpEaseUp: 6
+      SelectedJumpEaseDown: 5
+    _price: 0
+    _reward: 10
