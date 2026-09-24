@@ -1056,7 +1056,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 250}
-  m_SizeDelta: {x: 70, y: 750}
+  m_SizeDelta: {x: 700, y: 750}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7021785735510223530
 MonoBehaviour:
@@ -1316,10 +1316,10 @@ MonoBehaviour:
   _container: {fileID: 8992544588395598305}
   _button: {fileID: 2734893992133933767}
   _turnsCount: {fileID: 8582544471584781221}
+  _goldEarned: {fileID: 851221130995383416}
   _defaultEnemiesKilled: {fileID: 175539892513593498}
   _hardEnemiesKilled: {fileID: 175539892513593499}
   _bossEnemiesKilled: {fileID: 175539892513593500}
-  _goldEarned: {fileID: 851221130995383416}
 --- !u!222 &428871731708650951
 CanvasRenderer:
   m_ObjectHideFlags: 0

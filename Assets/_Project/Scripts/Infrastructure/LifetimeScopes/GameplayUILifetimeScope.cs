@@ -1,5 +1,5 @@
-﻿using _Project.Scripts.UI.BotBossPhaseProgress;
-using _Project.Scripts.UI.BotHardPhaseProgress;
+﻿using _Project.Scripts.UI.BotPhaseProgress.BotBossPhaseProgress;
+using _Project.Scripts.UI.BotPhaseProgress.BotHardPhaseProgress;
 using _Project.Scripts.UI.CharacterCase;
 using _Project.Scripts.UI.CheatsPanel;
 using _Project.Scripts.UI.CheatsPanel.AddMoneyButton;

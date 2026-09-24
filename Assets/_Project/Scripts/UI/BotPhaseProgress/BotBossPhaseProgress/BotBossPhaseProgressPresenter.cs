@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Configs;
 using _Project.Scripts.Infrastructure.EventBus;
@@ -7,20 +7,20 @@ using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using JetBrains.Lifetimes;
 using VContainer.Unity;
 
-namespace _Project.Scripts.UI.BotHardPhaseProgress
+namespace _Project.Scripts.UI.BotPhaseProgress.BotBossPhaseProgress
 {
-    public class BotHardPhaseProgressPresenter : IStartable, IDisposable
+    public class BotBossPhaseProgressPresenter : IStartable, IDisposable
     {
         private readonly EventBus _eventBus;
-        private readonly BotHardPhaseProgressView _view;
+        private readonly BotBossPhaseProgressView _view;
         private readonly BotPhaseService _botPhaseService;
         private readonly BotPhaseCharactersConfig _botPhaseCharactersConfig;
         private readonly LifetimeDefinition _lifetimeDefinition = new();
 
 
-        public BotHardPhaseProgressPresenter(
+        public BotBossPhaseProgressPresenter(
             EventBus eventBus,
-            BotHardPhaseProgressView view,
+            BotBossPhaseProgressView view,
             BotPhaseService botPhaseService,
             BotPhaseCharactersConfig botPhaseCharactersConfig)
         {
@@ -52,8 +52,9 @@ namespace _Project.Scripts.UI.BotHardPhaseProgress
         private void Refresh()
         {
             _view.SetProgress(
-                _botPhaseService.EnemiesKilledUntilHardPhase,
-                _botPhaseCharactersConfig.BotHardPhaseThreshold);
+                _botPhaseService.EnemiesKilledUntilBossPhase,
+                _botPhaseCharactersConfig.BotBossPhaseThreshold);
+            _view.SetPhaseActive(_botPhaseService.Phase == BotPhase.Boss);
         }
     }
 }
