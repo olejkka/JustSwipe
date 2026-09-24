@@ -37,12 +37,15 @@ namespace _Project.Scripts.UI.GameplayStatistic
 
         private void OnShowGameplayStatisticEvent(ShowGameplayStatisticEvent _)
         {
-            _gameplayStatisticsService.GetSnapshot();
-            
             _view.SetContainerActive(true);
-            _view.SetTurnsCount(_gameplayStatisticsService.GetSnapshot().TurnsCount.ToString());
-            _view.SetCountEnemiesKilled(_gameplayStatisticsService.GetSnapshot().EnemiesKilled.ToString());
-            _view.SetGoldEarned(_gameplayStatisticsService.GetSnapshot().GoldEarned.ToString());
+            
+            var snapshot = _gameplayStatisticsService.GetSnapshot();
+            
+            _view.SetTurnsCount(snapshot.TurnsCount.ToString());
+            _view.SetGoldEarned(snapshot.GoldEarned.ToString());
+            _view.SetDefaultEnemiesKilled(snapshot.DefaultEnemiesKilled.ToString());
+            _view.SetHardEnemiesKilled(snapshot.HardEnemiesKilled.ToString());
+            _view.SetBossEnemiesKilled(snapshot.BossEnemiesKilled.ToString());
         }
 
         private void ApplicationQuitClicked()

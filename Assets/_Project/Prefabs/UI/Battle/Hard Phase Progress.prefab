@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 359085510664135069}
   - component: {fileID: 2889718034374610391}
   m_Layer: 5
-  m_Name: Boss Spawn Progress
+  m_Name: Hard Phase Progress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

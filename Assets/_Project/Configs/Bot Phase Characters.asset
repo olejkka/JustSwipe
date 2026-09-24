@@ -17,6 +17,7 @@ MonoBehaviour:
   - bot_02
   _hardBots:
   - bot_03
-  _bossBots: []
+  _bossBots:
+  - bot_04
   _botHardPhaseThreshold: 10
   _botBossPhaseThreshold: 3

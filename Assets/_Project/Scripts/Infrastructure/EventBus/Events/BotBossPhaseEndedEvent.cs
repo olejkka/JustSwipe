@@ -1,6 +1,6 @@
 namespace _Project.Scripts.Infrastructure.EventBus.Events
 {
-    public class BossSpawnThresholdReachedEvent
+    public class BotBossPhaseEndedEvent
     {
     }
 }

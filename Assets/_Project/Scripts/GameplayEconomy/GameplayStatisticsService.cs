@@ -14,14 +14,12 @@ namespace _Project.Scripts.GameplayEconomy
         private readonly LifetimeDefinition _lifetimeDefinition = new();
 
         private int _turnsCount;
-        private int _enemiesKilledUntilBoss;
-        private int _enemiesKilled;
+        private int _defaultEnemiesKilled;
+        private int _hardEnemiesKilled;
+        private int _bossEnemiesKilled;
         private int _goldEarned;
-        private bool _enemiesKilledUntilBossFrozen;
-        
-        public int EnemiesKilledUntilBoss => _enemiesKilledUntilBoss;
-        
-        
+
+
         public GameplayStatisticsService(EventBus eventBus)
         {
             _eventBus = eventBus;
@@ -37,45 +35,41 @@ namespace _Project.Scripts.GameplayEconomy
             _lifetimeDefinition.Terminate();
         }
 
-        public void AddEnemyKillReward(int reward)
+        public void AddDefaultEnemyKill(int reward)
         {
-            if (!_enemiesKilledUntilBossFrozen)
-                _enemiesKilledUntilBoss++;
+            _defaultEnemiesKilled++;
+            _goldEarned += reward;
+        }
 
-            _enemiesKilled++;
+        public void AddHardEnemyKill(int reward)
+        {
+            _hardEnemiesKilled++;
+            _goldEarned += reward;
+        }
+
+        public void AddBossEnemyKill(int reward)
+        {
+            _bossEnemiesKilled++;
             _goldEarned += reward;
         }
 
         public GameplayStatisticsSnapshot GetSnapshot()
         {
             return new GameplayStatisticsSnapshot(
-                _enemiesKilled,
+                _defaultEnemiesKilled,
+                _hardEnemiesKilled,
+                _bossEnemiesKilled,
                 _goldEarned,
                 _turnsCount);
-        }
-        
-        public void ResetEnemiesKilledUntilBoss()
-        {
-            _enemiesKilledUntilBoss = 0;
-        }
-
-        public void FreezeEnemiesKilledUntilBoss()
-        {
-            _enemiesKilledUntilBossFrozen = true;
-        }
-
-        public void UnfreezeEnemiesKilledUntilBoss()
-        {
-            _enemiesKilledUntilBossFrozen = false;
         }
 
         public void Reset()
         {
             _turnsCount = 0;
-            _enemiesKilledUntilBoss = 0;
-            _enemiesKilled = 0;
+            _defaultEnemiesKilled = 0;
+            _hardEnemiesKilled = 0;
+            _bossEnemiesKilled = 0;
             _goldEarned = 0;
-            _enemiesKilledUntilBossFrozen = false;
         }
 
         private void OnTurnEnded(TurnEndedEvent e)
@@ -86,17 +80,26 @@ namespace _Project.Scripts.GameplayEconomy
             _turnsCount++;
         }
     }
-    
+
     public readonly struct GameplayStatisticsSnapshot
     {
-        public int EnemiesKilled { get; }
+        public int DefaultEnemiesKilled { get; }
+        public int HardEnemiesKilled { get; }
+        public int BossEnemiesKilled { get; }
         public int GoldEarned { get; }
         public int TurnsCount { get; }
-        
-        
-        public GameplayStatisticsSnapshot(int enemiesKilled, int goldEarned, int turnsCount)
+
+
+        public GameplayStatisticsSnapshot(
+            int defaultEnemiesKilled,
+            int hardEnemiesKilled,
+            int bossEnemiesKilled,
+            int goldEarned,
+            int turnsCount)
         {
-            EnemiesKilled = enemiesKilled;
+            DefaultEnemiesKilled = defaultEnemiesKilled;
+            HardEnemiesKilled = hardEnemiesKilled;
+            BossEnemiesKilled = bossEnemiesKilled;
             GoldEarned = goldEarned;
             TurnsCount = turnsCount;
         }

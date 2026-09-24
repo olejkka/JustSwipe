@@ -21,13 +21,20 @@ namespace _Project.Scripts.Characters
         private readonly HealthChangeService _healthChangeService;
         private readonly BotPhaseCharactersConfig _botPhaseCharactersConfig;
         private readonly LifetimeDefinition _lifetimeDefinition = new();
-
-        private BotPhase _phase = BotPhase.Default;
+        
         private int _hardInstanceId;
-        private bool _capturingSpawn;
-        private string _pendingHardDefinitionId;
+        private int _bossInstanceId;
+        
+        private int _enemiesKilledUntilHardPhase;
+        private int _enemiesKilledUntilBossPhase;
+        private bool _enemiesKilledUntilHardPhaseFrozen;
+        private bool _enemiesKilledUntilBossPhaseFrozen;
+        
+        private BotPhase _phase = BotPhase.Default;
 
         public BotPhase Phase => _phase;
+        public int EnemiesKilledUntilHardPhase => _enemiesKilledUntilHardPhase;
+        public int EnemiesKilledUntilBossPhase => _enemiesKilledUntilBossPhase;
 
 
         public BotPhaseService(
@@ -48,17 +55,9 @@ namespace _Project.Scripts.Characters
 
         public void Start()
         {
-            _eventBus.SubscribeWithLifetime<BossSpawnThresholdReachedEvent>(
-                _lifetimeDefinition.Lifetime,
-                OnBossSpawnThresholdReached);
-
             _eventBus.SubscribeWithLifetime<CharacterDiedEvent>(
                 _lifetimeDefinition.Lifetime,
                 OnCharacterDied);
-
-            _eventBus.SubscribeWithLifetime<CharacterCreatedEvent>(
-                _lifetimeDefinition.Lifetime,
-                OnCharacterCreated);
         }
 
         public void Dispose() => _lifetimeDefinition.Terminate();
@@ -67,6 +66,12 @@ namespace _Project.Scripts.Characters
         {
             instanceId = _hardInstanceId;
             return _hardInstanceId != 0;
+        }
+
+        public bool TryGetBossInstanceId(out int instanceId)
+        {
+            instanceId = _bossInstanceId;
+            return _bossInstanceId != 0;
         }
 
         public void SpawnHardBot()
@@ -79,49 +84,103 @@ namespace _Project.Scripts.Characters
             if (bots.Count >= _initialGameplayConfig.MaxCharactersCount)
             {
                 var victim = bots[UnityEngine.Random.Range(0, bots.Count)];
-                
+
                 _healthChangeService.Enqueue(HealthChangeRequest.Damage(
                     HealthChangeSource.None,
                     victim,
                     victim.Health + victim.BonusHealth));
-                
+
                 _healthChangeService.Apply();
             }
 
             var definitionId = _botPhaseCharactersConfig.GetRandomHardBot();
-            _pendingHardDefinitionId = definitionId;
-            _capturingSpawn = true;
-
-            try
-            {
-                _characterCreator.CreateOnRandomPos(definitionId);
-            }
-            finally
-            {
-                _capturingSpawn = false;
-                _pendingHardDefinitionId = null;
-            }
+            _characterCreator.CreateOnRandomPos(definitionId);
+            _hardInstanceId = TakeSpawnedInstanceId(definitionId);
         }
 
-        private void OnBossSpawnThresholdReached(BossSpawnThresholdReachedEvent e) =>
-            _phase = BotPhase.Hard;
+        public void SpawnBoss()
+        {
+            if (_phase != BotPhase.Boss || _bossInstanceId != 0)
+                return;
+
+            var bots = _charactersStorage.GetCharactersByTeam(Team.Bot).ToList();
+
+            foreach (var victim in bots)
+            {
+                _healthChangeService.Enqueue(HealthChangeRequest.Damage(
+                    HealthChangeSource.None,
+                    victim,
+                    victim.Health + victim.BonusHealth));
+            }
+
+            _healthChangeService.Apply();
+
+            var definitionId = _botPhaseCharactersConfig.GetRandomBoss();
+            _characterCreator.CreateOnRandomPos(definitionId);
+            _bossInstanceId = TakeSpawnedInstanceId(definitionId);
+        }
 
         private void OnCharacterDied(CharacterDiedEvent e)
         {
+            if (e.Character.Team != Team.Player && e.Source.OwnerTeam == Team.Player)
+                RegisterPlayerKill(e.Character.DefinitionId);
+
+            if (e.Character.InstanceId == _bossInstanceId)
+            {
+                _bossInstanceId = 0;
+                _phase = BotPhase.Default;
+                _enemiesKilledUntilHardPhaseFrozen = false;
+                _enemiesKilledUntilBossPhaseFrozen = false;
+                _eventBus.Publish(new BotBossPhaseEndedEvent());
+                return;
+            }
+
             if (e.Character.InstanceId != _hardInstanceId)
                 return;
 
             _hardInstanceId = 0;
+
+            if (_phase == BotPhase.Boss)
+                return;
+
             _phase = BotPhase.Default;
+            _enemiesKilledUntilHardPhaseFrozen = false;
             _eventBus.Publish(new BotHardPhaseEndedEvent());
         }
 
-        private void OnCharacterCreated(CharacterCreatedEvent e)
+        private void RegisterPlayerKill(string definitionId)
         {
-            if (!_capturingSpawn || e.Character.DefinitionId != _pendingHardDefinitionId)
-                return;
+            var listedPhase = _botPhaseCharactersConfig.RequireListedPhase(definitionId);
 
-            _hardInstanceId = e.Character.InstanceId;
+            if (listedPhase == BotPhase.Default && !_enemiesKilledUntilHardPhaseFrozen)
+            {
+                _enemiesKilledUntilHardPhase++;
+
+                if (_enemiesKilledUntilHardPhase >= _botPhaseCharactersConfig.BotHardPhaseThreshold)
+                {
+                    _enemiesKilledUntilHardPhase = 0;
+                    _enemiesKilledUntilHardPhaseFrozen = true;
+                    _phase = BotPhase.Hard;
+                }
+            }
+            else if (listedPhase == BotPhase.Hard && !_enemiesKilledUntilBossPhaseFrozen)
+            {
+                _enemiesKilledUntilBossPhase++;
+
+                if (_enemiesKilledUntilBossPhase >= _botPhaseCharactersConfig.BotBossPhaseThreshold)
+                {
+                    _enemiesKilledUntilBossPhase = 0;
+                    _enemiesKilledUntilHardPhaseFrozen = true;
+                    _enemiesKilledUntilBossPhaseFrozen = true;
+                    _phase = BotPhase.Boss;
+                }
+            }
         }
+
+        private int TakeSpawnedInstanceId(string definitionId) =>
+            _charactersStorage
+                .GetCharactersByTeam(Team.Bot)
+                .Single(character => character.DefinitionId == definitionId)
+                .InstanceId;
     }
 }

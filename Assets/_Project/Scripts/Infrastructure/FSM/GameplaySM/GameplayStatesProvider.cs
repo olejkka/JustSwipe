@@ -34,8 +34,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
             BotSpawnChancesConfig botSpawnChancesConfig,
             BotPhaseCharactersConfig botPhaseCharactersConfig,
             InitialGameplayConfig initialGameplayConfig,
-            BotPhaseService botPhaseService
-        )
+            BotPhaseService botPhaseService)
         {
             _eventBus = eventBus;
             _botMoveCreator = botMoveCreator;
@@ -54,6 +53,9 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                 new ITransition[]
                 {
                     new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any()),
+                    new EventTransition<PlayerMoveCompletedEvent, BotBossPhaseTurnState>(
+                        _eventBus,
+                        () => _botPhaseService.Phase == BotPhase.Boss),
                     new EventTransition<PlayerMoveCompletedEvent, BotHardPhaseTurnState>(
                         _eventBus,
                         () => _botPhaseService.Phase == BotPhase.Hard),
@@ -98,6 +100,21 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                 _botPhaseService
             );
             
+            var botBossPhaseTurnState = new BotBossPhaseTurnState(
+                new ITransition[]
+                {
+                    new TransitionTo<EndGameState>(() => !_charactersStorage.GetCharactersByTeam(Team.Player).Any()),
+                    new EventTransition<BotMoveCompletedEvent, PlayerTurnState>(_eventBus),
+                },
+                _eventBus,
+                _botPhaseCharactersConfig,
+                _botMoveCreator,
+                _charactersTurnOrchestrator,
+                _characterCreator,
+                _charactersStorage,
+                _botPhaseService
+            );
+
             var endGameState = new EndGameState(
                 new ITransition[]
                 {
@@ -110,6 +127,7 @@ namespace _Project.Scripts.Infrastructure.FSM.GameplaySM
                 playerTurnState,
                 botDefaultPhaseTurnState,
                 botHardPhaseTurnState,
+                botBossPhaseTurnState,
                 endGameState
             };
         }

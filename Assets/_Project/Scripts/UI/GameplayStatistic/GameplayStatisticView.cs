@@ -12,10 +12,12 @@ namespace _Project.Scripts.UI.GameplayStatistic
         [SerializeField] private GameObject _container;
         [SerializeField] private Button _button;
         [SerializeField] private TMP_Text _turnsCount;
-        [SerializeField] private TMP_Text _countEnemiesKilled;
         [SerializeField] private TMP_Text _goldEarned;
-        
-        
+        [SerializeField] private TMP_Text _defaultEnemiesKilled;
+        [SerializeField] private TMP_Text _hardEnemiesKilled;
+        [SerializeField] private TMP_Text _bossEnemiesKilled;
+
+
         public void Initialize(Lifetime lifetime, Action applicationQuitClicked)
         {
             lifetime.BracketButton(_button, () => applicationQuitClicked?.Invoke());
@@ -33,9 +35,19 @@ namespace _Project.Scripts.UI.GameplayStatistic
             _turnsCount.text = $"Turns count: {turnsCount}";
         }
         
-        public void SetCountEnemiesKilled(string countEnemiesKilled)
+        public void SetDefaultEnemiesKilled(string count)
         {
-            _countEnemiesKilled.text = $"Enemies killed: {countEnemiesKilled}";
+            _defaultEnemiesKilled.text = $"Default enemies killed: {count}";
+        }
+
+        public void SetHardEnemiesKilled(string count)
+        {
+            _hardEnemiesKilled.text = $"Hard enemies killed: {count}";
+        }
+
+        public void SetBossEnemiesKilled(string count)
+        {
+            _bossEnemiesKilled.text = $"Boss enemies killed: {count}";
         }
 
         public void SetGoldEarned(string goldEarned)

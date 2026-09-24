@@ -10,21 +10,7 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JustSwipe/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Configs/Bot Spawn Chances.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Configs/Bot Spawn Chances.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Configs/Characters.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Configs/Characters.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Configs/Gameplay Configs.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Configs/Gameplay Configs.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Configs/Initial Gameplay.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Configs/Initial Gameplay.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/BotPhaseService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Characters/BotPhaseService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Configs/BotSpawnChancesConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Configs/BotSpawnChancesConfig.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Configs/GameplayConfigs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Configs/GameplayConfigs.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Configs/InitialGameplayConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Configs/InitialGameplayConfig.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/GameplaySM/GameplayStatesProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/GameplaySM/GameplayStatesProvider.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/GameplaySM/States/BotDefaultPhaseTurnState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/GameplaySM/States/BotDefaultPhaseTurnState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/GameplaySM/States/BotHardPhaseTurnState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/FSM/GameplaySM/States/BotHardPhaseTurnState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayEntryPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Infrastructure/GameplayEntryPoint.cs" afterDir="false" />
-    </list>
+    <list default="true" id="995489e3-7aea-4d91-9cdd-ffac97a62994" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
