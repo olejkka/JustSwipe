@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using _Project.Scripts.Board;
 using _Project.Scripts.Characters;
 using _Project.Scripts.Characters.Storages;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace _Project.Scripts.Creators
     public class BotMoveCreator
     {
         private readonly CharactersStorage _charactersStorage;
+        private readonly TilesStorage _tilesStorage;
         
         private readonly Vector2Int[] _directions =
         {
@@ -18,9 +20,10 @@ namespace _Project.Scripts.Creators
         };
         
 
-        public BotMoveCreator(CharactersStorage charactersStorage)
+        public BotMoveCreator(CharactersStorage charactersStorage, TilesStorage tilesStorage)
         {
             _charactersStorage = charactersStorage;
+            _tilesStorage = tilesStorage;
         }
 
         public Vector2Int GenerateDirectionToANearbyPlayerCharacter()
@@ -30,6 +33,8 @@ namespace _Project.Scripts.Creators
             
             var bestDistance = int.MaxValue;
             var bestDelta = Vector2Int.zero;
+            
+            Character origin = null;
             
             foreach (var botCharacter in botCharacters)
             {
@@ -42,23 +47,15 @@ namespace _Project.Scripts.Creators
                     {
                         bestDistance = distance;
                         bestDelta = delta;
+                        origin = botCharacter;
                     }
                 }
             }
 
-            var absX = Mathf.Abs(bestDelta.x);
-            var absY = Mathf.Abs(bestDelta.y);
-            
-            if (absX > absY)
-                return new Vector2Int(bestDelta.x > 0 ? 1 : -1, 0);
-            
-            if (absY > absX)
-                return new Vector2Int(0, bestDelta.y > 0 ? 1 : -1);
-            
-            if (Random.value < 0.5f)
-                return new Vector2Int(bestDelta.x > 0 ? 1 : -1, 0);
-            
-            return new Vector2Int(0, bestDelta.y > 0 ? 1 : -1);
+            if (origin == null)
+                return DirectionFromDelta(bestDelta);
+
+            return PickDirection(origin, bestDelta);
         }
 
         public Vector2Int GenerateDirectionToANearbyPlayerCharacter(int instanceId)
@@ -81,22 +78,54 @@ namespace _Project.Scripts.Creators
                 }
             }
 
-            var absX = Mathf.Abs(bestDelta.x);
-            var absY = Mathf.Abs(bestDelta.y);
-
-            if (absX > absY)
-                return new Vector2Int(bestDelta.x > 0 ? 1 : -1, 0);
-
-            if (absY > absX)
-                return new Vector2Int(0, bestDelta.y > 0 ? 1 : -1);
-
-            if (Random.value < 0.5f)
-                return new Vector2Int(bestDelta.x > 0 ? 1 : -1, 0);
-
-            return new Vector2Int(0, bestDelta.y > 0 ? 1 : -1);
+            return PickDirection(origin, bestDelta);
         }
         
         public Vector2Int GenerateRandomDirection() => 
             _directions[Random.Range(0, _directions.Length)];
+
+        private Vector2Int PickDirection(Character origin, Vector2Int delta)
+        {
+            var preferred = DirectionFromDelta(delta);
+
+            if (origin.IsRanged)
+                return preferred;
+
+            if (IsWalkableTile(origin.Position + preferred))
+                return preferred;
+
+            for (int i = 0; i < _directions.Length; i++)
+            {
+                var direction = _directions[i];
+
+                if (direction == preferred)
+                    continue;
+
+                if (IsWalkableTile(origin.Position + direction))
+                    return direction;
+            }
+
+            return GenerateRandomDirection();
+        }
+
+        private bool IsWalkableTile(Vector2Int position) =>
+            _tilesStorage.TryGet(position, out var tile) && tile.IsWalkable;
+
+        private static Vector2Int DirectionFromDelta(Vector2Int delta)
+        {
+            var absX = Mathf.Abs(delta.x);
+            var absY = Mathf.Abs(delta.y);
+
+            if (absX > absY)
+                return new Vector2Int(delta.x > 0 ? 1 : -1, 0);
+
+            if (absY > absX)
+                return new Vector2Int(0, delta.y > 0 ? 1 : -1);
+
+            if (Random.value < 0.5f)
+                return new Vector2Int(delta.x > 0 ? 1 : -1, 0);
+
+            return new Vector2Int(0, delta.y > 0 ? 1 : -1);
+        }
     }
 }
