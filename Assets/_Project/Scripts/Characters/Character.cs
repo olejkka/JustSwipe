@@ -28,6 +28,7 @@ namespace _Project.Scripts.Characters
         public int BonusHealth { get; private set; }
         public int BonusDamage { get; private set; }
         public int AttackCD { get; private set; }
+        public int TotalHealth => Health + BonusHealth;
         public int TotalDamage => Damage + BonusDamage;
         public bool CanAttack { get; private set; }
         public HealthChangeSource LastHealthChangeSource { get; private set; }

@@ -17,7 +17,7 @@ MonoBehaviour:
     _type: 1
     _team: 1
     _baseStats:
-      Health: 1000
+      Health: 10
       Damage: 1
       AttackRange: 0
       AttackCD: 0

@@ -4,6 +4,7 @@ using _Project.Scripts.Characters;
 using _Project.Scripts.Infrastructure.LifetimesExtensions;
 using _Project.Scripts.Utilities;
 using JetBrains.Lifetimes;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +26,13 @@ namespace _Project.Scripts.UI.CharacterCase
         [Header("Containers")]
         [SerializeField] private RectTransform _hpContainer;
         [SerializeField] private RectTransform _damageContainer;
+        [SerializeField] private RectTransform _hpNumericContainer;
+        [SerializeField] private RectTransform _damageNumericContainer;
+        [SerializeField] private int _maxStatIcons;
+
+        [Header("Numeric")]
+        [SerializeField] private TMP_Text _hpNumericText;
+        [SerializeField] private TMP_Text _damageNumericText;
 
         [Header("Colors")]
         [SerializeField] private Color _bonusStatColor;
@@ -92,9 +100,11 @@ namespace _Project.Scripts.UI.CharacterCase
 
         public void SetHealth(int health, int bonusHealth)
         {
-            ShowIcons(
+            ShowStat(
                 _hpIconsPool,
                 _hpContainer,
+                _hpNumericContainer,
+                _hpNumericText,
                 _hpIcon,
                 Mathf.Max(0, health),
                 Mathf.Max(0, bonusHealth));
@@ -102,9 +112,11 @@ namespace _Project.Scripts.UI.CharacterCase
 
         public void SetDamage(int damage, int bonusDamage)
         {
-            ShowIcons(
+            ShowStat(
                 _damageIconsPool,
                 _damageContainer,
+                _damageNumericContainer,
+                _damageNumericText,
                 _damageIcon,
                 Mathf.Max(0, damage),
                 Mathf.Max(0, bonusDamage));
@@ -113,6 +125,30 @@ namespace _Project.Scripts.UI.CharacterCase
         public void SetActive(bool active)
         {
             gameObject.SetActive(active);
+        }
+
+        private void ShowStat(
+            List<Image> pool,
+            RectTransform iconContainer,
+            RectTransform numericContainer,
+            TMP_Text numericText,
+            Image iconPrefab,
+            int baseCount,
+            int bonusCount)
+        {
+            var total = baseCount + bonusCount;
+            var showIcons = total <= _maxStatIcons;
+
+            iconContainer.gameObject.SetActive(showIcons);
+            numericContainer.gameObject.SetActive(!showIcons);
+
+            if (!showIcons)
+            {
+                numericText.text = total.ToString();
+                return;
+            }
+
+            ShowIcons(pool, iconContainer, iconPrefab, baseCount, bonusCount);
         }
 
         private void ShowIcons(

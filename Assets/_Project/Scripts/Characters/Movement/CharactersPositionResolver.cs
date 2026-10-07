@@ -35,7 +35,7 @@ namespace _Project.Scripts.Characters.Movement
                         HealthChangeRequest.Damage(
                             HealthChangeSource.None,
                             character,
-                            character.Health + character.BonusHealth));
+                            character.TotalHealth));
             }
         }
     }
